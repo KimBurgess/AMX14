@@ -1,0 +1,27 @@
+[submodule "lib/modero"]
+	path = lib/modero
+	url = https://github.com/AMXAUNZ/amx-modero-library.git
+[submodule "lib/common"]
+	path = lib/common
+	url = https://github.com/AMXAUNZ/common-library.git
+[submodule "lib/device"]
+	path = lib/device
+	url = https://github.com/AMXAUNZ/amx-device-library.git
+[submodule "lib/dxlink"]
+	path = lib/dxlink
+	url = https://github.com/AMXAUNZ/amx-dxlink-library.git
+[submodule "lib/dvx"]
+	path = lib/dvx
+	url = https://github.com/AMXAUNZ/amx-dvx-library.git
+[submodule "lib/pdu"]
+	path = lib/pdu
+	url = https://github.com/AMXAUNZ/amx-pdu-library.git
+[submodule "lib/rms-tools"]
+	path = lib/rms-tools
+	url = https://github.com/AMXAUNZ/rms-tools.git
+[submodule "lib/rms-sdk"]
+	path = lib/rms-sdk
+	url = https://github.com/KimBurgess/rms-sdk.git
+[submodule "lib/ncl"]
+	path = lib/ncl
+	url = https://github.com/KimBurgess/netlinx-common-libraries.git
