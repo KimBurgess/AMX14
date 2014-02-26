@@ -19,3 +19,6 @@
 *.axw
 *.apw
 !/AMX14.apw
+/src/*/ui/img
+/src/*/ui/sound
+/src/*/ui/assets
