@@ -263,6 +263,12 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
+<File CompileType="None" Type="TP4"><Identifier>AMX14 Standard Systems</Identifier>
+<FilePathName>AMX14 Standard Systems.TP4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP"><DevName>dvTP</DevName>
+</DeviceMap>
+</File>
 <File CompileType="None" Type="Include"><Identifier>common</Identifier>
 <FilePathName>lib\common\common.axi</FilePathName>
 <Comments></Comments>
