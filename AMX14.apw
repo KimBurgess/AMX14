@@ -229,6 +229,10 @@
 <FilePathName>src\boardroom\boardroom.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="TP4"><Identifier>boardroom-10-inch-in-desk-drag-and-drop</Identifier>
+<FilePathName>src\boardroom\ui\boardroom-10-inch-in-desk-drag-and-drop.TP4</FilePathName>
+<Comments></Comments>
+</File>
 </System>
 <System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Huddle</Identifier>
 <SysID>0</SysID>
