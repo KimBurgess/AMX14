@@ -13,9 +13,9 @@
 *.axi
 !/src/*/*.axi
 *.tp4
-!/src/*/*.tp4
+!/src/*/ui/*.tp4
 *.tp5
-!/src/*/*.tp5
+!/src/*/ui/*.tp5
 *.axw
 *.apw
 !/AMX14.apw
