@@ -236,7 +236,11 @@
 <FilePathName>lib\dvx\amx-dvx-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="MasterSrc"><Identifier>stage</Identifier>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>Stage Revised</Identifier>
+<FilePathName>src\stage\Stage Revised.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Source"><Identifier>stage</Identifier>
 <FilePathName>src\stage\stage.axs</FilePathName>
 <Comments></Comments>
 </File>
