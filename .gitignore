@@ -4,10 +4,6 @@
 !/module/*.tko
 *.jar
 !/module/*.jar
-*.doc
-!/docs/*.doc
-*.txt
-!/docs/*.txt
 *.axs
 !/src/*/*.axs
 *.axi
