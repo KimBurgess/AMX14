@@ -1,7 +1,6 @@
 *.src
 *.tkn
 *.tko
-*.~vsdx
 !/module/*.tko
 *.jar
 !/module/*.jar
@@ -23,3 +22,10 @@
 /src/*/ui/img
 /src/*/ui/sound
 /src/*/ui/assets
+*.~vsdx
+*.vsdx
+!/schematics/*.vsdx
+*.pdf
+!/schematics/*.pdf
+*.doc
+!/module/docs/*.doc
