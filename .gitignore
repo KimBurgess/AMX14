@@ -1,6 +1,7 @@
 *.src
 *.tkn
 *.tko
+*.~vsdx
 !/module/*.tko
 *.jar
 !/module/*.jar
