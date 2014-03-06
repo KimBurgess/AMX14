@@ -174,23 +174,23 @@ BUTTON_EVENT[dvTP,0]
 	    
 	    CASE btnLAPTOPtoPREV:
 	    {
-		nCONFIDENCESourceSelected=LAPTOP
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, CONFIDENCE)
+		nPREVIEWSourceSelected=LAPTOP
+		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PREVIEW)
 	    }
 	    CASE btnSTAGEtoPREV:
 	    {
-		nCONFIDENCESourceSelected=STAGE
-		dvxSwitchVideoOnly(dvSWITCHER, STAGE, CONFIDENCE)
+		nPREVIEWSourceSelected=STAGE
+		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PREVIEW)
 	    }
 	    CASE btnCAMERAtoPREV:
 	    {
-		nCONFIDENCESourceSelected=CAMERA
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, CONFIDENCE)
+		nPREVIEWSourceSelected=CAMERA
+		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PREVIEW)
 	    }
 	    CASE btnSIGNAGEtoPREV:
 	    {
-		nCONFIDENCESourceSelected=SIGNAGE
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, CONFIDENCE)
+		nPREVIEWSourceSelected=SIGNAGE
+		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PREVIEW)
 	    }
 	    
 	    CASE btnLAPTOPtoALL:
@@ -246,25 +246,25 @@ BUTTON_EVENT[dvTP,0]
 (***********************************************************)
 DEFINE_PROGRAM
 
-[dvTP,btnSIGNAGEtoPJ1]	= nPJ1SourceSelected=SIGNAGE
 [dvTP,btnLAPTOPtoPJ1]	= nPJ1SourceSelected=LAPTOP
 [dvTP,btnSTAGEtoPJ1]	= nPJ1SourceSelected=STAGE
 [dvTP,btnCAMERAtoPJ1]	= nPJ1SourceSelected=CAMERA
+[dvTP,btnSIGNAGEtoPJ1]	= nPJ1SourceSelected=SIGNAGE
 
-[dvTP,btnSIGNAGEtoPJ2]	= nPJ2SourceSelected=SIGNAGE
 [dvTP,btnLAPTOPtoPJ2]	= nPJ2SourceSelected=LAPTOP
 [dvTP,btnSTAGEtoPJ2]	= nPJ2SourceSelected=STAGE
 [dvTP,btnCAMERAtoPJ2]	= nPJ2SourceSelected=CAMERA
+[dvTP,btnSIGNAGEtoPJ2]	= nPJ2SourceSelected=SIGNAGE
 
-[dvTP,btnSIGNAGEtoCONF]	= nCONFIDENCESourceSelected=SIGNAGE
 [dvTP,btnLAPTOPtoCONF]	= nCONFIDENCESourceSelected=LAPTOP
 [dvTP,btnSTAGEtoCONF]	= nCONFIDENCESourceSelected=STAGE
 [dvTP,btnCAMERAtoCONF]	= nCONFIDENCESourceSelected=CAMERA
+[dvTP,btnSIGNAGEtoCONF]	= nCONFIDENCESourceSelected=SIGNAGE
 
-[dvTP,btnSIGNAGEtoPREV]	= nPreviewSourceSelected=SIGNAGE
 [dvTP,btnLAPTOPtoPREV]	= nPreviewSourceSelected=LAPTOP
 [dvTP,btnSTAGEtoPREV]	= nPreviewSourceSelected=STAGE
 [dvTP,btnCAMERAtoPREV]	= nPreviewSourceSelected=CAMERA
+[dvTP,btnSIGNAGEtoPREV]	= nPreviewSourceSelected=SIGNAGE
 
 
 (***********************************************************)
