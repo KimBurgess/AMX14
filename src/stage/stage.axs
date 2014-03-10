@@ -22,30 +22,40 @@ DEFINE_CONSTANT
 // Inputs
 SIGNAGE 	= 4	//HDMI port 
 LAPTOP  	= 3
-AUX		= 5	//Multiformat input
 STAGE		= 7	//DXLink port
 CAMERA		= 8
 
 //Outputs
-DISPLAY1	= 1	// Projector 1 on DXLink output
-DISPLAY2	= 2	// Projector 2 on HDMI & then Tx
-DISPLAY3	= 3	// LCD confidence monitor at stage
+PJ1		= 1	// Projector 1 on DXLink output
+PJ2		= 3	// Projector 2 on DXLink
+CONFIDENCE	= 4	// LCD confidence monitor at stage vir Tx/Rx pair
+PREVIEW		= 2	// Local preview monitor
 
 // TP buttons
-btnSIGNAGEtoDISPLAY1	= 11
-btnLAPTOPtoDISPLAY1	= 12
-btnAUXtoDISPLAY1	= 13
-btnCAMERAtoDISPLAY1	= 14
+btnLAPTOPtoPJ1		= 11
+btnLAPTOPtoPJ2		= 21
+btnLAPTOPtoCONF		= 31
+btnLAPTOPtoPREV		= 41
+btnLAPTOPtoALL		= 101
 
-btnSIGNAGEtoDISPLAY2	= 21
-btnLAPTOPtoDISPLAY2	= 22
-btnAUXtoDISPLAY2	= 23
-btnCAMERAtoDISPLAY2	= 24
+btnSTAGEtoPJ1		= 12
+btnSTAGEtoPJ2		= 22
+btnSTAGEtoCONF		= 32
+btnSTAGEtoPREV		= 42
+btnSTAGEtoALL		= 102
 
-btnSIGNAGEtoDISPLAY3	= 31
-btnLAPTOPtoDISPLAY3	= 32
-btnAUXtoDISPLAY3	= 33
-btnCAMERAtoDISPLAY3	= 34
+btnCAMERAtoPJ1		= 13
+btnCAMERAtoPJ2		= 23
+btnCAMERAtoCONF		= 33
+btnCAMERAtoPREV		= 43
+btnCAMERAtoALL		= 103
+
+btnSIGNAGEtoPJ1		= 14
+btnSIGNAGEtoPJ2		= 24
+btnSIGNAGEtoCONF	= 34
+btnSIGNAGEtoPREV	= 44
+btnSIGNAGEtoALL		= 104
+
 
 (***********************************************************)
 (*              DATA TYPE DEFINITIONS GO BELOW             *)
@@ -58,9 +68,11 @@ DEFINE_TYPE
 DEFINE_VARIABLE
 
 // Flags
-VOLATILE INTEGER nDisplay1SourceSelected
-VOLATILE INTEGER nDisplay2SourceSelected
-VOLATILE INTEGER nDisplay3SourceSelected
+VOLATILE INTEGER nPJ1SourceSelected
+VOLATILE INTEGER nPJ2SourceSelected
+VOLATILE INTEGER nConfidenceSourceSelected
+VOLATILE INTEGER nPreviewSourceSelected
+VOLATILE INTEGER nAllSourceSelected
 
 dev dvDvxVidInPorts[] = { 5002:1:0, 5002:2:0, 5002:3:0, 5002:4:0, 5002:5:0, 5002:6:0, 5002:7:0, 5002:8:0, 5002:9:0, 5002:10:0 }
 
@@ -74,7 +86,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 	// signalStatus is the input signal status (DVX_SIGNAL_STATUS_NO_SIGNAL | DVX_SIGNAL_STATUS_UNKNOWN | DVX_SIGNAL_STATUS_VALID_SIGNAL)
 	IF((dvxVideoInput.PORT = 2)|| (signalStatus = 'DVX_SIGNAL_STATUS_VALID_SIGNAL'))
 	{
-	    dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, DISPLAY1)  //auto-switch laptop to display
+	    dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PJ1)  //auto-switch laptop to display
 	}
 	
 }
@@ -97,67 +109,133 @@ BUTTON_EVENT[dvTP,0]
     {
 	SWITCH (BUTTON.INPUT.CHANNEL)
 	{
-	    CASE btnSIGNAGEtoDISPLAY1:
+	    CASE btnLAPTOPtoPJ1:
 	    {
-		nDisplay1SourceSelected=SIGNAGE
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, DISPLAY1)
+		nPJ1SourceSelected=LAPTOP
+		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PJ1)
 	    }
-	    CASE btnLAPTOPtoDISPLAY1:
+	    CASE btnSTAGEtoPJ1:
 	    {
-		nDisplay1SourceSelected=LAPTOP
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, DISPLAY1)
+		nPJ1SourceSelected=STAGE
+		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PJ1)
 	    }
-	    CASE btnAUXtoDISPLAY1:
+	    CASE btnCAMERAtoPJ1:
 	    {
-		nDisplay1SourceSelected=AUX
-		dvxSwitchVideoOnly(dvSWITCHER, AUX, DISPLAY1)
+		nPJ1SourceSelected=CAMERA
+		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PJ1)
 	    }
-	    CASE btnCAMERAtoDISPLAY1:
+	    CASE btnSIGNAGEtoPJ1:
 	    {
-		nDisplay1SourceSelected=CAMERA
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, DISPLAY1)
-	    }
-	    
-	    CASE btnSIGNAGEtoDISPLAY2:
-	    {
-		nDisplay2SourceSelected=SIGNAGE
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, DISPLAY2)
-	    }
-	    CASE btnLAPTOPtoDISPLAY2:
-	    {
-		nDisplay2SourceSelected=LAPTOP
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, DISPLAY2)
-	    }
-	    CASE btnAUXtoDISPLAY2:
-	    {
-		nDisplay2SourceSelected=AUX
-		dvxSwitchVideoOnly(dvSWITCHER, AUX, DISPLAY2)
-	    }
-	    CASE btnCAMERAtoDISPLAY2:
-	    {
-		nDisplay2SourceSelected=CAMERA
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, DISPLAY2)
+		nPJ1SourceSelected=SIGNAGE
+		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PJ1)
 	    }
 	    
-	    CASE btnSIGNAGEtoDISPLAY3:
+	    CASE btnLAPTOPtoPJ2:
 	    {
-		nDisplay3SourceSelected=SIGNAGE
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, DISPLAY3)
+		nPJ2SourceSelected=LAPTOP
+		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PJ2)
 	    }
-	    CASE btnLAPTOPtoDISPLAY3:
+	    CASE btnSTAGEtoPJ2:
 	    {
-		nDisplay3SourceSelected=LAPTOP
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, DISPLAY3)
+		nPJ2SourceSelected=STAGE
+		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PJ2)
 	    }
-	    CASE btnAUXtoDISPLAY3:
+	    CASE btnCAMERAtoPJ2:
 	    {
-		nDisplay3SourceSelected=AUX
-		dvxSwitchVideoOnly(dvSWITCHER, AUX, DISPLAY3)
+		nPJ2SourceSelected=CAMERA
+		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PJ2)
 	    }
-	    CASE btnCAMERAtoDISPLAY3:
+	    CASE btnSIGNAGEtoPJ2:
 	    {
-		nDisplay3SourceSelected=CAMERA
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, DISPLAY3)
+		nPJ2SourceSelected=SIGNAGE
+		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PJ2)
+	    }
+	    
+	    CASE btnLAPTOPtoCONF:
+	    {
+		nCONFIDENCESourceSelected=LAPTOP
+		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, CONFIDENCE)
+	    }
+	    CASE btnSTAGEtoCONF:
+	    {
+		nCONFIDENCESourceSelected=STAGE
+		dvxSwitchVideoOnly(dvSWITCHER, STAGE, CONFIDENCE)
+	    }
+	    CASE btnCAMERAtoCONF:
+	    {
+		nCONFIDENCESourceSelected=CAMERA
+		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, CONFIDENCE)
+	    }
+	    CASE btnSIGNAGEtoCONF:
+	    {
+		nCONFIDENCESourceSelected=SIGNAGE
+		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, CONFIDENCE)
+	    }
+	    
+	    CASE btnLAPTOPtoPREV:
+	    {
+		nPREVIEWSourceSelected=LAPTOP
+		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PREVIEW)
+	    }
+	    CASE btnSTAGEtoPREV:
+	    {
+		nPREVIEWSourceSelected=STAGE
+		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PREVIEW)
+	    }
+	    CASE btnCAMERAtoPREV:
+	    {
+		nPREVIEWSourceSelected=CAMERA
+		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PREVIEW)
+	    }
+	    CASE btnSIGNAGEtoPREV:
+	    {
+		nPREVIEWSourceSelected=SIGNAGE
+		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PREVIEW)
+	    }
+	    
+	    CASE btnLAPTOPtoALL:
+	    {
+		nPJ1SourceSelected=LAPTOP
+		nPJ2SourceSelected=LAPTOP
+		nConfidenceSourceSelected=LAPTOP
+		nPreviewSourceSelected=LAPTOP
+		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PJ1)
+		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PJ2)
+		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, CONFIDENCE)
+		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PREVIEW)
+	    }
+	    CASE btnSTAGEtoALL:
+	    {
+		nPJ1SourceSelected=STAGE
+		nPJ2SourceSelected=STAGE
+		nConfidenceSourceSelected=STAGE
+		nPreviewSourceSelected=STAGE
+		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PJ1)
+		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PJ2)
+		dvxSwitchVideoOnly(dvSWITCHER, STAGE, CONFIDENCE)
+		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PREVIEW)
+	    }
+	    CASE btnCAMERAtoALL:
+	    {
+		nPJ1SourceSelected=CAMERA
+		nPJ2SourceSelected=CAMERA
+		nConfidenceSourceSelected=CAMERA
+		nPreviewSourceSelected=CAMERA
+		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PJ1)
+		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PJ2)
+		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, CONFIDENCE)
+		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PREVIEW)
+	    }
+	    CASE btnSIGNAGEtoALL:
+	    {
+		nPJ1SourceSelected=SIGNAGE
+		nPJ2SourceSelected=SIGNAGE
+		nConfidenceSourceSelected=SIGNAGE
+		nPreviewSourceSelected=SIGNAGE
+		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PJ1)
+		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PJ2)
+		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, CONFIDENCE)
+		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PREVIEW)
 	    }
 	}
     }
@@ -168,20 +246,25 @@ BUTTON_EVENT[dvTP,0]
 (***********************************************************)
 DEFINE_PROGRAM
 
-[dvTP,btnSIGNAGEtoDISPLAY1]	= nDisplay1SourceSelected=SIGNAGE
-[dvTP,btnLAPTOPtoDISPLAY1]	= nDisplay1SourceSelected=LAPTOP
-[dvTP,btnAUXtoDISPLAY1]		= nDisplay1SourceSelected=AUX
-[dvTP,btnCAMERAtoDISPLAY1]	= nDisplay1SourceSelected=CAMERA
+[dvTP,btnLAPTOPtoPJ1]	= nPJ1SourceSelected=LAPTOP
+[dvTP,btnSTAGEtoPJ1]	= nPJ1SourceSelected=STAGE
+[dvTP,btnCAMERAtoPJ1]	= nPJ1SourceSelected=CAMERA
+[dvTP,btnSIGNAGEtoPJ1]	= nPJ1SourceSelected=SIGNAGE
 
-[dvTP,btnSIGNAGEtoDISPLAY2]	= nDisplay2SourceSelected=SIGNAGE
-[dvTP,btnLAPTOPtoDISPLAY2]	= nDisplay2SourceSelected=LAPTOP
-[dvTP,btnAUXtoDISPLAY2]		= nDisplay2SourceSelected=AUX
-[dvTP,btnCAMERAtoDISPLAY2]	= nDisplay2SourceSelected=CAMERA
+[dvTP,btnLAPTOPtoPJ2]	= nPJ2SourceSelected=LAPTOP
+[dvTP,btnSTAGEtoPJ2]	= nPJ2SourceSelected=STAGE
+[dvTP,btnCAMERAtoPJ2]	= nPJ2SourceSelected=CAMERA
+[dvTP,btnSIGNAGEtoPJ2]	= nPJ2SourceSelected=SIGNAGE
 
-[dvTP,btnSIGNAGEtoDISPLAY3]	= nDisplay3SourceSelected=SIGNAGE
-[dvTP,btnLAPTOPtoDISPLAY3]	= nDisplay3SourceSelected=LAPTOP
-[dvTP,btnAUXtoDISPLAY3]		= nDisplay3SourceSelected=AUX
-[dvTP,btnCAMERAtoDISPLAY3]	= nDisplay3SourceSelected=CAMERA
+[dvTP,btnLAPTOPtoCONF]	= nCONFIDENCESourceSelected=LAPTOP
+[dvTP,btnSTAGEtoCONF]	= nCONFIDENCESourceSelected=STAGE
+[dvTP,btnCAMERAtoCONF]	= nCONFIDENCESourceSelected=CAMERA
+[dvTP,btnSIGNAGEtoCONF]	= nCONFIDENCESourceSelected=SIGNAGE
+
+[dvTP,btnLAPTOPtoPREV]	= nPreviewSourceSelected=LAPTOP
+[dvTP,btnSTAGEtoPREV]	= nPreviewSourceSelected=STAGE
+[dvTP,btnCAMERAtoPREV]	= nPreviewSourceSelected=CAMERA
+[dvTP,btnSIGNAGEtoPREV]	= nPreviewSourceSelected=SIGNAGE
 
 
 (***********************************************************)
