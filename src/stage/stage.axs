@@ -14,6 +14,8 @@ dvTX3		= 5403:1:0	// Feed to Projector 2
 
 dvTP		= 10001:1:0
 
+vdvRMS		= 41001:1:0
+
 (***********************************************************)
 (*               CONSTANT DEFINITIONS GO BELOW             *)
 (***********************************************************)
@@ -76,6 +78,23 @@ VOLATILE INTEGER nAllSourceSelected
 
 dev dvDvxVidInPorts[] = { 5002:1:0, 5002:2:0, 5002:3:0, 5002:4:0, 5002:5:0, 5002:6:0, 5002:7:0, 5002:8:0, 5002:9:0, 5002:10:0 }
 
+//CHAR cRMS_Server_URL[] = 'http://events.amxaustralia.com.au/rms'
+CHAR cRMS_Server_URL[] = 'http://developer.amxaustralia.com.au/rms'
+
+
+DEFINE_MODULE 'RmsNetLinxAdapter_dr4_0_0' mdlRMSNetLinx(vdvRMS);
+DEFINE_MODULE 'RmsControlSystemMonitor' mdlRmsControlSystemMonitorMod(vdvRMS,dvMaster);
+//DEFINE_MODULE 'RmsSystemPowerMonitor' mdlRmsSystemPowerMonitorMod(vdvRMS,dvMaster);
+DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_1(vdvRMS,dvTP);
+DEFINE_MODULE 'RmsDvxSwitcherMonitor' dvxSwitcher(vdvRMS);  //monitor DVX internal settings
+DEFINE_MODULE 'RmsGenericNetLinxDeviceMonitorDXLink' mdlRmsDXLinkRx1MonitorMod(vdvRMS,dvRx1);  //modified SDK module
+DEFINE_MODULE 'RmsGenericNetLinxDeviceMonitorDXLink' mdlRmsDXLinkRx2MonitorMod(vdvRMS,dvRx2);  //modified SDK module
+DEFINE_MODULE 'RmsGenericNetLinxDeviceMonitorDXLink' mdlRmsDXLinkRx3MonitorMod(vdvRMS,dvRx3);  //modified SDK module
+DEFINE_MODULE 'RmsGenericNetLinxDeviceMonitorDXLink' mdlRmsDXLinkTxMonitorMod(vdvRMS,dvTx1);    //modified SDK module
+DEFINE_MODULE 'RmsGenericNetLinxDeviceMonitorDXLink' mdlRmsDXLinkTx2MonitorMod(vdvRMS,dvTx2);    //modified SDK module
+
+
+
 #INCLUDE 'amx-dvx-control.axi'
 
 
@@ -102,6 +121,25 @@ DEFINE_START
 (*                THE EVENTS GO BELOW                      *)
 (***********************************************************)
 DEFINE_EVENT
+
+DATA_EVENT[vdvRMS]
+{
+    ONLINE:
+    {
+	WAIT 50
+	{
+	    SEND_COMMAND vdvRMS,"'CONFIG.SERVER.URL-',cRMS_Server_URL" 	// Server URL
+	    SEND_COMMAND vdvRMS,"'CONFIG.SERVER.PASSWORD-password'"
+	    SEND_COMMAND vdvRMS,"'CONFIG.CLIENT.NAME-Stage System'"		// passed from room code  
+	    SEND_COMMAND vdvRMS,"'CONFIG.CLIENT.ENABLED-true'"
+	    SEND_COMMAND vdvRMS,"'CLIENT.CONNECT'"
+	}
+    }
+    OFFLINE:
+    {
+    }
+}
+
 
 BUTTON_EVENT[dvTP,0]
 {
