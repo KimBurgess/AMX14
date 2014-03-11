@@ -1,7 +1,6 @@
 *.src
 *.tkn
 *.tko
-!/module/*.tko
 *.jar
 !/module/*.jar
 *.axs
