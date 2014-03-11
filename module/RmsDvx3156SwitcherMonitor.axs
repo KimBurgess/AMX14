@@ -40,7 +40,7 @@
  *     as applicable.
 */
 
-MODULE_NAME='RmsDvxSwitcherMonitor'(DEV vdvRMS)
+MODULE_NAME='RmsDvx3156SwitcherMonitor'(DEV vdvRMS)
 
 (***********************************************************)
 (*                                                         *)

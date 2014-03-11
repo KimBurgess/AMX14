@@ -86,12 +86,12 @@ DEFINE_MODULE 'RmsNetLinxAdapter_dr4_0_0' mdlRMSNetLinx(vdvRMS);
 DEFINE_MODULE 'RmsControlSystemMonitor' mdlRmsControlSystemMonitorMod(vdvRMS,dvMaster);
 //DEFINE_MODULE 'RmsSystemPowerMonitor' mdlRmsSystemPowerMonitorMod(vdvRMS,dvMaster);
 DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_1(vdvRMS,dvTP);
-DEFINE_MODULE 'RmsDvxSwitcherMonitor' dvxSwitcher(vdvRMS);  //monitor DVX internal settings
-DEFINE_MODULE 'RmsGenericNetLinxDeviceMonitorDXLink' mdlRmsDXLinkRx1MonitorMod(vdvRMS,dvRx1);  //modified SDK module
-DEFINE_MODULE 'RmsGenericNetLinxDeviceMonitorDXLink' mdlRmsDXLinkRx2MonitorMod(vdvRMS,dvRx2);  //modified SDK module
-DEFINE_MODULE 'RmsGenericNetLinxDeviceMonitorDXLink' mdlRmsDXLinkRx3MonitorMod(vdvRMS,dvRx3);  //modified SDK module
-DEFINE_MODULE 'RmsGenericNetLinxDeviceMonitorDXLink' mdlRmsDXLinkTxMonitorMod(vdvRMS,dvTx1);    //modified SDK module
-DEFINE_MODULE 'RmsGenericNetLinxDeviceMonitorDXLink' mdlRmsDXLinkTx2MonitorMod(vdvRMS,dvTx2);    //modified SDK module
+DEFINE_MODULE 'RmsDvx3156SwitcherMonitor' dvxSwitcher(vdvRMS);  //monitor DVX internal settings
+DEFINE_MODULE 'RmsDXLinkMonitor' mdlRmsDXLinkRx1MonitorMod(vdvRMS,dvRx1);  //modified SDK module
+DEFINE_MODULE 'RmsDXLinkMonitor' mdlRmsDXLinkRx2MonitorMod(vdvRMS,dvRx2);  //modified SDK module
+DEFINE_MODULE 'RmsDXLinkMonitor' mdlRmsDXLinkRx3MonitorMod(vdvRMS,dvRx3);  //modified SDK module
+DEFINE_MODULE 'RmsDXLinkMonitor' mdlRmsDXLinkTxMonitorMod(vdvRMS,dvTx1);    //modified SDK module
+DEFINE_MODULE 'RmsDXLinkMonitor' mdlRmsDXLinkTx2MonitorMod(vdvRMS,dvTx2);    //modified SDK module
 
 
 
