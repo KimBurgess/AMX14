@@ -350,8 +350,32 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
+<File CompileType="None" Type="Include"><Identifier>amx-dgx-api</Identifier>
+<FilePathName>..\amx-dgx-library\amx-dgx-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dgx-control</Identifier>
+<FilePathName>..\amx-dgx-library\amx-dgx-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dgx-listener</Identifier>
+<FilePathName>..\amx-dgx-library\amx-dgx-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>common</Identifier>
 <FilePathName>lib\common\common.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dxlink-api</Identifier>
+<FilePathName>lib\dxlink\amx-dxlink-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dxlink-control</Identifier>
+<FilePathName>lib\dxlink\amx-dxlink-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dxlink-listener</Identifier>
+<FilePathName>lib\dxlink\amx-dxlink-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>enova-dgx32</Identifier>
