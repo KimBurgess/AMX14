@@ -8,7 +8,7 @@ dvSWITCHER	= 5002:1:0
 dvRX1		= 5301:1:0	// Projector 1	(DXLinkfrom DVX)
 dvRX2		= 5302:1:0	// Projector 2	(via separate Tx)
 dvRX3		= 5303:1:0	// Confidence monitor at stage (DVXlink from DVX)
-dvTX1		= 5401:1:0	// Feed from stage laptop
+dvTX1		= 5401:1:0	// Feed from stage DISPLAY1
 dvTX2		= 5402:1:0	// Feed from Camera
 dvTX3		= 5403:1:0	// Feed to Projector 2	
 
@@ -22,41 +22,41 @@ vdvRMS		= 41001:1:0
 DEFINE_CONSTANT
 
 // Inputs
-SIGNAGE 	= 4	//HDMI port 
-LAPTOP  	= 3
-STAGE		= 7	//DXLink port
-CAMERA		= 8
+Source1 	= 3
+Source2 	= 4	//HDMI port on 3156
+Source3		= 7	// Stage Laptop - DXLink port on 3156
+Source4		= 8
 
 //Outputs
-PJ1		= 1	// Projector 1 on DXLink output
-PJ2		= 3	// Projector 2 on DXLink
-CONFIDENCE	= 4	// LCD confidence monitor at stage vir Tx/Rx pair
-PREVIEW		= 2	// Local preview monitor
+Display1		= 1	// Projector 1 on DXLink output
+Display2		= 3	// Projector 2 on DXLink
+Display3	= 4	// LCD confidence monitor at stage vir Tx/Rx pair
+Display4		= 2	// Local Display4 monitor
 
 // TP buttons
-btnLAPTOPtoPJ1		= 11
-btnLAPTOPtoPJ2		= 21
-btnLAPTOPtoCONF		= 31
-btnLAPTOPtoPREV		= 41
-btnLAPTOPtoALL		= 101
+btnSource1toDisplay1		= 11
+btnSource1toDisplay2		= 21
+btnSource1toDisplay3		= 31
+btnSource1toDisplay4		= 41
+btnSource1toALL		= 101
 
-btnSTAGEtoPJ1		= 12
-btnSTAGEtoPJ2		= 22
-btnSTAGEtoCONF		= 32
-btnSTAGEtoPREV		= 42
-btnSTAGEtoALL		= 102
+btnSource3toDisplay1		= 12
+btnSource3toDisplay2		= 22
+btnSource3toDisplay3		= 32
+btnSource3toDisplay4		= 42
+btnSource3toALL		= 102
 
-btnCAMERAtoPJ1		= 13
-btnCAMERAtoPJ2		= 23
-btnCAMERAtoCONF		= 33
-btnCAMERAtoPREV		= 43
-btnCAMERAtoALL		= 103
+btnSource4toDisplay1		= 13
+btnSource4toDisplay2		= 23
+btnSource4toDisplay3		= 33
+btnSource4toDisplay4		= 43
+btnSource4toALL		= 103
 
-btnSIGNAGEtoPJ1		= 14
-btnSIGNAGEtoPJ2		= 24
-btnSIGNAGEtoCONF	= 34
-btnSIGNAGEtoPREV	= 44
-btnSIGNAGEtoALL		= 104
+btnSource2toDisplay1		= 14
+btnSource2toDisplay2		= 24
+btnSource2toDisplay3	= 34
+btnSource2toDisplay4	= 44
+btnSource2toALL		= 104
 
 
 (***********************************************************)
@@ -70,10 +70,10 @@ DEFINE_TYPE
 DEFINE_VARIABLE
 
 // Flags
-VOLATILE INTEGER nPJ1SourceSelected
-VOLATILE INTEGER nPJ2SourceSelected
-VOLATILE INTEGER nConfidenceSourceSelected
-VOLATILE INTEGER nPreviewSourceSelected
+VOLATILE INTEGER nDisplay1SourceSelected
+VOLATILE INTEGER nDisplay2SourceSelected
+VOLATILE INTEGER nDisplay3SourceSelected
+VOLATILE INTEGER nDisplay4SourceSelected
 VOLATILE INTEGER nAllSourceSelected
 
 dev dvDvxVidInPorts[] = { 5002:1:0, 5002:2:0, 5002:3:0, 5002:4:0, 5002:5:0, 5002:6:0, 5002:7:0, 5002:8:0, 5002:9:0, 5002:10:0 }
@@ -105,7 +105,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 	// signalStatus is the input signal status (DVX_SIGNAL_STATUS_NO_SIGNAL | DVX_SIGNAL_STATUS_UNKNOWN | DVX_SIGNAL_STATUS_VALID_SIGNAL)
 	IF((dvxVideoInput.PORT = 2)|| (signalStatus = 'DVX_SIGNAL_STATUS_VALID_SIGNAL'))
 	{
-	    dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PJ1)  //auto-switch laptop to display
+	    dvxSwitchVideoOnly(dvSWITCHER, Source1, Display1)  //auto-switch laptop to display
 	}
 	
 }
@@ -147,133 +147,133 @@ BUTTON_EVENT[dvTP,0]
     {
 	SWITCH (BUTTON.INPUT.CHANNEL)
 	{
-	    CASE btnLAPTOPtoPJ1:
+	    CASE btnSource1toDisplay1:
 	    {
-		nPJ1SourceSelected=LAPTOP
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PJ1)
+		nDisplay1SourceSelected=Source1
+		dvxSwitchVideoOnly(dvSWITCHER, Source1, Display1)
 	    }
-	    CASE btnSTAGEtoPJ1:
+	    CASE btnSource3toDisplay1:
 	    {
-		nPJ1SourceSelected=STAGE
-		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PJ1)
+		nDisplay1SourceSelected=Source3
+		dvxSwitchVideoOnly(dvSWITCHER, Source3, Display1)
 	    }
-	    CASE btnCAMERAtoPJ1:
+	    CASE btnSource4toDisplay1:
 	    {
-		nPJ1SourceSelected=CAMERA
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PJ1)
+		nDisplay1SourceSelected=Source4
+		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display1)
 	    }
-	    CASE btnSIGNAGEtoPJ1:
+	    CASE btnSource2toDisplay1:
 	    {
-		nPJ1SourceSelected=SIGNAGE
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PJ1)
-	    }
-	    
-	    CASE btnLAPTOPtoPJ2:
-	    {
-		nPJ2SourceSelected=LAPTOP
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PJ2)
-	    }
-	    CASE btnSTAGEtoPJ2:
-	    {
-		nPJ2SourceSelected=STAGE
-		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PJ2)
-	    }
-	    CASE btnCAMERAtoPJ2:
-	    {
-		nPJ2SourceSelected=CAMERA
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PJ2)
-	    }
-	    CASE btnSIGNAGEtoPJ2:
-	    {
-		nPJ2SourceSelected=SIGNAGE
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PJ2)
+		nDisplay1SourceSelected=Source2
+		dvxSwitchVideoOnly(dvSWITCHER, Source2, Display1)
 	    }
 	    
-	    CASE btnLAPTOPtoCONF:
+	    CASE btnSource1toDisplay2:
 	    {
-		nCONFIDENCESourceSelected=LAPTOP
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, CONFIDENCE)
+		nDisplay2SourceSelected=Source1
+		dvxSwitchVideoOnly(dvSWITCHER, Source1, Display2)
 	    }
-	    CASE btnSTAGEtoCONF:
+	    CASE btnSource3toDisplay2:
 	    {
-		nCONFIDENCESourceSelected=STAGE
-		dvxSwitchVideoOnly(dvSWITCHER, STAGE, CONFIDENCE)
+		nDisplay2SourceSelected=Source3
+		dvxSwitchVideoOnly(dvSWITCHER, Source3, Display2)
 	    }
-	    CASE btnCAMERAtoCONF:
+	    CASE btnSource4toDisplay2:
 	    {
-		nCONFIDENCESourceSelected=CAMERA
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, CONFIDENCE)
+		nDisplay2SourceSelected=Source4
+		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display2)
 	    }
-	    CASE btnSIGNAGEtoCONF:
+	    CASE btnSource2toDisplay2:
 	    {
-		nCONFIDENCESourceSelected=SIGNAGE
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, CONFIDENCE)
-	    }
-	    
-	    CASE btnLAPTOPtoPREV:
-	    {
-		nPREVIEWSourceSelected=LAPTOP
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PREVIEW)
-	    }
-	    CASE btnSTAGEtoPREV:
-	    {
-		nPREVIEWSourceSelected=STAGE
-		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PREVIEW)
-	    }
-	    CASE btnCAMERAtoPREV:
-	    {
-		nPREVIEWSourceSelected=CAMERA
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PREVIEW)
-	    }
-	    CASE btnSIGNAGEtoPREV:
-	    {
-		nPREVIEWSourceSelected=SIGNAGE
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PREVIEW)
+		nDisplay2SourceSelected=Source2
+		dvxSwitchVideoOnly(dvSWITCHER, Source2, Display2)
 	    }
 	    
-	    CASE btnLAPTOPtoALL:
+	    CASE btnSource1toDisplay3:
 	    {
-		nPJ1SourceSelected=LAPTOP
-		nPJ2SourceSelected=LAPTOP
-		nConfidenceSourceSelected=LAPTOP
-		nPreviewSourceSelected=LAPTOP
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PJ1)
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PJ2)
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, CONFIDENCE)
-		dvxSwitchVideoOnly(dvSWITCHER, LAPTOP, PREVIEW)
+		nDisplay3SourceSelected=Source1
+		dvxSwitchVideoOnly(dvSWITCHER, Source1, Display3)
 	    }
-	    CASE btnSTAGEtoALL:
+	    CASE btnSource3toDisplay3:
 	    {
-		nPJ1SourceSelected=STAGE
-		nPJ2SourceSelected=STAGE
-		nConfidenceSourceSelected=STAGE
-		nPreviewSourceSelected=STAGE
-		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PJ1)
-		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PJ2)
-		dvxSwitchVideoOnly(dvSWITCHER, STAGE, CONFIDENCE)
-		dvxSwitchVideoOnly(dvSWITCHER, STAGE, PREVIEW)
+		nDisplay3SourceSelected=Source3
+		dvxSwitchVideoOnly(dvSWITCHER, Source3, Display3)
 	    }
-	    CASE btnCAMERAtoALL:
+	    CASE btnSource4toDisplay3:
 	    {
-		nPJ1SourceSelected=CAMERA
-		nPJ2SourceSelected=CAMERA
-		nConfidenceSourceSelected=CAMERA
-		nPreviewSourceSelected=CAMERA
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PJ1)
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PJ2)
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, CONFIDENCE)
-		dvxSwitchVideoOnly(dvSWITCHER, CAMERA, PREVIEW)
+		nDisplay3SourceSelected=Source4
+		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display3)
 	    }
-	    CASE btnSIGNAGEtoALL:
+	    CASE btnSource2toDisplay3:
 	    {
-		nPJ1SourceSelected=SIGNAGE
-		nPJ2SourceSelected=SIGNAGE
-		nConfidenceSourceSelected=SIGNAGE
-		nPreviewSourceSelected=SIGNAGE
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PJ1)
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PJ2)
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, CONFIDENCE)
-		dvxSwitchVideoOnly(dvSWITCHER, SIGNAGE, PREVIEW)
+		nDisplay3SourceSelected=Source2
+		dvxSwitchVideoOnly(dvSWITCHER, Source2, Display3)
+	    }
+	    
+	    CASE btnSource1toDisplay4:
+	    {
+		nDisplay4SourceSelected=Source1
+		dvxSwitchVideoOnly(dvSWITCHER, Source1, Display4)
+	    }
+	    CASE btnSource3toDisplay4:
+	    {
+		nDisplay4SourceSelected=Source3
+		dvxSwitchVideoOnly(dvSWITCHER, Source3, Display4)
+	    }
+	    CASE btnSource4toDisplay4:
+	    {
+		nDisplay4SourceSelected=Source4
+		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display4)
+	    }
+	    CASE btnSource2toDisplay4:
+	    {
+		nDisplay4SourceSelected=Source2
+		dvxSwitchVideoOnly(dvSWITCHER, Source2, Display4)
+	    }
+	    
+	    CASE btnSource1toALL:
+	    {
+		nDisplay1SourceSelected=Source1
+		nDisplay2SourceSelected=Source1
+		nDisplay3SourceSelected=Source1
+		nDisplay4SourceSelected=Source1
+		dvxSwitchVideoOnly(dvSWITCHER, Source1, Display1)
+		dvxSwitchVideoOnly(dvSWITCHER, Source1, Display2)
+		dvxSwitchVideoOnly(dvSWITCHER, Source1, Display3)
+		dvxSwitchVideoOnly(dvSWITCHER, Source1, Display4)
+	    }
+	    CASE btnSource3toALL:
+	    {
+		nDisplay1SourceSelected=Source3
+		nDisplay2SourceSelected=Source3
+		nDisplay3SourceSelected=Source3
+		nDisplay4SourceSelected=Source3
+		dvxSwitchVideoOnly(dvSWITCHER, Source3, Display1)
+		dvxSwitchVideoOnly(dvSWITCHER, Source3, Display2)
+		dvxSwitchVideoOnly(dvSWITCHER, Source3, Display3)
+		dvxSwitchVideoOnly(dvSWITCHER, Source3, Display4)
+	    }
+	    CASE btnSource4toALL:
+	    {
+		nDisplay1SourceSelected=Source4
+		nDisplay2SourceSelected=Source4
+		nDisplay3SourceSelected=Source4
+		nDisplay4SourceSelected=Source4
+		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display1)
+		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display2)
+		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display3)
+		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display4)
+	    }
+	    CASE btnSource2toALL:
+	    {
+		nDisplay1SourceSelected=Source2
+		nDisplay2SourceSelected=Source2
+		nDisplay3SourceSelected=Source2
+		nDisplay4SourceSelected=Source2
+		dvxSwitchVideoOnly(dvSWITCHER, Source2, Display1)
+		dvxSwitchVideoOnly(dvSWITCHER, Source2, Display2)
+		dvxSwitchVideoOnly(dvSWITCHER, Source2, Display3)
+		dvxSwitchVideoOnly(dvSWITCHER, Source2, Display4)
 	    }
 	}
     }
@@ -284,25 +284,25 @@ BUTTON_EVENT[dvTP,0]
 (***********************************************************)
 DEFINE_PROGRAM
 
-[dvTP,btnLAPTOPtoPJ1]	= nPJ1SourceSelected=LAPTOP
-[dvTP,btnSTAGEtoPJ1]	= nPJ1SourceSelected=STAGE
-[dvTP,btnCAMERAtoPJ1]	= nPJ1SourceSelected=CAMERA
-[dvTP,btnSIGNAGEtoPJ1]	= nPJ1SourceSelected=SIGNAGE
+[dvTP,btnSource1toDisplay1]	= nDisplay1SourceSelected=Source1
+[dvTP,btnSource3toDisplay1]	= nDisplay1SourceSelected=Source3
+[dvTP,btnSource4toDisplay1]	= nDisplay1SourceSelected=Source4
+[dvTP,btnSource2toDisplay1]	= nDisplay1SourceSelected=Source2
 
-[dvTP,btnLAPTOPtoPJ2]	= nPJ2SourceSelected=LAPTOP
-[dvTP,btnSTAGEtoPJ2]	= nPJ2SourceSelected=STAGE
-[dvTP,btnCAMERAtoPJ2]	= nPJ2SourceSelected=CAMERA
-[dvTP,btnSIGNAGEtoPJ2]	= nPJ2SourceSelected=SIGNAGE
+[dvTP,btnSource1toDisplay2]	= nDisplay2SourceSelected=Source1
+[dvTP,btnSource3toDisplay2]	= nDisplay2SourceSelected=Source3
+[dvTP,btnSource4toDisplay2]	= nDisplay2SourceSelected=Source4
+[dvTP,btnSource2toDisplay2]	= nDisplay2SourceSelected=Source2
 
-[dvTP,btnLAPTOPtoCONF]	= nCONFIDENCESourceSelected=LAPTOP
-[dvTP,btnSTAGEtoCONF]	= nCONFIDENCESourceSelected=STAGE
-[dvTP,btnCAMERAtoCONF]	= nCONFIDENCESourceSelected=CAMERA
-[dvTP,btnSIGNAGEtoCONF]	= nCONFIDENCESourceSelected=SIGNAGE
+[dvTP,btnSource1toDisplay3]		= nDisplay3SourceSelected=Source1
+[dvTP,btnSource3toDisplay3]		= nDisplay3SourceSelected=Source3
+[dvTP,btnSource4toDisplay3]		= nDisplay3SourceSelected=Source4
+[dvTP,btnSource2toDisplay3]		= nDisplay3SourceSelected=Source2
 
-[dvTP,btnLAPTOPtoPREV]	= nPreviewSourceSelected=LAPTOP
-[dvTP,btnSTAGEtoPREV]	= nPreviewSourceSelected=STAGE
-[dvTP,btnCAMERAtoPREV]	= nPreviewSourceSelected=CAMERA
-[dvTP,btnSIGNAGEtoPREV]	= nPreviewSourceSelected=SIGNAGE
+[dvTP,btnSource1toDisplay4]		= nDisplay4SourceSelected=Source1
+[dvTP,btnSource3toDisplay4]		= nDisplay4SourceSelected=Source3
+[dvTP,btnSource4toDisplay4]		= nDisplay4SourceSelected=Source4
+[dvTP,btnSource2toDisplay4]		= nDisplay4SourceSelected=Source2
 
 
 (***********************************************************)
