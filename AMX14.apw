@@ -369,6 +369,30 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
+<File CompileType="None" Type="Include"><Identifier>common</Identifier>
+<FilePathName>lib\common\common.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-device-control</Identifier>
+<FilePathName>lib\device\amx-device-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dvx-api</Identifier>
+<FilePathName>lib\dvx\amx-dvx-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dvx-control</Identifier>
+<FilePathName>lib\dvx\amx-dvx-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dvx-listener</Identifier>
+<FilePathName>lib\dvx\amx-dvx-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>enova-dvx</Identifier>
+<FilePathName>src\enova\enova-dvx.axs</FilePathName>
+<Comments></Comments>
+</File>
 </System>
 </Project>
 </Workspace>
