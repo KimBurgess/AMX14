@@ -350,6 +350,10 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
+<File CompileType="None" Type="Include"><Identifier>common</Identifier>
+<FilePathName>lib\common\common.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>enova-dgx32</Identifier>
 <FilePathName>src\enova\enova-dgx32.axs</FilePathName>
 <Comments></Comments>
