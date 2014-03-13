@@ -1,11 +1,11 @@
 *.src
 *.tkn
 *.tko
-!/module/*.tko
 *.jar
 !/module/*.jar
 *.axs
 !/src/*/*.axs
+!/module/*.axs
 *.axi
 !/src/*/*.axi
 *.tp4
