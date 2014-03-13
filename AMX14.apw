@@ -130,8 +130,8 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
-<File CompileType="None" Type="TP4"><Identifier>AMX14 Standard Systems</Identifier>
-<FilePathName>AMX14 Standard Systems.TP4</FilePathName>
+<File CompileType="None" Type="TP4"><Identifier>AMX14 Generic Swtching MXT1000</Identifier>
+<FilePathName>AMX14 Generic Swtching MXT1000.TP4</FilePathName>
 <Comments></Comments>
 <DeviceMap DevAddr="dvTP"><DevName>dvTP</DevName>
 </DeviceMap>
@@ -173,7 +173,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>UI</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>UI</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -187,8 +187,8 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
-<File CompileType="None" Type="TP4"><Identifier>AMX14 Standard Systems</Identifier>
-<FilePathName>AMX14 Standard Systems.TP4</FilePathName>
+<File CompileType="None" Type="TP4"><Identifier>AMX14 Generic Swtching MXT1000</Identifier>
+<FilePathName>AMX14 Generic Swtching MXT1000.TP4</FilePathName>
 <Comments></Comments>
 <DeviceMap DevAddr="dvTP"><DevName>dvTP</DevName>
 </DeviceMap>
@@ -240,6 +240,12 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
+<File CompileType="None" Type="TP4"><Identifier>AMX14 Generic Swtching MXT1000</Identifier>
+<FilePathName>AMX14 Generic Swtching MXT1000.TP4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP"><DevName>dvTP</DevName>
+</DeviceMap>
+</File>
 <File CompileType="None" Type="Include"><Identifier>common</Identifier>
 <FilePathName>lib\common\common.axi</FilePathName>
 <Comments></Comments>
@@ -258,6 +264,10 @@
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsDvxSwitcherMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsDvxSwitcherMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
@@ -288,7 +298,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Stage</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Stage</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>

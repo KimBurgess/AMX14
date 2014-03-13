@@ -78,8 +78,8 @@ VOLATILE INTEGER nAllSourceSelected
 
 dev dvDvxVidInPorts[] = { 5002:1:0, 5002:2:0, 5002:3:0, 5002:4:0, 5002:5:0, 5002:6:0, 5002:7:0, 5002:8:0, 5002:9:0, 5002:10:0 }
 
-//CHAR cRMS_Server_URL[] = 'http://events.amxaustralia.com.au/rms'
-CHAR cRMS_Server_URL[] = 'http://developer.amxaustralia.com.au/rms'
+CHAR cRMS_Server_URL[] = 'http://events.amxaustralia.com.au/rms'
+//CHAR cRMS_Server_URL[] = 'http://developer.amxaustralia.com.au/rms'
 
 
 DEFINE_MODULE 'RmsNetLinxAdapter_dr4_0_0' mdlRMSNetLinx(vdvRMS);
