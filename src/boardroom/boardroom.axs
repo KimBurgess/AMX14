@@ -1,1 +1,1 @@
-PROGRAM_NAME='boardroom'
+program_name='boardroom'

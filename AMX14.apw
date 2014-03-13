@@ -363,8 +363,80 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
+<File CompileType="None" Type="Include"><Identifier>common</Identifier>
+<FilePathName>lib\common\common.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-controlports-api</Identifier>
+<FilePathName>lib\device\amx-controlports-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-controlports-control</Identifier>
+<FilePathName>lib\device\amx-controlports-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-controlports-listener</Identifier>
+<FilePathName>lib\device\amx-controlports-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-device-control</Identifier>
+<FilePathName>lib\device\amx-device-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dvx-api</Identifier>
+<FilePathName>lib\dvx\amx-dvx-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dvx-control</Identifier>
+<FilePathName>lib\dvx\amx-dvx-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dvx-listener</Identifier>
+<FilePathName>lib\dvx\amx-dvx-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dxlink-api</Identifier>
+<FilePathName>lib\dxlink\amx-dxlink-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dxlink-control</Identifier>
+<FilePathName>lib\dxlink\amx-dxlink-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dxlink-listener</Identifier>
+<FilePathName>lib\dxlink\amx-dxlink-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-api</Identifier>
+<FilePathName>lib\modero\amx-modero-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-control</Identifier>
+<FilePathName>lib\modero\amx-modero-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-listener</Identifier>
+<FilePathName>lib\modero\amx-modero-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-pdu-api</Identifier>
+<FilePathName>lib\pdu\amx-pdu-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-pdu-control</Identifier>
+<FilePathName>lib\pdu\amx-pdu-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-pdu-listener</Identifier>
+<FilePathName>lib\pdu\amx-pdu-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>boardroom</Identifier>
 <FilePathName>src\boardroom\boardroom.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>boardroom-10-inch-in-desk-drag-and-drop</Identifier>
+<FilePathName>src\boardroom\ui\boardroom-10-inch-in-desk-drag-and-drop.TP4</FilePathName>
 <Comments></Comments>
 </File>
 </System>
