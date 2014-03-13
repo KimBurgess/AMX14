@@ -226,7 +226,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Presentation</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -264,8 +264,8 @@
 <FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="MasterSrc"><Identifier>enova</Identifier>
-<FilePathName>src\enova\enova.axs</FilePathName>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>Generic switching code</Identifier>
+<FilePathName>src\enova\Generic switching code.axs</FilePathName>
 <Comments></Comments>
 </File>
 </System>
@@ -517,6 +517,92 @@
 </File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>Generic switching code</Identifier>
 <FilePathName>src\Generic switching code.axs</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DGX32</Identifier>
+<SysID>0</SysID>
+<TransSerial>COM30,115200,8,None,1,None</TransSerial>
+<TransModem></TransModem>
+<TransTCPIP>192.168.69.28:1319:1: ::</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>192.168.7.190:1319:1:AMX Australia - GC Office - Boardroom DVX-2100:administrator:p@55w0rd</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>192.168.7.126</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="None" Type="Include"><Identifier>common</Identifier>
+<FilePathName>lib\common\common.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dgx-api</Identifier>
+<FilePathName>lib\dgx\amx-dgx-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dgx-control</Identifier>
+<FilePathName>lib\dgx\amx-dgx-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dgx-listener</Identifier>
+<FilePathName>lib\dgx\amx-dgx-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dxlink-api</Identifier>
+<FilePathName>lib\dxlink\amx-dxlink-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dxlink-control</Identifier>
+<FilePathName>lib\dxlink\amx-dxlink-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dxlink-listener</Identifier>
+<FilePathName>lib\dxlink\amx-dxlink-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>enova-dgx32</Identifier>
+<FilePathName>src\enova\enova-dgx32.axs</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX</Identifier>
+<SysID>0</SysID>
+<TransSerial>COM30,115200,8,None,1,None</TransSerial>
+<TransModem></TransModem>
+<TransTCPIP>192.168.69.28:1319:1: ::</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>192.168.7.190:1319:1:AMX Australia - GC Office - Boardroom DVX-2100:administrator:p@55w0rd</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>192.168.7.126</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="None" Type="Include"><Identifier>common</Identifier>
+<FilePathName>lib\common\common.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-device-control</Identifier>
+<FilePathName>lib\device\amx-device-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dvx-api</Identifier>
+<FilePathName>lib\dvx\amx-dvx-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dvx-control</Identifier>
+<FilePathName>lib\dvx\amx-dvx-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dvx-listener</Identifier>
+<FilePathName>lib\dvx\amx-dvx-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>enova-dvx</Identifier>
+<FilePathName>src\enova\enova-dvx.axs</FilePathName>
 <Comments></Comments>
 </File>
 </System>

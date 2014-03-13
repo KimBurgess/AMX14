@@ -25,3 +25,6 @@
 [submodule "lib/ncl"]
 	path = lib/ncl
 	url = https://github.com/KimBurgess/netlinx-common-libraries.git
+[submodule "lib/dgx"]
+	path = lib/dgx
+	url = https://github.com/DavidVine/amx-dgx-library.git
