@@ -484,6 +484,18 @@
 <FilePathName>lib\dxlink\amx-dxlink-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>amx-enzo-api</Identifier>
+<FilePathName>lib\enzo\amx-enzo-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-enzo-control</Identifier>
+<FilePathName>lib\enzo\amx-enzo-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-enzo-listener</Identifier>
+<FilePathName>lib\enzo\amx-enzo-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>huddle</Identifier>
 <FilePathName>src\huddle\huddle.axs</FilePathName>
 <Comments></Comments>
