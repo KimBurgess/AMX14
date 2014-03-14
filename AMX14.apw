@@ -298,7 +298,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Stage</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Stage</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -542,11 +542,11 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DGX32</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DGX32</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM30,115200,8,None,1,None</TransSerial>
 <TransModem></TransModem>
-<TransTCPIP>192.168.69.28:1319:1: ::</TransTCPIP>
+<TransTCPIP>192.168.4.56:1319:1:AMX14 - ENOVA - DGX32::</TransTCPIP>
 <VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
 <VNMRestoreIPSettings>192.168.7.190:1319:1:AMX Australia - GC Office - Boardroom DVX-2100:administrator:p@55w0rd</VNMRestoreIPSettings>
 <VNMSystemID>1</VNMSystemID>
