@@ -45,9 +45,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 	//save current signal status
 	dvx.videoInputs[dvxVideoInput.port].status = signalStatus
 	
-	
-	
-	
+	//see if there is a signal avaiable at all
 	if (dvx.videoInputs[dvDvxSwitcherVideoInput9.port].status == DVX_SIGNAL_STATUS_VALID_SIGNAL or
 		dvx.videoInputs[dvDvxSwitcherVideoInput10.port].status == DVX_SIGNAL_STATUS_VALID_SIGNAL )
 	{
