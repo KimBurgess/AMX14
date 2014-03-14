@@ -1,5 +1,6 @@
 PROGRAM_NAME='enova-dgx32'
 
+include 'amx-dxlink-api'
 
 define_device
 
@@ -18,3 +19,29 @@ dvDxlfRxMain        = 7001:DXLINK_PORT_MAIN:0
 dvDxlfRxUsb         = 7001:DXLINK_PORT_USB:0
 dvDxlfRxAudioOutput = 7001:DXLINK_PORT_AUDIO_OUTPUT:0
 dvDxlfRxVideoOutput = 7001:DXLINK_PORT_VIDEO_OUTPUT:0
+
+
+
+define_event
+
+
+data_event[dvDxlfMftxMain]
+data_event[dvDxlfMftxMain]
+data_event[dvDxlfMftxAudioInput]
+data_event[dvDxlfMftxVideoInputDigital]
+data_event[dvDxlfMftxVideoInputAnalog]
+{
+	command:
+	{
+	}
+}
+
+data_event[dvDxlfRxMain]
+data_event[dvDxlfRxUsb]
+data_event[dvDxlfRxAudioOutput]
+data_event[dvDxlfRxVideoOutput]
+{
+	command:
+	{
+	}
+}
