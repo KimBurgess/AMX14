@@ -45,3 +45,10 @@ data_event [dvDxlfRxVideoOutput]
 	{
 	}
 }
+
+data_event [dvDgxSwitcher]
+{
+	online:
+	{
+	}
+}
