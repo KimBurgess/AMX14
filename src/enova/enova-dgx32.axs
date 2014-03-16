@@ -46,3 +46,13 @@ data_event[dvDxlfRxVideoOutput]
 	{
 	}
 }
+
+data_event [dvDxlfRxMain]
+data_event [dvDxlfRxUsb]
+data_event [dvDxlfRxAudioOutput]
+data_event [dvDxlfRxVideoOutput]
+{
+	online:
+	{
+	}
+}
