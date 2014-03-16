@@ -6,6 +6,9 @@ define_device
 // Touch Panel
 dvTpMain = 10001:1:0
 
+// DGX Switcher
+dvDgxSwitcher = 5002:2:0
+
 // DXLink Fiber Multi-Format Transmitter
 dvDxlfMftxMain              = 6001:DXLINK_PORT_MAIN:0
 dvDxlfMftxUsb               = 6001:DXLINK_PORT_USB:0
