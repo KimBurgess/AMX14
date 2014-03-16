@@ -1,6 +1,11 @@
 PROGRAM_NAME='enova-dgx32'
 
 
+#include 'amx-dgx-api'
+#include 'amx-dgx-control'
+#include 'amx-dxlink-api'
+#include 'amx-dxlink-control'
+
 define_device
 
 // Touch Panel
@@ -44,6 +49,8 @@ integer DGX_OUTPUT_MONITOR_DIRECT   = 14
 
 
 
+
+
 define_event
 
 data_event [dvDxlfMftxMain]
@@ -73,3 +80,9 @@ data_event [dvDgxSwitcher]
 	{
 	}
 }
+
+
+
+
+#include 'amx-dgx-listener'
+#include 'amx-dxlink-listener'
