@@ -8,6 +8,7 @@
 !/module/*.axs
 *.axi
 !/src/*/*.axi
+!/src/*/include/*.axi
 *.tp4
 !/src/*/ui/*.tp4
 *.tp5

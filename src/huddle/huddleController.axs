@@ -2,11 +2,18 @@ module_name='huddleController'(dev vdvComm, dev vdvRMS, dev vdvDisplay,
 		dev dvEnzo, dev dvRXMonitor, dev dvTXTable, devchan dcButton)
 
 
+#define INCLUDE_CONTROLPORTS_NOTIFY_IO_INPUT_ON_CALLBACK;
+#define INCLUDE_CONTROLPORTS_NOTIFY_IO_INPUT_OFF_CALLBACK;
+
+
+#include 'logger';
+#include 'string';
 #include 'common';
 #include 'util';
 #include 'amx-device-control';
 #include 'amx-controlports-api';
 #include 'amx-controlports-control';
+#include 'amx-controlports-listener';
 #include 'amx-dxlink-api';
 #include 'amx-dxlink-control';
 #include 'amx-modero-api';
@@ -37,12 +44,22 @@ volatile dev dvIoPorts[1];
 
 
 /**
- * Map our device variables used internally to the appropriatevdevices passed
- * into this instance of the huddle controller.
- *
- * Note: this should be called from define_start only.
+ * Initialises module state on startup.
  */
-define_function mapDevices() {
+define_function init() {
+	setLogPrefix("'huddleController[', itoa(vdvComm.NUMBER), ']'");
+	log(AMX_DEBUG, 'Initialising module');
+	mapDevices();
+}
+
+/**
+ * Map our device variables used internally to the appropriate devices passed
+ * into this instance of the huddle controller.
+ */
+define_function mapDevices()
+{
+	log(AMX_DEBUG, 'Mapping devices...');
+
 	dvRxMonitorMain = dvRXMonitor;
 	dvRxMonitorSerial = dvRXMonitor.NUMBER:DXLINK_PORT_SERIAL:dvRXMonitor.SYSTEM;
 	dvRxMonitorVidOut = dvRXMonitor.NUMBER:DXLINK_PORT_VIDEO_OUTPUT:dvRXMonitor.SYSTEM;
@@ -57,9 +74,69 @@ define_function mapDevices() {
 	set_length_array(dvIoPorts, 1);
 
 	rebuild_event();
+
+	log(AMX_INFO, 'Device mapping complete');
+}
+
+/**
+ * Handle incoming command data on our comm device.
+ */
+define_function handleCommRx(char cmd[], char params[][])
+{
+	log(AMX_DEBUG, "'Incoming data from comm device: {cmd: ', cmd, ' params:[',
+			implode(params, ','), ']}'");
+}
+
+/**
+ * Handle a change to the pushbutton state.
+ */
+define_function handlePushbuttonEvent(char isPushed) {
+	log(AMX_DEBUG, "'pushbutton event [', bool_to_string(isPushed), ']'");
+
+	if (isPushed) {
+
+	}
+}
+
+
+// AMX control ports callbacks
+
+define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
+{
+	if (ioPort == dcButton.device && ioChanCde == dcButton.channel) {
+		handlePushbuttonEvent(true);
+	}
+}
+
+define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
+{
+	if (ioPort == dcButton.device && ioChanCde == dcButton.channel) {
+		handlePushbuttonEvent(false);
+	}
+}
+
+
+define_event
+
+data_event[vdvComm]
+{
+
+	command:
+	{
+		stack_var char cmd[128];
+		stack_var char params[8][256];
+		stack_var integer paramCount;
+
+		cmd = upper_string(string_get_key(data.text, '-'));
+		paramCount = explode(',', string_get_value(data.text, '-'), params, 0);
+		set_length_array(params, paramCount);
+
+		handleCommRx(cmd, params);
+	}
+
 }
 
 
 define_start
 
-mapDevices();
+init();

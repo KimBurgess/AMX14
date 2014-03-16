@@ -724,12 +724,20 @@
 <FilePathName>lib\modero\amx-modero-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>string</Identifier>
+<FilePathName>lib\ncl\string.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>huddle</Identifier>
 <FilePathName>src\huddle\huddle.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>huddleController</Identifier>
 <FilePathName>src\huddle\huddleController.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>logger</Identifier>
+<FilePathName>src\huddle\include\logger.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>util</Identifier>
