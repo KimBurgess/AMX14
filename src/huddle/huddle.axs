@@ -15,7 +15,7 @@ define_device
 dvSystem = 0:1:0;
 vdvRMS = 41001:1:0;
 dvWayfindingPanel = 10002:2:0;
-dvIO = 5001:1:0;
+dvIO = 5001:4:0;
 
 // Huddle Specific
 vdvHuddle1Comm = dynamic_virtual_device;
