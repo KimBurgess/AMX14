@@ -47,6 +47,8 @@ integer DGX_OUTPUT_MONITOR_FIBER_RX = 9
 integer DGX_OUTPUT_ENCODER          = 13
 integer DGX_OUTPUT_MONITOR_DIRECT   = 14
 
+// Touch panel button channel codes
+integer BTN_RESET_DEMO = 1
 
 
 define_variable
@@ -65,7 +67,12 @@ define_function moderoNotifyButtonPush (dev panel, integer btnChanCde)
 	
 	if (panel == dvTpMain)
 	{
-		
+		switch (btnChanCde)
+		{
+			case BTN_RESET_DEMO:
+			{
+			}
+		}
 	}
 }
 
