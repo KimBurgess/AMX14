@@ -5,6 +5,8 @@ PROGRAM_NAME='enova-dgx32'
 #include 'amx-dgx-control'
 #include 'amx-dxlink-api'
 #include 'amx-dxlink-control'
+#include 'amx-modero-api'
+#include 'amx-modero-control'
 
 define_device
 
@@ -86,3 +88,4 @@ data_event [dvDgxSwitcher]
 
 #include 'amx-dgx-listener'
 #include 'amx-dxlink-listener'
+#include 'amx-modero-listener'
