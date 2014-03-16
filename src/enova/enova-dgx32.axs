@@ -71,6 +71,13 @@ define_function moderoNotifyButtonPush (dev panel, integer btnChanCde)
 		{
 			case BTN_RESET_DEMO:
 			{
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_DVX_1_FEED_1)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_DVX_1_FEED_2)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_DVX_2_FEED_1)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_DVX_2_FEED_2)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_ENCODER)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_MONITOR_DIRECT)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_MONITOR_FIBER_RX)
 			}
 		}
 	}
