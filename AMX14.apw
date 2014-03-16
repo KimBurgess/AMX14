@@ -595,6 +595,10 @@
 <FilePathName>lib\common\common.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>amx-device-control</Identifier>
+<FilePathName>lib\device\amx-device-control.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>amx-dgx-api</Identifier>
 <FilePathName>lib\dgx\amx-dgx-api.axi</FilePathName>
 <Comments></Comments>
