@@ -240,6 +240,26 @@ data_event[vdvComm]
 
 }
 
+data_event[dvTxTableMain]
+{
+
+	online:
+	{
+		dxlinkDisableTxVideoInputAutoSelect(data.device);
+	}
+
+}
+
+data_event[dcButton.device]
+{
+
+	online:
+	{
+		amxIoSetInputState(dcButton.device, dcButton.channel, IO_ACTIVE_STATE_LOW);
+	}
+
+}
+
 
 define_start
 
