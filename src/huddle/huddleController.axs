@@ -23,7 +23,11 @@ constant char SOURCE_ENZO = 1;
 constant char SOURCE_HDMI = 2;
 constant char SOURCE_VGA = 3;
 
-volatile SignalSource source[3];
+constant char NUM_SOURCES = 3;
+
+volatile SignalSource source[NUM_SOURCES];
+
+volatile char activeSource;
 
 // As we can only use define_device to declare devices based on constant value,
 // rather than those passed in at runtime we need to be a little 'non standard'
@@ -144,7 +148,7 @@ define_function char isSourceAvailable(char sourceId) {
  */
 define_function setSourceAvailable(char sourceId, char isAvailable) {
 	log(AMX_DEBUG, "'Setting availability state of ', getSourceName(sourceId),
-			bool_to_string(isAvailable)");
+			' ', bool_to_string(isAvailable)");
 	source[sourceId].isAvailable = isAvailable;
 }
 
@@ -154,7 +158,44 @@ define_function setSourceAvailable(char sourceId, char isAvailable) {
 define_function setActiveSource(char sourceId) {
 	log(AMX_INFO, "'Selecting ', getSourceName(sourceId), ' as system source'");
 
+	switch (sourceId)
+	{
+		case SOURCE_ENZO:
+		{
+			// TODO wake enzo up
+			// TODO select correct input on display
+		}
+		case SOURCE_HDMI:
+		{
+			dxlinkSetTxVideoInputDigital(dvTxTableMain);
+			// TODO select correct input on display
+		}
+		case SOURCE_VGA:
+		{
+			dxlinkSetTxVideoInputAnalog(dvTxTableMain);
+			// TODO select correct input on display
+		}
+	}
 
+	activeSource = sourceId;
+}
+
+/**
+ * Selects the next available source.
+ */
+define_function cycleActiveSource()
+{
+	stack_var char nextSource;
+	nextSource = activeSource + 1;
+	while(!isSourceAvailable(nextSource))
+	{
+		nextSource = nextSource + 1
+		if (nextSource > NUM_SOURCES) {
+			nextSource = 1;
+		}
+	}
+
+	setActiveSource(nextSource);
 }
 
 /**
@@ -164,8 +205,9 @@ define_function handlePushbuttonEvent(char isPushed)
 {
 	log(AMX_DEBUG, "'pushbutton event [', bool_to_string(isPushed), ']'");
 
-	if (isPushed) {
-
+	if (isPushed)
+	{
+		cycleActiveSource();
 	}
 }
 
