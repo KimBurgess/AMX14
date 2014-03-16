@@ -619,6 +619,18 @@
 <FilePathName>lib\dxlink\amx-dxlink-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-api</Identifier>
+<FilePathName>lib\modero\amx-modero-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-control</Identifier>
+<FilePathName>lib\modero\amx-modero-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-listener</Identifier>
+<FilePathName>lib\modero\amx-modero-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>enova-dgx32</Identifier>
 <FilePathName>src\enova\enova-dgx32.axs</FilePathName>
 <Comments></Comments>
