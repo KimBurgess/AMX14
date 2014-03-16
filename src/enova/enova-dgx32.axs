@@ -26,19 +26,22 @@ dvDxlfRxVideoOutput = 7001:DXLINK_PORT_VIDEO_OUTPUT:0
 define_constant
 
 // DGX inputs
-integer dgxInputSignage          = 1
-integer dgxInputBluray           = 2
-integer dgxInputLaptopFiberTx    = 5
-integer dgxInputSignageRemovable = 9
+integer DGX_INPUT_SIGNAGE           = 1
+integer DGX_INPUT_BLURAY            = 2
+integer DGX_INPUT_LAPTOP_FIBER_TX   = 5
+integer DGX_INPUT_SIGNAGE_REMOVABLE = 9
 
 // DGX outputs
-integer dgxOutputDvx1Feed1      = 1
-integer dgxOutputDvx2Feed1      = 2
-integer dgxOutputDvx1Feed2      = 5
-integer dgxOutputDvx2Feed2      = 6
-integer dgxOutputMonitorFiberRx = 9
-integer dgxOutputEncoder        = 13
-integer dgxOutputMonitorDirect  = 14
+integer DGX_OUTPUT_DVX_1_FEED_1     = 1
+integer DGX_OUTPUT_DVX_2_FEED_1     = 2
+integer DGX_OUTPUT_DVX_1_FEED_2     = 5
+integer DGX_OUTPUT_DVX_2_FEED_2     = 6
+integer DGX_OUTPUT_MONITOR_FIBER_RX = 9
+integer DGX_OUTPUT_ENCODER          = 13
+integer DGX_OUTPUT_MONITOR_DIRECT   = 14
+
+
+
 
 
 define_event
