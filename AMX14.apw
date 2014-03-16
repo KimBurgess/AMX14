@@ -441,6 +441,10 @@
 <FilePathName>lib\pdu\amx-pdu-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Source"><Identifier>amx-au-gc-boardroom-main</Identifier>
+<FilePathName>src\boardroom\amx-au-gc-boardroom-main.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>boardroom</Identifier>
 <FilePathName>src\boardroom\boardroom.axs</FilePathName>
 <Comments></Comments>
