@@ -21,12 +21,13 @@ dvDxlfRxAudioOutput = 7001:DXLINK_PORT_AUDIO_OUTPUT:0
 dvDxlfRxVideoOutput = 7001:DXLINK_PORT_VIDEO_OUTPUT:0
 
 
+<<<<<<< HEAD
 
 define_event
 
 
 data_event[dvDxlfMftxMain]
-data_event[dvDxlfMftxMain]
+data_event [dvDxlfMftxUsb]
 data_event[dvDxlfMftxAudioInput]
 data_event[dvDxlfMftxVideoInputDigital]
 data_event[dvDxlfMftxVideoInputAnalog]
