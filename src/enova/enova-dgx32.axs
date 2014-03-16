@@ -32,3 +32,13 @@ data_event [dvDxlfMftxVideoInputAnalog]
 	{
 	}
 }
+
+data_event [dvDxlfRxMain]
+data_event [dvDxlfRxUsb]
+data_event [dvDxlfRxAudioOutput]
+data_event [dvDxlfRxVideoOutput]
+{
+	online:
+	{
+	}
+}
