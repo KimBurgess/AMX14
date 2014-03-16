@@ -53,7 +53,7 @@ integer DGX_OUTPUT_MONITOR_DIRECT   = 14
 define_variable
 
 // Modero Listener Dev Array for Listening to button events
-dvPanelsButtons[] = { dvTpMain }
+dev dvPanelsButtons[] = { dvTpMain }
 
 
 
