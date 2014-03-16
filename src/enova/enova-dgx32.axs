@@ -7,7 +7,7 @@ define_device
 dvTpMain = 10001:1:0
 
 // DGX Switcher
-dvDgxSwitcher = 5002:2:0
+dvDgxSwitcher = 5002:DGX_PORT_SWITCHER:0
 
 // DXLink Fiber Multi-Format Transmitter
 dvDxlfMftxMain              = 6001:DXLINK_PORT_MAIN:0
