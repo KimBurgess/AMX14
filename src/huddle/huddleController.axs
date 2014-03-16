@@ -6,20 +6,6 @@ module_name='huddleController'(dev vdvComm, dev vdvRMS, dev vdvDisplay,
 #define INCLUDE_CONTROLPORTS_NOTIFY_IO_INPUT_OFF_CALLBACK;
 
 
-#include 'logger';
-#include 'string';
-#include 'common';
-#include 'util';
-#include 'amx-device-control';
-#include 'amx-controlports-api';
-#include 'amx-controlports-control';
-#include 'amx-controlports-listener';
-#include 'amx-dxlink-api';
-#include 'amx-dxlink-control';
-#include 'amx-modero-api';
-#include 'amx-modero-control';
-
-
 define_variable
 
 // As we can only use define_device to declare devices based on constant value,
@@ -41,6 +27,20 @@ volatile dev dvTxTableAudIn;
 
 // Button IO
 volatile dev dvIoPorts[1];
+
+
+#include 'logger';
+#include 'string';
+#include 'common';
+#include 'util';
+#include 'amx-device-control';
+#include 'amx-controlports-api';
+#include 'amx-controlports-control';
+#include 'amx-controlports-listener';
+#include 'amx-dxlink-api';
+#include 'amx-dxlink-control';
+#include 'amx-modero-api';
+#include 'amx-modero-control';
 
 
 /**
