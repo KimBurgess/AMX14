@@ -22,15 +22,15 @@ vdvRMS		= 41001:1:0
 DEFINE_CONSTANT
 
 // Inputs
-Source1 	= 3
-Source2 	= 4	//HDMI port on 3156
-Source3		= 7	// Stage Laptop - DXLink port on 3156
-Source4		= 8
+Source1 		= 3
+Source2 		= 4	//HDMI port on 3156
+Source3			= 7	// Stage Laptop - DXLink port on 3156
+Source4			= 8
 
 //Outputs
 Display1		= 1	// Projector 1 on DXLink output
 Display2		= 3	// Projector 2 on DXLink
-Display3	= 4	// LCD confidence monitor at stage vir Tx/Rx pair
+Display3		= 4	// LCD confidence monitor at stage vir Tx/Rx pair
 Display4		= 2	// Local Display4 monitor
 
 // TP buttons
@@ -38,25 +38,25 @@ btnSource1toDisplay1		= 11
 btnSource1toDisplay2		= 21
 btnSource1toDisplay3		= 31
 btnSource1toDisplay4		= 41
-btnSource1toALL		= 101
+btnSource1toALL			= 101
 
 btnSource3toDisplay1		= 12
 btnSource3toDisplay2		= 22
 btnSource3toDisplay3		= 32
 btnSource3toDisplay4		= 42
-btnSource3toALL		= 102
+btnSource3toALL			= 102
 
 btnSource4toDisplay1		= 13
 btnSource4toDisplay2		= 23
 btnSource4toDisplay3		= 33
 btnSource4toDisplay4		= 43
-btnSource4toALL		= 103
+btnSource4toALL			= 103
 
 btnSource2toDisplay1		= 14
 btnSource2toDisplay2		= 24
-btnSource2toDisplay3	= 34
-btnSource2toDisplay4	= 44
-btnSource2toALL		= 104
+btnSource2toDisplay3		= 34
+btnSource2toDisplay4		= 44
+btnSource2toALL			= 104
 
 
 (***********************************************************)
