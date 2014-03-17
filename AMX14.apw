@@ -449,6 +449,10 @@
 <FilePathName>src\boardroom\boardroom.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="TP4"><Identifier>amx-au-gc-boardroom-mxt-1900</Identifier>
+<FilePathName>src\boardroom\ui\amx-au-gc-boardroom-mxt-1900.TP4</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="TP4"><Identifier>boardroom-10-inch-in-desk-drag-and-drop</Identifier>
 <FilePathName>src\boardroom\ui\boardroom-10-inch-in-desk-drag-and-drop.TP4</FilePathName>
 <Comments></Comments>
