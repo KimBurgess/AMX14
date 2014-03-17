@@ -56,7 +56,8 @@ define_variable
 // Modero Listener Dev Array for Listening to button events
 dev dvPanelsButtons[] = { dvTpMain }
 
-
+char ipAddressDxlfTx[15]
+char ipAddressDxlfRx[15]
 
 // Override Callback function from Moder Listener to track button pushes
 #define INCLUDE_MODERO_NOTIFY_BUTTON_PUSH
@@ -87,24 +88,24 @@ define_function moderoNotifyButtonPush (dev panel, integer btnChanCde)
 
 define_event
 
-data_event [dvDxlfMftxMain]
 data_event [dvDxlfMftxUsb]
-data_event [dvDxlfMftxAudioInput]
-data_event [dvDxlfMftxVideoInputDigital]
-data_event [dvDxlfMftxVideoInputAnalog]
 {
 	online:
 	{
+		ipAddressDxlfTx = data.sourceip
+		dxlinkEnableTxUsbHidService (dvDxlfMftxUsb)
+		
+		if (device_id(dvDxlfRxUsb))
+			dxlinkSetRxUsbHidRoute (dvDxlfRxUsb,ipAddressDxlfTx)
 	}
 }
 
-data_event [dvDxlfRxMain]
 data_event [dvDxlfRxUsb]
-data_event [dvDxlfRxAudioOutput]
-data_event [dvDxlfRxVideoOutput]
 {
 	online:
 	{
+		if (device_id(dvDxlfMftxUsb))
+			dxlinkSetRxUsbHidRoute (dvDxlfRxUsb,ipAddressDxlfTx)
 	}
 }
 
