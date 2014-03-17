@@ -52,6 +52,17 @@ integer DGX_OUTPUT_MONITOR_DIRECT   = 14
 // Touch panel button channel codes
 integer BTN_RESET_DEMO = 1
 
+integer BTN_SOURCE_SIGNAGE_DGX32_ONLY     = 11
+integer BTN_SOURCE_BLURAY                 = 12
+integer BTN_SOURCE_LAPTOP                 = 13
+integer BTN_SOURCE_SIGNAGE_DGX32_AND_DGX8 = 14
+
+integer BTN_DESTINATION_DVX_1            = 21
+integer BTN_DESTINATION_DVX_2            = 22
+integer BTN_DESTINATION_MONITOR_RECEIVER = 23
+integer BTN_DESTINATION_H264_ENCODER     = 24
+integer BTN_DESTINATION_MONITOR_LOCAL    = 25
+
 
 define_variable
 
