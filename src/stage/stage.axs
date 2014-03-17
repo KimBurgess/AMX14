@@ -92,6 +92,7 @@ DEFINE_MODULE 'RmsDXLinkMonitor' mdlRmsDXLinkRx2MonitorMod(vdvRMS,dvRx2);  //mod
 DEFINE_MODULE 'RmsDXLinkMonitor' mdlRmsDXLinkRx3MonitorMod(vdvRMS,dvRx3);  //modified SDK module
 DEFINE_MODULE 'RmsDXLinkMonitor' mdlRmsDXLinkTxMonitorMod(vdvRMS,dvTx1);    //modified SDK module
 DEFINE_MODULE 'RmsDXLinkMonitor' mdlRmsDXLinkTx2MonitorMod(vdvRMS,dvTx2);    //modified SDK module
+DEFINE_MODULE 'RmsDXLinkMonitor' mdlRmsDXLinkTx3MonitorMod(vdvRMS,dvTx3);    //modified SDK module
 
 
 
