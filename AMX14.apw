@@ -82,7 +82,7 @@
                IRDB*)>
 
 <!ATTLIST File 
-       Type (Source | MasterSrc | Include | Module | AXB | IR | TPD | TP4 | KPD | TKO | AMX_IR_DB | IRN_DB | Other | DUET | TOK | TKN | KPB ) "Other"
+       Type (Source | MasterSrc | Include | Module | AXB | IR | TPD | TP4 | TP5 | XDD | KPD | TKO | AMX_IR_DB | IRN_DB | Other | DUET | TOK | TKN | KPB ) "Other"
        CompileType (Axcess | Netlinx | None) "None"> 
 
 <!ELEMENT FilePathName	(#PCDATA)>
@@ -498,47 +498,6 @@
 </File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>huddle</Identifier>
 <FilePathName>src\huddle\huddle.axs</FilePathName>
-<Comments></Comments>
-</File>
-</System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Generic display switching</Identifier>
-<SysID>0</SysID>
-<TransSerial>COM1,38400,8,None,1,None</TransSerial>
-<TransModem></TransModem>
-<TransTCPIP>192.168.4.40:1319:1:AMX14 generic switching::</TransTCPIP>
-<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
-<VNMRestoreIPSettings>0.0.0.0:1319:1</VNMRestoreIPSettings>
-<VNMSystemID>1</VNMSystemID>
-<VNMIPAddress>10.0.0.1</VNMIPAddress>
-<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
-<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
-<UserName></UserName>
-<Password></Password>
-<Comments></Comments>
-<File CompileType="None" Type="TP4"><Identifier>AMX14 Standard Systems</Identifier>
-<FilePathName>AMX14 Standard Systems.TP4</FilePathName>
-<Comments></Comments>
-<DeviceMap DevAddr="dvTP"><DevName>dvTP</DevName>
-</DeviceMap>
-</File>
-<File CompileType="None" Type="Include"><Identifier>common</Identifier>
-<FilePathName>lib\common\common.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="Include"><Identifier>amx-device-control</Identifier>
-<FilePathName>lib\device\amx-device-control.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="Include"><Identifier>amx-dvx-control</Identifier>
-<FilePathName>lib\dvx\amx-dvx-control.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
-<FilePathName>lib\rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="MasterSrc"><Identifier>Generic switching code</Identifier>
-<FilePathName>src\Generic switching code.axs</FilePathName>
 <Comments></Comments>
 </File>
 </System>
