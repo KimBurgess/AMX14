@@ -28,6 +28,3 @@
 [submodule "lib/dgx"]
 	path = lib/dgx
 	url = https://github.com/DavidVine/amx-dgx-library.git
-[submodule "lib/drag-and-drop"]
-	path = lib/drag-and-drop
-	url = https://github.com/AMXAUNZ/drag-and-drop
