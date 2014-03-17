@@ -445,6 +445,38 @@
 <FilePathName>lib\pdu\amx-pdu-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>RmsApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsMathUtil</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsMathUtil.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsMonitorCommon</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsMonitorCommon.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemPowerMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSystemPowerMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>agent-usb-ptz-web-cam</Identifier>
+<FilePathName>src\boardroom\agent-usb-ptz-web-cam.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Source"><Identifier>amx-au-gc-boardroom-main</Identifier>
 <FilePathName>src\boardroom\amx-au-gc-boardroom-main.axs</FilePathName>
 <Comments></Comments>
@@ -453,12 +485,34 @@
 <FilePathName>src\boardroom\boardroom.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>debug</Identifier>
+<FilePathName>src\boardroom\debug.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>dynalite-lighting</Identifier>
+<FilePathName>src\boardroom\dynalite-lighting.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>nec-monitor</Identifier>
+<FilePathName>src\boardroom\nec-monitor.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>rms-main</Identifier>
+<FilePathName>src\boardroom\rms-main.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="TP4"><Identifier>amx-au-gc-boardroom-mxt-1900</Identifier>
 <FilePathName>src\boardroom\ui\amx-au-gc-boardroom-mxt-1900.TP4</FilePathName>
 <Comments></Comments>
+<DeviceMap DevAddr="Custom [10001:1:0]"><DevName>Custom [10001:1:0]</DevName>
+</DeviceMap>
 </File>
 <File CompileType="None" Type="TP4"><Identifier>boardroom-10-inch-in-desk-drag-and-drop</Identifier>
 <FilePathName>src\boardroom\ui\boardroom-10-inch-in-desk-drag-and-drop.TP4</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>wake-on-lan</Identifier>
+<FilePathName>src\boardroom\wake-on-lan.axi</FilePathName>
 <Comments></Comments>
 </File>
 </System>
