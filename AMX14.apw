@@ -187,12 +187,6 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
-<File CompileType="None" Type="TP4"><Identifier>AMX14 Generic Swtching MXT1000</Identifier>
-<FilePathName>AMX14 Generic Swtching MXT1000.TP4</FilePathName>
-<Comments></Comments>
-<DeviceMap DevAddr="dvTP"><DevName>dvTP</DevName>
-</DeviceMap>
-</File>
 <File CompileType="None" Type="Include"><Identifier>common</Identifier>
 <FilePathName>lib\common\common.axi</FilePathName>
 <Comments></Comments>
@@ -220,6 +214,12 @@
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
 <Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>AMX14 Generic Swtching MXT1000</Identifier>
+<FilePathName>src\demo-presentations\ui\AMX14 Generic Swtching MXT1000.TP4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP"><DevName>dvTP</DevName>
+</DeviceMap>
 </File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>ui</Identifier>
 <FilePathName>src\ui\ui.axs</FilePathName>
