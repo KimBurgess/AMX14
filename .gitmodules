@@ -31,3 +31,6 @@
 [submodule "lib/enzo"]
 	path = lib/enzo
 	url = https://github.com/AMXAUNZ/amx-enzo-library.git
+[submodule "lib/drag-and-drop"]
+	path = lib/drag-and-drop
+	url = https://github.com/AMXAUNZ/drag-and-drop
