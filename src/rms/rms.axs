@@ -19,9 +19,10 @@ DEFINE_CONSTANT
 
 // Inputs
 Source1 		= 1	// Eric's laptop
-Source2 		= 2	 
-Source3			= 5	// Signage player
-Source4			= 6
+Source2 		= 5	// NUC Out 1 
+Source3			= 6	// NUC Out 2
+Source4			= 7	// Signage
+Source5			= 8	// AppleTV
 
 //Outputs
 Display1		= 1	// Projector 1 on DXLink output
@@ -53,6 +54,12 @@ btnSource4toDisplay2		= 24
 btnSource4toDisplay3		= 34
 btnSource4toDisplay4		= 44
 btnSource4toALL			= 104
+
+btnSource5toDisplay1		= 15
+btnSource5toDisplay2		= 25
+btnSource5toDisplay3		= 35
+btnSource5toDisplay4		= 45
+btnSource5toALL			= 105
 
 
 
@@ -161,6 +168,11 @@ BUTTON_EVENT[dvTP,0]
 		nDisplay1SourceSelected=Source4
 		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display1)
 	    }
+	    CASE btnSource5toDisplay1:
+	    {
+		nDisplay1SourceSelected=Source5
+		dvxSwitchVideoOnly(dvSWITCHER, Source5, Display1)
+	    }
 	    
 	    CASE btnSource1toDisplay2:
 	    {
@@ -181,6 +193,11 @@ BUTTON_EVENT[dvTP,0]
 	    {
 		nDisplay2SourceSelected=Source4
 		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display2)
+	    }
+	    CASE btnSource5toDisplay2:
+	    {
+		nDisplay2SourceSelected=Source5
+		dvxSwitchVideoOnly(dvSWITCHER, Source5, Display2)
 	    }
 	    
 	    CASE btnSource1toDisplay3:
@@ -203,6 +220,11 @@ BUTTON_EVENT[dvTP,0]
 		nDisplay3SourceSelected=Source4
 		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display3)
 	    }
+	    CASE btnSource5toDisplay3:
+	    {
+		nDisplay3SourceSelected=Source5
+		dvxSwitchVideoOnly(dvSWITCHER, Source5, Display3)
+	    }
 	    
 	    CASE btnSource1toDisplay4:
 	    {
@@ -223,6 +245,11 @@ BUTTON_EVENT[dvTP,0]
 	    {
 		nDisplay4SourceSelected=Source4
 		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display4)
+	    }
+	    CASE btnSource5toDisplay4:
+	    {
+		nDisplay4SourceSelected=Source5
+		dvxSwitchVideoOnly(dvSWITCHER, Source5, Display4)
 	    }
 	    
 	    CASE btnSource1toALL:
@@ -269,6 +296,17 @@ BUTTON_EVENT[dvTP,0]
 		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display3)
 		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display4)
 	    }
+	    CASE btnSource5toALL:
+	    {
+		nDisplay1SourceSelected=Source5
+		nDisplay2SourceSelected=Source5
+		nDisplay3SourceSelected=Source5
+		nDisplay4SourceSelected=Source5
+		dvxSwitchVideoOnly(dvSWITCHER, Source5, Display1)
+		dvxSwitchVideoOnly(dvSWITCHER, Source5, Display2)
+		dvxSwitchVideoOnly(dvSWITCHER, Source5, Display3)
+		dvxSwitchVideoOnly(dvSWITCHER, Source5, Display4)
+	    }
 	}
     }
 }
@@ -279,24 +317,28 @@ BUTTON_EVENT[dvTP,0]
 DEFINE_PROGRAM
 
 [dvTP,btnSource1toDisplay1]	= nDisplay1SourceSelected=Source1
+[dvTP,btnSource2toDisplay1]	= nDisplay1SourceSelected=Source2
 [dvTP,btnSource3toDisplay1]	= nDisplay1SourceSelected=Source3
 [dvTP,btnSource4toDisplay1]	= nDisplay1SourceSelected=Source4
-[dvTP,btnSource2toDisplay1]	= nDisplay1SourceSelected=Source2
+[dvTP,btnSource5toDisplay1]	= nDisplay1SourceSelected=Source5
 
 [dvTP,btnSource1toDisplay2]	= nDisplay2SourceSelected=Source1
+[dvTP,btnSource2toDisplay2]	= nDisplay2SourceSelected=Source2
 [dvTP,btnSource3toDisplay2]	= nDisplay2SourceSelected=Source3
 [dvTP,btnSource4toDisplay2]	= nDisplay2SourceSelected=Source4
-[dvTP,btnSource2toDisplay2]	= nDisplay2SourceSelected=Source2
+[dvTP,btnSource5toDisplay2]	= nDisplay2SourceSelected=Source5
 
 [dvTP,btnSource1toDisplay3]	= nDisplay3SourceSelected=Source1
+[dvTP,btnSource2toDisplay3]	= nDisplay3SourceSelected=Source2
 [dvTP,btnSource3toDisplay3]	= nDisplay3SourceSelected=Source3
 [dvTP,btnSource4toDisplay3]	= nDisplay3SourceSelected=Source4
-[dvTP,btnSource2toDisplay3]	= nDisplay3SourceSelected=Source2
+[dvTP,btnSource5toDisplay3]	= nDisplay3SourceSelected=Source5
 
 [dvTP,btnSource1toDisplay4]	= nDisplay4SourceSelected=Source1
+[dvTP,btnSource2toDisplay4]	= nDisplay4SourceSelected=Source2
 [dvTP,btnSource3toDisplay4]	= nDisplay4SourceSelected=Source3
 [dvTP,btnSource4toDisplay4]	= nDisplay4SourceSelected=Source4
-[dvTP,btnSource2toDisplay4]	= nDisplay4SourceSelected=Source2
+[dvTP,btnSource5toDisplay4]	= nDisplay4SourceSelected=Source5
 
 
 (***********************************************************)
