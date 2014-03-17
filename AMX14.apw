@@ -635,6 +635,10 @@
 <FilePathName>lib\modero\amx-modero-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Module"><Identifier>drag-and-drop</Identifier>
+<FilePathName>module\drag-and-drop.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>enova-dgx32</Identifier>
 <FilePathName>src\enova\enova-dgx32.axs</FilePathName>
 <Comments></Comments>
