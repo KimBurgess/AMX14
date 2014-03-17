@@ -312,12 +312,6 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
-<File CompileType="None" Type="TP4"><Identifier>AMX14 Stage MVP-9000</Identifier>
-<FilePathName>AMX14 Stage MVP-9000.TP4</FilePathName>
-<Comments></Comments>
-<DeviceMap DevAddr="dvTP"><DevName>dvTP</DevName>
-</DeviceMap>
-</File>
 <File CompileType="None" Type="Include"><Identifier>common</Identifier>
 <FilePathName>lib\common\common.axi</FilePathName>
 <Comments></Comments>
@@ -357,6 +351,12 @@
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>Stage</Identifier>
 <FilePathName>src\stage\Stage.axs</FilePathName>
 <Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>AMX14 Stage MVP-9000</Identifier>
+<FilePathName>src\stage\ui\AMX14 Stage MVP-9000.TP4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP"><DevName>dvTP</DevName>
+</DeviceMap>
 </File>
 </System>
 <System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Boardroom</Identifier>
