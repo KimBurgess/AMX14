@@ -639,6 +639,10 @@
 <FilePathName>src\enova\enova-dgx32.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="TP4"><Identifier>Enova-Demo</Identifier>
+<FilePathName>src\enova\ui\Enova-Demo.TP4</FilePathName>
+<Comments></Comments>
+</File>
 </System>
 <System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX</Identifier>
 <SysID>0</SysID>
