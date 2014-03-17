@@ -16,6 +16,7 @@ dvTpMain = 10001:1:0
 
 // DGX Switcher
 dvDgxSwitcher = 5002:DGX_PORT_SWITCHER:0
+dvDgxSwitcherDiagnotsics = 5002:DGX_PORT_DIAGNOSTICS:0
 
 // DXLink Fiber Multi-Format Transmitter
 dvDxlfMftxMain              = 6001:DXLINK_PORT_MAIN:0
@@ -121,6 +122,7 @@ data_event [dvDxlfRxUsb]
 }
 
 data_event [dvDgxSwitcher]
+data_event [dvDgxSwitcherDiagnotsics]
 {
 	online:
 	{
