@@ -393,6 +393,10 @@
 <FilePathName>lib\device\amx-device-control.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Module"><Identifier>drag-and-drop</Identifier>
+<FilePathName>lib\drag-and-drop\drag-and-drop.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>amx-dvx-api</Identifier>
 <FilePathName>lib\dvx\amx-dvx-api.axi</FilePathName>
 <Comments></Comments>
