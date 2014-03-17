@@ -114,6 +114,12 @@ data_event [dvDgxSwitcher]
 	online:
 	{
 	}
+	command:
+	{
+	}
+	string:
+	{
+	}
 }
 
 
