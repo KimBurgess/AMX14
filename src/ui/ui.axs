@@ -275,6 +275,14 @@ BUTTON_EVENT[dvTP,0]
 		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display3)
 		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display4)
 	    }
+    	    CASE 200:
+	    {
+		// code to switch IS-SPX-1300 to Intro slide
+	    }
+	    CASE 201:
+	    {
+		// code to switch IS-SPX-1300 to Story slide
+	    }
 	}
     }
 }
