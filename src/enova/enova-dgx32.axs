@@ -286,6 +286,7 @@ data_event [touchTracker]
 					case DGX_OUTPUT_ENCODER:          btnDropArea = BTN_DESTINATION_ENCODER
 					case DGX_OUTPUT_MONITOR_LOCAL:    btnDropArea = BTN_DESTINATION_MONITOR_LOCAL
 					case DGX_OUTPUT_MONITOR_FIBER_RX: btnDropArea = BTN_DESTINATION_MONITOR_RECEIVER
+					case 0:                           btnDropArea = BTN_DESTINATION_ALL
 				}
 				
 				channelOn (dvTpMain, btnDropArea)
@@ -307,6 +308,7 @@ data_event [touchTracker]
 					case DGX_OUTPUT_ENCODER:          btnDropArea = BTN_DESTINATION_ENCODER
 					case DGX_OUTPUT_MONITOR_LOCAL:    btnDropArea = BTN_DESTINATION_MONITOR_LOCAL
 					case DGX_OUTPUT_MONITOR_FIBER_RX: btnDropArea = BTN_DESTINATION_MONITOR_RECEIVER
+					case 0:                           btnDropArea = BTN_DESTINATION_ALL
 				}
 				
 				channelOff (dvTpMain, btnDropArea)
@@ -356,6 +358,7 @@ data_event [touchTracker]
 					case DGX_OUTPUT_ENCODER:          btnDropArea = BTN_DESTINATION_ENCODER
 					case DGX_OUTPUT_MONITOR_LOCAL:    btnDropArea = BTN_DESTINATION_MONITOR_LOCAL
 					case DGX_OUTPUT_MONITOR_FIBER_RX: btnDropArea = BTN_DESTINATION_MONITOR_RECEIVER
+					case 0:                           btnDropArea = BTN_DESTINATION_ALL
 				}
 				
 				channelOff (dvTpMain, btnDropArea)
