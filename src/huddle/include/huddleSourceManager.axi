@@ -125,7 +125,7 @@ define_function setActiveSource(char sourceId)
  */
 define_function setDisplaySource(char sourceId)
 {
-	log(AMX_INFO, "'Switching to ', getSourceName(sourceId)");
+	log(AMX_DEBUG, "'Switching to ', getSourceName(sourceId)");
 
 	switch (sourceId)
 	{
