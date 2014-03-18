@@ -159,17 +159,15 @@ define_function char getActiveSource()
  */
 define_function cycleActiveSource()
 {
-	stack_var char nextSource;
-	nextSource = activeSource + 1;
-	while(!isSourceAvailable(nextSource))
+	stack_var char i;
+	for (i = activeSource; i < activeSource + NUM_SOURCES - 1; i++)
 	{
-		nextSource = nextSource + 1
-		if (nextSource > NUM_SOURCES) {
-			nextSource = 1;
+		if (isSourceAvailable(i % NUM_SOURCES + 1))
+		{
+			setActiveSource(i % NUM_SOURCES + 1);
+			break;
 		}
 	}
-
-	setActiveSource(nextSource);
 }
 
 
