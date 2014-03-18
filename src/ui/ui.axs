@@ -10,7 +10,12 @@ dvTP		= 10001:1:0	// switching TP
 dvTP2		= 10002:1:0	// TP outside door
 dvTP3		= 10003:1:0
 dvTP4		= 10004:1:0
-
+dvTP5		= 10005:1:0
+dvTP6		= 10006:1:0
+dvTP7		= 10007:1:0
+dvTP8		= 10008:1:0
+dvTP9		= 10009:1:0
+                    
 vdvRMS		= 41001:1:0
 
 
@@ -84,12 +89,17 @@ CHAR cRMS_Server_URL[] = 'http://events.amxaustralia.com.au/rms'
 DEFINE_MODULE 'RmsNetLinxAdapter_dr4_0_0' mdlRMSNetLinx(vdvRMS);
 DEFINE_MODULE 'RmsControlSystemMonitor' mdlRmsControlSystemMonitorMod(vdvRMS,dvMaster);
 //DEFINE_MODULE 'RmsSystemPowerMonitor' mdlRmsSystemPowerMonitorMod(vdvRMS,dvMaster);
+DEFINE_MODULE 'RmsDvxSwitcherMonitor' dvxSwitcher(vdvRMS);  //monitor DVX internal settings
 DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_1(vdvRMS,dvTP);
 DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_2(vdvRMS,dvTP2);
 DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_3(vdvRMS,dvTP3);
 DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_4(vdvRMS,dvTP4);
-DEFINE_MODULE 'RmsDvxSwitcherMonitor' dvxSwitcher(vdvRMS);  //monitor DVX internal settings
-
+DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_5(vdvRMS,dvTP5);
+DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_6(vdvRMS,dvTP6);
+DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_7(vdvRMS,dvTP7);
+DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_8(vdvRMS,dvTP8);
+DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_9(vdvRMS,dvTP9);
+                                                                           
 
 
 #INCLUDE 'amx-dvx-control.axi'

@@ -226,7 +226,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Presentation</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Presentation</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -298,7 +298,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Stage</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Stage</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
