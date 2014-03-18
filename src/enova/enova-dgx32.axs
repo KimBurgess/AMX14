@@ -38,10 +38,6 @@ dvDxlfRxVideoOutput = 7001:DXLINK_PORT_VIDEO_OUTPUT:0
 
 define_constant
 
-// CMD/STR Delimeters
-char DELIM_HEADER[] = '-'
-char DELIM_PARAM[] = ','
-
 // DGX inputs
 integer DGX_INPUT_SIGNAGE           = 1
 integer DGX_INPUT_BLURAY            = 2
