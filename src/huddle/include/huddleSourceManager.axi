@@ -108,6 +108,7 @@ define_function setActiveSource(char sourceId)
 
 	if (sourceId == SOURCE_ENZO)
 	{
+		enzoAlertClose(dvEnzo);
 		enzoBlankingHide(dvEnzo);
 	}
 	else
