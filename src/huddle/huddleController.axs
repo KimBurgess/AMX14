@@ -72,7 +72,7 @@ define_function handleSignalStatusEvent(char sourceId, char signalStatus[])
 				ENZO_ALERT_TYPE_INFORMATION,
 				'Device Disconnected',
 				false,
-				10);
+				15);
 		setDisplaySource(SOURCE_ENZO);
 
 		wait_until (isSourceAvailable(getActiveSource())) 'signal returned'
