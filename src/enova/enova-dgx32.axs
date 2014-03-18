@@ -229,19 +229,19 @@ data_event [touchTracker]
 	{
 		// Define drop areas
 		//send_command touchTracker, 'DEFINE_DROP_AREA-<id>,<left>,<top>,<width>,<height>'
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_DVX_1_FEED_1),',24,408,215,120'")
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_DVX_2_FEED_1),',282,408,215,120'")
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_MONITOR_FIBER_RX),',540,408,215,120'")
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_ENCODER),',798,408,215,120'")
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_MONITOR_LOCAL),',1041,408,215,120'")
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(0),',540,613,215,120'")	// all outputs
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_DVX_1_FEED_1),',24,310,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_DVX_2_FEED_1),',261,185,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_MONITOR_FIBER_RX),',805,185,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_ENCODER),',533,98,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_MONITOR_LOCAL),',1041,310,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(0),',533,389,215,120'")	// all outputs
 		
 		// Define drop items
 		//send_command touchTracker, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
-		sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_BLURAY),',415,112,120,120'")
-		sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_SIGNAGE),',281,112,120,120'")
-		sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_SIGNAGE_REMOVABLE),',879,112,120,120'")
-		sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_LAPTOP),',549,112,120,120'")
+		sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_BLURAY),',480,641,160,100'")
+		sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_SIGNAGE),',281,641,160,100'")
+		sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_SIGNAGE_REMOVABLE),',878,641,160,100'")
+		sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_LAPTOP),',679,641,160,100'")
 	}
 	
 	string:
