@@ -256,7 +256,7 @@ define_function moderoNotifyTouchCoordinatesMove (dev panel, integer nX, integer
 					if (!intersectStatus[selectedDragArea[idTouchPoint]][i])
 					{
 						intersectStatus[selectedDragArea[idTouchPoint]][i] = true
-						send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_ENTER_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dragAreas[i].id)"
+						send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_ENTER_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)"
 					}
 				}
 				else
@@ -264,7 +264,7 @@ define_function moderoNotifyTouchCoordinatesMove (dev panel, integer nX, integer
 					if (intersectStatus[selectedDragArea[idTouchPoint]][i])
 					{
 						intersectStatus[selectedDragArea[idTouchPoint]][i] = false
-						send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_EXIT_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dragAreas[i].id)"
+						send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_EXIT_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)"
 					}
 				}
 			}
