@@ -234,6 +234,11 @@ dvDvxVidInTx1   = dvDvxVidIn7
 dvDvxVidInTx2   = dvDvxVidIn8
 dvDvxVidInTx3   = dvDvxVidIn9
 dvDvxVidInTx4   = dvDvxVidIn10
+// Drag and drop names
+dvDvxVidInTableHdmi1       = dvDvxVidIn7
+dvDvxVidInTableHdmi2       = dvDvxVidIn8
+dvDvxVidInTableVga         = dvDvxVidIn1
+dvDvxVidInTableDisplayPort = dvDvxVidIn2
 
 // DVX Video Outputs
 dvDvxVidOut1    = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_OUT_1:SYS_MASTER
@@ -1186,6 +1191,8 @@ persistent integer cameraSpeedPreset1Focus  = 1
 long timelineTimesMultiPreviewSnapshots[DVX_MAX_VIDEO_INPUTS]
 long timelineTimeMplBetweenSwitches = 1000
 
+char draggableItemBitmapNames[4][30]
+
 /*
  * --------------------
  * Wait times
@@ -1686,6 +1693,33 @@ define_function lightsEnablePresetVc()
 	lightsPassThroughData (DYNALITE_PROTOCOL_RECALL_PRESET_VC_MODE_1)
 }
 
+
+
+/*
+ * --------------------
+ * Override modero-listener callback functions
+ * --------------------
+ */
+
+#define INCLUDE_MODERO_NOTIFY_BUTTON_BITMAP_NAME
+define_function moderoNotifyButtonBitmapName (dev panel, integer btnAdrCde, integer nbtnState, char bitmapName[])
+{
+	// panel is the touch panel
+	// btnAdrCde is the button address code
+	// btnState is the button state
+	// bitmapName is the name of the image assigned to the button
+	
+	if (panel == dvTpDragAndDrop)
+	{
+		switch (btnAdrCde)
+		{
+			case BTN_ADR_DRAG_ITEM_SOURCE_HDMI_1:	    draggableItemBitmapNames[dvDvxVidInTableHdmi1.port] = bitmapName
+			case BTN_ADR_DRAG_ITEM_SOURCE_HDMI_2:	    draggableItemBitmapNames[dvDvxVidInTableHdmi2.port] = bitmapName
+			case BTN_ADR_DRAG_ITEM_SOURCE_VGA:	        draggableItemBitmapNames[dvDvxVidInTableVga.port] = bitmapName
+			case BTN_ADR_DRAG_ITEM_SOURCE_DISPLAY_PORT:	draggableItemBitmapNames[dvDvxVidInTableDisplayPort.port] = bitmapName
+		}
+	}
+}
 
 
 
