@@ -393,10 +393,6 @@
 <FilePathName>lib\device\amx-device-control.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="Module"><Identifier>drag-and-drop</Identifier>
-<FilePathName>lib\drag-and-drop\drag-and-drop.axs</FilePathName>
-<Comments></Comments>
-</File>
 <File CompileType="None" Type="Include"><Identifier>amx-dvx-api</Identifier>
 <FilePathName>lib\dvx\amx-dvx-api.axi</FilePathName>
 <Comments></Comments>
@@ -471,6 +467,14 @@
 </File>
 <File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
 <FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>drag-and-drop</Identifier>
+<FilePathName>module\drag-and-drop.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>touch-tracker</Identifier>
+<FilePathName>module\touch-tracker.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>agent-usb-ptz-web-cam</Identifier>
