@@ -183,8 +183,24 @@ data_event [dvTpMain]
 {
 	online:
 	{
-		// display popups
+		// request bitmaps of sources
+		moderoRequestButtonBitmapName (dvTpMain, BTN_SOURCE_SIGNAGE, MODERO_BUTTON_STATE_OFF)
+		moderoRequestButtonBitmapName (dvTpMain, BTN_SOURCE_BLURAY, MODERO_BUTTON_STATE_OFF)
+		moderoRequestButtonBitmapName (dvTpMain, BTN_SOURCE_LAPTOP, MODERO_BUTTON_STATE_OFF)
+		moderoRequestButtonBitmapName (dvTpMain, BTN_SOURCE_SIGNAGE_REMOVABLE, MODERO_BUTTON_STATE_OFF)
 		
+		// reset popups
+		moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
+		moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
+		
+		moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_BLURAY)
+		moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_BLURAY)
+		
+		moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_LAPTOP)
+		moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_LAPTOP)
+		
+		moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE_REMOVABLE)
+		moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE_REMOVABLE)
 	}
 }
 
