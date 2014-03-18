@@ -115,15 +115,11 @@ define_function updateArea (_area area, integer id, _bounds bounds)
 
 define_function addDragArea (integer id, _bounds bounds)
 {
-	// #1) check to see (a) that the id is not zero - ignore if it is and exit.
-	// #2) check if the array is empty - if it is add the item to the first index and exit.
-	// #3) check to see if the id for the item is already in the array - if the id exists just update the _bounds info at that location and exit
-	// #4) check if the array is full - if it is not, increase the size of the list (aka, length of the array), add the item to the new end of the list and exit.
+	// #1) check if the array is empty - if it is add the item to the first index and exit.
+	// #2) check to see if the id for the item is already in the array - if the id exists just update the _bounds info at that location and exit
+	// #3) check if the array is full - if it is not, increase the size of the list (aka, length of the array), add the item to the new end of the list and exit.
 	
 	stack_var integer i
-	
-	if (id == 0)
-		return
 	
 	if (length_array(dragAreas) == 0)
 	{
@@ -153,15 +149,11 @@ define_function addDragArea (integer id, _bounds bounds)
 
 define_function addDropArea (integer id, _bounds bounds)
 {
-	// #1) check to see (a) that the id is not zero - ignore if it is and exit.
-	// #2) check if the array is empty - if it is add the item to the first index and exit.
-	// #3) check to see if the id for the item is already in the array - if the id exists just update the _bounds info at that location and exit
-	// #4) check if the array is full - if it is not, increase the size of the list (aka, length of the array), add the item to the new end of the list and exit.
+	// #1) check if the array is empty - if it is add the item to the first index and exit.
+	// #2) check to see if the id for the item is already in the array - if the id exists just update the _bounds info at that location and exit
+	// #3) check if the array is full - if it is not, increase the size of the list (aka, length of the array), add the item to the new end of the list and exit.
 	
 	stack_var integer i
-	
-	if (id == 0)
-		return
 	
 	if (length_array(dropAreas) == 0)
 	{
@@ -264,7 +256,7 @@ define_function moderoNotifyTouchCoordinatesMove (dev panel, integer nX, integer
 					if (!intersectStatus[selectedDragArea[idTouchPoint]][i])
 					{
 						intersectStatus[selectedDragArea[idTouchPoint]][i] = true
-						send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_ENTER_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dragAreas[i].id)"
+						send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_ENTER_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)"
 					}
 				}
 				else
@@ -272,7 +264,7 @@ define_function moderoNotifyTouchCoordinatesMove (dev panel, integer nX, integer
 					if (intersectStatus[selectedDragArea[idTouchPoint]][i])
 					{
 						intersectStatus[selectedDragArea[idTouchPoint]][i] = false
-						send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_EXIT_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dragAreas[i].id)"
+						send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_EXIT_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)"
 					}
 				}
 			}
