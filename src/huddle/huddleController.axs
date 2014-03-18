@@ -4,8 +4,8 @@ module_name='huddleController'(dev vdvComm, dev vdvRMS, dev vdvDisplay,
 
 #define INCLUDE_CONTROLPORTS_NOTIFY_IO_INPUT_ON_CALLBACK;
 #define INCLUDE_CONTROLPORTS_NOTIFY_IO_INPUT_OFF_CALLBACK;
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_STATUS_ANALOG_CALLBACK
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_STATUS_DIGITAL_CALLBACK
+#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_STATUS_ANALOG_CALLBACK;
+#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_STATUS_DIGITAL_CALLBACK;
 
 
 define_type
@@ -60,6 +60,9 @@ volatile dev dvDxlinkTxAnalogVidInPorts[1];
 #include 'amx-dxlink-api';
 #include 'amx-dxlink-control';
 #include 'amx-dxlink-listener';
+#include 'amx-enzo-api';
+#include 'amx-enzo-control';
+#include 'amx-enzo-listener';
 #include 'amx-modero-api';
 #include 'amx-modero-control';
 #include 'amx-modero-listener';
@@ -124,14 +127,16 @@ define_function mapDevices()
 /**
  * Get the human readable name associated with a source.
  */
-define_function char[32] getSourceName(char sourceId) {
+define_function char[32] getSourceName(char sourceId)
+{
 	return source[sourceId].name;
 }
 
 /**
  * Sets the human readable name associated with a source ID.
  */
-define_function setSourceName(char sourceId, char name[32]) {
+define_function setSourceName(char sourceId, char name[32])
+{
 	log(AMX_DEBUG, "'Associating source ID', itoa(sourceId), ' with ', name");
 	source[sourceId].name = name;
 }
@@ -139,14 +144,16 @@ define_function setSourceName(char sourceId, char name[32]) {
 /**
  * Check the availability (aka input status) of a source id.
  */
-define_function char isSourceAvailable(char sourceId) {
+define_function char isSourceAvailable(char sourceId)
+{
 	return source[sourceId].isAvailable;
 }
 
 /**
  * Sets the source available for consideration during switching requests.
  */
-define_function setSourceAvailable(char sourceId, char isAvailable) {
+define_function setSourceAvailable(char sourceId, char isAvailable)
+{
 	log(AMX_DEBUG, "'Setting availability state of ', getSourceName(sourceId),
 			' ', bool_to_string(isAvailable)");
 	source[sourceId].isAvailable = isAvailable;
@@ -155,14 +162,43 @@ define_function setSourceAvailable(char sourceId, char isAvailable) {
 /**
  * Set the active system source.
  */
-define_function setActiveSource(char sourceId) {
+define_function setActiveSource(char sourceId)
+{
 	log(AMX_INFO, "'Selecting ', getSourceName(sourceId), ' as system source'");
+
+	if (sourceId == SOURCE_ENZO)
+	{
+		enzoBlankingHide(dvEnzo);
+	}
+	else
+	{
+		enzoBlankingShow(dvEnzo, true);
+	}
+
+	setDisplaySource(sourceId);
+
+	activeSource = sourceId;
+}
+
+/**
+ * Gets the currently active system source.
+ */
+define_function char getActiveSource()
+{
+	return activeSource;
+}
+
+/**
+ * Sets the source to be output to the room display.
+ */
+define_function setDisplaySource(char sourceId)
+{
+	log(AMX_INFO, "'Switching to ', getSourceName(sourceId)");
 
 	switch (sourceId)
 	{
 		case SOURCE_ENZO:
 		{
-			// TODO wake enzo up
 			// TODO select correct input on display
 		}
 		case SOURCE_HDMI:
@@ -176,8 +212,6 @@ define_function setActiveSource(char sourceId) {
 			// TODO select correct input on display
 		}
 	}
-
-	activeSource = sourceId;
 }
 
 /**
@@ -207,6 +241,7 @@ define_function handlePushbuttonEvent(char isPushed)
 
 	if (isPushed)
 	{
+		cancel_wait 'signal returned';
 		cycleActiveSource();
 	}
 }
@@ -216,12 +251,34 @@ define_function handlePushbuttonEvent(char isPushed)
  */
 define_function handleSignalStatusEvent(char sourceId, char signalStatus[])
 {
-	log (AMX_DEBUG, "'signal event for ', getSourceName(sourceId), ' [',
+	log(AMX_DEBUG, "'Signal event for ', getSourceName(sourceId), ' [',
 			signalStatus, ']'");
 
 	setSourceAvailable(sourceId, signalStatus == DXLINK_SIGNAL_STATUS_VALID_SIGNAL);
-}
 
+	// If signal drops from the active source (e.g. laptop is unplugged or goes
+	// to sleep throw up an alert using Enzo.
+	if (signalStatus == DXLINK_SIGNAL_STATUS_NO_SIGNAL &&
+			sourceId == activeSource)
+	{
+		log(AMX_INFO, 'Signal lost from active source');
+
+		enzoAlert(dvEnzo,
+				'Please reconnect your device to continue presenting.',
+				ENZO_ALERT_TYPE_INFORMATION,
+				'Device Disconnected',
+				false,
+				10);
+		setDisplaySource(SOURCE_ENZO);
+		wait_until (isSourceAvailable(getActiveSource())) 'signal returned'
+		{
+			log(AMX_DEBUG, 'Signal to active source returned. Switching back to display');
+			setDisplaySource(getActiveSource());
+			enzoAlertClose(dvEnzo);
+		}
+	}
+}
+show
 
 // AMX control ports callbacks
 

@@ -36,6 +36,7 @@ define_variable
 
 volatile devchan dcHuddle1Button = {dvIO, 1};
 
+
 // Each huddle in the space uses it's own huddleController module instance. This
 // handles all devices interaction, registration of devices with RMS, individual
 // huddle UI etc.
