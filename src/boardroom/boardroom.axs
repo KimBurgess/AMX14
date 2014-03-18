@@ -2567,6 +2567,111 @@ data_event[dvTpDragAndDrop]
 }
 
 
+data_event [vdvDragAndDrop]
+{
+	online:
+	{
+		// Define drop areas
+		//send_command touchTracker, 'DEFINE_DROP_AREA-<id>,<left>,<top>,<width>,<height>'
+		//sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_DVX_1_FEED_1),',24,310,215,120'")
+		
+		// Define drop items
+		//send_command touchTracker, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
+		//sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_BLURAY),',480,641,160,100'")
+	}
+	
+	string:
+	{
+		stack_var char header[50]
+		
+		header = remove_string (data.text,DELIM_HEADER,1)
+		
+		switch (header)
+		{
+			case 'DRAG_ITEM_SELECTED-': {}
+			
+			case 'DRAG_ITEM_DESELECTED-':
+			{
+				/*stack_var integer idDragItem
+				
+				idDragItem = atoi(data.text)
+				
+				// reset the draggable popup position by hiding it and then showing it again
+				switch (idDragItem)
+				{
+					case DGX_INPUT_SIGNAGE:
+					{
+						moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
+						moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
+					}
+				}*/
+			}
+			
+			case 'DRAG_ITEM_ENTER_DROP_AREA-':
+			{
+				/*stack_var integer idDragItem
+				
+				idDragItem = atoi(data.text)
+				
+				// reset the draggable popup position by hiding it and then showing it again
+				switch (idDragItem)
+				{
+					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
+				}
+				
+				channelOn (dvTpMain, btnDropArea)*/
+			}
+			
+			case 'DRAG_ITEM_EXIT_DROP_AREA-':
+			{
+				/*stack_var integer idDragItem
+				stack_var integer idDropArea
+				stack_var integer btnDropArea
+				
+				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
+				idDropArea = atoi(data.text)
+				
+				switch (idDropArea)
+				{
+					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
+				}
+				
+				channelOff (dvTpMain, btnDropArea)*/
+			}
+			
+			case 'DRAG_ITEM_DROPPED_ON_DROP_AREA-':
+			{
+				/*stack_var integer idDragItem
+				stack_var integer idDropArea
+				stack_var integer btnDropArea
+				
+				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
+				idDropArea = atoi(data.text)
+				
+				dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, idDropArea)
+				
+				switch (idDropArea)
+				{
+					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
+				}
+				channelOff (dvTpMain, btnDropArea)
+				
+				moderoSetButtonBitmap (dvTpMain, btnDropArea, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[idDragItem])
+				
+				// reset the draggable popup position by hiding it and then showing it again
+				switch (idDragItem)
+				{
+					case DGX_INPUT_SIGNAGE:
+					{
+						moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
+						moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
+					}
+				}*/
+			}
+		}
+	}
+}
+	
 
 // Configure Resolutions for Multi-Preview Input and associated DVX Output
 data_event[dvDvxVidOutMultiPreview]
