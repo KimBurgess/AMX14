@@ -55,7 +55,7 @@ integer DGX_OUTPUT_DVX_1_FEED_2     = 5
 integer DGX_OUTPUT_DVX_2_FEED_2     = 6
 integer DGX_OUTPUT_MONITOR_FIBER_RX = 9
 integer DGX_OUTPUT_ENCODER          = 13
-integer DGX_OUTPUT_MONITOR_DIRECT   = 14
+integer DGX_OUTPUT_MONITOR_LOCAL   = 14
 
 // Touch panel button channel codes
 integer BTN_RESET_DEMO = 1
@@ -65,6 +65,7 @@ integer BTN_SOURCE_BLURAY            = 12
 integer BTN_SOURCE_LAPTOP            = 13
 integer BTN_SOURCE_SIGNAGE_REMOVABLE = 14
 
+integer BTN_DESTINATION_ALL              = 20
 integer BTN_DESTINATION_DVX_1            = 21
 integer BTN_DESTINATION_DVX_2            = 22
 integer BTN_DESTINATION_MONITOR_RECEIVER = 23
@@ -130,7 +131,7 @@ define_function moderoNotifyButtonPush (dev panel, integer btnChanCde)
 				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_DVX_2_FEED_1)
 				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_DVX_2_FEED_2)
 				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_ENCODER)
-				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_MONITOR_DIRECT)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_MONITOR_LOCAL)
 				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_MONITOR_FIBER_RX)
 			}
 		}
@@ -215,7 +216,8 @@ data_event [touchTracker]
 		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_DVX_2_FEED_1),',282,408,215,120'")
 		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_MONITOR_FIBER_RX),',540,408,215,120'")
 		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_ENCODER),',798,408,215,120'")
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_MONITOR_DIRECT),',1041,408,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_MONITOR_LOCAL),',1041,408,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(0),',540,613,215,120'")	// all outputs
 		
 		// Define drop items
 		//send_command touchTracker, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
@@ -283,6 +285,16 @@ data_event [touchTracker]
 				
 				switch (idDropArea)
 				{
+					case 0:	// all outputs
+					{
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_DVX_1_FEED_1)
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_DVX_1_FEED_2)
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_DVX_2_FEED_1)
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_DVX_2_FEED_2)
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_ENCODER)
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_MONITOR_LOCAL)
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_MONITOR_FIBER_RX)
+					}
 					case DGX_OUTPUT_DVX_1_FEED_1:
 					{
 						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_DVX_1_FEED_1)
@@ -304,11 +316,22 @@ data_event [touchTracker]
 					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
 					case DGX_OUTPUT_DVX_2_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_2
 					case DGX_OUTPUT_ENCODER:          btnDropArea = BTN_DESTINATION_ENCODER
-					case DGX_OUTPUT_MONITOR_DIRECT:   btnDropArea = BTN_DESTINATION_MONITOR_LOCAL
+					case DGX_OUTPUT_MONITOR_LOCAL:   btnDropArea = BTN_DESTINATION_MONITOR_LOCAL
 					case DGX_OUTPUT_MONITOR_FIBER_RX: btnDropArea = BTN_DESTINATION_MONITOR_RECEIVER
 				}
 				
-				moderoSetButtonBitmap (dvTpMain, btnDropArea, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[idDragItem])
+				if (idDropArea == 0)
+				{
+					moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_DVX_1, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[idDragItem])
+					moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_DVX_2, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[idDragItem])
+					moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_ENCODER, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[idDragItem])
+					moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_MONITOR_LOCAL, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[idDragItem])
+					moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_MONITOR_RECEIVER, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[idDragItem])
+				}
+				else
+				{
+					moderoSetButtonBitmap (dvTpMain, btnDropArea, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[idDragItem])
+				}
 				
 				// reset the draggable popup position by hiding it and then showing it again
 				switch (idDragItem)
