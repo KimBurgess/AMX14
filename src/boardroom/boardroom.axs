@@ -2554,6 +2554,20 @@ data_event[dvDvxMain]
 	}
 }
 
+data_event[dvTpDragAndDrop]
+{
+	online:
+	{
+		// request bitmaps of sources
+		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_HDMI_1, MODERO_BUTTON_STATE_OFF)
+		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_HDMI_2, MODERO_BUTTON_STATE_OFF)
+		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_VGA, MODERO_BUTTON_STATE_OFF)
+		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_DISPLAY_PORT, MODERO_BUTTON_STATE_OFF)
+	}
+}
+
+
+
 // Configure Resolutions for Multi-Preview Input and associated DVX Output
 data_event[dvDvxVidOutMultiPreview]
 data_event[dvTpTableMain]
