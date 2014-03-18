@@ -272,6 +272,13 @@ data_event [touchTracker]
 			
 			case 'DRAG_ITEM_ENTER_DROP_AREA-':
 			{
+				stack_var integer idDragItem
+				stack_var integer idDropArea
+				stack_var integer btnDropArea
+				
+				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
+				idDropArea = atoi(data.text)
+				
 				switch (idDropArea)
 				{
 					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
@@ -286,6 +293,13 @@ data_event [touchTracker]
 			
 			case 'DRAG_ITEM_EXIT_DROP_AREA-':
 			{
+				stack_var integer idDragItem
+				stack_var integer idDropArea
+				stack_var integer btnDropArea
+				
+				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
+				idDropArea = atoi(data.text)
+				
 				switch (idDropArea)
 				{
 					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
