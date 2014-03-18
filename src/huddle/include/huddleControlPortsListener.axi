@@ -16,7 +16,7 @@ volatile dev dvIoPorts[1];
 
 define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 {
-	if (ioPort == dcButton.device && ioChanCde == dcButton.channel)
+	if (ioPort == dcBtn.device && ioChanCde == dcBtn.channel)
 	{
 		handlePushbuttonEvent(true);
 	}
@@ -24,7 +24,7 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 
 define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
 {
-	if (ioPort == dcButton.device && ioChanCde == dcButton.channel)
+	if (ioPort == dcBtn.device && ioChanCde == dcBtn.channel)
 	{
 		handlePushbuttonEvent(false);
 	}
@@ -33,19 +33,19 @@ define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
 
 define_event
 
-data_event[dcButton.device]
+data_event[dcBtn.device]
 {
 	online:
 	{
-		amxIoSetInputState(dcButton.device, dcButton.channel, IO_ACTIVE_STATE_LOW);
-		amxIoSetInputState(dcButtonFb.device, dcButtonFb.channel, IO_ACTIVE_STATE_LOW);
+		amxIoSetInputState(dcBtn.device, dcBtn.channel, IO_ACTIVE_STATE_LOW);
+		amxIoSetInputState(dcBtnFb.device, dcBtnFb.channel, IO_ACTIVE_STATE_LOW);
 	}
 }
 
 
 define_start
 
-dvIoPorts[1] = dcButton.DEVICE;
+dvIoPorts[1] = dcBtn.DEVICE;
 set_length_array(dvIoPorts, 1);
 
 rebuild_event();

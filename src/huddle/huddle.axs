@@ -20,8 +20,8 @@ dvIO = 5001:4:0;
 // Huddle Specific
 vdvHuddle1Comm = dynamic_virtual_device;
 vdvHuddle1Display = 41501:1:0;
-dvHuddle1DXLinkTx = 7001:1:0;
-dvHuddle1DXLinkRx = 8001:1:0;
+dvHuddle1Tx = 7001:1:0;
+dvHuddle1Rx = 8001:1:0;
 dvHuddle1Tp = 10001:1:0;
 dvHuddle1SchedulingTp = 10002:1:0;
 dvHuddle1Enzo = 20001:1:0;
@@ -34,13 +34,12 @@ dvHuddle1Enzo = 20001:1:0;
 
 define_variable
 
-volatile devchan dcHuddle1Button = {dvIO, 1};
-volatile devchan dcHuddle1ButtonFb = {dvIO, 2};
+volatile devchan dcHuddle1Btn = {dvIO, 1};
+volatile devchan dcHUddle1BtnFb = {dvIO, 2};
 
 
 // Each huddle in the space uses it's own huddleController module instance. This
 // handles all devices interaction, registration of devices with RMS, individual
 // huddle UI etc.
-define_module 'huddleController' mdlHuddle1(vdvHuddle1Comm, vdvRMS,
-		vdvHuddle1Display, dvHuddle1Enzo, dvHuddle1DXLinkRx, dvHuddle1DXLinkTx,
-		dcHuddle1Button, dcHuddle1ButtonFb);
+define_module 'huddleController' mdlHuddle1(vdvRMS, vdvHuddle1Display,
+		dvHuddle1Enzo, dvHuddle1Rx, dvHuddle1Tx, dcHuddle1Btn, dcHuddle1BtnFb);

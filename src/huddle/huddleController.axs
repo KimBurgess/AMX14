@@ -1,6 +1,5 @@
-module_name='huddleController'(dev vdvComm, dev vdvRMS, dev vdvDisplay,
-		dev dvEnzo, dev dvRXMonitor, dev dvTXTable, devchan dcButton,
-		devchan dcButtonFb)
+module_name='huddleController'(dev vdvRms, dev vdvDisplay,
+		dev dvEnzo, dev dvRx, dev dvTx, devchan dcBtn, devchan dcBtnFb)
 
 
 #include 'logger';
@@ -46,12 +45,12 @@ define_function updateButtonFeedbackState()
 	if ((getAvailableSourceCount() > 1) || (getActiveSource() != SOURCE_ENZO))
 	{
 		log(AMX_DEBUG, 'Enabling button feedback');
-		channelOn(dcButtonFb.device, dcButtonFb.channel);
+		channelOn(dcBtnFb.device, dcBtnFb.channel);
 	}
 	else
 	{
 		log(AMX_DEBUG, 'Disabling button feedback');
-		channelOff(dcButtonFb.device, dcButtonFb.channel);
+		channelOff(dcBtnFb.device, dcBtnFb.channel);
 	}
 }
 
@@ -108,7 +107,7 @@ define_function handleSignalStatusEvent(char sourceId, char signalStatus[])
 
 define_event
 
-data_event[dvTxTable]
+data_event[dvTx]
 {
 	online:
 	{

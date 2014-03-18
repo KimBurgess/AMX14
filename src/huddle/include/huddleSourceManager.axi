@@ -135,12 +135,12 @@ define_function setDisplaySource(char sourceId)
 		}
 		case SOURCE_HDMI:
 		{
-			dxlinkSetTxVideoInputDigital(dvTXTable);
+			dxlinkSetTxVideoInputDigital(dvTx);
 			// TODO select correct input on display
 		}
 		case SOURCE_VGA:
 		{
-			dxlinkSetTxVideoInputAnalog(dvTXTable);
+			dxlinkSetTxVideoInputAnalog(dvTx);
 			// TODO select correct input on display
 		}
 	}

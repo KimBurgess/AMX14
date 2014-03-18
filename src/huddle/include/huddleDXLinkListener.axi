@@ -17,7 +17,7 @@ volatile dev dvDxlinkTxAnalogVidInPorts[1];
 
 define_function dxlinkNotifyTxVideoInputStatusAnalog (dev dxlinkTxAnalogVideoInput, char signalStatus[])
 {
-	if (dxlinkTxAnalogVideoInput == dvTXTable.NUMBER:DXLINK_PORT_VIDEO_INPUT_ANALOG:dvTXTable.SYSTEM)
+	if (dxlinkTxAnalogVideoInput == dvTx.NUMBER:DXLINK_PORT_VIDEO_INPUT_ANALOG:dvTx.SYSTEM)
 	{
 		handleSignalStatusEvent(SOURCE_VGA, signalStatus);
 	}
@@ -25,7 +25,7 @@ define_function dxlinkNotifyTxVideoInputStatusAnalog (dev dxlinkTxAnalogVideoInp
 
 define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoInput, char signalStatus[])
 {
-	if (dxlinkTxDigitalVideoInput == dvTXTable.NUMBER:DXLINK_PORT_VIDEO_INPUT_DIGITAL:dvTXTable.SYSTEM)
+	if (dxlinkTxDigitalVideoInput == dvTx.NUMBER:DXLINK_PORT_VIDEO_INPUT_DIGITAL:dvTx.SYSTEM)
 	{
 		handleSignalStatusEvent(SOURCE_HDMI, signalStatus);
 	}
@@ -34,10 +34,10 @@ define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoI
 
 define_start
 
-dvDxlinkTxDigitalVideoInPorts[1] = dvTXTable.NUMBER:DXLINK_PORT_VIDEO_INPUT_DIGITAL:dvTXTable.SYSTEM;
+dvDxlinkTxDigitalVideoInPorts[1] = dvTx.NUMBER:DXLINK_PORT_VIDEO_INPUT_DIGITAL:dvTx.SYSTEM;
 set_length_array(dvDxlinkTxDigitalVideoInPorts, 1);
 
-dvDxlinkTxAnalogVidInPorts[1] = dvTXTable.NUMBER:DXLINK_PORT_VIDEO_INPUT_ANALOG:dvTXTable.SYSTEM;
+dvDxlinkTxAnalogVidInPorts[1] = dvTx.NUMBER:DXLINK_PORT_VIDEO_INPUT_ANALOG:dvTx.SYSTEM;
 set_length_array(dvDxlinkTxAnalogVidInPorts, 1);
 
 rebuild_event();
