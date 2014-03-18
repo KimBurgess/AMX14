@@ -152,6 +152,12 @@ data_event [dvDxlfMftxUsb]
 	online:
 	{
 		ipAddressDxlfTx = data.sourceip
+		
+		// if the last character is the NULL ($00) character
+		if(ipAddressDxlfRx[length_array(ipAddressDxlfRx)] == $00)
+			  // remove last character
+			set_length_array(ipAddressDxlfRx,(length_array(ipAddressDxlfRx)-1))
+		
 		dxlinkEnableTxUsbHidService (dvDxlfMftxUsb)
 		
 		if (device_id(dvDxlfRxUsb))
