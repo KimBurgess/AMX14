@@ -398,6 +398,10 @@
 <FilePathName>module\drag-and-drop.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>touch-tracker</Identifier>
+<FilePathName>module\touch-tracker.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>enova-dgx32</Identifier>
 <FilePathName>src\enova\enova-dgx32.axs</FilePathName>
 <Comments></Comments>
