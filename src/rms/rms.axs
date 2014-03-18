@@ -149,6 +149,11 @@ DATA_EVENT[vdvRMS]
     }
 }
 
+DATA_EVENT[dvTP]
+{
+    ONLINE: SEND_COMMAND dvTP,'PAGE-RMS Demo'
+}
+
 
 BUTTON_EVENT[dvTP,0]
 {
