@@ -281,9 +281,33 @@ data_event [touchTracker]
 				
 			}
 			
-			case 'DRAG_ITEM_ENTER_DROP_AREA-': {}
+			case 'DRAG_ITEM_ENTER_DROP_AREA-':
+			{
+				switch (idDropArea)
+				{
+					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
+					case DGX_OUTPUT_DVX_2_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_2
+					case DGX_OUTPUT_ENCODER:          btnDropArea = BTN_DESTINATION_ENCODER
+					case DGX_OUTPUT_MONITOR_LOCAL:    btnDropArea = BTN_DESTINATION_MONITOR_LOCAL
+					case DGX_OUTPUT_MONITOR_FIBER_RX: btnDropArea = BTN_DESTINATION_MONITOR_RECEIVER
+				}
+				
+				channelOn (dvTpMain, btnDropArea)
+			}
 			
-			case 'DRAG_ITEM_EXIT_DROP_AREA-': {}
+			case 'DRAG_ITEM_EXIT_DROP_AREA-':
+			{
+				switch (idDropArea)
+				{
+					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
+					case DGX_OUTPUT_DVX_2_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_2
+					case DGX_OUTPUT_ENCODER:          btnDropArea = BTN_DESTINATION_ENCODER
+					case DGX_OUTPUT_MONITOR_LOCAL:    btnDropArea = BTN_DESTINATION_MONITOR_LOCAL
+					case DGX_OUTPUT_MONITOR_FIBER_RX: btnDropArea = BTN_DESTINATION_MONITOR_RECEIVER
+				}
+				
+				channelOff (dvTpMain, btnDropArea)
+			}
 			
 			case 'DRAG_ITEM_DROPPED_ON_DROP_AREA-':
 			{
@@ -330,6 +354,8 @@ data_event [touchTracker]
 					case DGX_OUTPUT_MONITOR_LOCAL:    btnDropArea = BTN_DESTINATION_MONITOR_LOCAL
 					case DGX_OUTPUT_MONITOR_FIBER_RX: btnDropArea = BTN_DESTINATION_MONITOR_RECEIVER
 				}
+				
+				channelOff (dvTpMain, btnDropArea)
 				
 				if (idDropArea == 0)
 				{
