@@ -292,6 +292,8 @@ data_event [touchTracker]
 				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
 				idDropArea = atoi(data.text)
 				
+				dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, idDropArea)6
+				
 				switch (idDropArea)
 				{
 					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
