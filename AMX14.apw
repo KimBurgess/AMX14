@@ -728,12 +728,36 @@
 <FilePathName>lib\ncl\string.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>RmsApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>Samsung_MD55C_Comm_dr1_0_0</Identifier>
+<FilePathName>module\Samsung_MD55C_Comm_dr1_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>huddle</Identifier>
 <FilePathName>src\huddle\huddle.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>huddleController</Identifier>
 <FilePathName>src\huddle\huddleController.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleControlPortsListener</Identifier>
+<FilePathName>src\huddle\include\huddleControlPortsListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleDXLinkListener</Identifier>
+<FilePathName>src\huddle\include\huddleDXLinkListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleSourceManager</Identifier>
+<FilePathName>src\huddle\include\huddleSourceManager.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>logger</Identifier>
