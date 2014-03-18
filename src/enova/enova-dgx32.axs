@@ -281,7 +281,23 @@ data_event [touchTracker]
 				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
 				idDropArea = atoi(data.text)
 				
-				dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, idDropArea)
+				switch (idDropArea)
+				{
+					case DGX_OUTPUT_DVX_1_FEED_1:
+					{
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_DVX_1_FEED_1)
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_DVX_1_FEED_2)
+					}
+					case DGX_OUTPUT_DVX_2_FEED_1:
+					{
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_DVX_2_FEED_1)
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, DGX_OUTPUT_DVX_2_FEED_2)
+					}
+					default:
+					{
+						dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, idDropArea)
+					}
+				}
 				
 				switch (idDropArea)
 				{
