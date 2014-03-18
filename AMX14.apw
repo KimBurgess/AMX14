@@ -517,9 +517,11 @@
 <DeviceMap DevAddr="Custom [10001:1:0]"><DevName>Custom [10001:1:0]</DevName>
 </DeviceMap>
 </File>
-<File CompileType="None" Type="TP4"><Identifier>boardroom-10-inch-in-desk-drag-and-drop</Identifier>
-<FilePathName>src\boardroom\ui\boardroom-10-inch-in-desk-drag-and-drop.TP4</FilePathName>
+<File CompileType="None" Type="TP4"><Identifier>drag-and-drop</Identifier>
+<FilePathName>src\boardroom\ui\drag-and-drop.TP4</FilePathName>
 <Comments></Comments>
+<DeviceMap DevAddr="Custom [10002:1:0]"><DevName>Custom [10002:1:0]</DevName>
+</DeviceMap>
 </File>
 <File CompileType="None" Type="Include"><Identifier>wake-on-lan</Identifier>
 <FilePathName>src\boardroom\wake-on-lan.axi</FilePathName>
