@@ -73,10 +73,10 @@ integer BTN_DESTINATION_ENCODER          = 24
 integer BTN_DESTINATION_MONITOR_LOCAL    = 25
 
 
-char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE[]            = 'dragabble-source-signage'
-char POPUP_NAME_DRAGGABLE_SOURCE_BLURAY[]             = 'dragabble-source-bluray'
-char POPUP_NAME_DRAGGABLE_SOURCE_LAPTOP[]             = 'dragabble-source-laptop'
-char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE_REMOVABLE[]  = 'dragabble-source-signage-removable'
+char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE[]            = 'draggabble-source-signage'
+char POPUP_NAME_DRAGGABLE_SOURCE_BLURAY[]             = 'draggabble-source-bluray'
+char POPUP_NAME_DRAGGABLE_SOURCE_LAPTOP[]             = 'draggabble-source-laptop'
+char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE_REMOVABLE[]  = 'draggabble-source-signage-removable'
 
 
 
@@ -187,6 +187,15 @@ data_event [dvDgxSwitcherDiagnotsics]
 	}
 	string:
 	{
+	}
+}
+
+data_event [dvTpMain]
+{
+	online:
+	{
+		// display popups
+		
 	}
 }
 
