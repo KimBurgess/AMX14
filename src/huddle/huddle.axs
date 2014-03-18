@@ -35,6 +35,7 @@ dvHuddle1Enzo = 20001:1:0;
 define_variable
 
 volatile devchan dcHuddle1Button = {dvIO, 1};
+volatile devchan dcHuddle1ButtonFb = {dvIO, 2};
 
 
 // Each huddle in the space uses it's own huddleController module instance. This
@@ -42,4 +43,4 @@ volatile devchan dcHuddle1Button = {dvIO, 1};
 // huddle UI etc.
 define_module 'huddleController' mdlHuddle1(vdvHuddle1Comm, vdvRMS,
 		vdvHuddle1Display, dvHuddle1Enzo, dvHuddle1DXLinkRx, dvHuddle1DXLinkTx,
-		dcHuddle1Button);
+		dcHuddle1Button, dcHuddle1ButtonFb);

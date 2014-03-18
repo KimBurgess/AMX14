@@ -1,5 +1,6 @@
 module_name='huddleController'(dev vdvComm, dev vdvRMS, dev vdvDisplay,
-		dev dvEnzo, dev dvRXMonitor, dev dvTXTable, devchan dcButton)
+		dev dvEnzo, dev dvRXMonitor, dev dvTXTable, devchan dcButton,
+		devchan dcButtonFb)
 
 
 #define INCLUDE_CONTROLPORTS_NOTIFY_IO_INPUT_ON_CALLBACK;
@@ -156,7 +157,30 @@ define_function setSourceAvailable(char sourceId, char isAvailable)
 {
 	log(AMX_DEBUG, "'Setting availability state of ', getSourceName(sourceId),
 			' ', bool_to_string(isAvailable)");
+
 	source[sourceId].isAvailable = isAvailable;
+
+	updateButtonFeedbackState();
+}
+
+/**
+ * Gets the number of sources currently available for selection.
+ */
+define_function char getAvailableSourceCount()
+{
+	stack_var char i;
+	stack_var char count;
+
+	count = 0;
+	for (i = NUM_SOURCES; i; i--)
+	{
+		if (isSourceAvailable(i))
+		{
+			count = count + 1;
+		}
+	}
+
+	return count;
 }
 
 /**
@@ -165,6 +189,8 @@ define_function setSourceAvailable(char sourceId, char isAvailable)
 define_function setActiveSource(char sourceId)
 {
 	log(AMX_INFO, "'Selecting ', getSourceName(sourceId), ' as system source'");
+
+	setDisplaySource(sourceId);
 
 	if (sourceId == SOURCE_ENZO)
 	{
@@ -175,9 +201,9 @@ define_function setActiveSource(char sourceId)
 		enzoBlankingShow(dvEnzo, true);
 	}
 
-	setDisplaySource(sourceId);
-
 	activeSource = sourceId;
+
+	updateButtonFeedbackState();
 }
 
 /**
@@ -233,6 +259,24 @@ define_function cycleActiveSource()
 }
 
 /**
+ * Sets the button feedback to display for the appropriate system state.
+ */
+define_function updateButtonFeedbackState()
+{
+	setButtonFeedback((getAvailableSourceCount() > 1) || (getActiveSource() != SOURCE_ENZO));
+}
+
+/**
+ * Sets the pushbutton feedback state.
+ */
+define_function setButtonFeedback(char isOn)
+{
+	log(AMX_DEBUG, "'Setting button feedback ', bool_to_string(isOn)");
+
+	[dcButtonFb] = isOn;
+}
+
+/**
  * Handle a change to the pushbutton state.
  */
 define_function handlePushbuttonEvent(char isPushed)
@@ -278,7 +322,7 @@ define_function handleSignalStatusEvent(char sourceId, char signalStatus[])
 		}
 	}
 }
-show
+
 
 // AMX control ports callbacks
 
