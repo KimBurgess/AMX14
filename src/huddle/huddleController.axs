@@ -20,6 +20,25 @@ module_name='huddleController'(dev vdvComm, dev vdvRMS, dev vdvDisplay,
 
 
 /**
+ * Gets a unique instance id for this module.
+ */
+define_function char[8] getInstanceId()
+{
+	stack_var long id;
+
+	id = 1;
+	id = id * 31 + vdvRms.number;
+	id = id * 31 + vdvDisplay.number;
+	id = id * 31 + dvEnzo.number;
+	id = id * 31 + dvRx.number;
+	id = id * 31 + dvTx.number;
+	id = id * 31 + dcBtn.device.number;
+	id = id * 31 + dcBtn.device.number;
+
+	return itohex(id);
+}
+
+/**
  * Sets the button feedback to display for the appropriate system state.
  */
 define_function updateButtonFeedbackState()
@@ -100,4 +119,4 @@ data_event[dvTxTable]
 
 define_start
 
-setLogPrefix("'huddleController[', itoa(vdvComm.NUMBER), ']'");
+setLogPrefix("'huddleController[', getInstanceId(), ']'");
