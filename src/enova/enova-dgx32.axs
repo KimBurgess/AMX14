@@ -133,6 +133,12 @@ define_function moderoNotifyButtonPush (dev panel, integer btnChanCde)
 				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_ENCODER)
 				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_MONITOR_LOCAL)
 				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_MONITOR_FIBER_RX)
+				
+				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_DVX_1, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
+				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_DVX_2, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
+				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_ENCODER, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
+				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_MONITOR_LOCAL, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
+				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_MONITOR_RECEIVER, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
 			}
 		}
 	}
