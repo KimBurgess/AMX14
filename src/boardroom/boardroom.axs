@@ -58,7 +58,6 @@ program_name='boardroom'
 #include 'agent-usb-ptz-web-cam'
 
 
-
 /*
  * --------------------
  * Constant definitions
@@ -74,7 +73,8 @@ define_constant
  * --------------------
  */
 integer DEV_ID_MASTER                               = 0
-integer DEV_ID_TOUCH_PANEL_TABLE                    = 10001
+integer DEV_ID_TOUCH_PANEL_19_INCH_TABLE            = 10001
+integer DEV_ID_TOUCH_PANEL_DRAG_AND_DROP            = 10002
 integer DEV_ID_TX_1                                 = 7001
 integer DEV_ID_TX_2                                 = 7002
 integer DEV_ID_TX_3                                 = 7003
@@ -94,10 +94,11 @@ integer DEV_ID_PDU_5                                =  89
 integer DEV_ID_PDU_6                                =  90
 integer DEV_ID_PDU_7                                =  91
 integer DEV_ID_PDU_8                                =  92
-integer DEV_ID_DUET_MODULE_VIRTUAL_RMS              = 41001
-integer DEV_ID_DUET_MODULE_VIRTUAL_MONITOR_LEFT     = 41002
-integer DEV_ID_DUET_MODULE_VIRTUAL_MONITOR_RIGHT    = 41003
-integer DEV_ID_DUET_MODULE_VIRTUAL_DYNALITE         = 41004
+integer DEV_ID_VIRTUAL_DUET_RMS                     = 41001
+integer DEV_ID_VIRTUAL_DUET_MONITOR_LEFT            = 41002
+integer DEV_ID_VIRTUAL_DUET_MONITOR_RIGHT           = 41003
+integer DEV_ID_VIRTUAL_DUET_DYNALITE                = 41004
+integer DEV_ID_VIRTUAL_NETLINX_DRAG_AND_DROP        = 33001
 
 /*
  * --------------------
@@ -162,18 +163,20 @@ dvMaster    = DEV_ID_MASTER:1:SYS_MASTER
 dvKeypad1   = DEV_ID_KEYPAD_1:PORT_AXLINK:SYS_MASTER
 dvKeypad2   = DEV_ID_KEYPAD_2:PORT_AXLINK:SYS_MASTER
 
-// Touch Panel Ports
-dvTpTableMain       = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_MAIN:SYS_MASTER
-dvTpTableLighting   = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_LIGHTING:SYS_MASTER
-dvTpTableVideo      = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_VIDEO:SYS_MASTER
-dvTpTableAudio      = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_AUDIO:SYS_MASTER
-dvTpTableBlinds     = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_BLINDS:SYS_MASTER
-dvTpTablePower      = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_POWER:SYS_MASTER
-dvTpTableCamera     = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_CAMERA:SYS_MASTER
-dvTpTableDxlink     = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_DXLINK:SYS_MASTER
-dvTpTableDeviceInfo = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_DEVICE_INFO:SYS_MASTER
-dvTpTableOccupancy  = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_OCCUPANCY:SYS_MASTER
-dvTpTableDebug      = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_DEBUG:SYS_MASTER
+// 19" Touch Panel Ports
+dvTpTableMain       = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_MAIN:SYS_MASTER
+dvTpTableLighting   = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_LIGHTING:SYS_MASTER
+dvTpTableVideo      = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_VIDEO:SYS_MASTER
+dvTpTableAudio      = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_AUDIO:SYS_MASTER
+dvTpTableBlinds     = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_BLINDS:SYS_MASTER
+dvTpTablePower      = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_POWER:SYS_MASTER
+dvTpTableCamera     = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_CAMERA:SYS_MASTER
+dvTpTableDxlink     = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_DXLINK:SYS_MASTER
+dvTpTableDeviceInfo = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_DEVICE_INFO:SYS_MASTER
+dvTpTableOccupancy  = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_OCCUPANCY:SYS_MASTER
+dvTpTableDebug      = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_DEBUG:SYS_MASTER
+
+dvTpDragAndDrop     = DEV_ID_TOUCH_PANEL_DRAG_AND_DROP:PORT_TP_MAIN:SYS_MASTER
 
 // DXLinx Receiver on Left Monitor
 dvRxMonitorLeftMain     = DEV_ID_RX_MONITOR_LEFT:DXLINK_PORT_MAIN:SYS_MASTER
@@ -317,19 +320,22 @@ dvDvxIos    = DEV_ID_DVX_CONTROLLER:PORT_DVX_IOS:SYS_MASTER
 
 // Lighting
 dvDynaliteDyNetLightSystem  = DEV_ID_MASTER:2:SYS_MASTER // This device should be used as the physical device by the COMM module
-vdvDynaliteDyNetLightSystem = DEV_ID_DUET_MODULE_VIRTUAL_DYNALITE:PORT_VIRTUAL_MAIN:SYS_MASTER  // The COMM module should use this as its duet device
+vdvDynaliteDyNetLightSystem = DEV_ID_VIRTUAL_DUET_DYNALITE:PORT_VIRTUAL_MAIN:SYS_MASTER  // The COMM module should use this as its duet device
 
 // IP socket for wake on lan
 dvIpSocketWakeOnLan = DEV_ID_MASTER:3:SYS_MASTER
 
 // Monitors
 dvMonitorLeft   = dvRxMonitorLeftSerial
-vdvMonitorLeft  = DEV_ID_DUET_MODULE_VIRTUAL_MONITOR_LEFT:PORT_VIRTUAL_MAIN:SYS_MASTER
+vdvMonitorLeft  = DEV_ID_VIRTUAL_DUET_MONITOR_LEFT:PORT_VIRTUAL_MAIN:SYS_MASTER
 dvMonitorRight  = dvRxMonitorRightSerial
-vdvMonitorRight = DEV_ID_DUET_MODULE_VIRTUAL_MONITOR_RIGHT:PORT_VIRTUAL_MAIN:SYS_MASTER
+vdvMonitorRight = DEV_ID_VIRTUAL_DUET_MONITOR_RIGHT:PORT_VIRTUAL_MAIN:SYS_MASTER
 
 // RMS
-vdvRms  = DEV_ID_DUET_MODULE_VIRTUAL_RMS:PORT_VIRTUAL_MAIN:SYS_MASTER
+vdvRms  = DEV_ID_VIRTUAL_DUET_RMS:PORT_VIRTUAL_MAIN:SYS_MASTER
+
+// drag-and-drop
+vdvDragAndDrop = DEV_ID_VIRTUAL_NETLINX_DRAG_AND_DROP:PORT_VIRTUAL_MAIN:SYS_MASTER
 
 
 /*
@@ -382,7 +388,23 @@ integer nLVL_KP_JOG_WHEEL       = 1
 
 /*
  * --------------------
- * Touch panel button channel/address/level codes
+ * Drag and drop panel button channel/address/level codes
+ * --------------------
+ */
+
+// Drag Items
+integer BTN_ADR_DRAG_ITEM_SOURCE_HDMI_1       = 1
+integer BTN_ADR_DRAG_ITEM_SOURCE_HDMI_2       = 2
+integer BTN_ADR_DRAG_ITEM_SOURCE_VGA          = 3
+integer BTN_ADR_DRAG_ITEM_SOURCE_DISPLAY_PORT = 4
+
+// Drop Items
+integer BTN_ADR_DROP_AREA_DESTINATION_MONITOR_LEFT  = 11
+integer BTN_ADR_DROP_AREA_DESTINATION_MONITOR_RIGHT = 12
+
+/*
+ * --------------------
+ * 19" Touch panel button channel/address/level codes
  * --------------------
  */
 
@@ -886,12 +908,18 @@ char LABELS_PDU_OUTLETS[][20]   =
  * --------------------
  */
  
+char PAGE_NAME_SPLASH_SCREEN[]                  = 'page-spash-screen'
+char PAGE_NAME_MAIN_USER[]                      = 'page-main-user'
 char POPUP_NAME_VIDEO_PREVIEW[]                 = 'popup-video-preview'
 char POPUP_NAME_VIDEO_LOADING[]                 = 'popup-video-loading'
 char POPUP_NAME_MESSAGE_QUERY_USER_LYNC_CALL[]  = 'popup-message-query-user-lync-call'
-char PAGE_NAME_SPLASH_SCREEN[]                  = 'page-spash-screen'
-char PAGE_NAME_MAIN_USER[]                      = 'page-main-user'
 char POPUP_NAME_SOURCE_SELECTION[]              = 'popup-source-selection-v3'
+
+
+char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE[]            = 'draggable-source-signage'
+char POPUP_NAME_DRAGGABLE_SOURCE_BLURAY[]             = 'draggable-source-bluray'
+char POPUP_NAME_DRAGGABLE_SOURCE_LAPTOP[]             = 'draggable-source-laptop'
+char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE_REMOVABLE[]  = 'draggable-source-signage-removable'
 
 /*
  * --------------------
@@ -1188,6 +1216,17 @@ persistent integer waitTimeCameraAdjustingToPreset1Focus    = 0
  * --------------------
  */
 
+
+
+
+
+/*
+ * --------------------
+ * Module Definitions
+ * --------------------
+ */
+
+define_module 'drag-and-drop' dragAndDropMod (vdvDragAndDrop, dvTpDragAndDrop)
 
 
 
@@ -2434,6 +2473,7 @@ define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
 		}
 	}
 }
+
 
 
 
