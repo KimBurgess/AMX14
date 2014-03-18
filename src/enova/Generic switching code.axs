@@ -18,6 +18,7 @@ DEFINE_DEVICE
 dvMASTER	= 0:1:0
 dvSWITCHER	= 5002:1:0
 dvTP		= 10001:1:0
+dvTP2		= 10002:1:0	// TP outside door
 
 vdvRMS		= 41001:1:0
 
@@ -92,6 +93,7 @@ DEFINE_MODULE 'RmsNetLinxAdapter_dr4_0_0' mdlRMSNetLinx(vdvRMS);
 DEFINE_MODULE 'RmsControlSystemMonitor' mdlRmsControlSystemMonitorMod(vdvRMS,dvMaster);
 //DEFINE_MODULE 'RmsSystemPowerMonitor' mdlRmsSystemPowerMonitorMod(vdvRMS,dvMaster);
 DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_1(vdvRMS,dvTP);
+DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_2(vdvRMS,dvTP2);
 DEFINE_MODULE 'RmsDvxSwitcherMonitor' dvxSwitcher(vdvRMS);  //monitor DVX internal settings
 
 
@@ -286,6 +288,7 @@ BUTTON_EVENT[dvTP,0]
 	    {
 		// code to switch IS-SPX-1300 to Story slide
 	    }
+	}    
     }
 }
 
