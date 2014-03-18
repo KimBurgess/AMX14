@@ -398,14 +398,14 @@ integer nLVL_KP_JOG_WHEEL       = 1
  */
 
 // Drag Items
-integer BTN_ADR_DRAG_ITEM_SOURCE_HDMI_1      = 1
-integer BTN_ADR_DRAG_ITEM_SOURCE_HDMI_2      = 2
-integer BTN_ADR_DRAG_ITEM_SOURCE_VGA         = 3
-integer BTN_ADR_DRAG_ITEM_SOURCE_DISPLAYPORT = 4
+integer BTN_DRAG_ITEM_SOURCE_HDMI_1      = 1
+integer BTN_DRAG_ITEM_SOURCE_HDMI_2      = 2
+integer BTN_DRAG_ITEM_SOURCE_VGA         = 3
+integer BTN_DRAG_ITEM_SOURCE_DISPLAYPORT = 4
 
 // Drop Items
-integer BTN_ADR_DROP_AREA_DESTINATION_MONITOR_LEFT  = 11
-integer BTN_ADR_DROP_AREA_DESTINATION_MONITOR_RIGHT = 12
+integer BTN_DROP_AREA_DESTINATION_MONITOR_LEFT  = 11
+integer BTN_DROP_AREA_DESTINATION_MONITOR_RIGHT = 12
 
 /*
  * --------------------
@@ -1713,10 +1713,10 @@ define_function moderoNotifyButtonBitmapName (dev panel, integer btnAdrCde, inte
 	{
 		switch (btnAdrCde)
 		{
-			case BTN_ADR_DRAG_ITEM_SOURCE_HDMI_1:	    draggableItemBitmapNames[dvDvxVidInTableHdmi1.port] = bitmapName
-			case BTN_ADR_DRAG_ITEM_SOURCE_HDMI_2:	    draggableItemBitmapNames[dvDvxVidInTableHdmi2.port] = bitmapName
-			case BTN_ADR_DRAG_ITEM_SOURCE_VGA:	        draggableItemBitmapNames[dvDvxVidInTableVga.port] = bitmapName
-			case BTN_ADR_DRAG_ITEM_SOURCE_DISPLAYPORT:	draggableItemBitmapNames[dvDvxVidInTableDisplayPort.port] = bitmapName
+			case BTN_DRAG_ITEM_SOURCE_HDMI_1:	    draggableItemBitmapNames[dvDvxVidInTableHdmi1.port] = bitmapName
+			case BTN_DRAG_ITEM_SOURCE_HDMI_2:	    draggableItemBitmapNames[dvDvxVidInTableHdmi2.port] = bitmapName
+			case BTN_DRAG_ITEM_SOURCE_VGA:	        draggableItemBitmapNames[dvDvxVidInTableVga.port] = bitmapName
+			case BTN_DRAG_ITEM_SOURCE_DISPLAYPORT:	draggableItemBitmapNames[dvDvxVidInTableDisplayPort.port] = bitmapName
 		}
 	}
 }
@@ -2559,10 +2559,10 @@ data_event[dvTpDragAndDrop]
 	online:
 	{
 		// request bitmaps of sources
-		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_HDMI_1, MODERO_BUTTON_STATE_OFF)
-		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_HDMI_2, MODERO_BUTTON_STATE_OFF)
-		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_VGA, MODERO_BUTTON_STATE_OFF)
-		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_DISPLAYPORT, MODERO_BUTTON_STATE_OFF)
+		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_DRAG_ITEM_SOURCE_HDMI_1, MODERO_BUTTON_STATE_OFF)
+		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_DRAG_ITEM_SOURCE_HDMI_2, MODERO_BUTTON_STATE_OFF)
+		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_DRAG_ITEM_SOURCE_VGA, MODERO_BUTTON_STATE_OFF)
+		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_DRAG_ITEM_SOURCE_DISPLAYPORT, MODERO_BUTTON_STATE_OFF)
 	}
 }
 
@@ -2636,8 +2636,8 @@ data_event [vdvDragAndDrop]
 				
 				select
 				{
-					active (idDropArea == dvDvxVidOutMonitorLeft.port):     btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_LEFT
-					active (idDropArea == dvDvxVidOutMonitorRight.port):    btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_RIGHT
+					active (idDropArea == dvDvxVidOutMonitorLeft.port):     btnDropArea = BTN_DROP_AREA_DESTINATION_MONITOR_LEFT
+					active (idDropArea == dvDvxVidOutMonitorRight.port):    btnDropArea = BTN_DROP_AREA_DESTINATION_MONITOR_RIGHT
 				}
 				
 				channelOn (dvTpDragAndDrop, btnDropArea)
@@ -2654,8 +2654,8 @@ data_event [vdvDragAndDrop]
 				
 				select
 				{
-					active (idDropArea == dvDvxVidOutMonitorLeft.port):     btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_LEFT
-					active (idDropArea == dvDvxVidOutMonitorRight.port):    btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_RIGHT
+					active (idDropArea == dvDvxVidOutMonitorLeft.port):     btnDropArea = BTN_DROP_AREA_DESTINATION_MONITOR_LEFT
+					active (idDropArea == dvDvxVidOutMonitorRight.port):    btnDropArea = BTN_DROP_AREA_DESTINATION_MONITOR_RIGHT
 				}
 				
 				channelOff (dvTpDragAndDrop, btnDropArea)
@@ -2674,8 +2674,8 @@ data_event [vdvDragAndDrop]
 				
 				select
 				{
-					active (idDropArea == dvDvxVidOutMonitorLeft.port):     btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_LEFT
-					active (idDropArea == dvDvxVidOutMonitorRight.port):    btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_RIGHT
+					active (idDropArea == dvDvxVidOutMonitorLeft.port):     btnDropArea = BTN_DROP_AREA_DESTINATION_MONITOR_LEFT
+					active (idDropArea == dvDvxVidOutMonitorRight.port):    btnDropArea = BTN_DROP_AREA_DESTINATION_MONITOR_RIGHT
 				}
 				
 				channelOff (dvTpDragAndDrop, btnDropArea)
