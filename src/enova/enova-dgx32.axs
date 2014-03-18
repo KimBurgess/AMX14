@@ -72,10 +72,10 @@ integer BTN_DESTINATION_ENCODER          = 24
 integer BTN_DESTINATION_MONITOR_LOCAL    = 25
 
 
-char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE[]            = 'draggabble-source-signage'
-char POPUP_NAME_DRAGGABLE_SOURCE_BLURAY[]             = 'draggabble-source-bluray'
-char POPUP_NAME_DRAGGABLE_SOURCE_LAPTOP[]             = 'draggabble-source-laptop'
-char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE_REMOVABLE[]  = 'draggabble-source-signage-removable'
+char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE[]            = 'draggable-source-signage'
+char POPUP_NAME_DRAGGABLE_SOURCE_BLURAY[]             = 'draggable-source-bluray'
+char POPUP_NAME_DRAGGABLE_SOURCE_LAPTOP[]             = 'draggable-source-laptop'
+char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE_REMOVABLE[]  = 'draggable-source-signage-removable'
 
 
 
