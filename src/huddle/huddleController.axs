@@ -63,7 +63,7 @@ define_function handleSignalStatusEvent(char sourceId, char signalStatus[])
 	// If signal drops from the active source (e.g. laptop is unplugged or goes
 	// to sleep throw up an alert using Enzo).
 	if (signalStatus == DXLINK_SIGNAL_STATUS_NO_SIGNAL &&
-			sourceId == activeSource)
+			sourceId == getActiveSource())
 	{
 		log(AMX_INFO, 'Signal lost from active source');
 
@@ -75,7 +75,7 @@ define_function handleSignalStatusEvent(char sourceId, char signalStatus[])
 				15);
 		setDisplaySource(SOURCE_ENZO);
 
-		wait_until (isSourceAvailable(getActiveSource())) 'signal returned'
+		wait_until (isSourceAvailable(sourceId)) 'signal returned'
 		{
 			log(AMX_DEBUG, 'Signal to active source returned. Switching back to display');
 			setDisplaySource(getActiveSource());
