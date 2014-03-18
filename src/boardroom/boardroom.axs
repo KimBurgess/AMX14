@@ -2566,7 +2566,6 @@ data_event[dvTpDragAndDrop]
 	}
 }
 
-
 data_event [vdvDragAndDrop]
 {
 	online:
@@ -2671,7 +2670,6 @@ data_event [vdvDragAndDrop]
 		}
 	}
 }
-	
 
 // Configure Resolutions for Multi-Preview Input and associated DVX Output
 data_event[dvDvxVidOutMultiPreview]
