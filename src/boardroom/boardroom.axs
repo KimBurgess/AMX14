@@ -1716,7 +1716,7 @@ define_function moderoNotifyButtonBitmapName (dev panel, integer btnAdrCde, inte
 			case BTN_ADR_DRAG_ITEM_SOURCE_HDMI_1:	    draggableItemBitmapNames[dvDvxVidInTableHdmi1.port] = bitmapName
 			case BTN_ADR_DRAG_ITEM_SOURCE_HDMI_2:	    draggableItemBitmapNames[dvDvxVidInTableHdmi2.port] = bitmapName
 			case BTN_ADR_DRAG_ITEM_SOURCE_VGA:	        draggableItemBitmapNames[dvDvxVidInTableVga.port] = bitmapName
-			case BTN_ADR_DRAG_ITEM_SOURCE_DISPLAY_PORT:	draggableItemBitmapNames[dvDvxVidInTableDisplayPort.port] = bitmapName
+			case BTN_ADR_DRAG_ITEM_SOURCE_DISPLAYPORT:	draggableItemBitmapNames[dvDvxVidInTableDisplayPort.port] = bitmapName
 		}
 	}
 }
@@ -2562,7 +2562,7 @@ data_event[dvTpDragAndDrop]
 		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_HDMI_1, MODERO_BUTTON_STATE_OFF)
 		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_HDMI_2, MODERO_BUTTON_STATE_OFF)
 		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_VGA, MODERO_BUTTON_STATE_OFF)
-		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_DISPLAY_PORT, MODERO_BUTTON_STATE_OFF)
+		moderoRequestButtonBitmapName (dvTpDragAndDrop, BTN_ADR_DRAG_ITEM_SOURCE_DISPLAYPORT, MODERO_BUTTON_STATE_OFF)
 	}
 }
 
@@ -2595,81 +2595,117 @@ data_event [vdvDragAndDrop]
 			
 			case 'DRAG_ITEM_DESELECTED-':
 			{
-				/*stack_var integer idDragItem
+				stack_var integer idDragItem
 				
 				idDragItem = atoi(data.text)
 				
 				// reset the draggable popup position by hiding it and then showing it again
-				switch (idDragItem)
+				select
 				{
-					case DGX_INPUT_SIGNAGE:
+					active (idDragItem == dvDvxVidInTableHdmi1.port):
 					{
-						moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
-						moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
+						moderoDisablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1)
+						moderoEnablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1)
 					}
-				}*/
+					active (idDragItem == dvDvxVidInTableHdmi2.port):
+					{
+						moderoDisablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_2)
+						moderoEnablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_2)
+					}
+					active (idDragItem == dvDvxVidInTableVga.port):
+					{
+						moderoDisablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_VGA)
+						moderoEnablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_VGA)
+					}
+					active (idDragItem == dvDvxVidInTableDisplayPort.port):
+					{
+						moderoDisablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_DISPLAYPORT)
+						moderoEnablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_DISPLAYPORT)
+					}
+				}
 			}
 			
 			case 'DRAG_ITEM_ENTER_DROP_AREA-':
 			{
-				/*stack_var integer idDragItem
+				stack_var integer idDragItem
+				stack_var integer idDropArea
+				stack_var integer btnDropArea
 				
-				idDragItem = atoi(data.text)
+				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
+				idDropArea = atoi(data.text)
 				
-				// reset the draggable popup position by hiding it and then showing it again
-				switch (idDragItem)
+				select
 				{
-					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
+					active (idDropArea == dvDvxVidOutMonitorLeft.port):     btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_LEFT
+					active (idDropArea == dvDvxVidOutMonitorRight.port):    btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_RIGHT
 				}
 				
-				channelOn (dvTpMain, btnDropArea)*/
+				channelOn (dvTpDragAndDrop, btnDropArea)
 			}
 			
 			case 'DRAG_ITEM_EXIT_DROP_AREA-':
 			{
-				/*stack_var integer idDragItem
+				stack_var integer idDragItem
 				stack_var integer idDropArea
 				stack_var integer btnDropArea
 				
 				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
 				idDropArea = atoi(data.text)
 				
-				switch (idDropArea)
+				select
 				{
-					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
+					active (idDropArea == dvDvxVidOutMonitorLeft.port):     btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_LEFT
+					active (idDropArea == dvDvxVidOutMonitorRight.port):    btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_RIGHT
 				}
 				
-				channelOff (dvTpMain, btnDropArea)*/
+				channelOff (dvTpDragAndDrop, btnDropArea)
 			}
 			
 			case 'DRAG_ITEM_DROPPED_ON_DROP_AREA-':
 			{
-				/*stack_var integer idDragItem
+				stack_var integer idDragItem
 				stack_var integer idDropArea
 				stack_var integer btnDropArea
 				
 				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
 				idDropArea = atoi(data.text)
 				
-				dgxEnableSwitch (dvDgxSwitcher, DGX_SWITCH_LEVEL_ALL, idDragItem, idDropArea)
+				dvxSwitchVideoOnly (dvDvxMain, idDragItem, idDropArea)
 				
-				switch (idDropArea)
+				select
 				{
-					case DGX_OUTPUT_DVX_1_FEED_1:     btnDropArea = BTN_DESTINATION_DVX_1
+					active (idDropArea == dvDvxVidOutMonitorLeft.port):     btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_LEFT
+					active (idDropArea == dvDvxVidOutMonitorRight.port):    btnDropArea = BTN_ADR_DROP_AREA_DESTINATION_MONITOR_RIGHT
 				}
-				channelOff (dvTpMain, btnDropArea)
 				
-				moderoSetButtonBitmap (dvTpMain, btnDropArea, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[idDragItem])
+				channelOff (dvTpDragAndDrop, btnDropArea)
+				
+				moderoSetButtonBitmap (dvTpDragAndDrop, btnDropArea, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[idDragItem])
 				
 				// reset the draggable popup position by hiding it and then showing it again
-				switch (idDragItem)
+				select
 				{
-					case DGX_INPUT_SIGNAGE:
+					active (idDragItem == dvDvxVidInTableHdmi1.port):
 					{
-						moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
-						moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
+						moderoDisablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1)
+						moderoEnablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1)
 					}
-				}*/
+					active (idDragItem == dvDvxVidInTableHdmi2.port):
+					{
+						moderoDisablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_2)
+						moderoEnablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_2)
+					}
+					active (idDragItem == dvDvxVidInTableVga.port):
+					{
+						moderoDisablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_VGA)
+						moderoEnablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_VGA)
+					}
+					active (idDragItem == dvDvxVidInTableDisplayPort.port):
+					{
+						moderoDisablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_DISPLAYPORT)
+						moderoEnablePopup (dvTpDragAndDrop, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_DISPLAYPORT)
+					}
+				}
 			}
 		}
 	}
