@@ -398,10 +398,10 @@ integer nLVL_KP_JOG_WHEEL       = 1
  */
 
 // Drag Items
-integer BTN_ADR_DRAG_ITEM_SOURCE_HDMI_1       = 1
-integer BTN_ADR_DRAG_ITEM_SOURCE_HDMI_2       = 2
-integer BTN_ADR_DRAG_ITEM_SOURCE_VGA          = 3
-integer BTN_ADR_DRAG_ITEM_SOURCE_DISPLAY_PORT = 4
+integer BTN_ADR_DRAG_ITEM_SOURCE_HDMI_1      = 1
+integer BTN_ADR_DRAG_ITEM_SOURCE_HDMI_2      = 2
+integer BTN_ADR_DRAG_ITEM_SOURCE_VGA         = 3
+integer BTN_ADR_DRAG_ITEM_SOURCE_DISPLAYPORT = 4
 
 // Drop Items
 integer BTN_ADR_DROP_AREA_DESTINATION_MONITOR_LEFT  = 11
@@ -921,10 +921,10 @@ char POPUP_NAME_MESSAGE_QUERY_USER_LYNC_CALL[]  = 'popup-message-query-user-lync
 char POPUP_NAME_SOURCE_SELECTION[]              = 'popup-source-selection-v3'
 
 
-char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE[]            = 'draggable-source-signage'
-char POPUP_NAME_DRAGGABLE_SOURCE_BLURAY[]             = 'draggable-source-bluray'
-char POPUP_NAME_DRAGGABLE_SOURCE_LAPTOP[]             = 'draggable-source-laptop'
-char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE_REMOVABLE[]  = 'draggable-source-signage-removable'
+char POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1[]      = 'draggable-source-hdmi1'
+char POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_2[]      = 'draggable-source-hdmi2'
+char POPUP_NAME_DRAGGABLE_SOURCE_TABLE_VGA[]         = 'draggable-source-vga'
+char POPUP_NAME_DRAGGABLE_SOURCE_TABLE_DISPLAYPORT[] = 'draggable-source-displayport'
 
 /*
  * --------------------
@@ -1191,7 +1191,7 @@ persistent integer cameraSpeedPreset1Focus  = 1
 long timelineTimesMultiPreviewSnapshots[DVX_MAX_VIDEO_INPUTS]
 long timelineTimeMplBetweenSwitches = 1000
 
-char draggableItemBitmapNames[4][30]
+char draggableItemBitmapNames[DVX_MAX_VIDEO_INPUTS][30]
 
 /*
  * --------------------
@@ -2571,12 +2571,16 @@ data_event [vdvDragAndDrop]
 	online:
 	{
 		// Define drop areas
-		//send_command touchTracker, 'DEFINE_DROP_AREA-<id>,<left>,<top>,<width>,<height>'
-		//sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_DVX_1_FEED_1),',24,310,215,120'")
+		//send_command vdvDragAndDrop, 'DEFINE_DROP_AREA-<id>,<left>,<top>,<width>,<height>'
+		sendCommand (vdvDragAndDrop, "'DEFINE_DROP_AREA-',itoa(dvDvxVidOutMonitorLeft.port),',78,0,307,213'")
+		sendCommand (vdvDragAndDrop, "'DEFINE_DROP_AREA-',itoa(dvDvxVidOutMonitorRight.port),',417,0,307,213'")
 		
 		// Define drop items
-		//send_command touchTracker, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
-		//sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_BLURAY),',480,641,160,100'")
+		//send_command vdvDragAndDrop, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
+		sendCommand (vdvDragAndDrop, "'DEFINE_DRAG_ITEM-',itoa(dvDvxVidInTableHdmi1.port),',102,543,215,137'")
+		sendCommand (vdvDragAndDrop, "'DEFINE_DRAG_ITEM-',itoa(dvDvxVidInTableHdmi2.port),',483,543,215,137'")
+		sendCommand (vdvDragAndDrop, "'DEFINE_DRAG_ITEM-',itoa(dvDvxVidInTableVga.port),',102,822,215,137'")
+		sendCommand (vdvDragAndDrop, "'DEFINE_DRAG_ITEM-',itoa(dvDvxVidInTableDisplayPort.port),',483,822,215,137'")
 	}
 	
 	string:
