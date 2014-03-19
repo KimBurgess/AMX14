@@ -3,10 +3,13 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 		dev dvTp, dev dvSchedulingTp)
 
 
+// Utility includes
 #include 'logger';
 #include 'string';
 #include 'common';
 #include 'util';
+
+// Device control / listener libraries
 #include 'amx-device-control';
 #include 'amx-controlports-api';
 #include 'amx-controlports-control';
@@ -14,11 +17,18 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 #include 'amx-enzo-control';
 #include 'amx-modero-api';
 #include 'amx-modero-control';
+
+// Rms guff
+#include 'RmsApi';
+#include 'RmsSchedulingApi';
+
+// System components
 #include 'huddleDisplayManager';
 #include 'huddleSourceManager';
 #include 'huddleOSDManager';
 #include 'huddleDXLinkListener';
 #include 'huddleControlPortsListener';
+#include 'huddleRmsListener';
 
 
 define_module
@@ -46,6 +56,25 @@ define_function char[8] getInstanceId()
 	id = id * 31 + dcBtn.device.number;
 
 	return itohex(id);
+}
+
+/**
+ * Handle anything involved to turn on / prep the system at the start of a
+ * reservation.
+ */
+define_function handleBookingStart(RmsEventBookingResponse booking)
+{
+	setDisplayPower(true);
+	setActiveSource(SOURCE_ENZO);
+}
+
+/**
+ * System cleanup following a booking end.
+ */
+define_function handleBookingEnd(RmsEventBookingResponse booking)
+{
+	enzoSessionEnd();
+	setDisplayPower(false);
 }
 
 /**
@@ -116,10 +145,12 @@ define_event
 
 data_event[dvTx]
 {
+
 	online:
 	{
 		dxlinkDisableTxVideoInputAutoSelect(data.device);
 	}
+
 }
 
 
