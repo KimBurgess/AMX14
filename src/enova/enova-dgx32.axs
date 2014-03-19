@@ -154,9 +154,9 @@ data_event [dvDxlfMftxUsb]
 		ipAddressDxlfTx = data.sourceip
 		
 		// if the last character is the NULL ($00) character
-		if(ipAddressDxlfRx[length_array(ipAddressDxlfRx)] == $00)
+		if(ipAddressDxlfRx[length_array(ipAddressDxlfTx)] == $00)
 			  // remove last character
-			set_length_array(ipAddressDxlfRx,(length_array(ipAddressDxlfRx)-1))
+			set_length_array(ipAddressDxlfTx,(length_array(ipAddressDxlfTx)-1))
 		
 		dxlinkEnableTxUsbHidService (dvDxlfMftxUsb)
 		
