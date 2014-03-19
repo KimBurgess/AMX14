@@ -104,17 +104,12 @@ define_function setActiveSource(char sourceId)
 {
 	log(AMX_INFO, "'Selecting ', getSourceName(sourceId), ' as system source'");
 
-	setDisplaySource(sourceId);
-
 	if (sourceId == SOURCE_ENZO)
 	{
-		enzoAlertClose(dvEnzo);
-		enzoBlankingHide(dvEnzo);
+		hideOSD();
 	}
-	else
-	{
-		enzoBlankingShow(dvEnzo, true);
-	}
+
+	setDisplaySource(sourceId);
 
 	activeSource = sourceId;
 
@@ -132,17 +127,17 @@ define_function setDisplaySource(char sourceId)
 	{
 		case SOURCE_ENZO:
 		{
-			// TODO select correct input on display
+			setDisplayInput(INPUT_HDMI);
 		}
 		case SOURCE_HDMI:
 		{
 			dxlinkSetTxVideoInputDigital(dvTx);
-			// TODO select correct input on display
+			setDisplayInput(INPUT_DVI);
 		}
 		case SOURCE_VGA:
 		{
 			dxlinkSetTxVideoInputAnalog(dvTx);
-			// TODO select correct input on display
+			setDisplayInput(INPUT_DVI);
 		}
 	}
 }

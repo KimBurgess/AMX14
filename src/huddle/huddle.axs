@@ -18,7 +18,6 @@ dvWayfindingPanel = 10002:2:0;
 dvIO = 5001:4:0;
 
 // Huddle Specific
-vdvHuddle1Comm = dynamic_virtual_device;
 vdvHuddle1Display = 41501:1:0;
 dvHuddle1Tx = 7001:1:0;
 dvHuddle1Rx = 8001:1:0;
@@ -37,6 +36,11 @@ define_variable
 volatile devchan dcHuddle1Btn = {dvIO, 1};
 volatile devchan dcHUddle1BtnFb = {dvIO, 2};
 
+
+// Display module instantiation is intentially done here rather than within the
+// huddleController module so that we can use the same huddle interaction logic
+// regardless of the display in use.
+define_module 'Samsung_MD55C_Comm_dr1_0_0' mdlHuddle1Display(vdvHuddle1Display, dvHuddle1Rx);
 
 // Each huddle in the space uses it's own huddleController module instance. This
 // handles all devices interaction, registration of devices with RMS, individual

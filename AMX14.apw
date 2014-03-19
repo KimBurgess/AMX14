@@ -736,6 +736,10 @@
 <FilePathName>lib\rms-sdk\includes\RmsEventListener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Other"><Identifier>SamsungMD55C Interface</Identifier>
+<FilePathName>module\docs\SamsungMD55C Interface.doc</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="DUET"><Identifier>Samsung_MD55C_Comm_dr1_0_0</Identifier>
 <FilePathName>module\Samsung_MD55C_Comm_dr1_0_0.jar</FilePathName>
 <Comments></Comments>
@@ -752,8 +756,16 @@
 <FilePathName>src\huddle\include\huddleControlPortsListener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>huddleDisplayManager</Identifier>
+<FilePathName>src\huddle\include\huddleDisplayManager.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>huddleDXLinkListener</Identifier>
 <FilePathName>src\huddle\include\huddleDXLinkListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleOSDManager</Identifier>
+<FilePathName>src\huddle\include\huddleOSDManager.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>huddleSourceManager</Identifier>

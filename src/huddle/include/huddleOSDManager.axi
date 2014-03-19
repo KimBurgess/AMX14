@@ -39,6 +39,8 @@ define_function showOSD(char messageName[])
 	// TODO if enzo is not is session we need to start a session here
 
 	enzoShowWebApp(dvEnzo, address);
+
+	setDisplaySource(SOURCE_ENZO);
 }
 
 /**
@@ -47,6 +49,8 @@ define_function showOSD(char messageName[])
 define_function hideOSD()
 {
 	log(AMX_DEBUG, 'Hiding OSD');
+
+	setDisplaySource(getActiveSource());
 
 	enzoHideWebApp(dvEnzo);
 }

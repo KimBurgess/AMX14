@@ -13,6 +13,7 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 #include 'amx-enzo-control';
 #include 'amx-modero-api';
 #include 'amx-modero-control';
+#include 'huddleDisplayManager';
 #include 'huddleSourceManager';
 #include 'huddleOSDManager';
 #include 'huddleDXLinkListener';
@@ -65,6 +66,9 @@ define_function handlePushbuttonEvent(char isPushed)
 	if (isPushed)
 	{
 		cancel_wait 'signal returned';
+	}
+	else
+	{
 		cycleActiveSource();
 	}
 }
@@ -87,12 +91,10 @@ define_function handleSignalStatusEvent(char sourceId, char signalStatus[])
 		log(AMX_INFO, 'Signal lost from active source');
 
 		showOSD('disconnected');
-		setDisplaySource(SOURCE_ENZO);
 
 		wait_until (isSourceAvailable(sourceId)) 'signal returned'
 		{
 			log(AMX_DEBUG, 'Signal to active source returned. Switching back to display');
-			setDisplaySource(getActiveSource());
 			hideOSD();
 		}
 	}
