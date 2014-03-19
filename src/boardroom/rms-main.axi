@@ -1,5 +1,9 @@
 program_name='rms-main'
 
+DEFINE_DEVICE
+
+dvTP2 = 10002:1:0
+dvTP3 = 10003:1:0
 
 define_variable
 
@@ -11,6 +15,17 @@ define_variable
 
 url_struct rmsUrl
 
+VOLATILE DEV dvPowerMonitoredDevices[8] =
+{
+   5001:1:0,    	// Outlet #1
+   5002:1:0,     	// Outlet #2
+   0:1:0,      		// Outlet #3
+   0:1:0,        	// Outlet #4
+   0:1:0, 		// Outlet #5
+   0:1:0,          	// Outlet #6 
+   0:1:0,            	// Outlet #7 
+   0:1:0             	// Outlet #8 
+}
 
 
 
@@ -21,7 +36,11 @@ define_module 'RmsControlSystemMonitor' modRMSsysMon(vdvRms, dvMaster)
 // monitor power of the system
 define_module 'RmsSystemPowerMonitor' modRMSPwrMon(vdvRms, dvMaster)
 
+DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_1(vdvRMS,dvTpTableMain);
+DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_2(vdvRMS,dvTP2);
+DEFINE_MODULE 'RmsTouchPanelMonitor' mdlRmsTouchPanelMonitorMod_3(vdvRMS,dvTP3);
 
+DEFINE_MODULE 'RmsPowerDistributionUnitMonitor' mdlRmsPowerDistributionUnitMonitorMod(vdvRMS, dvPduMain1, dvPowerMonitoredDevices);
 
 
 // This function will get called when RMS is ready to register assets
