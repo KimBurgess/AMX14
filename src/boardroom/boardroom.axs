@@ -228,7 +228,7 @@ dvDvxVidIn7     = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_7:SYS_MASTER
 dvDvxVidIn8     = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_8:SYS_MASTER
 dvDvxVidIn9     = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_9:SYS_MASTER
 dvDvxVidIn10    = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_10:SYS_MASTER
-// Names ports
+// Named ports
 dvDvxVidInPc    = dvDvxVidIn5
 dvDvxVidInTx1   = dvDvxVidIn7
 dvDvxVidInTx2   = dvDvxVidIn8
