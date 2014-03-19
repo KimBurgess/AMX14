@@ -505,6 +505,14 @@
 <FilePathName>src\boardroom\dynalite-lighting.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>modero-multi-preview-dvx</Identifier>
+<FilePathName>src\boardroom\modero-multi-preview-dvx.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Source"><Identifier>multi-preview-demo</Identifier>
+<FilePathName>src\boardroom\multi-preview-demo.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>nec-monitor</Identifier>
 <FilePathName>src\boardroom\nec-monitor.axi</FilePathName>
 <Comments></Comments>
