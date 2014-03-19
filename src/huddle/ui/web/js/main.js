@@ -14,6 +14,6 @@ $(function() {
 
 	setTimeout(function() {
 		$('#message').fadeIn(3000);
-	}, 1000);
+	}, 2000);
 
 });
