@@ -38,10 +38,6 @@ dvDxlfRxVideoOutput = 7001:DXLINK_PORT_VIDEO_OUTPUT:0
 
 define_constant
 
-// CMD/STR Delimeters
-char DELIM_HEADER[] = '-'
-char DELIM_PARAM[] = ','
-
 // DGX inputs
 integer DGX_INPUT_SIGNAGE           = 1
 integer DGX_INPUT_BLURAY            = 2
@@ -156,6 +152,12 @@ data_event [dvDxlfMftxUsb]
 	online:
 	{
 		ipAddressDxlfTx = data.sourceip
+		
+		// if the last character is the NULL ($00) character
+		if(ipAddressDxlfRx[length_array(ipAddressDxlfTx)] == $00)
+			  // remove last character
+			set_length_array(ipAddressDxlfTx,(length_array(ipAddressDxlfTx)-1))
+		
 		dxlinkEnableTxUsbHidService (dvDxlfMftxUsb)
 		
 		if (device_id(dvDxlfRxUsb))
