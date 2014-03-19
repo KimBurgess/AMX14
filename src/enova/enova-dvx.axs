@@ -6,6 +6,8 @@ include 'amx-device-control'
 
 define_device
 
+dvSystem = 0:1:0
+
 // DVX Switcher Input/Outputs - Generic Identifiers
 dvDvxSwitcherMain         = 5002:DVX_PORT_MAIN:0
 // Video inputs
@@ -22,7 +24,18 @@ dvDvxSwitcherVideoOutput1 = 5002:DVX_PORT_VID_OUT_1:0
 // Audio outputs
 dvDvxSwitcherAudioOutput1 = 5002:DVX_PORT_AUD_OUT_1:0
 
+vdvRMS = 41001:1:0 // RMS Client (Duet Module)
 
+
+// RMS Client - NetLinx Adapter Module
+// This module includes the RMS client module 
+// and enables communication via SEND_COMMAND, 
+// SEND_STRINGS, CHANNELS, and LEVELS with the 
+// RMS Client.
+DEFINE_MODULE 'RmsNetLinxAdapter_dr4_0_0' mdlRMSNetLinx(vdvRMS)
+
+			  'RmsControlSystemMonitor' mdlRMSControlSys(vdvRMS, dvSystem)
+			  'RmsDvxSwitcherMonitor' mdlRMSDvxSwitch(vdvRMS)
 
 define_variable
 
@@ -93,3 +106,4 @@ data_event [dvDvxSwitcherMain]
 		dvxRequestInputVideo(dvDvxSwitcherMain,dvDvxSwitcherVideoOutput1.port)
 	}
 }
+
