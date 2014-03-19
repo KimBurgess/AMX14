@@ -388,9 +388,9 @@ timeline_event[TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS]
 		{
 			dynamicImageName = "'MXA_PREVIEW_',itoa(currentDvxInput)"
 			
-			sendCommand (dvTpSnapshotPreview, "'^RMF-',dynamicImageName,',%V0'")
+			moderoEnableResourceReloadOnView (dvTpSnapshotPreview, dynamicImageName)
 			moderoResourceForceRefreshPrefetchFromCache (dvTpSnapshotPreview, dynamicImageName, MODERO_RESOURCE_NOTIFICATION_OFF)
-			sendCommand (dvTpSnapshotPreview, "'^RMF-',dynamicImageName,',%V1'")
+			moderoDisableResourceReloadOnView (dvTpSnapshotPreview, dynamicImageName)
 			
 			// only need to set the button bitmap the first time the resource is loaded
 			if (currentPreviewButtonBitmap[currentDvxInput] != dynamicImageName)
