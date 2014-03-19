@@ -33,9 +33,10 @@ vdvRMS = 41001:1:0 // RMS Client (Duet Module)
 // SEND_STRINGS, CHANNELS, and LEVELS with the 
 // RMS Client.
 DEFINE_MODULE 'RmsNetLinxAdapter_dr4_0_0' mdlRMSNetLinx(vdvRMS)
-
 			  'RmsControlSystemMonitor' mdlRMSControlSys(vdvRMS, dvSystem)
 			  'RmsDvxSwitcherMonitor' mdlRMSDvxSwitch(vdvRMS)
+			  //'RmsTouchPanelMonitor' mdlRMSTouchPanel(vdvRMS, 
+			
 
 define_variable
 
