@@ -736,6 +736,34 @@
 <FilePathName>lib\rms-sdk\includes\RmsEventListener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSourceUsageMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSourceUsageMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemModeMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSystemModeMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemPowerMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSystemPowerMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsVirtualDeviceMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsVirtualDeviceMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Other"><Identifier>SamsungMD55C Interface</Identifier>
 <FilePathName>module\docs\SamsungMD55C Interface.doc</FilePathName>
 <Comments></Comments>

@@ -1,5 +1,6 @@
 module_name='huddleController'(dev vdvRms, dev vdvDisplay,
-		dev dvEnzo, dev dvRx, dev dvTx, devchan dcBtn, devchan dcBtnFb)
+		dev dvEnzo, dev dvRx, dev dvTx, devchan dcBtn, devchan dcBtnFb,
+		dev dvTp, dev dvSchedulingTp)
 
 
 #include 'logger';
@@ -18,6 +19,14 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 #include 'huddleOSDManager';
 #include 'huddleDXLinkListener';
 #include 'huddleControlPortsListener';
+
+
+define_module
+
+'RmsDuetMonitorMonitor' mdlRmsMonitor(vdvRms, vdvDisplay, dvRx);
+'RmsGenericNetLinxDeviceMonitor' mdlRmsEnzo(vdvRms, dvEnzo);
+'RmsTouchPanelMonitor' mdlRmsTp(vdvRms, dvTp);
+'RmsTouchPanelMonitor' mdlRmsSchedulingTp(vdvRms, dvSchedulingTp);
 
 
 /**
