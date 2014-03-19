@@ -461,8 +461,16 @@
 <FilePathName>lib\rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsPowerDistributionUnitMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsPowerDistributionUnitMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemPowerMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors\RmsSystemPowerMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
