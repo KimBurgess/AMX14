@@ -12,6 +12,8 @@ $(function() {
 
 	//$("#message").html(getQueryVariable("msg"));
 
-	$('#disconnected').fadeIn(3000);
+	setTimeout(function() {
+		$('#message').fadeIn(3000);
+	}, 1000);
 
 });
