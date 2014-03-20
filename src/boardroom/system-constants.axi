@@ -568,7 +568,7 @@ char PAGE_NAME_MAIN_USER[]                      = 'page-main-user'
 char POPUP_NAME_VIDEO_PREVIEW[]                 = 'popup-video-preview'
 char POPUP_NAME_VIDEO_LOADING[]                 = 'popup-video-loading'
 char POPUP_NAME_MESSAGE_QUERY_USER_LYNC_CALL[]  = 'popup-message-query-user-lync-call'
-char POPUP_NAME_SOURCE_SELECTION[]              = 'popup-source-selection-v3'
+char POPUP_NAME_SOURCE_SELECTION[]              = 'popup-source-selection-vAMX14'
 
 
 char POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1[]      = 'draggable-source-hdmi1'
