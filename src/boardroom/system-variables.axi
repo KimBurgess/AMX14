@@ -296,7 +296,7 @@ integer btnAdrsVideoInputLabels[DVX_MAX_VIDEO_INPUTS] =
 	48,
 	49,
 	50
-}   
+}
 
 integer btnAdrVideoPreviewLoadingMessage = 30
 
@@ -311,6 +311,23 @@ integer btnExitVideoPreview = 100
 char popupNameVideoPreview[] = 'popup-video-preview'
 
 char imageFileNameNoVideo[] = 'icon-novideo.png'
+
+
+integer dropAreaMonitorLeft_left = 438
+integer dropAreaMonitorLeft_top = 164
+integer dropAreaMonitorLeft_width = 320
+integer dropAreaMonitorLeft_height = 180
+
+integer dropAreaMonitorRight_left = 1163
+integer dropAreaMonitorRight_top = 164
+integer dropAreaMonitorRight_width = 320
+integer dropAreaMonitorRight_height = 180
+
+integer dropAreaPreviewVideo_left = 771
+integer dropAreaPreviewVideo_top = 164
+integer dropAreaPreviewVideo_width = 379
+integer dropAreaPreviewVideo_height = 180
+
 
 /*
  * --------------------
