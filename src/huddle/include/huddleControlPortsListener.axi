@@ -11,6 +11,7 @@ volatile dev dvIoPorts[1];
 
 
 #include 'amx-controlports-api';
+#include 'amx-controlports-control';
 #include 'amx-controlports-listener';
 
 

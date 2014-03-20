@@ -19,7 +19,7 @@ define_function dxlinkNotifyTxVideoInputStatusAnalog (dev dxlinkTxAnalogVideoInp
 {
 	if (dxlinkTxAnalogVideoInput == dvTx.NUMBER:DXLINK_PORT_VIDEO_INPUT_ANALOG:dvTx.SYSTEM)
 	{
-		handleSignalStatusEvent(SOURCE_VGA, signalStatus);
+		handleSignalStatusEvent(SOURCE_VGA, signalStatus == DXLINK_SIGNAL_STATUS_VALID_SIGNAL);
 	}
 }
 
@@ -27,8 +27,21 @@ define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoI
 {
 	if (dxlinkTxDigitalVideoInput == dvTx.NUMBER:DXLINK_PORT_VIDEO_INPUT_DIGITAL:dvTx.SYSTEM)
 	{
-		handleSignalStatusEvent(SOURCE_HDMI, signalStatus);
+		handleSignalStatusEvent(SOURCE_HDMI, signalStatus == DXLINK_SIGNAL_STATUS_VALID_SIGNAL);
 	}
+}
+
+
+define_event
+
+data_event[dvTx]
+{
+
+	online:
+	{
+		dxlinkDisableTxVideoInputAutoSelect(data.device);
+	}
+
 }
 
 

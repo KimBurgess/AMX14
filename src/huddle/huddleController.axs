@@ -9,14 +9,9 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 #include 'common';
 #include 'util';
 
-// Device control / listener libraries
+// Device control libraries
 #include 'amx-device-control';
-#include 'amx-controlports-api';
-#include 'amx-controlports-control';
-#include 'amx-enzo-api';
 #include 'amx-enzo-control';
-#include 'amx-modero-api';
-#include 'amx-modero-control';
 
 // Rms guff
 #include 'RmsApi';
@@ -28,6 +23,7 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 #include 'huddleOSDManager';
 #include 'huddleDXLinkListener';
 #include 'huddleControlPortsListener';
+#include 'huddleEnzoListener';
 #include 'huddleRmsListener';
 
 
@@ -73,7 +69,7 @@ define_function handleBookingStart(RmsEventBookingResponse booking)
  */
 define_function handleBookingEnd(RmsEventBookingResponse booking)
 {
-	enzoSessionEnd();
+	enzoSessionEnd(dvEnzo);
 	setDisplayPower(false);
 }
 
@@ -114,17 +110,16 @@ define_function handlePushbuttonEvent(char isPushed)
 /**
  * Handle an update to the detected signal status of one of our system sources.
  */
-define_function handleSignalStatusEvent(char sourceId, char signalStatus[])
+define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 {
 	log(AMX_DEBUG, "'Signal event for ', getSourceName(sourceId), ' [',
-			signalStatus, ']'");
+			bool_to_string(hasSignal), ']'");
 
-	setSourceAvailable(sourceId, signalStatus == DXLINK_SIGNAL_STATUS_VALID_SIGNAL);
+	setSourceAvailable(sourceId, hasSignal);
 
 	// If signal drops from the active source (e.g. laptop is unplugged or goes
 	// to sleep throw up an alert using Enzo).
-	if (signalStatus == DXLINK_SIGNAL_STATUS_NO_SIGNAL &&
-			sourceId == getActiveSource())
+	if (hasSignal == false && sourceId == getActiveSource())
 	{
 		log(AMX_INFO, 'Signal lost from active source');
 
@@ -138,19 +133,6 @@ define_function handleSignalStatusEvent(char sourceId, char signalStatus[])
 	}
 
 	updateButtonFeedbackState();
-}
-
-
-define_event
-
-data_event[dvTx]
-{
-
-	online:
-	{
-		dxlinkDisableTxVideoInputAutoSelect(data.device);
-	}
-
 }
 
 
