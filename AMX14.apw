@@ -521,6 +521,16 @@
 <FilePathName>src\boardroom\rms-main.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>sony-evihd7v</Identifier>
+<FilePathName>src\boardroom\sony-evihd7v.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>SONY0222</Identifier>
+<FilePathName>src\boardroom\SONY0222.IRL</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="Custom [5001:9:10]"><DevName>Custom [5001:9:10]</DevName>
+</DeviceMap>
+</File>
 <File CompileType="None" Type="Include"><Identifier>system-constants</Identifier>
 <FilePathName>src\boardroom\system-constants.axi</FilePathName>
 <Comments></Comments>
@@ -573,16 +583,10 @@
 <FilePathName>src\boardroom\system-variables.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="None" Type="TP4"><Identifier>amx-au-gc-boardroom-mxt-1900</Identifier>
-<FilePathName>src\boardroom\ui\amx-au-gc-boardroom-mxt-1900.TP4</FilePathName>
+<File CompileType="None" Type="TP4"><Identifier>boardroom-G4-mxt-1900</Identifier>
+<FilePathName>src\boardroom\ui\boardroom-G4-mxt-1900.TP4</FilePathName>
 <Comments></Comments>
-<DeviceMap DevAddr="Custom [10001:1:0]"><DevName>Custom [10001:1:0]</DevName>
-</DeviceMap>
-</File>
-<File CompileType="None" Type="TP5"><Identifier>amx-au-gc-boardroom-mxt-1901-G5</Identifier>
-<FilePathName>src\boardroom\ui\amx-au-gc-boardroom-mxt-1901-G5.TP5</FilePathName>
-<Comments></Comments>
-<DeviceMap DevAddr="Custom [10001:1:0]"><DevName>Custom [10001:1:0]</DevName>
+<DeviceMap DevAddr="Custom [10001:1:10]"><DevName>Custom [10001:1:10]</DevName>
 </DeviceMap>
 </File>
 <File CompileType="None" Type="TP4"><Identifier>drag-and-drop</Identifier>
