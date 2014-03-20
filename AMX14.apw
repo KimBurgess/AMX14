@@ -489,10 +489,6 @@
 <FilePathName>src\boardroom\agent-usb-ptz-web-cam.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="Netlinx" Type="Source"><Identifier>amx-au-gc-boardroom-main</Identifier>
-<FilePathName>src\boardroom\amx-au-gc-boardroom-main.axs</FilePathName>
-<Comments></Comments>
-</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>boardroom</Identifier>
 <FilePathName>src\boardroom\boardroom.axs</FilePathName>
 <Comments></Comments>
@@ -511,10 +507,6 @@
 </File>
 <File CompileType="None" Type="Include"><Identifier>modero-multi-preview-dvx</Identifier>
 <FilePathName>src\boardroom\modero-multi-preview-dvx.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Source"><Identifier>multi-preview-demo</Identifier>
-<FilePathName>src\boardroom\multi-preview-demo.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>multi-preview-dvx</Identifier>
