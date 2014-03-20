@@ -17,7 +17,21 @@ program_name='system-functions'
  * --------------------
  */
 
-
+define_function showDragAndDropPopups (dev panel)
+{
+	if (panel == dvTpTableMain)
+	{
+		stack_var integer i
+		
+		for (i=1; i<=DVX_MAX_VIDEO_INPUTS; i++)
+		{
+			if (dragAreas19[i].height and dragAreas19[i].width AND dragAreas19[i].left AND dragAreas19[i].top)
+			{
+				moderoEnablePopup (panel, "'popup-draggable-source-',itoa(i)")
+			}
+		}
+	}
+}
 
 define_function initArea (_area area, integer left, integer top, integer width, integer height)
 {
@@ -115,8 +129,12 @@ define_function shutdownAvSystem ()
 	amxRelayPulse (dvRelaysRelBox, REL_SHADES_CORNER_WINDOW_UP)
 	amxRelayPulse (dvRelaysRelBox, REL_SHADES_WALL_WINDOW_UP)
 	
-	// Lights - recall the "all on" preset
-	lightsEnablePresetAllOn ()
+	// Lights - recall the "all off" preset
+	lightsEnablePresetAllOff ()
+	
+	
+	channelOff (dvTpTableDebug, 1)
+	sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
 	
 	// Video - Turn the monitors off and switch input "none" to the monitor and multi-preview outputs on the DVX
 	necMonitorSetPowerOff (vdvMonitorLeft)
@@ -189,7 +207,9 @@ define_function tableInputDetected (dev dvTxVidIn)
 	{
 		stack_var integer input
 		
-		select
+		input = dvTxVidIn.port
+		
+		/*select
 		{
 			active (dvTxVidIn == dvTxTable1VidInDigital):    input = dvDvxVidInTx1.port
 			active (dvTxVidIn == dvTxTable1VidInAnalog):     input = dvDvxVidInTx1.port
@@ -202,7 +222,7 @@ define_function tableInputDetected (dev dvTxVidIn)
 			
 			active (dvTxVidIn == dvTxTable4VidInDigital):    input = dvDvxVidInTx4.port
 			active (dvTxVidIn == dvTxTable4VidInAnalog):     input = dvDvxVidInTx4.port
-		}
+		}*/
 		
 		// route the DVX input for this TX to the DVX output for the left monitor
 		dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorLeft.port)
@@ -227,6 +247,7 @@ define_function tableInputDetected (dev dvTxVidIn)
 		moderoSetPage (dvTpTableMain, PAGE_NAME_MAIN_USER)
 		// show the source selection / volume control page
 		moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_SELECTION)
+		showDragAndDropPopups (dvTpTableMain)
 		
 		// set the flag to show that the AV system is now in use
 		isSystemAvInUse = TRUE
@@ -470,6 +491,17 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 	{
 		dvx.videoInputs[dvxVideoInput.port].status = signalStatus
 		//startMultiPreviewSnapshots ()
+		
+		if (signalStatus == DVX_SIGNAL_STATUS_VALID_SIGNAL)
+		{
+			if ( (dvxVideoInput == dvDvxVidInTx1) OR
+			     (dvxVideoInput == dvDvxVidInTx2) OR
+			     (dvxVideoInput == dvDvxVidInTx3) OR
+			     (dvxVideoInput == dvDvxVidInTx4) )
+			{
+				tableInputDetected (dvxVideoInput)
+			}
+		}
 	}
 	
 	
@@ -1124,7 +1156,7 @@ define_function pduNotifyTemperatureScaleFahrenheit (dev pduPort1)
 
 
 #define INCLUDE_CONTROLPORTS_NOTIFY_IO_INPUT_ON_CALLBACK
-define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
+define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
 {
 	// ioPort is the IO port.
 	// ioChanCde is the IO channel code.
@@ -1154,7 +1186,7 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 
 
 #define INCLUDE_CONTROLPORTS_NOTIFY_IO_INPUT_OFF_CALLBACK
-define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
+define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 {
 	// ioPort is the IO port.
 	// ioChanCde is the IO channel code.
