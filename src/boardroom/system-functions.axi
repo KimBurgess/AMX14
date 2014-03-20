@@ -19,63 +19,17 @@ program_name='system-functions'
 
 
 
-
+/*
 define_function recallCameraPreset (integer cameraPreset)
 {
 	switch (cameraPreset)
 	{
-		case CAMERA_PRESET_1:
-		{
-			if (waitTimeCameraAdjustingToPreset1Pan)
-			agentUsbPtzWebCamPanLeft (dvPtzCam, CAMERA_MAX_PAN_SPEED)
-			if (waitTimeCameraAdjustingToPreset1Tilt)
-			agentUsbPtzWebCamTiltDown (dvPtzCam, CAMERA_MAX_TILT_SPEED)
-			if (waitTimeCameraAdjustingToPreset1Zoom)
-			agentUsbPtzWebCamZoomOutStandardSpeed (dvPtzCam)
-			if (waitTimeCameraAdjustingToPreset1Focus)
-			agentUsbPtzWebCamFocusFarStandardSpeed (dvPtzCam)
-			
-			wait waitTimeCameraAdjustingToBasePosition
-			{
-				// adjust pan
-				if (waitTimeCameraAdjustingToPreset1Pan)
-				agentUsbPtzWebCamPanRight (dvPtzCam, cameraSpeedPreset1Pan)
-				wait waitTimeCameraAdjustingToPreset1Pan
-				{
-					if (waitTimeCameraAdjustingToPreset1Pan)
-					agentUsbPtzWebCamPanOff (dvPtzCam)
-					// adjust tilt
-					if (waitTimeCameraAdjustingToPreset1Tilt)
-					agentUsbPtzWebCamTiltUp (dvPtzCam, cameraSpeedPreset1Tilt)
-					wait waitTimeCameraAdjustingToPreset1Tilt
-					{
-						if (waitTimeCameraAdjustingToPreset1Tilt)
-						agentUsbPtzWebCamTiltOff (dvPtzCam)
-						// adjust zoom
-						if (waitTimeCameraAdjustingToPreset1Zoom)
-						agentUsbPtzWebCamZoomInStandardSpeed (dvPtzCam)
-						wait waitTimeCameraAdjustingToPreset1Zoom
-						{
-							if (waitTimeCameraAdjustingToPreset1Zoom)
-							agentUsbPtzWebCamZoomOff (dvPtzCam)
-							// adjust focus
-							if (waitTimeCameraAdjustingToPreset1Focus)
-							agentUsbPtzWebCamFocusNearStandardSpeed (dvPtzCam)
-							wait waitTimeCameraAdjustingToPreset1Focus
-							{
-								if (waitTimeCameraAdjustingToPreset1Focus)
-								agentUsbPtzWebCamFocusOff (dvPtzCam)
-							}
-						}
-					}
-				}
-			}
-		}
-		case CAMERA_PRESET_2: {}
-		case CAMERA_PRESET_3: {}
+		case CAMERA_PRESET_1:	channelPulse (dvPtzCam, CAM1_PRESET_1)
+		case CAMERA_PRESET_2:   channelPulse (dvPtzCam, CAM1_PRESET_2)
+		case CAMERA_PRESET_3:   channelPulse (dvPtzCam, CAM1_PRESET_3)
 	}
 }
-
+*/
 /*
 define_function startMultiPreviewSnapshots ()
 {
@@ -166,8 +120,9 @@ define_function shutdownAvSystem ()
 	// stop taking snapshots (no point constantly switching on the DVX anymore)
 	//stopMultiPreviewSnapshots ()
 	
-	// recall Camera position
-	recallCameraPreset (CAMERA_PRESET_1)
+	// reset Camera position
+	irPulse (dvPtzCam, CAM1_HOME)
+	
 	
 	// set flag to indicate that system is not in use
 	isSystemAvInUse = FALSE

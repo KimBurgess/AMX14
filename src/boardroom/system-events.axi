@@ -26,6 +26,15 @@ define_event
  * --------------------
  */
 
+
+data_event[dvPtzCam]
+{
+	online:
+	{
+		amxIrSetMode (data.device, IR_MODE_IR)
+	}
+}
+
 data_event[dvDvxMain]
 {
 	online:
@@ -750,26 +759,18 @@ button_event[dvTpTableCamera,0]
 		
 		switch (button.input.channel)
 		{
-			case BTN_CAMERA_FOCUS_NEAR:  agentUsbPtzWebCamFocusNearStandardSpeed (dvPtzCam)
-			case BTN_CAMERA_FOCUS_FAR:   agentUsbPtzWebCamFocusFarStandardSpeed (dvPtzCam)
-			case BTN_CAMERA_ZOOM_IN:     agentUsbPtzWebCamZoomInStandardSpeed (dvPtzCam)
-			case BTN_CAMERA_ZOOM_OUT:    agentUsbPtzWebCamZoomOutStandardSpeed (dvPtzCam)
-			case BTN_CAMERA_PAN_LEFT:    agentUsbPtzWebCamPanLeft (dvPtzCam, panSpeed)
-			case BTN_CAMERA_PAN_RIGHT:   agentUsbPtzWebCamPanRight (dvPtzCam, panSpeed)
-			case BTN_CAMERA_TILT_DOWN:   agentUsbPtzWebCamTiltDown (dvPtzCam, tiltSpeed)
-			case BTN_CAMERA_TILT_UP:     agentUsbPtzWebCamTiltUp (dvPtzCam, tiltSpeed)
+			case BTN_CAMERA_FOCUS_NEAR:  irOn (dvPtzCam, CAM1_FOCUS_NEAR)
+			case BTN_CAMERA_FOCUS_FAR:   irOn (dvPtzCam, CAM1_FOCUS_FAR)
+			case BTN_CAMERA_ZOOM_IN:     irOn (dvPtzCam, CAM1_ZOOM_FAST_TELE)
+			case BTN_CAMERA_ZOOM_OUT:    irOn (dvPtzCam, CAM1_ZOOM_FAST_WIDE)
+			case BTN_CAMERA_PAN_LEFT:    irOn (dvPtzCam, CAM1_REVERSE)
+			case BTN_CAMERA_PAN_RIGHT:   irOn (dvPtzCam, CAM1_FORWARD)
+			case BTN_CAMERA_TILT_DOWN:   irOn (dvPtzCam, CAM1_DOWN)
+			case BTN_CAMERA_TILT_UP:     irOn (dvPtzCam, CAM1_UP)
 			
-			case BTN_CAMERA_PRESET_1:
+			case BTN_CAMERA_HOME:
 			{
-				recallCameraPreset (CAMERA_PRESET_1)
-			}
-			case BTN_CAMERA_PRESET_2:
-			{
-				recallCameraPreset (CAMERA_PRESET_2)
-			}
-			case BTN_CAMERA_PRESET_3:
-			{
-				recallCameraPreset (CAMERA_PRESET_3)
+				irPulse (dvPtzCam, CAM1_HOME)
 			}
 		}
 	}
@@ -777,14 +778,14 @@ button_event[dvTpTableCamera,0]
 	{
 		switch (button.input.channel)
 		{
-			case BTN_CAMERA_FOCUS_NEAR:  agentUsbPtzWebCamFocusOff (dvPtzCam)
-			case BTN_CAMERA_FOCUS_FAR:   agentUsbPtzWebCamFocusOff (dvPtzCam)
-			case BTN_CAMERA_ZOOM_IN:     agentUsbPtzWebCamZoomOff (dvPtzCam)
-			case BTN_CAMERA_ZOOM_OUT:    agentUsbPtzWebCamZoomOff (dvPtzCam)
-			case BTN_CAMERA_PAN_LEFT:    agentUsbPtzWebCamPanOff (dvPtzCam)
-			case BTN_CAMERA_PAN_RIGHT:   agentUsbPtzWebCamPanOff (dvPtzCam)
-			case BTN_CAMERA_TILT_DOWN:   agentUsbPtzWebCamTiltOff (dvPtzCam)
-			case BTN_CAMERA_TILT_UP:     agentUsbPtzWebCamTiltOff (dvPtzCam)
+			case BTN_CAMERA_FOCUS_NEAR:  irOff (dvPtzCam, CAM1_FOCUS_NEAR)
+			case BTN_CAMERA_FOCUS_FAR:   irOff (dvPtzCam, CAM1_FOCUS_FAR)
+			case BTN_CAMERA_ZOOM_IN:     irOff (dvPtzCam, CAM1_ZOOM_FAST_TELE)
+			case BTN_CAMERA_ZOOM_OUT:    irOff (dvPtzCam, CAM1_ZOOM_FAST_WIDE)
+			case BTN_CAMERA_PAN_LEFT:    irOff (dvPtzCam, CAM1_REVERSE)
+			case BTN_CAMERA_PAN_RIGHT:   irOff (dvPtzCam, CAM1_FORWARD)
+			case BTN_CAMERA_TILT_DOWN:   irOff (dvPtzCam, CAM1_DOWN)
+			case BTN_CAMERA_TILT_UP:     irOff (dvPtzCam, CAM1_UP)
 		}
 	}
 }
