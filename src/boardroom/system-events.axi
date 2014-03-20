@@ -154,6 +154,9 @@ data_event [vdvDragAndDrop19]
 						dvxSwitchVideoOnly (dvDvxMain, idDragItem, dvDvxVidOutMonitorLeft.port)
 						
 						sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
+						
+						// set flag to indicate that system is in use
+						isSystemAvInUse = TRUE
 					}
 					
 					active (idDropArea == dvDvxVidOutMonitorRight.port):
@@ -163,6 +166,9 @@ data_event [vdvDragAndDrop19]
 						dvxSwitchVideoOnly (dvDvxMain, idDragItem, dvDvxVidOutMonitorRight.port)
 						
 						sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
+						
+						// set flag to indicate that system is in use
+						isSystemAvInUse = TRUE
 					}
 					
 					active (idDropArea == dvDvxVidOutMultiPreview.port):
@@ -1068,15 +1074,76 @@ data_event[dvTpTableMain]
 {
 	string:
 	{
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','data_event[dvTpTableMain] - string:'"
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','data.text = ',data.text"
+		
 		// start taking snapshots of each input as soon as the video preview popup closes
 		if (find_string(data.text, '@PPF-popup-video-preview',1) == 1)
 		{
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','else if(find_string(data.text, "@PPF-popup-video-preview",1) == 1)'"
 			// turn off the video being previewed flag
 			isVideoBeingPreviewed = FALSE
 			//startMultiPreviewSnapshots ()
 		}
+		else if( data.text == 'AWAKE' )	// panel just woke up
+		{
+			// this could have been caused by:
+			// - user triggering panels' motion sensor
+			// - user touching panels' touch overlay without triggering motion sensor somehow
+			// - user VNC'ing to the panel
+			// - program telling panel to wake up (i.e., if occ sensor triggers)
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','else if( data.text == "AWAKE" )'"
+			
+			if (isSystemAvInUse = FALSE)
+				// turn on the lights
+				lightsEnablePresetAllOn ()
+		}
+		else if( data.text == 'ASLEEP' )	// panel just went to sleep
+		{
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','else if( data.text == "ASLEEP" )'"
+		}
+		else if( data.text == 'STANDBY' )	// panel just went into standby
+		{
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','else if( data.text == "STANDBY" )'"
+		}
+		else if( data.text == 'SHUTDOWN' )	// panel just shut down
+		{
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','else if( data.text == "SHUTDOWN" )'"
+		}
+		else if( data.text == 'STARTUP' )	// panel just booted
+		{
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','else if( data.text == "STARTUP" )'"
+		}
 	}
 }
+
+
+button_event[dvTpTableMain,0]
+{
+	push:
+	{
+		switch (button.input.channel)
+		{
+			case BTN_MAIN_PRESENTATION:
+			{
+				channelOn (button.input.device, button.input.channel)
+			}
+			
+			case BTN_MAIN_VIDEO_CONFERENCE:
+			{
+				channelOn (button.input.device, button.input.channel)
+				
+				channelOff (dvTpTableDebug, 1)
+				sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
+				
+				dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInVcMain.port, dvDvxVidOutMonitorLeft.port)
+				dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInVcCamera.port, dvDvxVidOutMonitorRight.port)
+			}
+		}
+	}
+}
+
+
 
 
 level_event[dvTpTableLighting,BTN_LVL_LIGHTING_CONTROL]
