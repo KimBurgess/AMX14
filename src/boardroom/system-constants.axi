@@ -415,9 +415,7 @@ integer BTN_CAMERA_PAN_LEFT     = 5
 integer BTN_CAMERA_PAN_RIGHT    = 6
 integer BTN_CAMERA_FOCUS_NEAR   = 7
 integer BTN_CAMERA_FOCUS_FAR    = 8
-integer BTN_CAMERA_PRESET_1     = 11
-integer BTN_CAMERA_PRESET_2     = 12
-integer BTN_CAMERA_PRESET_3     = 13
+integer BTN_CAMERA_HOME         = 11
 
 
 // DXLink Control
@@ -614,6 +612,66 @@ integer CAMERA_PRESET_1 = 1
 integer CAMERA_PRESET_2 = 2
 integer CAMERA_PRESET_3 = 3
 
+
+/*
+ * --------------------
+ * Camera Function Codes
+ * --------------------
+ */
+
+/*
+ * --------------------
+ * Constant definitions
+ * --------------------
+ */
+
+CAM1_POWER            = 9
+CAM1_1_STD            = 11
+CAM1_2_REV            = 12
+CAM1_3                = 13
+CAM1_4                = 14
+CAM1_5                = 15
+CAM1_6                = 16
+CAM1_BACKLIGHT        = 43
+CAM1_ZOOM_SLOW_TELE   = 44
+CAM1_ZOOM_SLOW_WIDE   = 45
+CAM1_ZOOM_FAST_TELE   = 46
+CAM1_ZOOM_FAST_WIDE   = 47
+CAM1_AUTO_FOCUS       = 48
+CAM1_MANUAL_FOCUS     = 49
+CAM1_FOCUS_FAR        = 50
+CAM1_FOCUS_NEAR       = 51
+CAM1_MD_ONOFF         = 52
+CAM1_FRAME            = 53
+CAM1_DETECT           = 54
+CAM1_AT_ONOFF         = 55
+CAM1_OFFSET           = 56
+CAM1_ENTRY            = 57
+CAM1_CHASE            = 58
+CAM1_AE               = 59
+CAM1_AUTO_ZOOM        = 60
+CAM1_DATA_SCREEN      = 61
+CAM1_STARTSTOP        = 62
+CAM1_FRAME_DISPLAY    = 63
+CAM1_MENU             = 64
+CAM1_UP               = 65
+CAM1_DOWN             = 66
+CAM1_REVERSE          = 67
+CAM1_FORWARD          = 68
+CAM1_HOME             = 69
+CAM1_PANTILT_RESET    = 70
+CAM1_PRESET_1         = 71
+CAM1_PRESET_2         = 72
+CAM1_PRESET_3         = 73
+CAM1_PRESET_4         = 74
+CAM1_PRESET_5         = 75
+CAM1_PRESET_6         = 76
+CAM1_RESET_1          = 159
+CAM1_RESET_2          = 160
+CAM1_RESET_3          = 161
+CAM1_RESET_4          = 162
+CAM1_RESET_5          = 163
+CAM1_RESET_6          = 164 
 
 /*
  * --------------------
