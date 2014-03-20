@@ -19,14 +19,18 @@ program_name='system-functions'
 
 define_function showDragAndDropPopups (dev panel)
 {
+	send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::','showDragAndDropPopups (dev panel)'"
 	if (panel == dvTpTableMain)
 	{
 		stack_var integer i
 		
+		send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::'"
 		for (i=1; i<=DVX_MAX_VIDEO_INPUTS; i++)
 		{
-			if (dragAreas19[i].height and dragAreas19[i].width AND dragAreas19[i].left AND dragAreas19[i].top)
+			send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::i = ',itoa(i)"
+			if (dragAreas19[i].height and dragAreas19[i].width and dragAreas19[i].left and dragAreas19[i].top)
 			{
+				send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::if (true); i = ',itoa(i)"
 				moderoEnablePopup (panel, "'popup-draggable-source-',itoa(i)")
 			}
 		}
@@ -184,6 +188,8 @@ define_function tableInputDetected (dev dvTxVidIn)
 {
 	#warn '@BUG: amx-au-gc-boardroom-main'
 	
+	send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::','tableInputDetected (dev dvTxVidIn)'"
+	send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::','dvTxVidIn = ',itoa(dvTxVidIn.number),':',itoa(dvTxVidIn.port),':',itoa(dvTxVidIn.system)"
 	/*
 	 * --------------------
 	 * This code running as expected but the MFTX is reporting a valid signal twice when a new input is plugged in.
@@ -247,6 +253,7 @@ define_function tableInputDetected (dev dvTxVidIn)
 		moderoSetPage (dvTpTableMain, PAGE_NAME_MAIN_USER)
 		// show the source selection / volume control page
 		moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_SELECTION)
+		send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::'"
 		showDragAndDropPopups (dvTpTableMain)
 		
 		// set the flag to show that the AV system is now in use
