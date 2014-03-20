@@ -62,6 +62,8 @@ integer BTN_DROP_AREA_DESTINATION_MONITOR_RIGHT = 12
 // Main System
 integer BTN_MAIN_SHUT_DOWN  = 1
 integer BTN_MAIN_SPLASH_SCREEN = 2
+integer BTN_MAIN_PRESENTATION = 3
+integer BTN_MAIN_VIDEO_CONFERENCE = 4
 
 // Debug
 integer BTN_DEBUG_REBUILD_EVENT_TABLE   = 1
@@ -562,7 +564,7 @@ char LABELS_PDU_OUTLETS[][20]   =
  * Page and popup page names
  * --------------------
  */
- 
+
 char PAGE_NAME_SPLASH_SCREEN[]                  = 'page-spash-screen'
 char PAGE_NAME_MAIN_USER[]                      = 'page-main-user'
 char POPUP_NAME_VIDEO_PREVIEW[]                 = 'popup-video-preview'
