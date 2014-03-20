@@ -116,7 +116,7 @@
 <SalesOrder></SalesOrder>
 <PurchaseOrder></PurchaseOrder>
 <Comments></Comments>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>RMS Pod</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>RMS Pod</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -654,11 +654,11 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM30,115200,8,None,1,None</TransSerial>
 <TransModem></TransModem>
-<TransTCPIP>AMX14-ENOVA-DVX-3156-02:1319:1: ::</TransTCPIP>
+<TransTCPIP>192.168.4.53:1319:1: ::</TransTCPIP>
 <VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
 <VNMRestoreIPSettings>192.168.7.190:1319:1:AMX Australia - GC Office - Boardroom DVX-2100:administrator:p@55w0rd</VNMRestoreIPSettings>
 <VNMSystemID>1</VNMSystemID>
