@@ -53,6 +53,16 @@ data_event[dvTpDragAndDrop10]
 	}
 }
 
+button_event [dvTpTableDebug,1]
+{
+	push:
+	{
+		channelOff (dvTpTableDebug, 1)
+		moderoDisableButtonPushes (dvTpTableDebug, 2)
+		sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
+	}
+}
+
 data_event [vdvDragAndDrop19]
 {
 	online:
@@ -79,10 +89,11 @@ data_event [vdvDragAndDrop19]
 		{
 			case 'DRAG_ITEM_SELECTED-':
 			{
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',itoa(dvDvxVidOutMonitorLeft.port),',205,164,320,180'")
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',itoa(dvDvxVidOutMonitorRight.port),',1396,164,320,180'")
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',itoa(dvDvxVidOutMultiPreview.port),',771,164,379,183'")
+				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',itoa(dvDvxVidOutMonitorLeft.port),',',itoa(dropAreaMonitorLeft_left),',',itoa(dropAreaMonitorLeft_top),',',itoa(dropAreaMonitorLeft_width),',',itoa(dropAreaMonitorLeft_height)")
+				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',itoa(dvDvxVidOutMonitorRight.port),',',itoa(dropAreaMonitorRight_left),',',itoa(dropAreaMonitorRight_top),',',itoa(dropAreaMonitorRight_width),',',itoa(dropAreaMonitorRight_height)")
+				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',itoa(dvDvxVidOutMultiPreview.port),',',itoa(dropAreaPreviewVideo_left),',',itoa(dropAreaPreviewVideo_top),',',itoa(dropAreaPreviewVideo_width),',',itoa(dropAreaPreviewVideo_height)")
 				channelOn (dvTpTableDebug, 1)
+				moderoEnableButtonPushes (dvTpTableDebug, 2)
 			}
 			
 			case 'DRAG_ITEM_DESELECTED-':
@@ -99,7 +110,7 @@ data_event [vdvDragAndDrop19]
 				sendCommand (vdvDragAndDrop19, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMonitorRight.port)")
 				sendCommand (vdvDragAndDrop19, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMultiPreview.port)")
 				
-				channelOff (dvTpTableDebug, 1)
+				//channelOff (dvTpTableDebug, 1)	// maybe don't do this here
 			}
 			
 			case 'DRAG_ITEM_ENTER_DROP_AREA-': {}
@@ -128,6 +139,7 @@ data_event [vdvDragAndDrop19]
 					active (idDropArea == dvDvxVidOutMonitorLeft.port):
 					{
 						channelOff (dvTpTableDebug, 1)
+						
 						dvxSwitchVideoOnly (dvDvxMain, idDragItem, dvDvxVidOutMonitorLeft.port)
 						sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
 					}
@@ -517,6 +529,7 @@ button_event[dvTpTableAudio,0]
 	}
 }
 
+/*
 button_event[dvTpTableVideo,BTNS_VIDEO_MONITOR_LEFT_INPUT_SELECTION]
 {
 	hold[waitTimeVideoPreview]:
@@ -555,7 +568,9 @@ button_event[dvTpTableVideo,BTNS_VIDEO_MONITOR_LEFT_INPUT_SELECTION]
 		//isVideoBeingPreviewed = FALSE	// moved to data_event to capture video preview popup hiding
 	}
 }
+*/
 
+/*
 button_event[dvTpTableVideo,BTNS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION]
 {
 	hold[waitTimeVideoPreview]:
@@ -594,7 +609,9 @@ button_event[dvTpTableVideo,BTNS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION]
 		//isVideoBeingPreviewed = FALSE   // moved to data_event to capture video preview popup hiding
 	}
 }
+*/
 
+/*
 button_event[dvTpTableVideo,0]
 {
 	push:
@@ -651,6 +668,7 @@ button_event[dvTpTableVideo,0]
 		}
 	}
 }
+*/
 
 button_event[dvTpTableLighting,0]
 {
