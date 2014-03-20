@@ -234,6 +234,14 @@ define_function moderoNotifyButtonBitmapName (dev panel, integer btnAdrCde, inte
 	}
 }
 
+#define INCLUDE_DVX_NOTIFY_VIDEO_INPUT_NAME_CALLBACK
+define_function dvxNotifyVideoInputName (dev dvxVideoInput, char name[])
+{
+	// dvxVideoInput is the D:P:S of the video input port on the DVX switcher. The input number can be taken from dvxVideoInput.PORT
+	// name is the name of the video input
+	moderoSetButtonText (dvTpSnapshotPreview, btnAdrsVideoInputLabels[dvxVideoInput.port], MODERO_BUTTON_STATE_ALL, name)
+}
+
 
 // Listener includes go below function definitions (IMPORTANT!!!)
 #include 'amx-dvx-listener'
@@ -281,6 +289,7 @@ data_event[dvDvxSwitcher]
 	online:
 	{
 		dvxRequestVideoInputStatusAll (dvDvxSwitcher)
+		dvxRequestVideoInputNameAll (dvDvxSwitcher)
 	}
 }
 
@@ -324,6 +333,10 @@ data_event[dvTpSnapshotPreview]
 		
 		// Setup video settings for MPL
 		moderoSetMultiPreviewInputFormatAndResolution (data.device, MODERO_MULTI_PREVIEW_INPUT_FORMAT_HDMI, MODERO_MULTI_PREVIEW_INPUT_RESOLUTION_HDMI_720x480i30HZ)
+		
+		// Request Dvx Info
+		dvxRequestVideoInputStatusAll (dvDvxSwitcher)
+		dvxRequestVideoInputNameAll (dvDvxSwitcher)
 	}
 }
 
