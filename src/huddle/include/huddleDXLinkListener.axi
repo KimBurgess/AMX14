@@ -19,7 +19,18 @@ define_function dxlinkNotifyTxVideoInputStatusAnalog (dev dxlinkTxAnalogVideoInp
 {
 	if (dxlinkTxAnalogVideoInput == dvTx.NUMBER:DXLINK_PORT_VIDEO_INPUT_ANALOG:dvTx.SYSTEM)
 	{
-		handleSignalStatusEvent(SOURCE_VGA, signalStatus == DXLINK_SIGNAL_STATUS_VALID_SIGNAL);
+		local_var char hasSignal;
+
+		hasSignal = signalStatus == DXLINK_SIGNAL_STATUS_VALID_SIGNAL;
+
+		// When some devices are plugged in / unplugged it can cause a couple of
+		// signal status events in quick succession. This will buffer this and
+		// ensure we're not attempting to handle these while the device
+		// stabalises.
+		wait 5 'Analog signal status buffer'
+		{
+			handleSignalStatusEvent(SOURCE_VGA, hasSignal);
+		}
 	}
 }
 
@@ -27,7 +38,17 @@ define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoI
 {
 	if (dxlinkTxDigitalVideoInput == dvTx.NUMBER:DXLINK_PORT_VIDEO_INPUT_DIGITAL:dvTx.SYSTEM)
 	{
-		handleSignalStatusEvent(SOURCE_HDMI, signalStatus == DXLINK_SIGNAL_STATUS_VALID_SIGNAL);
+		local_var char hasSignal;
+
+		hasSignal = signalStatus == DXLINK_SIGNAL_STATUS_VALID_SIGNAL;
+
+		// As above, this will help ensure we're not attempting to deal with
+		// signal state changes as attached devices freak out during connect /
+		// disconnect.
+		wait 5 'Digital signal status buffer'
+		{
+			handleSignalStatusEvent(SOURCE_HDMI, hasSignal);
+		}
 	}
 }
 
