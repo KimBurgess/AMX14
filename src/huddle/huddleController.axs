@@ -50,8 +50,18 @@ define_function char[8] getInstanceId()
 	id = id * 31 + dvTx.number;
 	id = id * 31 + dcBtn.device.number;
 	id = id * 31 + dcBtn.device.number;
+	id = id * 31 + dvTp.number;
+	id = id * 31 + dvSchedulingTp.number;
 
 	return itohex(id);
+}
+
+/**
+ * Check if this huddle instance is running in extended mode (with UI).
+ */
+define_function char extendedModeActive()
+{
+	return deviceIsOnline(dvTp);
 }
 
 /**
@@ -60,6 +70,7 @@ define_function char[8] getInstanceId()
  */
 define_function handleBookingStart(RmsEventBookingResponse booking)
 {
+	log(AMX_DEBUG, 'Booking starting for huddle location');
 	setDisplayPower(true);
 	setActiveSource(SOURCE_ENZO);
 }
@@ -69,9 +80,31 @@ define_function handleBookingStart(RmsEventBookingResponse booking)
  */
 define_function handleBookingEnd(RmsEventBookingResponse booking)
 {
+	log(AMX_DEBUG, 'Booking ending for huddle location');
 	enzoSessionEnd(dvEnzo);
 	setDisplayPower(false);
 }
+
+/**
+ * Handle an enzo login
+ */
+define_function handleEnzoLoginEvent()
+{
+	log(AMX_DEBUG, 'Enzo login detected');
+}
+
+/**
+ * Handle Enzo post logout actions
+ */
+ define_function handleEnzoLogoutEvent()
+ {
+	log(AMX_DEBUG, 'Enzo logout detected');
+
+	if (extendedModeActive)
+	{
+
+	}
+ }
 
 /**
  * Sets the button feedback to display for the appropriate system state.

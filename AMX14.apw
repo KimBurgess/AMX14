@@ -736,6 +736,14 @@
 <FilePathName>lib\rms-sdk\includes\RmsEventListener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsDuetMonitorMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors-duet\RmsDuetMonitorMonitor.axs</FilePathName>
 <Comments></Comments>
@@ -812,8 +820,16 @@
 <FilePathName>src\huddle\include\huddleDXLinkListener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>huddleEnzoListener</Identifier>
+<FilePathName>src\huddle\include\huddleEnzoListener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>huddleOSDManager</Identifier>
 <FilePathName>src\huddle\include\huddleOSDManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleRmsListener</Identifier>
+<FilePathName>src\huddle\include\huddleRmsListener.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>huddleSourceManager</Identifier>
