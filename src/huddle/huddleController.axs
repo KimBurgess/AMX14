@@ -26,6 +26,7 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 #include 'huddleDXLinkListener';
 #include 'huddleControlPortsListener';
 #include 'huddleEnzoListener';
+#include 'huddleModeroListener';
 #include 'huddleRmsListener';
 
 
@@ -39,11 +40,18 @@ define_module
 
 define_variable
 
+constant char PAGE_MAIN[] = 'main';
+constant char PAGE_STANDBY[] = 'standby';
+
 constant char SOURCE_SUBPAGE_PREFEX[] = '[source]';
 
 constant integer BTN_SOURCE_SELECT[] = {1, 2, 3};
 
 constant integer BTN_SOURCES_SUBPAGE_VIEW = 10;
+
+constant integer BTN_END_SESSION = 13;
+
+volatile char sessionActive;
 
 
 /**
@@ -76,14 +84,47 @@ define_function char extendedModeActive()
 }
 
 /**
+ * Starts up the huddle space.
+ */
+define_function startSession()
+{
+	log(AMX_INFO, 'Starting huddle session');
+
+	sessionActive = true;
+
+	setDisplayPower(true);
+	setActiveSource(SOURCE_ENZO);
+
+	// TODO start time and check that enzo is activated / source is present
+}
+
+/**
+ * End the current usage session.
+ */
+define_function endSession()
+{
+	log(AMX_INFO, 'Ending huddle session');
+
+	sessionActive = false;
+
+	setActiveSource(SOURCE_ENZO);
+	enzoSessionEnd(dvEnzo);
+	setDisplayPower(false);
+}
+
+define_function char isSessionActive()
+{
+	return sessionActive;
+}
+
+/**
  * Handle anything involved to turn on / prep the system at the start of a
  * reservation.
  */
 define_function handleBookingStart(RmsEventBookingResponse booking)
 {
 	log(AMX_DEBUG, 'Booking starting for huddle location');
-	setDisplayPower(true);
-	setActiveSource(SOURCE_ENZO);
+	startSession();
 }
 
 /**
@@ -92,8 +133,7 @@ define_function handleBookingStart(RmsEventBookingResponse booking)
 define_function handleBookingEnd(RmsEventBookingResponse booking)
 {
 	log(AMX_DEBUG, 'Booking ending for huddle location');
-	enzoSessionEnd(dvEnzo);
-	setDisplayPower(false);
+	endSession();
 }
 
 /**
@@ -258,7 +298,21 @@ button_event[dvTp, BTN_SOURCE_SELECT]
 {
 	push:
 	{
-		setActiveSource(get_last(BTN_SOURCE_SELECT));
+		stack_var char sourceId;
+		sourceId = get_last(BTN_SOURCE_SELECT)
+		setActiveSource(sourceId);
+		if (sourceId == SOURCE_ENZO && !getEnzoSessionActive())
+		{
+			enzoSessionStart(dvEnzo);
+		}
+	}
+}
+
+button_event[dvTp, BTN_END_SESSION]
+{
+	push:
+	{
+		endSession();
 	}
 }
 
