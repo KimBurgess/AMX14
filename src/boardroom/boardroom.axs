@@ -4,8 +4,6 @@ program_name='boardroom2'
 #include 'common'
 #include 'debug'
 
-#include 'agent-usb-ptz-web-cam'
-
 #include 'system-library-api'
 #include 'system-library-control'
 

@@ -202,9 +202,6 @@ persistent integer volumeDefault    = 30
 persistent integer opacityUnselected    = 102
 persistent integer opacitySelected      = 255
 
-persistent integer panSpeed     = CAMERA_MAX_PAN_SPEED
-persistent integer tiltSpeed    = CAMERA_MAX_TILT_SPEED
-
 /*persistent integer CAMERASpeedPresetTilt  = CAMERA_MIN_TILT_SPEED
 persistent integer CAMERASpeedPresetPan     = CAMERA_MIN_PAN_SPEED
 persistent integer CAMERASpeedPresetZoom    = CAMERA_MIN_ZOOM_SPEED
