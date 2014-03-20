@@ -179,16 +179,18 @@ dvDvxVidIn8     = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_8:SYS_MASTER
 dvDvxVidIn9     = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_9:SYS_MASTER
 dvDvxVidIn10    = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_10:SYS_MASTER
 // Named ports
-dvDvxVidInPc    = dvDvxVidIn5
 dvDvxVidInTx1   = dvDvxVidIn7
 dvDvxVidInTx2   = dvDvxVidIn8
 dvDvxVidInTx3   = dvDvxVidIn9
 dvDvxVidInTx4   = dvDvxVidIn10
 // Drag and drop names
+dvDvxVidInTableVga         = dvDvxVidIn1
+dvDvxVidInVcMain           = dvDvxVidIn3
+dvDvxVidInVcCamera         = dvDvxVidIn4
+dvDvxVidInPc               = dvDvxVidIn5
+dvDvxVidInTableDisplayPort = dvDvxVidIn6
 dvDvxVidInTableHdmi1       = dvDvxVidIn7
 dvDvxVidInTableHdmi2       = dvDvxVidIn8
-dvDvxVidInTableVga         = dvDvxVidIn1
-dvDvxVidInTableDisplayPort = dvDvxVidIn2
 
 // DVX Video Outputs
 dvDvxVidOut1    = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_OUT_1:SYS_MASTER
