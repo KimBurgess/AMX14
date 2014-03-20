@@ -20,7 +20,7 @@ constant char ENZO_CONTENT_SOURCE_USB = 3;
 
 constant char MAX_ENZO_CONTENT_SOURCES = 3;
 
-volatile enzoContentSource enzoSource[3];
+volatile enzoContentSource enzoSource[MAX_ENZO_CONTENT_SOURCES];
 
 
 define_function setEznoContentSourceCount(integer count)

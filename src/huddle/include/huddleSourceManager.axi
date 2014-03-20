@@ -9,6 +9,7 @@ define_type
 
 structure SignalSource
 {
+	char key[32];
 	char name[32];
 	char isAvailable;
 }
@@ -31,14 +32,34 @@ volatile char activeSource;
  * Set up system source information.
  */
 define_function configSources() {
+	setSourceKey(SOURCE_ENZO, 'enzo');
 	setSourceName(SOURCE_ENZO, 'Enzo');
 	setSourceAvailable(SOURCE_ENZO, true);
 
+	setSourceKey(SOURCE_HDMI, 'hdmi');
 	setSourceName(SOURCE_HDMI, 'HDMI input');
 	setSourceAvailable(SOURCE_HDMI, false);
 
+	setSourceKey(SOURCE_VGA, 'vga');
 	setSourceName(SOURCE_VGA, 'VGA input');
 	setSourceAvailable(SOURCE_VGA, false);
+}
+
+/**
+ * Get the key associated with a source.
+ */
+define_function char[32] getSourceKey(char sourceId)
+{
+	return source[sourceId].key;
+}
+
+/**
+ * Sets the key associated with a source ID.
+ */
+define_function setSourceKey(char sourceId, char key[32])
+{
+	log(AMX_DEBUG, "'Associating source key', itoa(sourceId), ' with ', key");
+	source[sourceId].key = key;
 }
 
 /**

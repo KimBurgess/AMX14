@@ -210,35 +210,44 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 	// based on what's available.
 	if (extendedModeActive())
 	{
-		stack_var char key[16];
-		switch (sourceId)
-		{
-			case SOURCE_HDMI: key = 'hdmi';
-			case SOURCE_VGA: key = 'vga';
-		}
-		setSourceLauncherVisbible(key, hasSignal);
+		setSourceLauncherVisbible(getSourceKey(sourceId), hasSignal);
 	}
 }
 
 /**
  * Handle a change to the availability state of one of our enzo content sources.
  */
-define_function handleEnzoSourceStatusEvent(char sourceId[], char isAvailable)
+define_function handleEnzoContentSourceStatusEvent(char key[], char isAvailable)
 {
-	log(AMX_DEBUG, "'Source status event for ', sourceId, ' [',
+	log(AMX_DEBUG, "'Enzo source status event for ', key, ' [',
 			bool_to_string(isAvailable), ']'");
 
 	// Dynamically update our enzo based content sources based on what's
 	// available.
 	if (extendedModeActive())
 	{
-		stack_var char key[16];
-		switch (sourceId)
-		{
-			case ENZO_CONTENT_SOURCE_DROPBOX: key = 'dropbox';
-			case ENZO_CONTENT_SOURCE_USB: key = 'usb';
-		}
 		setSourceLauncherVisbible(key, isAvailable);
+	}
+}
+
+
+define_event
+
+data_event[dvTp]
+{
+	online:
+	{
+		stack_var char i;
+
+		for (i = NUM_SOURCES; i; i--)
+		{
+			setSourceLauncherVisbible(getSourceKey(i), isSourceAvailable(i));
+		}
+
+		for (i = MAX_ENZO_CONTENT_SOURCES; i; i--)
+		{
+			setSourceLauncherVisbible(getEnzoContentSourceKey(i), isEnzoContentSourceAvailable(i));
+		}
 	}
 }
 

@@ -41,10 +41,10 @@ define_function enzoNotifyContentSourcesRecord(dev enzo, integer relativeIndex,
 			setEnzoContentSourceSourceId(absoluteIndex, id);
 			setEnzoContentSourceSourceName(absoluteIndex, name);
 			setEnzoContentSourceAvailable(absoluteIndex, isAvailable);
-			
+
 			if (isAvailable != previousAvailability)
 			{
-				handleEnzoSourceStatusEvent(id, isAvailable);
+				handleEnzoContentSourceStatusEvent(id, isAvailable);
 			}
 		}
 	}
