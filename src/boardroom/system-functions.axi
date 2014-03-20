@@ -19,6 +19,19 @@ program_name='system-functions'
 
 
 
+define_function initArea (_area area, integer left, integer top, integer width, integer height)
+{
+	area.left = left
+	area.top = top
+	area.width = width
+	area.height = height
+}
+
+define_function char[20] buildDragAndDropAreaString (_area area)
+{
+	return "itoa(area.left),',',itoa(area.top),',',itoa(area.width),',',itoa(area.height)"
+}
+
 /*
 define_function recallCameraPreset (integer cameraPreset)
 {

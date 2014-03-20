@@ -310,20 +310,12 @@ char popupNameVideoPreview[] = 'popup-video-preview'
 char imageFileNameNoVideo[] = 'icon-novideo.png'
 
 
-integer dropAreaMonitorLeft_left = 438
-integer dropAreaMonitorLeft_top = 164
-integer dropAreaMonitorLeft_width = 320
-integer dropAreaMonitorLeft_height = 180
+// drop areas
+_area dropAreas19[DVX_MAX_VIDEO_OUTPUTS]
 
-integer dropAreaMonitorRight_left = 1163
-integer dropAreaMonitorRight_top = 164
-integer dropAreaMonitorRight_width = 320
-integer dropAreaMonitorRight_height = 180
+// drag item areas
+_area dragAreas19[DVX_MAX_VIDEO_INPUTS]
 
-integer dropAreaPreviewVideo_left = 771
-integer dropAreaPreviewVideo_top = 164
-integer dropAreaPreviewVideo_width = 379
-integer dropAreaPreviewVideo_height = 180
 
 
 /*

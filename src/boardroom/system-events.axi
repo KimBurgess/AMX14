@@ -81,11 +81,11 @@ data_event [vdvDragAndDrop19]
 		
 		// Define drop items
 		//send_command vdvDragAndDrop, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',itoa(dvDvxVidIn1.port),',601,400,134,105'")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',itoa(dvDvxVidIn3.port),',747,400,134,105'")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',itoa(dvDvxVidIn4.port),',893,400,134,105'")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',itoa(dvDvxVidIn5.port),',1039,400,134,105'")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',itoa(dvDvxVidIn8.port),',1185,400,134,105'")
+		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropAreaString(dragAreas19[dvDvxVidIn1.port])")
+		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropAreaString(dragAreas19[dvDvxVidIn5.port])")
+		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropAreaString(dragAreas19[dvDvxVidIn6.port])")
+		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropAreaString(dragAreas19[dvDvxVidIn7.port])")
+		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropAreaString(dragAreas19[dvDvxVidIn8.port])")
 	}
 	
 	string:
@@ -98,10 +98,12 @@ data_event [vdvDragAndDrop19]
 		{
 			case 'DRAG_ITEM_SELECTED-':
 			{
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',itoa(dvDvxVidOutMonitorLeft.port),',',itoa(dropAreaMonitorLeft_left),',',itoa(dropAreaMonitorLeft_top),',',itoa(dropAreaMonitorLeft_width),',',itoa(dropAreaMonitorLeft_height)")
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',itoa(dvDvxVidOutMonitorRight.port),',',itoa(dropAreaMonitorRight_left),',',itoa(dropAreaMonitorRight_top),',',itoa(dropAreaMonitorRight_width),',',itoa(dropAreaMonitorRight_height)")
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',itoa(dvDvxVidOutMultiPreview.port),',',itoa(dropAreaPreviewVideo_left),',',itoa(dropAreaPreviewVideo_top),',',itoa(dropAreaPreviewVideo_width),',',itoa(dropAreaPreviewVideo_height)")
+				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropAreaString(dropAreas19[dvDvxVidOutMonitorLeft.port])")
+				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropAreaString(dropAreas19[dvDvxVidOutMonitorRight.port])")
+				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropAreaString(dropAreas19[dvDvxVidOutMultiPreview.port])")
+				
 				channelOn (dvTpTableDebug, 1)
+				
 				moderoEnableButtonPushes (dvTpTableDebug, 2)
 			}
 			
@@ -150,13 +152,16 @@ data_event [vdvDragAndDrop19]
 						channelOff (dvTpTableDebug, 1)
 						
 						dvxSwitchVideoOnly (dvDvxMain, idDragItem, dvDvxVidOutMonitorLeft.port)
+						
 						sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
 					}
 					
 					active (idDropArea == dvDvxVidOutMonitorRight.port):
 					{
 						channelOff (dvTpTableDebug, 1)
+						
 						dvxSwitchVideoOnly (dvDvxMain, idDragItem, dvDvxVidOutMonitorRight.port)
+						
 						sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
 					}
 					
