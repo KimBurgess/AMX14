@@ -1,0 +1,700 @@
+<HTML>
+
+<HEAD>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<TITLE>TPDesign4 Programmer's Report - Panel: AMX14 Signage Panels</TITLE>
+
+	<style>
+		<!--
+		/* Style Definitions */
+		BODY
+		{
+			BACKGROUND-COLOR: #ffffff;
+			COLOR: #000000;
+			FONT-FAMILY: verdana, arial, helvetica, sans-serif;
+			FONT-SIZE: 10pt;
+			FONT-STYLE: normal;
+			FONT-WEIGHT: normal
+		}
+		.Header1
+		{
+			BACKGROUND-COLOR: #ffffff;
+			COLOR: #000000;
+			FONT-FAMILY: verdana, arial, helvetica, sans-serif;
+			FONT-SIZE: 14pt;
+			FONT-STYLE: normal;
+			FONT-WEIGHT: bold
+		}
+		.Header2
+		{
+			BACKGROUND-COLOR: #ffffff;
+			COLOR: #000000;
+			FONT-FAMILY: verdana, arial, helvetica, sans-serif;
+			FONT-SIZE: 12pt;
+			FONT-STYLE: normal;
+			FONT-WEIGHT: normal
+		}
+		.NoData
+		{
+			BACKGROUND-COLOR: #ffffff;
+			COLOR: #000000;
+			FONT-FAMILY: verdana, arial, helvetica, sans-serif;
+			FONT-SIZE: 12pt;
+			FONT-STYLE: normal;
+			FONT-WEIGHT: bold
+		}
+		.SectionHeader
+		{
+			BACKGROUND-COLOR: #ffffff;
+			COLOR: #000000;
+			FONT-FAMILY: verdana, arial, helvetica, sans-serif;
+			FONT-SIZE: 12pt;
+			FONT-STYLE: normal;
+			FONT-WEIGHT: bold;
+			TEXT-DECORATION: underline
+		}
+		.TableFieldTitle
+		{
+			FONT-WEIGHT: bold;
+			FONT-SIZE: 14px;
+			COLOR: black;
+			FONT-FAMILY: Verdana, Arial, 'Arial Black', Tahoma;
+			HEIGHT: 16pt;
+			BACKGROUND-COLOR: #E0E0E0
+		}
+		TR
+		{
+			FONT-WEIGHT: normal;
+			FONT-SIZE: 12px;
+			COLOR: black;
+			FONT-FAMILY: Verdana, Arial, 'Arial Black', Tahoma;
+			HEIGHT: 14px
+		}
+		.TR_Highlight
+		{
+			FONT-WEIGHT: normal;
+			FONT-SIZE: 12px;
+			COLOR: black;
+			FONT-FAMILY: Verdana, Arial, 'Arial Black', Tahoma;
+			HEIGHT: 14px;
+			BACKGROUND-COLOR: #CCFFCC
+		}
+		.TD_SectionTitle
+		{
+			FONT-WEIGHT: normal;
+			FONT-SIZE: 12px;
+			COLOR: black;
+			FONT-FAMILY: Verdana, Arial, 'Arial Black', Tahoma;
+			HEIGHT: 14px;
+			BACKGROUND-COLOR: #CCFFFF
+		}
+		A.Hover:hover
+		{
+			COLOR: #ff0000;
+			FONT-SIZE: 10pt;
+			FONT-WEIGHT: bold;
+			TEXT-DECORATION: none
+		}
+		HR
+		{
+			COLOR: black;
+			BORDER-BOTTOM: gray groove;
+			HEIGHT: 3px
+		}
+		-->
+	</style>
+
+</HEAD>
+
+<BODY>
+
+	<SPAN CLASS="Header1">TPDesign4 Programmer's Report - Panel: AMX14 Signage Panels</SPAN><BR>
+
+	<SPAN CLASS="Header2">Thursday, March 20, 2014 01:07 PM</SPAN><BR><BR><BR>
+
+	<SPAN CLASS="SectionHeader">Report Topics</SPAN><BR>
+
+	&nbsp;&nbsp;&nbsp; <A HREF="#FontUtilization">Fonts</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#ImageUtilization">Images in the Panel File</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#DynamicImageUtilization">Dynamic Images in the Panel File</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#SoundUtilization">Sounds in the Panel File</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#SensorUtilization">Sensors in the Panel File</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#IRUtilization">IR Port Assignments</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#FunctionCodeUtilization">Function Codes</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#CommandStringUtilization">Command Strings</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#StringOutputUtilization">String Outputs</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#ListBoxDataUtilization">List Box Data</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#ListTablesDataUtilization">List Table Data</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#SubPageViewSets">Sub-Page Sets</A><BR>
+	&nbsp;&nbsp;&nbsp; <A HREF="#SubPageViewButtons">Sub-Page View Buttons</A><BR>
+
+	<BR>
+
+	<!--Report starts here-->
+
+	<HR>
+
+	<A NAME="FontUtilization"></A><SPAN CLASS="SectionHeader"><CENTER>Fonts</CENTER></SPAN><BR>
+
+	<DIV ALIGN="CENTER">
+		<TABLE BORDER="1" WIDTH="500" CELLSPACING="0" CELLPADDING="0">
+			<TR CLASS=TableFieldTitle>
+				<TD>&nbsp;Font ID</TD>
+				<TD>&nbsp;Font Name</TD>
+				<TD>&nbsp;Size</TD>
+				<TD>&nbsp;File Size</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;1</TD>
+				<TD>&nbsp;Courier New</TD>
+				<TD>&nbsp;9</TD>
+				<TD>&nbsp;693.0 KB</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;2</TD>
+				<TD>&nbsp;Courier New</TD>
+				<TD>&nbsp;12</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;3</TD>
+				<TD>&nbsp;Courier New</TD>
+				<TD>&nbsp;18</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;4</TD>
+				<TD>&nbsp;Courier New</TD>
+				<TD>&nbsp;26</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;5</TD>
+				<TD>&nbsp;Courier New</TD>
+				<TD>&nbsp;32</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;6</TD>
+				<TD>&nbsp;Courier New</TD>
+				<TD>&nbsp;18</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;7</TD>
+				<TD>&nbsp;Courier New</TD>
+				<TD>&nbsp;26</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;8</TD>
+				<TD>&nbsp;Courier New</TD>
+				<TD>&nbsp;34</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;9</TD>
+				<TD>&nbsp;AMX Bold</TD>
+				<TD>&nbsp;14</TD>
+				<TD>&nbsp;13.4 KB</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;10</TD>
+				<TD>&nbsp;AMX Bold</TD>
+				<TD>&nbsp;20</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;11</TD>
+				<TD>&nbsp;AMX Bold</TD>
+				<TD>&nbsp;36</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;12</TD>
+				<TD>&nbsp;Arial Bold</TD>
+				<TD>&nbsp;9</TD>
+				<TD>&nbsp;731.4 KB</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;13</TD>
+				<TD>&nbsp;Arial Bold</TD>
+				<TD>&nbsp;12</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;14</TD>
+				<TD>&nbsp;Arial Bold</TD>
+				<TD>&nbsp;14</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;15</TD>
+				<TD>&nbsp;Arial Bold</TD>
+				<TD>&nbsp;16</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;16</TD>
+				<TD>&nbsp;Arial Bold</TD>
+				<TD>&nbsp;18</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;17</TD>
+				<TD>&nbsp;Arial Bold</TD>
+				<TD>&nbsp;20</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;18</TD>
+				<TD>&nbsp;Arial</TD>
+				<TD>&nbsp;8</TD>
+				<TD>&nbsp;760.3 KB</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;19</TD>
+				<TD>&nbsp;Arial</TD>
+				<TD>&nbsp;9</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;20</TD>
+				<TD>&nbsp;Arial</TD>
+				<TD>&nbsp;10</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;21</TD>
+				<TD>&nbsp;Arial</TD>
+				<TD>&nbsp;12</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;22</TD>
+				<TD>&nbsp;Arial</TD>
+				<TD>&nbsp;14</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;23</TD>
+				<TD>&nbsp;Arial</TD>
+				<TD>&nbsp;16</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;24</TD>
+				<TD>&nbsp;Arial</TD>
+				<TD>&nbsp;18</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;25</TD>
+				<TD>&nbsp;Arial</TD>
+				<TD>&nbsp;20</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;26</TD>
+				<TD>&nbsp;Arial</TD>
+				<TD>&nbsp;24</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;27</TD>
+				<TD>&nbsp;Arial</TD>
+				<TD>&nbsp;36</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;28</TD>
+				<TD>&nbsp;Arial Bold</TD>
+				<TD>&nbsp;10</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;29</TD>
+				<TD>&nbsp;Arial Bold</TD>
+				<TD>&nbsp;8</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;30</TD>
+				<TD>&nbsp;AMX Bold</TD>
+				<TD>&nbsp;8</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;31</TD>
+				<TD>&nbsp;Arial</TD>
+				<TD>&nbsp;5</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;32</TD>
+				<TD>&nbsp;ProximaNova-Regular</TD>
+				<TD>&nbsp;8</TD>
+				<TD>&nbsp;88.0 KB</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;34</TD>
+				<TD>&nbsp;ProximaNova-Regular</TD>
+				<TD>&nbsp;72</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;36</TD>
+				<TD>&nbsp;ProximaNova-Regular</TD>
+				<TD>&nbsp;26</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;37</TD>
+				<TD>&nbsp;ProximaNova-Regular</TD>
+				<TD>&nbsp;20</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;38</TD>
+				<TD>&nbsp;ProximaNova-Regular</TD>
+				<TD>&nbsp;30</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+		</TABLE>
+
+		<BR>
+		<SPAN CLASS="Header2">Total number of fonts entries utilized:&nbsp;36</SPAN>
+	</DIV>
+
+		<BR>
+		<SPAN CLASS="Header2"><CENTER>Total number of unique fonts utilized:&nbsp;5</CENTER></SPAN>
+	</DIV>
+
+		<BR>
+		<SPAN CLASS="Header2"><CENTER>Total size of all fonts:&nbsp;2.2 MB<CENTER></SPAN>
+	</DIV>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="ImageUtilization"></A><SPAN CLASS="SectionHeader"><CENTER>Images</CENTER></SPAN><BR>
+
+	<DIV ALIGN="CENTER">
+		<TABLE BORDER="1" WIDTH="500" CELLSPACING="0" CELLPADDING="0">
+			<TR CLASS=TableFieldTitle>
+				<TD>&nbsp;Image Name</TD>
+				<TD>&nbsp;Resolution</TD>
+				<TD>&nbsp;Size</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;AMX Boardroom 1280x1024.jpg</TD>
+				<TD>&nbsp;1280 x 1024</TD>
+				<TD>&nbsp;673.3 KB</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;paul.png</TD>
+				<TD>&nbsp;80 x 80</TD>
+				<TD>&nbsp;13.0 KB</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;QRcode Content.png</TD>
+				<TD>&nbsp;200 x 200</TD>
+				<TD>&nbsp;2.0 KB</TD>
+			</TR>
+		</TABLE>
+
+		<BR>
+		<SPAN CLASS="Header2">Total number of images utilized:&nbsp;3</SPAN>
+	</DIV>
+
+		<BR>
+		<SPAN CLASS="Header2"><CENTER>Total size of all images:&nbsp;688.3 KB<CENTER></SPAN>
+	</DIV>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="DynamicImageUtilization"></A><SPAN CLASS="SectionHeader"><CENTER>Dynamic Images</CENTER></SPAN><BR>
+
+	<SPAN CLASS="NoData">No dynamic images were utilized.</SPAN><BR><BR>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="SoundUtilization"></A><SPAN CLASS="SectionHeader"><CENTER>Sounds</CENTER></SPAN><BR>
+
+	<SPAN CLASS="NoData">No sounds were utilized.</SPAN><BR><BR>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="SensorUtilization"></A><SPAN CLASS="SectionHeader"><CENTER>Sensor Codes</CENTER></SPAN><BR>
+
+	<DIV ALIGN="CENTER">
+		<TABLE BORDER="1" WIDTH="500" CELLSPACING="0" CELLPADDING="0">
+			<TR CLASS=TableFieldTitle>
+				<TD>&nbsp;Sensor Type</TD>
+				<TD>&nbsp;Channel Port:Code</TD>
+				<TD>&nbsp;Level Port:Code</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;Battery</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;Cradle</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;VoIP Cmd Port</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+		</TABLE>
+	</DIV>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="IRUtilization"></A><SPAN CLASS="SectionHeader"><CENTER>IR Port Assignments</CENTER></SPAN><BR>
+
+	<DIV ALIGN="CENTER">
+		<TABLE BORDER="1" WIDTH="500" CELLSPACING="0" CELLPADDING="0">
+			<TR CLASS=TableFieldTitle>
+				<TD>&nbsp;IR Type</TD>
+				<TD>&nbsp;Port Assigned</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;AMX 38KHz IR Emit</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;AMX 455KHz IR Emit</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;User IR 1</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;User IR 2</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;User IR 3</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;User IR 4</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;User IR 5</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;User IR 6</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;User IR 7</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;User IR 8</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+		</TABLE>
+	</DIV>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="FunctionCodeUtilization"></A><SPAN CLASS="SectionHeader"><CENTER>Function Codes</CENTER></SPAN><BR>
+
+	<DIV ALIGN="CENTER">
+		<TABLE BORDER="1" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+			<COL WIDTH=15%>
+			<COL WIDTH=15%>
+			<COL WIDTH=15%>
+			<COL WIDTH=15%>
+			<COL WIDTH=15%>
+			<COL WIDTH=*>
+			<TR CLASS=TableFieldTitle>
+				<TD>&nbsp;Page Name</TD>
+				<TD>&nbsp;Button Name</TD>
+				<TD>&nbsp;Channel Port:Code</TD>
+				<TD>&nbsp;Address Port:Code</TD>
+				<TD>&nbsp;Level Port:Code</TD>
+				<TD>&nbsp;Description</TD>
+			</TR>
+
+			<TR>
+				<TD COLSPAN="6" CLASS="TD_SectionTitle"><B>&nbsp;Page 1</B></TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;Presenters Name</TD>
+				<TD>&nbsp;1:3</TD>
+				<TD>&nbsp;1:3</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;Green Group</TD>
+				<TD>&nbsp;1:10</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;Group number</TD>
+				<TD>&nbsp;1:1</TD>
+				<TD>&nbsp;1:1</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;Session Info</TD>
+				<TD>&nbsp;1:2</TD>
+				<TD>&nbsp;1:2</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;Orange Group</TD>
+				<TD>&nbsp;1:11</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;Purple Group</TD>
+				<TD>&nbsp;1:12</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;Yellow Group</TD>
+				<TD>&nbsp;1:13</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;Violet Group</TD>
+				<TD>&nbsp;1:14</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;</TD>
+			</TR>
+		</TABLE>
+	</DIV>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="CommandStringUtilization"></A><SPAN CLASS="SectionHeader"><CENTER>Command Strings</CENTER></SPAN><BR>
+
+	<DIV ALIGN="CENTER">
+		<TABLE BORDER="1" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+			<COL WIDTH=15%>
+			<COL WIDTH=40%>
+			<COL WIDTH=*>
+			<TR CLASS=TableFieldTitle>
+				<TD>&nbsp;Page Name</TD>
+				<TD>&nbsp;Button Name</TD>
+				<TD>&nbsp;Port Number</TD>
+				<TD>&nbsp;Command Output</TD>
+			</TR>
+
+			<TR>
+				<TD COLSPAN="4" CLASS="TD_SectionTitle"><B>&nbsp;Page 1</B></TD>
+			</TR>
+			<TR CLASS=TR_Highlight>
+				<TD>&nbsp;</TD>
+				<TD>&nbsp;paul</TD>
+				<TD>&nbsp;Port 0</TD>
+				<TD>&nbsp;^UNI-3,0,004500720069006300200027007400680065002000760069006B0069006E006700270020004E00650069006C0073006F006E000A00530065006E0069006F0072002000500072006F00640075006300740020004D0061006E0061006700650072</TD>
+			</TR>
+		</TABLE>
+	</DIV>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="StringOutputUtilization"></A><SPAN CLASS="SectionHeader"><CENTER>String Outputs</CENTER></SPAN><BR>
+
+	<SPAN CLASS="NoData">No string outputs were utilized.</SPAN><BR><BR>
+
+		</TABLE>
+	</DIV>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="ListBoxDataUtilization"></A><SPAN CLASS="SectionHeader"><CENTER>List Box Data</CENTER></SPAN><BR>
+
+	<SPAN CLASS="NoData">No List Boxes were utilized.</SPAN><BR><BR>
+
+		</TABLE>
+	</DIV>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="ListTablesDataUtilization"></A><SPAN CLASS="SectionHeader"><CENTER>List Table Data</CENTER></SPAN><BR>
+
+	<SPAN CLASS="NoData">No List Table Data utilized.</SPAN><BR><BR>
+
+		</TABLE>
+	</DIV>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="SubPageViewSets"></A><SPAN CLASS="SectionHeader"><CENTER>Sub-Page Sets</CENTER></SPAN><BR>
+
+	<SPAN CLASS="NoData">No Sub-Page Sets were utilized.</SPAN><BR><BR>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<A NAME="SubPageViewButtons"></A><SPAN CLASS="SectionHeader"><CENTER>Sub-Page View Buttons</CENTER></SPAN><BR>
+
+	<SPAN CLASS="NoData">No Sub-Page View Buttons were utilized.</SPAN><BR><BR>
+
+	<BR>
+	<A HREF="#top">Top</A>
+	<HR>
+
+	<B>End of report</B>
+
+	<!-- Report ends here -->
+
+</BODY>
+
+</HTML>
+
