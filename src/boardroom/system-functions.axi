@@ -19,19 +19,19 @@ program_name='system-functions'
 
 define_function showDragAndDropPopups (dev panel)
 {
-	send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::','showDragAndDropPopups (dev panel)'"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','showDragAndDropPopups (dev panel)'"
 	if (panel == dvTpTableMain)
 	{
 		stack_var integer i
 		
-		send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::'"
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::'"
 		for (i=1; i<=DVX_MAX_VIDEO_INPUTS; i++)
 		{
-			send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::i = ',itoa(i)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::i = ',itoa(i)"
 			if (dragAreas19[i].height and dragAreas19[i].width and dragAreas19[i].left and dragAreas19[i].top)
 			{
-				send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::if (true); i = ',itoa(i)"
-				moderoEnablePopup (panel, "'popup-draggable-source-',itoa(i)")
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (true); i = ',itoa(i)"
+				moderoEnablePopup (panel, "'draggable-source-',itoa(i)")
 			}
 		}
 	}
@@ -188,8 +188,8 @@ define_function tableInputDetected (dev dvTxVidIn)
 {
 	#warn '@BUG: amx-au-gc-boardroom-main'
 	
-	send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::','tableInputDetected (dev dvTxVidIn)'"
-	send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::','dvTxVidIn = ',itoa(dvTxVidIn.number),':',itoa(dvTxVidIn.port),':',itoa(dvTxVidIn.system)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','tableInputDetected (dev dvTxVidIn)'"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','dvTxVidIn = ',itoa(dvTxVidIn.number),':',itoa(dvTxVidIn.port),':',itoa(dvTxVidIn.system)"
 	/*
 	 * --------------------
 	 * This code running as expected but the MFTX is reporting a valid signal twice when a new input is plugged in.
@@ -208,6 +208,9 @@ define_function tableInputDetected (dev dvTxVidIn)
 	 * not what I want to happen!
 	 * --------------------
 	 */
+	
+	
+	cancel_wait 'WAITING_TO_MAKE_SURE_ROOM_IS_EMPTY'
 	
 	if (!isSystemAvInUse)
 	{
@@ -246,14 +249,20 @@ define_function tableInputDetected (dev dvTxVidIn)
 		// set up a nice lighting atmosphere for viewing the video
 		lightsSetLevelWithFade (LIGHTING_ADDRESS_BOARDROOM, LIGHTING_LEVEL_40_PERCENT,5)
 		
+		// Set lights to "all on" mode as people have entered the room
+		lightsEnablePresetAllOn ()
+		
 		// turn on the left monitor
 		necMonitorSetPowerOn (vdvMonitorLeft)
+		
+		// wake up the touch panel
+		moderoWake (dvTpTableMain)
 		
 		// flip the panel to the main page
 		moderoSetPage (dvTpTableMain, PAGE_NAME_MAIN_USER)
 		// show the source selection / volume control page
 		moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_SELECTION)
-		send_string 0, "'DEBUG::',__FILE__,'::',__LINE__,'::'"
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::'"
 		showDragAndDropPopups (dvTpTableMain)
 		
 		// set the flag to show that the AV system is now in use
@@ -1168,6 +1177,8 @@ define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
 	// ioPort is the IO port.
 	// ioChanCde is the IO channel code.
 	
+	cancel_wait 'WAITING_TO_MAKE_SURE_ROOM_IS_EMPTY'
+	
 	if (ioPort == dvDvxIos)
 	{
 		switch (ioChanCde)
@@ -1204,26 +1215,30 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 		{
 			case IO_OCCUPANCY_SENSOR:
 			{
-				// room is now unoccupied (note: Will take 8 minutes minimum to trigger after person leaves room)
-				isRoomOccupied = FALSE
-				
-				// Set lights to "all off" mode as there have been no people in the room for at least 8 minutes
-				lightsEnablePresetAllOff ()
-				
-				// Flip the touch panel to the splash screen
-				moderoSetPage (dvTpTableMain, PAGE_NAME_SPLASH_SCREEN)
-				
-				// Send the panel to sleep
-				moderoSleep (dvTpTableMain)
-				
-				// Stop taking snapshots
-				//stopMultiPreviewSnapshots ()
-				
-				// shutdown the system if it was being used (i.e., someone just walked away without pressing the shutdown button on the panel)
-				if (isSystemAvInUse)
+				wait 100 'WAITING_TO_MAKE_SURE_ROOM_IS_EMPTY'
 				{
-					countTimesPeopleLeftWithoutShuttingDownSystem++
-					shutdownAvSystem ()
+				
+					// room is now unoccupied (note: Will take 8 minutes minimum to trigger after person leaves room)
+					isRoomOccupied = FALSE
+					
+					// Set lights to "all off" mode as there have been no people in the room for at least 8 minutes
+					lightsEnablePresetAllOff ()
+					
+					// Flip the touch panel to the splash screen
+					moderoSetPage (dvTpTableMain, PAGE_NAME_SPLASH_SCREEN)
+					
+					// Send the panel to sleep
+					moderoSleep (dvTpTableMain)
+					
+					// Stop taking snapshots
+					//stopMultiPreviewSnapshots ()
+					
+					// shutdown the system if it was being used (i.e., someone just walked away without pressing the shutdown button on the panel)
+					if (isSystemAvInUse)
+					{
+						countTimesPeopleLeftWithoutShuttingDownSystem++
+						shutdownAvSystem ()
+					}
 				}
 			}
 		}
