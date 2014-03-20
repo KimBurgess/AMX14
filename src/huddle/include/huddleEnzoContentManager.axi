@@ -73,5 +73,13 @@ define_function char isEnzoContentSourceAvailable(integer sourceId)
  */
 define_function setEnzoContentSourceAvailable(integer sourceId, char isAvailable)
 {
+	stack_var char previousAvailability;
+	previousAvailability = enzoSource[sourceId].isAvailable;
+
 	enzoSource[sourceId].isAvailable = isAvailable;
+
+	if (isAvailable != previousAvailability)
+	{
+		handleEnzoContentSourceStatusEvent(sourceId, isAvailable);
+	}
 }

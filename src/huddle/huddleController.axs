@@ -41,7 +41,9 @@ define_variable
 
 constant char SOURCE_SUBPAGE_PREFEX[] = '[source]';
 
-constant integer BTN_SOURCES = 1;
+constant integer BTN_SOURCE_SELECT[] = {1, 2, 3};
+
+constant integer BTN_SOURCES_SUBPAGE_VIEW = 10;
 
 
 /**
@@ -111,7 +113,7 @@ define_function handleEnzoLoginEvent()
 
 	if (extendedModeActive())
 	{
-	
+
 	}
  }
 
@@ -163,11 +165,11 @@ define_function setSourceLauncherVisbible(char key[], char isVisible)
 
 	if (isVisible)
 	{
-		moderoShowSubpage(dvTp, BTN_SOURCES, subpageName, 65535, 10);
+		moderoShowSubpage(dvTp, BTN_SOURCES_SUBPAGE_VIEW, subpageName, 1, 10);
 	}
 	else
 	{
-		moderoHideSubpage(dvTp, BTN_SOURCES, subpageName, 10);
+		moderoHideSubpage(dvTp, BTN_SOURCES_SUBPAGE_VIEW, subpageName, 10);
 	}
 }
 
@@ -217,16 +219,17 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 /**
  * Handle a change to the availability state of one of our enzo content sources.
  */
-define_function handleEnzoContentSourceStatusEvent(char key[], char isAvailable)
+define_function handleEnzoContentSourceStatusEvent(integer sourceId, char isAvailable)
 {
-	log(AMX_DEBUG, "'Enzo source status event for ', key, ' [',
+	log(AMX_DEBUG, "'Enzo source status event for ',
+			getEnzoContentSourceName(sourceId), ' [',
 			bool_to_string(isAvailable), ']'");
 
 	// Dynamically update our enzo based content sources based on what's
 	// available.
 	if (extendedModeActive())
 	{
-		setSourceLauncherVisbible(key, isAvailable);
+		setSourceLauncherVisbible(getEnzoContentSourceKey(sourceId), isAvailable);
 	}
 }
 
@@ -248,6 +251,14 @@ data_event[dvTp]
 		{
 			setSourceLauncherVisbible(getEnzoContentSourceKey(i), isEnzoContentSourceAvailable(i));
 		}
+	}
+}
+
+button_event[dvTp, BTN_SOURCE_SELECT]
+{
+	push:
+	{
+		setActiveSource(get_last(BTN_SOURCE_SELECT));
 	}
 }
 

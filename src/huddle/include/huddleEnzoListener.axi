@@ -35,17 +35,9 @@ define_function enzoNotifyContentSourcesRecord(dev enzo, integer relativeIndex,
 	{
 		if (absoluteIndex <= MAX_ENZO_CONTENT_SOURCES)
 		{
-			stack_var char previousAvailability;
-			previousAvailability = isEnzoContentSourceAvailable(absoluteIndex);
-			
 			setEnzoContentSourceSourceId(absoluteIndex, id);
 			setEnzoContentSourceSourceName(absoluteIndex, name);
 			setEnzoContentSourceAvailable(absoluteIndex, isAvailable);
-
-			if (isAvailable != previousAvailability)
-			{
-				handleEnzoContentSourceStatusEvent(id, isAvailable);
-			}
 		}
 	}
 }
@@ -56,7 +48,7 @@ define_function enzoNotifyContentSourceCount(dev enzo, integer relativeCount,
 	if (enzo == dvEnzo)
 	{
 		setEznoContentSourceCount(min_value(absoluteCount, MAX_ENZO_CONTENT_SOURCES));
-	
+
 		// At the time of writing the Enzo API does not provide a means to query
 		// ENzo session state. There is however an error returned if you
 		// attempt to query available sources whilst the device is not in an
@@ -79,6 +71,11 @@ define_function enzoNotifyContentError(dev enzo, char errorMessage[])
 		{
 			if (getEnzoSessionActive())
 			{
+				stack_var integer i;
+				for (i = MAX_ENZO_CONTENT_SOURCES; i; i--)
+				{
+					setEnzoContentSourceAvailable(i, false);
+				}
 				enzoIsInSession = false;
 				handleEnzoLogoutEvent();
 			}
