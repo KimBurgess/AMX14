@@ -116,7 +116,7 @@
 <SalesOrder></SalesOrder>
 <PurchaseOrder></PurchaseOrder>
 <Comments></Comments>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>RMS Pod</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>RMS Pod</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -173,7 +173,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>UI</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>UI</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -219,6 +219,12 @@
 <FilePathName>src\demo-presentations\ui\AMX14 Generic Swtching MXT1000.TP4</FilePathName>
 <Comments></Comments>
 <DeviceMap DevAddr="dvTP"><DevName>dvTP</DevName>
+</DeviceMap>
+</File>
+<File CompileType="None" Type="TP5"><Identifier>MXT-1901-Landscape-Demo</Identifier>
+<FilePathName>src\ui\MXT-1901-Landscape-Demo.TP5</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP9"><DevName>dvTP9</DevName>
 </DeviceMap>
 </File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>ui</Identifier>
@@ -359,7 +365,7 @@
 </DeviceMap>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Boardroom</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Boardroom</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -573,7 +579,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DGX32</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DGX32</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM30,115200,8,None,1,None</TransSerial>
 <TransModem></TransModem>
