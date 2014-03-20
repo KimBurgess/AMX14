@@ -100,7 +100,7 @@ define_function handleEnzoLoginEvent()
  {
 	log(AMX_DEBUG, 'Enzo logout detected');
 
-	if (extendedModeActive)
+	if (extendedModeActive())
 	{
 
 	}
@@ -166,6 +166,16 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 	}
 
 	updateButtonFeedbackState();
+}
+
+/**
+ * Handle a change to the availability state of one of our enzo content sources.
+ */
+define_function handleEnzoSourceStatusEvent(char sourceId[], char isAvailable)
+{
+	log(AMX_DEBUG, "'Source status event for ', sourceId, ' [',
+			bool_to_string(isAvailable), ']'");
+
 }
 
 
