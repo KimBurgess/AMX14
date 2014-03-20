@@ -340,7 +340,7 @@ define_function tableInputDetected (dev dvTxVidIn)
 	}
 }
 
-
+/*
 define_function loadVideoPreviewWindow (dev dvDvxVidInPort)
 {
 	// kill the multi-preview snapshot timeline
@@ -374,7 +374,7 @@ define_function loadVideoPreviewWindow (dev dvDvxVidInPort)
 		moderoSetButtonOpacity (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_OPAQUE)
 	}
 }
-
+*/
 
 
 /*
