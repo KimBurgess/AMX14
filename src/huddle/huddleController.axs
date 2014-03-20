@@ -12,6 +12,7 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 // Device control libraries
 #include 'amx-device-control';
 #include 'amx-enzo-control';
+#include 'amx-modero-control';
 
 // Rms guff
 #include 'RmsApi';
@@ -20,6 +21,7 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 // System components
 #include 'huddleDisplayManager';
 #include 'huddleSourceManager';
+#include 'huddleEnzoContentManager';
 #include 'huddleOSDManager';
 #include 'huddleDXLinkListener';
 #include 'huddleControlPortsListener';
@@ -33,6 +35,13 @@ define_module
 'RmsGenericNetLinxDeviceMonitor' mdlRmsEnzo(vdvRms, dvEnzo);
 'RmsTouchPanelMonitor' mdlRmsTp(vdvRms, dvTp);
 'RmsTouchPanelMonitor' mdlRmsSchedulingTp(vdvRms, dvSchedulingTp);
+
+
+define_variable
+
+constant char SOURCE_SUBPAGE_PREFEX[] = '[source]';
+
+constant integer BTN_SOURCES = 1;
 
 
 /**
@@ -102,7 +111,7 @@ define_function handleEnzoLoginEvent()
 
 	if (extendedModeActive())
 	{
-
+	
 	}
  }
 
@@ -141,6 +150,28 @@ define_function handlePushbuttonEvent(char isPushed)
 }
 
 /**
+ * Sets the visibility state of a source launcher on our touch panel.
+ */
+define_function setSourceLauncherVisbible(char key[], char isVisible)
+{
+	stack_var char subpageName[16];
+
+	log(AMX_DEBUG, "'setting source launcher for ', key, ' visibility ',
+			bool_to_string(isVisible)");
+
+	subpageName = "SOURCE_SUBPAGE_PREFEX,key";
+
+	if (isVisible)
+	{
+		moderoShowSubpage(dvTp, BTN_SOURCES, subpageName, 65535, 10);
+	}
+	else
+	{
+		moderoHideSubpage(dvTp, BTN_SOURCES, subpageName, 10);
+	}
+}
+
+/**
  * Handle an update to the detected signal status of one of our system sources.
  */
 define_function handleSignalStatusEvent(char sourceId, char hasSignal)
@@ -156,7 +187,15 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 	{
 		log(AMX_INFO, 'Signal lost from active source');
 
-		showOSD('disconnected');
+		// TODO change messaged based on if we have a UI available or not
+		/*if (extendedModeActive())
+		{
+			showOSD('disconnect-extended');
+		}
+		else
+		{*/
+			showOSD('disconnected');
+		//}
 
 		wait_until (isSourceAvailable(sourceId)) 'signal returned'
 		{
@@ -166,6 +205,19 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 	}
 
 	updateButtonFeedbackState();
+
+	// If our touch panel is present we'll dynamically update selectable sources
+	// based on what's available.
+	if (extendedModeActive())
+	{
+		stack_var char key[16];
+		switch (sourceId)
+		{
+			case SOURCE_HDMI: key = 'hdmi';
+			case SOURCE_VGA: key = 'vga';
+		}
+		setSourceLauncherVisbible(key, hasSignal);
+	}
 }
 
 /**
@@ -176,6 +228,18 @@ define_function handleEnzoSourceStatusEvent(char sourceId[], char isAvailable)
 	log(AMX_DEBUG, "'Source status event for ', sourceId, ' [',
 			bool_to_string(isAvailable), ']'");
 
+	// Dynamically update our enzo based content sources based on what's
+	// available.
+	if (extendedModeActive())
+	{
+		stack_var char key[16];
+		switch (sourceId)
+		{
+			case ENZO_CONTENT_SOURCE_DROPBOX: key = 'dropbox';
+			case ENZO_CONTENT_SOURCE_USB: key = 'usb';
+		}
+		setSourceLauncherVisbible(key, isAvailable);
+	}
 }
 
 

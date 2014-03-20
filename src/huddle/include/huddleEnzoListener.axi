@@ -14,27 +14,12 @@ volatile dev dvEnzoDevices[1];
 #include 'amx-enzo-listener';
 
 
-define_type
-
-structure enzoContentSource
-{
-	char id[64];
-	char name[64];
-	char isAvailable;
-}
-
-
 define_variable
-
-constant char ENZO_CONTENT_SOURCE_USB[] = 'usb';
-constant char ENZO_CONTENT_SOURCE_DROPBOX[] = 'dropbox';
 
 constant long ENZO_SOURCE_POLL_TL = 87809;
 constant long ENZO_POLL_INTERVAL[1] = {1000};
 
 volatile char enzoIsInSession;
-
-volatile enzoContentSource enzoSource[3];
 
 
 define_function char getEnzoSessionActive()
@@ -48,16 +33,16 @@ define_function enzoNotifyContentSourcesRecord(dev enzo, integer relativeIndex,
 {
 	if (enzo == dvEnzo)
 	{
-		if (absoluteIndex <= max_length_array(enzoSource))
+		if (absoluteIndex <= MAX_ENZO_CONTENT_SOURCES)
 		{
 			stack_var char previousAvailability;
-			previousAvailability = enzoSource[absoluteIndex].isAvailable;
-
-			enzoSource[absoluteIndex].id = id;
-			enzoSource[absoluteIndex].name = name;
-			enzoSource[absoluteIndex].isAvailable = isAvailable;
-
-			if (enzoSource[absoluteIndex].isAvailable != previousAvailability)
+			previousAvailability = isEnzoContentSourceAvailable(absoluteIndex);
+			
+			setEnzoContentSourceSourceId(absoluteIndex, id);
+			setEnzoContentSourceSourceName(absoluteIndex, name);
+			setEnzoContentSourceAvailable(absoluteIndex, isAvailable);
+			
+			if (isAvailable != previousAvailability)
 			{
 				handleEnzoSourceStatusEvent(id, isAvailable);
 			}
@@ -70,9 +55,8 @@ define_function enzoNotifyContentSourceCount(dev enzo, integer relativeCount,
 {
 	if (enzo == dvEnzo)
 	{
-		set_length_array(enzoSource,
-				min_value(absoluteCount, max_length_array(enzoSource)));
-
+		setEznoContentSourceCount(min_value(absoluteCount, MAX_ENZO_CONTENT_SOURCES));
+	
 		// At the time of writing the Enzo API does not provide a means to query
 		// ENzo session state. There is however an error returned if you
 		// attempt to query available sources whilst the device is not in an
@@ -113,15 +97,9 @@ timeline_event[ENZO_SOURCE_POLL_TL]
 data_event[dvEnzo]
 {
 
-	command:
-	{
+	command: {}
 
-	}
-
-	string:
-	{
-
-	}
+	string: {}
 
 	online:
 	{

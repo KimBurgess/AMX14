@@ -824,6 +824,14 @@
 <FilePathName>src\huddle\include\huddleEnzoListener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>huddleEnzoContentManager</Identifier>
+<FilePathName>src\huddle\include\huddleEnzoContentManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleEnzoListener</Identifier>
+<FilePathName>src\huddle\include\huddleEnzoListener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>huddleOSDManager</Identifier>
 <FilePathName>src\huddle\include\huddleOSDManager.axi</FilePathName>
 <Comments></Comments>
@@ -842,6 +850,14 @@
 </File>
 <File CompileType="None" Type="Include"><Identifier>util</Identifier>
 <FilePathName>src\huddle\include\util.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP5"><Identifier>huddle</Identifier>
+<FilePathName>src\huddle\ui\huddle.TP5</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>huddleScheduling</Identifier>
+<FilePathName>src\huddle\ui\huddleScheduling.TP4</FilePathName>
 <Comments></Comments>
 </File>
 </System>
