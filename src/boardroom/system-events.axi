@@ -81,11 +81,11 @@ data_event [vdvDragAndDrop19]
 		
 		// Define drop items
 		//send_command vdvDragAndDrop, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropAreaString(dragAreas19[dvDvxVidIn1.port])")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropAreaString(dragAreas19[dvDvxVidIn5.port])")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropAreaString(dragAreas19[dvDvxVidIn6.port])")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropAreaString(dragAreas19[dvDvxVidIn7.port])")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropAreaString(dragAreas19[dvDvxVidIn8.port])")
+		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidIn1.port, dragAreas19[dvDvxVidIn1.port])")
+		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidIn5.port, dragAreas19[dvDvxVidIn5.port])")
+		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidIn6.port, dragAreas19[dvDvxVidIn6.port])")
+		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidIn7.port, dragAreas19[dvDvxVidIn7.port])")
+		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidIn8.port, dragAreas19[dvDvxVidIn8.port])")
 	}
 	
 	string:
@@ -98,9 +98,9 @@ data_event [vdvDragAndDrop19]
 		{
 			case 'DRAG_ITEM_SELECTED-':
 			{
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropAreaString(dropAreas19[dvDvxVidOutMonitorLeft.port])")
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropAreaString(dropAreas19[dvDvxVidOutMonitorRight.port])")
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropAreaString(dropAreas19[dvDvxVidOutMultiPreview.port])")
+				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorLeft.port, dropAreas19[dvDvxVidOutMonitorLeft.port])")
+				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorRight.port, dropAreas19[dvDvxVidOutMonitorRight.port])")
+				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMultiPreview.port, dropAreas19[dvDvxVidOutMultiPreview.port])")
 				
 				channelOn (dvTpTableDebug, 1)
 				

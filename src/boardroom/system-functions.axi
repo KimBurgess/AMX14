@@ -27,9 +27,9 @@ define_function initArea (_area area, integer left, integer top, integer width, 
 	area.height = height
 }
 
-define_function char[20] buildDragAndDropAreaString (_area area)
+define_function char[20] buildDragAndDropParameterString (integer id, _area area)
 {
-	return "itoa(area.left),',',itoa(area.top),',',itoa(area.width),',',itoa(area.height)"
+	return "itoa(id),',',itoa(area.left),',',itoa(area.top),',',itoa(area.width),',',itoa(area.height)"
 }
 
 /*
