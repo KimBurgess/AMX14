@@ -27,7 +27,7 @@ define_function dxlinkNotifyTxVideoInputStatusAnalog (dev dxlinkTxAnalogVideoInp
 		// signal status events in quick succession. This will buffer this and
 		// ensure we're not attempting to handle these while the device
 		// stabalises.
-		wait 5 'Analog signal status buffer'
+		wait 8 'Analog signal status buffer'
 		{
 			handleSignalStatusEvent(SOURCE_VGA, hasSignal);
 		}
@@ -45,7 +45,7 @@ define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoI
 		// As above, this will help ensure we're not attempting to deal with
 		// signal state changes as attached devices freak out during connect /
 		// disconnect.
-		wait 5 'Digital signal status buffer'
+		wait 8 'Digital signal status buffer'
 		{
 			handleSignalStatusEvent(SOURCE_HDMI, hasSignal);
 		}
