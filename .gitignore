@@ -25,3 +25,4 @@
 !/schematics/*.pdf
 *.doc
 !/module/docs/*.doc
+/module/drag-and-drop.tko
