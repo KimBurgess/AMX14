@@ -166,7 +166,7 @@ define_function loadVideoPreviewWindow (dev dvDvxVidInPort)
 	
 	moderoDisableButtonFeedback (dvTpSnapshotPreview, btnLoadingBarMultiState)    // reset the loading progress bar
 	
-	//moderoSetButtonOpacity (dvTpSnapshotPreview, btnAdrVideoPreviewWindow, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_INVISIBLE)
+	moderoSetButtonOpacity (dvTpSnapshotPreview, btnAdrVideoPreviewWindow, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_INVISIBLE)
 	moderoSetButtonShow (dvTpSnapshotPreview, btnAdrVideoPreviewLoadingMessage)
 	moderoSetButtonShow (dvTpSnapshotPreview, btnAdrLoadingBar)
 	
@@ -181,8 +181,8 @@ define_function loadVideoPreviewWindow (dev dvDvxVidInPort)
 	{
 		moderoSetButtonHide (dvTpSnapshotPreview, btnAdrVideoPreviewLoadingMessage)
 		moderoSetButtonHide (dvTpSnapshotPreview, btnAdrLoadingBar)
-		//moderoSetButtonOpacity (dvTpSnapshotPreview, btnAdrVideoPreviewWindow, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_OPAQUE)
-		moderoSetButtonShow (dvTpSnapshotPreview, btnAdrVideoPreviewWindow)
+		moderoSetButtonOpacity (dvTpSnapshotPreview, btnAdrVideoPreviewWindow, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_OPAQUE)
+		//moderoSetButtonShow (dvTpSnapshotPreview, btnAdrVideoPreviewWindow)
 	}
 }
 
@@ -447,8 +447,8 @@ data_event[virtual]
 					isVideoBeingPreviewed = FALSE
 					// delete video snapshot on the video preview button
 					moderoDeleteButtonVideoSnapshot (dvTpSnapshotPreview, btnAdrVideoPreviewWindow, MODERO_BUTTON_STATE_ALL)
-					//moderoSetButtonOpacity (dvTpSnapshotPreview, btnAdrVideoPreviewWindow, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_INVISIBLE)
-					moderoSetButtonHide (dvTpSnapshotPreview, btnAdrVideoPreviewWindow)
+					moderoSetButtonOpacity (dvTpSnapshotPreview, btnAdrVideoPreviewWindow, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_INVISIBLE)
+					//moderoSetButtonHide (dvTpSnapshotPreview, btnAdrVideoPreviewWindow)
 					startMultiPreviewSnapshots ()
 				}
 			}
