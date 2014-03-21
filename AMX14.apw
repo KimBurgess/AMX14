@@ -648,7 +648,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-2</Identifier>
 <SysID>53</SysID>
 <TransSerial>COM30,115200,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -711,7 +711,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-3</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-3</Identifier>
 <SysID>54</SysID>
 <TransSerial>COM8,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
