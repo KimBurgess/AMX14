@@ -491,6 +491,10 @@
 <FilePathName>module\Samsung_MD55C_Comm_dr1_0_0.jar</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Other"><Identifier>SamsungMD55C Interface</Identifier>
+<FilePathName>module\SamsungMD55C Interface.doc</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>touch-tracker</Identifier>
 <FilePathName>module\touch-tracker.axi</FilePathName>
 <Comments></Comments>
