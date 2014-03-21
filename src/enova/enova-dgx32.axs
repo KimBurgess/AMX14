@@ -143,6 +143,9 @@ define_function moderoNotifyButtonPush (dev panel, integer btnChanCde)
 				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_ENCODER, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
 				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_MONITOR_LOCAL, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
 				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_MONITOR_RECEIVER, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
+				
+				dvxSwitchVideoOnly (dvDvxSwitcher1, 9, 1)
+				dvxSwitchVideoOnly (dvDvxSwitcher2, 9, 1)
 			}
 		}
 	}
@@ -151,21 +154,6 @@ define_function moderoNotifyButtonPush (dev panel, integer btnChanCde)
 
 
 define_event
-
-button_event[dvTpMain,0]
-{
-	push:
-	{
-		switch (button.input.channel)
-		{
-			case BTN_RESET_DEMO:
-			{
-				dvxSwitchVideoOnly (dvDvxSwitcher1, 9, 1)
-				dvxSwitchVideoOnly (dvDvxSwitcher2, 9, 1)
-			}
-		}
-	}
-}
 
 
 data_event [dvDxlfMftxUsb]
@@ -207,18 +195,42 @@ data_event [dvTpMain]
 		moderoRequestButtonBitmapName (dvTpMain, BTN_SOURCE_LAPTOP, MODERO_BUTTON_STATE_OFF)
 		moderoRequestButtonBitmapName (dvTpMain, BTN_SOURCE_SIGNAGE_REMOVABLE, MODERO_BUTTON_STATE_OFF)
 		
+		//hide all popups
+		moderoDisableAllPopups (dvTpMain)
+		
 		// reset popups
-		moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
 		moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE)
-		
-		moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_BLURAY)
 		moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_BLURAY)
-		
-		moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_LAPTOP)
 		moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_LAPTOP)
-		
-		moderoDisablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE_REMOVABLE)
 		moderoEnablePopup (dvTpMain, POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE_REMOVABLE)
+		
+		// enable page tracking
+		moderoEnablePageTracking (dvTpMain)
+	}
+	string:
+	{
+		select
+		{
+			active (find_string(data.text,'@PPN-reset-demo',1) == 1):
+			{
+				// Delete drag items
+				//send_command touchTracker, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
+				sendCommand (touchTracker, "'DELETE_DRAG_ITEM-',itoa(DGX_INPUT_BLURAY)")
+				sendCommand (touchTracker, "'DELETE_DRAG_ITEM-',itoa(DGX_INPUT_SIGNAGE)")
+				sendCommand (touchTracker, "'DELETE_DRAG_ITEM-',itoa(DGX_INPUT_SIGNAGE_REMOVABLE)")
+				sendCommand (touchTracker, "'DELETE_DRAG_ITEM-',itoa(DGX_INPUT_LAPTOP)")
+			}
+			
+			active (find_string(data.text,"'@PPF-reset-demo'",1) == 1):
+			{
+				// Define drag items
+				//send_command touchTracker, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
+				sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_BLURAY),',480,641,160,100'")
+				sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_SIGNAGE),',281,641,160,100'")
+				sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_SIGNAGE_REMOVABLE),',878,641,160,100'")
+				sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_LAPTOP),',679,641,160,100'")
+			}
+		}
 	}
 }
 
@@ -229,14 +241,14 @@ data_event [touchTracker]
 	{
 		// Define drop areas
 		//send_command touchTracker, 'DEFINE_DROP_AREA-<id>,<left>,<top>,<width>,<height>'
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_DVX_1_FEED_1),',24,310,215,120'")
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_DVX_2_FEED_1),',261,185,215,120'")
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_MONITOR_FIBER_RX),',805,185,215,120'")
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_ENCODER),',533,98,215,120'")
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_MONITOR_LOCAL),',1041,310,215,120'")
-		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(0),',533,389,215,120'")	// all outputs
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_DVX_1_FEED_1),',24,367,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_DVX_2_FEED_1),',261,242,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_MONITOR_FIBER_RX),',805,242,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_ENCODER),',533,155,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(DGX_OUTPUT_MONITOR_LOCAL),',1041,367,215,120'")
+		sendCommand (touchTracker, "'DEFINE_DROP_AREA-',itoa(0),',533,446,215,120'")	// all outputs
 		
-		// Define drop items
+		// Define drag items
 		//send_command touchTracker, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
 		sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_BLURAY),',480,641,160,100'")
 		sendCommand (touchTracker, "'DEFINE_DRAG_ITEM-',itoa(DGX_INPUT_SIGNAGE),',281,641,160,100'")
