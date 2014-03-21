@@ -1240,6 +1240,12 @@ button_event[dvTpTableMain,0]
 			case BTN_MAIN_PRESENTATION:
 			{
 				channelOn (button.input.device, button.input.channel)
+				
+				dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
+				dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
+				
+				dvxSetVideoOutputBlankImage (dvDvxVidOutMonitorLeft, DVX_BLANK_IMAGE_LOGO_2)
+				dvxSetVideoOutputBlankImage (dvDvxVidOutMonitorRight, DVX_BLANK_IMAGE_LOGO_2)
 			}
 			
 			case BTN_MAIN_VIDEO_CONFERENCE:
