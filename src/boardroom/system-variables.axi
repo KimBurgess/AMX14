@@ -311,12 +311,21 @@ char popupNameVideoPreview[] = 'popup-video-preview'
 char imageFileNameNoVideo[] = 'icon-novideo.png'
 
 
+// Drag and drop areas for 19" panel
 // drop areas
 _area dropAreas19[DVX_MAX_VIDEO_OUTPUTS]
-
 // drag item areas
 _area dragAreas19[DVX_MAX_VIDEO_INPUTS]
 
+
+// Drag and drop areas for 10" panel
+// drop areas
+_area dropAreaLeftOrientationMonitorLeft
+_area dropAreaLeftOrientationMonitorRight
+_area dropAreaRightOrientationMonitorLeft
+_area dropAreaRightOrientationMonitorRight
+// drag item areas
+_area dragAreas10[DVX_MAX_VIDEO_INPUTS]
 
 
 /*

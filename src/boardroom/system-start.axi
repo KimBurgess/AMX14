@@ -35,8 +35,15 @@ initArea (dragAreas19[dvDvxVidIn7.port], 1039,400, 134, 105)
 initArea (dragAreas19[dvDvxVidIn8.port], 1185,400, 134, 105)
 
 
+initArea (dragAreas10[dvDvxVidInTableHdmi1.port], 20, 20 ,133, 200)
+initArea (dragAreas10[dvDvxVidInTableHdmi2.port], 647, 20, 133, 200)
+initArea (dragAreas10[dvDvxVidInTableVga.port], 20, 1060, 133, 200)
+initArea (dragAreas10[dvDvxVidInTableDisplayPort.port], 647,1060, 133, 200)
 
-
+initArea (dropAreaLeftOrientationMonitorLeft, 310, 303, 180, 320)
+initArea (dropAreaLeftOrientationMonitorRight, 310, 657, 180, 320)
+initArea (dropAreaRightOrientationMonitorLeft, 310, 657, 180, 320)
+initArea (dropAreaRightOrientationMonitorRight, 310, 303, 180, 320)
 
 
 
