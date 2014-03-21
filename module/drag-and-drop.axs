@@ -88,8 +88,8 @@ char STR_RESP_HEADER_DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME[] = 'DRAG_ITEM_NOT
  * Maxiumum values
  */
 
-integer MAX_DROP_AREAS = 50
-integer MAX_DRAG_AREAS = 50
+integer MAX_DROP_AREAS = 10
+integer MAX_DRAG_AREAS = 10
 integer MAX_AREA_NAME_LENGTH = 50
 
 long TIMELINE_ID_1 = 1
