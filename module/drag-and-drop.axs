@@ -1,5 +1,6 @@
 module_name='drag-and-drop' (dev virtual, dev panel)
 
+#include 'amx-device-control'
 #include 'amx-modero-control'
 #include 'touch-tracker'
 
@@ -24,34 +25,64 @@ char CMD_HEADER_DEFINE_DROP_AREA[] = 'DEFINE_DROP_AREA-'
 // Example:
 //    'DEFINE_DROP_AREA-1,254,625,160,118'
 
+char CMD_HEADER_DELETE_DRAG_ITEM[] = 'DELETE_DRAG_ITEM-'
+// CMD Syntax:
+//    'DELETE_DRAG_ITEM-<id>'
+// Example:
+//    'DELETE_DRAG_ITEM-1'
+char CMD_HEADER_DELETE_DROP_AREA[] = 'DELETE_DROP_AREA-'
+// CMD Syntax:
+//    'DELETE_DROP_AREA-<id>'
+// Example:
+//    'DELETE_DROP_AREA-1'
+
+char CMD_HEADER_STOP_TRACKING_TOUCH[] = 'STOP_TRACKING_TOUCH'
+// CMD Syntax:
+//    'STOP_TRACKING_TOUCH'
+// Example:
+//    'STOP_TRACKING_TOUCH'
+char CMD_HEADER_START_TRACKING_TOUCH[] = 'START_TRACKING_TOUCH'
+// CMD Syntax:
+//    'START_TRACKING_TOUCH'
+// Example:
+//    'START_TRACKING_TOUCH'
+
+
+
 /*
  * String Response Headers
  */
 char STR_RESP_HEADER_DRAG_ITEM_SELECTED[]             = 'DRAG_ITEM_SELECTED-'
-// CMD Syntax:
+// STR Syntax:
 //    'DRAG_ITEM_SELECTED-<id>'
 // Example:
 //    'DRAG_ITEM_SELECTED-1'
 char STR_RESP_HEADER_DRAG_ITEM_DESELECTED[]           = 'DRAG_ITEM_DESELECTED-'
-// CMD Syntax:
+// STR Syntax:
 //    'DRAG_ITEM_DESELECTED-<id>'
 // Example:
 //    'DRAG_ITEM_DESELECTED-1'
 char STR_RESP_HEADER_DRAG_ITEM_ENTER_DROP_AREA[]      = 'DRAG_ITEM_ENTER_DROP_AREA-'
-// CMD Syntax:
+// STR Syntax:
 //    'DRAG_ITEM_ENTER_DROP_AREA-<drag_item_id>,<drop_area_id>'
 // Example:
 //    'DRAG_ITEM_ENTER_DROP_AREA-1,1'
 char STR_RESP_HEADER_DRAG_ITEM_EXIT_DROP_AREA[]       = 'DRAG_ITEM_EXIT_DROP_AREA-'
-// CMD Syntax:
+// STR Syntax:
 //    'DRAG_ITEM_EXIT_DROP_AREA-<drag_item_id>,<drop_area_id>'
 // Example:
 //    'DRAG_ITEM_EXIT_DROP_AREA-1,1'
 char STR_RESP_HEADER_DRAG_ITEM_DROPPED_ON_DROP_AREA[] = 'DRAG_ITEM_DROPPED_ON_DROP_AREA-'
-// CMD Syntax:
+// STR Syntax:
 //    'DRAG_ITEM_DROPPED_ON_DROP_AREA-<drag_item_id>,<drop_area_id>'
 // Example:
 //    'DRAG_ITEM_DROPPED_ON_DROP_AREA-1,1'
+char STR_RESP_HEADER_DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME[] = 'DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME-'
+// STR Syntax:
+//    'DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME-<drag_item_id>'
+// Example:
+//    'DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME-1'
+
 
 /*
  * Maxiumum values
@@ -60,6 +91,10 @@ char STR_RESP_HEADER_DRAG_ITEM_DROPPED_ON_DROP_AREA[] = 'DRAG_ITEM_DROPPED_ON_DR
 integer MAX_DROP_AREAS = 50
 integer MAX_DRAG_AREAS = 50
 integer MAX_AREA_NAME_LENGTH = 50
+
+long TIMELINE_ID_1 = 1
+long TIMELINE_ID_2 = 2
+long TIMELINE_ID_3 = 3
 
 
 define_type
@@ -87,13 +122,20 @@ dev dvPanelsCoordinateTracking[1]
 _area dropAreas[MAX_DROP_AREAS]
 _area dragAreas[MAX_DRAG_AREAS]
 integer selectedDragArea[MAXIMUM_TOUCH_POINTS]
-char intersectStatus[MAX_DRAG_AREAS][MAX_DROP_AREAS] 
+char intersectStatus[MAX_DRAG_AREAS][MAX_DROP_AREAS]
+
+long timelineTimes[] = {1000}
+
+integer isTrackingTouch = true
+
+dev panelPort1
 
 
 define_start
 
 // Populate listener DEV array for amx-modero-listener
-dvPanelsCoordinateTracking[1] = panel
+panelPort1 = panel.number:1:panel.system
+dvPanelsCoordinateTracking[1] = panelPort1
 set_length_array (dvPanelsCoordinateTracking,1)
 rebuild_event()
 
@@ -144,6 +186,68 @@ define_function addDragArea (integer id, _bounds bounds)
 		updateArea (dragAreas[length_array(dragAreas)], id, bounds)
 		return
 	}
+}
+
+define_function removeDragArea (integer id)
+{
+	stack_var integer i
+	stack_var integer isMatchFound
+	
+	isMatchFound = FALSE
+	
+	for (i = 1; i <= length_array(dragAreas); i++)
+	{
+		if (dragAreas[i].id == id)
+		{
+			isMatchFound = TRUE
+		}
+		
+		if (isMatchFound)
+		{
+			resetArea (dragAreas[i])
+			if (i <= length_array(dragAreas))
+				updateArea (dragAreas[i],dragAreas[i+1].id,dragAreas[i+1].bounds)
+		}
+	}
+	
+	if (isMatchFound)
+		set_length_array (dragAreas, (length_array(dragAreas)-1))
+}
+
+
+define_function removeDropArea (integer id)
+{
+	stack_var integer i
+	stack_var integer isMatchFound
+	
+	isMatchFound = FALSE
+	
+	for (i = 1; i <= length_array(dropAreas); i++)
+	{
+		if (dropAreas[i].id == id)
+		{
+			isMatchFound = TRUE
+		}
+		
+		if (isMatchFound)
+		{
+			resetArea (dropAreas[i])
+			if (i <= length_array(dropAreas))
+				updateArea (dropAreas[i],dropAreas[i+1].id,dropAreas[i+1].bounds)
+		}
+	}
+	
+	if (isMatchFound)
+		set_length_array (dropAreas, (length_array(dropAreas)-1))
+}
+
+define_function resetArea (_area area)
+{
+	area.id = 0
+	area.bounds.height = 0
+	area.bounds.left = 0
+	area.bounds.top = 0
+	area.bounds.width = 0
 }
 
 
@@ -209,16 +313,23 @@ define_function moderoNotifyTouchCoordinatesPress (dev panel, integer nX, intege
 	stack_var integer idTouchPoint
 	stack_var integer i
 	
-	idTouchPoint = getNextAvailableTouchPointID ()
-	setTouchPointCoords (idTouchPoint, nX, nY)
-	setTouchPointActive (idTouchPoint)
-	
-	for (i = 1; i <= length_array(dragAreas); i++)
+	if (isTrackingTouch)
 	{
-		if (isCoordWithinBounds(nX, nY, dragAreas[i]))
+		idTouchPoint = getNextAvailableTouchPointID ()
+		setTouchPointCoords (idTouchPoint, nX, nY)
+		setTouchPointActive (idTouchPoint)
+		
+		for (i = 1; i <= length_array(dragAreas); i++)
 		{
-			selectedDragArea[idTouchPoint] = i
-			send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_SELECTED,itoa(dragAreas[i].id)"
+			if (isCoordWithinBounds(nX, nY, dragAreas[i]))
+			{
+				selectedDragArea[idTouchPoint] = i
+				sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_SELECTED,itoa(dragAreas[i].id)")
+				
+				if (!timeline_active(idTouchPoint))
+					timeline_create (idTouchPoint, timelineTimes, 1, TIMELINE_ABSOLUTE, TIMELINE_ONCE)
+				
+			}
 		}
 	}
 }
@@ -237,34 +348,45 @@ define_function moderoNotifyTouchCoordinatesMove (dev panel, integer nX, integer
 	stack_var Point p
 	stack_var integer i
 	
-	setPointCoords (p, nX, nY)
-	idTouchPoint =  getClosestTouchPoint(p)
-	
-	if (idTouchPoint)	// check to see that there is a touch point being tracked (mouse movements over VNC will trigger a move even though there has been no push
+	if (isTrackingTouch)
 	{
-		setTouchPointCoords (idTouchPoint, nX, nY)
+		setPointCoords (p, nX, nY)
+		idTouchPoint =  getClosestTouchPoint(p)
 		
-		// intersectStatus
-		// selectedDragArea[idTouchPoint] - contains the index of the selected drag area in the dragAreas array
-		
-		if (selectedDragArea[idTouchPoint])
+		if (idTouchPoint)	// check to see that there is a touch point being tracked (mouse movements over VNC will trigger a move even though there has been no push
 		{
-			for (i=1; i<=max_length_array(dropAreas); i++)
+			setTouchPointCoords (idTouchPoint, nX, nY)
+			
+			// intersectStatus
+			// selectedDragArea[idTouchPoint] - contains the index of the selected drag area in the dragAreas array
+			
+			if (selectedDragArea[idTouchPoint])
 			{
-				if( isCoordWithinBounds(nX,nY,dropAreas[i]) )
+				if (timeline_active(idTouchPoint))
 				{
-					if (!intersectStatus[selectedDragArea[idTouchPoint]][i])
+					if (!isCoordWithinBounds(nX,nY,dragAreas[selectedDragArea[idTouchPoint]]))
 					{
-						intersectStatus[selectedDragArea[idTouchPoint]][i] = true
-						send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_ENTER_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)"
+						timeline_kill (idTouchPoint)
 					}
 				}
-				else
+				
+				for (i=1; i<=max_length_array(dropAreas); i++)
 				{
-					if (intersectStatus[selectedDragArea[idTouchPoint]][i])
+					if (isCoordWithinBounds(nX,nY,dropAreas[i]) )
 					{
-						intersectStatus[selectedDragArea[idTouchPoint]][i] = false
-						send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_EXIT_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)"
+						if (!intersectStatus[selectedDragArea[idTouchPoint]][i])
+						{
+							intersectStatus[selectedDragArea[idTouchPoint]][i] = true
+							sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_ENTER_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)")
+						}
+					}
+					else
+					{
+						if (intersectStatus[selectedDragArea[idTouchPoint]][i])
+						{
+							intersectStatus[selectedDragArea[idTouchPoint]][i] = false
+							sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_EXIT_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)")
+						}
 					}
 				}
 			}
@@ -287,36 +409,41 @@ define_function moderoNotifyTouchCoordinatesRelease (dev panel, integer nX, inte
 	stack_var integer i
 	stack_var integer isDroppedOntoDragArea
 	
-	isDroppedOntoDragArea = false
-	
-	setPointCoords (p, nX, nY)
-	idTouchPoint =  getClosestTouchPoint(p)
-	setTouchPointCoords (idTouchPoint, nX, nY)
-	setTouchPointDeactive (idTouchPoint)
-	
-	
-	if (selectedDragArea[idTouchPoint])
+	if (isTrackingTouch)
 	{
-		for (i=1; i<= length_array(dropAreas); i++)
+		isDroppedOntoDragArea = false
+		
+		setPointCoords (p, nX, nY)
+		idTouchPoint =  getClosestTouchPoint(p)
+		setTouchPointCoords (idTouchPoint, nX, nY)
+		setTouchPointDeactive (idTouchPoint)
+		
+		if (selectedDragArea[idTouchPoint])
 		{
-			if (isCoordWithinBounds(nX, nY, dropAreas[i]))
+			if (timeline_active(idTouchPoint))
+				timeline_kill (idTouchPoint)
+			
+			for (i=1; i<= length_array(dropAreas); i++)
 			{
-				isDroppedOntoDragArea = true
-				send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_DROPPED_ON_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)"
+				if (isCoordWithinBounds(nX, nY, dropAreas[i]))
+				{
+					isDroppedOntoDragArea = true
+					sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_DROPPED_ON_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)")
+				}
 			}
+			
+			if (!isDroppedOntoDragArea)
+			{
+				sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_DESELECTED,itoa(dragAreas[selectedDragArea[idTouchPoint]].id)")
+			}
+			
+			for (i=1; i<=MAX_DROP_AREAS; i++)
+			{
+				intersectStatus[selectedDragArea[idTouchPoint]][i] = false
+			}
+			
+			selectedDragArea[idTouchPoint] = 0
 		}
-		
-		if (!isDroppedOntoDragArea)
-		{
-			send_string virtual, "STR_RESP_HEADER_DRAG_ITEM_DESELECTED,itoa(dragAreas[selectedDragArea[idTouchPoint]].id)"
-		}
-		
-		for (i=1; i<=MAX_DROP_AREAS; i++)
-		{
-			intersectStatus[selectedDragArea[idTouchPoint]][i] = false
-		}
-		
-		selectedDragArea[idTouchPoint] = 0
 	}
 }
 
@@ -345,37 +472,96 @@ data_event[virtual]
 		
 		header = remove_string(data.text,DELIM_HEADER,1)
 		
-		switch (header)
+		if (!length_array(header))
 		{
-			case CMD_HEADER_DEFINE_DRAG_ITEM:
+			switch (data.text)
 			{
-				// <id>,<left>,<top>,<width>,<height>
-				integer id
-				_bounds bounds
-				
-				id = atoi(remove_string (data.text,DELIM_PARAM,1))
-				bounds.left = atoi(remove_string (data.text,DELIM_PARAM,1))
-				bounds.top = atoi(remove_string (data.text,DELIM_PARAM,1))
-				bounds.width = atoi(remove_string (data.text,DELIM_PARAM,1))
-				bounds.height = atoi(data.text)
-				
-				addDragArea (id, bounds)
+				case CMD_HEADER_STOP_TRACKING_TOUCH:
+				{
+					stack_var integer i
+					
+					isTrackingTouch = false
+					
+					for (i=1; i<=MAXIMUM_TOUCH_POINTS; i++)
+					{
+						setTouchPointDeactive (i)
+					}
+				}
+				case CMD_HEADER_START_TRACKING_TOUCH:
+				{
+					isTrackingTouch = true
+				}
 			}
-			
-			case CMD_HEADER_DEFINE_DROP_AREA:
+		}
+		else
+		{
+			switch (header)
 			{
-				// <id>,<left>,<top>,<width>,<height>
-				integer id
-				_bounds bounds
+				case CMD_HEADER_DEFINE_DRAG_ITEM:
+				{
+					// <id>,<left>,<top>,<width>,<height>
+					integer id
+					_bounds bounds
+					
+					id = atoi(remove_string (data.text,DELIM_PARAM,1))
+					bounds.left = atoi(remove_string (data.text,DELIM_PARAM,1))
+					bounds.top = atoi(remove_string (data.text,DELIM_PARAM,1))
+					bounds.width = atoi(remove_string (data.text,DELIM_PARAM,1))
+					bounds.height = atoi(data.text)
+					
+					addDragArea (id, bounds)
+				}
 				
-				id = atoi(remove_string (data.text,DELIM_PARAM,1))
-				bounds.left = atoi(remove_string (data.text,DELIM_PARAM,1))
-				bounds.top = atoi(remove_string (data.text,DELIM_PARAM,1))
-				bounds.width = atoi(remove_string (data.text,DELIM_PARAM,1))
-				bounds.height = atoi(data.text)
+				case CMD_HEADER_DEFINE_DROP_AREA:
+				{
+					// <id>,<left>,<top>,<width>,<height>
+					integer id
+					_bounds bounds
+					
+					id = atoi(remove_string (data.text,DELIM_PARAM,1))
+					bounds.left = atoi(remove_string (data.text,DELIM_PARAM,1))
+					bounds.top = atoi(remove_string (data.text,DELIM_PARAM,1))
+					bounds.width = atoi(remove_string (data.text,DELIM_PARAM,1))
+					bounds.height = atoi(data.text)
+					
+					addDropArea (id, bounds)
+				}
 				
-				addDropArea (id, bounds)
+				case CMD_HEADER_DELETE_DRAG_ITEM:
+				{
+					// <id>
+					integer id
+					
+					id = atoi(remove_string (data.text,DELIM_PARAM,1))
+					
+					removeDragArea (id)
+				}
+				
+				case CMD_HEADER_DELETE_DROP_AREA:
+				{
+					// <id>
+					integer id
+					
+					id = atoi(remove_string (data.text,DELIM_PARAM,1))
+					
+					removeDropArea (id)
+				}
 			}
 		}
 	}
+}
+
+timeline_event[TIMELINE_ID_1]
+{
+	sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME,itoa(dragAreas[selectedDragArea[TIMELINE_ID_1]].id)")
+}
+
+timeline_event[TIMELINE_ID_2]
+{
+	sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME,itoa(dragAreas[selectedDragArea[TIMELINE_ID_2]].id)")
+}
+
+timeline_event[TIMELINE_ID_3]
+{
+	sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME,itoa(dragAreas[selectedDragArea[TIMELINE_ID_3]].id)")
 }

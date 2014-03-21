@@ -148,12 +148,151 @@ define_function moderoNotifyButtonPush (dev panel, integer btnChanCde)
 
 
 
+define_constant
+
+// CMD/STR Delimeters
+char DELIM_HEADER[] = '-'
+char DELIM_PARAM[] = ','
+
+// DGX inputs
+integer DGX_INPUT_SIGNAGE           = 1
+integer DGX_INPUT_BLURAY            = 2
+integer DGX_INPUT_LAPTOP            = 5
+integer DGX_INPUT_SIGNAGE_REMOVABLE = 9
+
+// DGX outputs
+integer DGX_OUTPUT_DVX_1_FEED_1     = 1
+integer DGX_OUTPUT_DVX_2_FEED_1     = 2
+integer DGX_OUTPUT_DVX_1_FEED_2     = 5
+integer DGX_OUTPUT_DVX_2_FEED_2     = 6
+integer DGX_OUTPUT_MONITOR_FIBER_RX = 9
+integer DGX_OUTPUT_ENCODER          = 13
+integer DGX_OUTPUT_MONITOR_LOCAL   = 14
+
+// Touch panel button channel codes
+integer BTN_RESET_DEMO = 1
+
+integer BTN_SOURCE_SIGNAGE           = 11
+integer BTN_SOURCE_BLURAY            = 12
+integer BTN_SOURCE_LAPTOP            = 13
+integer BTN_SOURCE_SIGNAGE_REMOVABLE = 14
+
+integer BTN_DESTINATION_ALL              = 20
+integer BTN_DESTINATION_DVX_1            = 21
+integer BTN_DESTINATION_DVX_2            = 22
+integer BTN_DESTINATION_MONITOR_RECEIVER = 23
+integer BTN_DESTINATION_ENCODER          = 24
+integer BTN_DESTINATION_MONITOR_LOCAL    = 25
+
+
+char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE[]            = 'draggable-source-signage'
+char POPUP_NAME_DRAGGABLE_SOURCE_BLURAY[]             = 'draggable-source-bluray'
+char POPUP_NAME_DRAGGABLE_SOURCE_LAPTOP[]             = 'draggable-source-laptop'
+char POPUP_NAME_DRAGGABLE_SOURCE_SIGNAGE_REMOVABLE[]  = 'draggable-source-signage-removable'
+
+
+
+
+define_variable
+
+// Modero Listener Dev Array for Listening to button events
+dev dvPanelsButtons[] = { dvTpMain }
+
+char ipAddressDxlfTx[15]
+char ipAddressDxlfRx[15]
+
+char draggableItemBitmapNames[DGX_32_MAX_VIDEO_INPUTS][30]
+
+
+
+define_module 'drag-and-drop' dragAndDropMod (touchTracker, dvTpMain)
+
+#define INCLUDE_MODERO_NOTIFY_BUTTON_BITMAP_NAME
+define_function moderoNotifyButtonBitmapName (dev panel, integer btnAdrCde, integer nbtnState, char bitmapName[])
+{
+	// panel is the touch panel
+	// btnAdrCde is the button address code
+	// btnState is the button state
+	// bitmapName is the name of the image assigned to the button
+	
+	switch (btnAdrCde)
+	{
+		case BTN_SOURCE_SIGNAGE:	        draggableItemBitmapNames[DGX_INPUT_SIGNAGE] = bitmapName
+		case BTN_SOURCE_BLURAY:	            draggableItemBitmapNames[DGX_INPUT_BLURAY] = bitmapName
+		case BTN_SOURCE_LAPTOP:	            draggableItemBitmapNames[DGX_INPUT_LAPTOP] = bitmapName
+		case BTN_SOURCE_SIGNAGE_REMOVABLE:	draggableItemBitmapNames[DGX_INPUT_SIGNAGE_REMOVABLE] = bitmapName
+	}
+}
+
+
+// Override Callback function from Moder Listener to track button pushes
+#define INCLUDE_MODERO_NOTIFY_BUTTON_PUSH
+define_function moderoNotifyButtonPush (dev panel, integer btnChanCde)
+{
+	// panel is the touch panel
+	// btnChanCde is the button channel code
+	
+	if (panel == dvTpMain)
+	{
+		switch (btnChanCde)
+		{
+			case BTN_RESET_DEMO:
+			{
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_DVX_1_FEED_1)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_DVX_1_FEED_2)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_DVX_2_FEED_1)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_DVX_2_FEED_2)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_ENCODER)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_MONITOR_LOCAL)
+				dgxEnableSwitch (dvDgxSwitcher, 0, DGX_INPUT_SIGNAGE, DGX_OUTPUT_MONITOR_FIBER_RX)
+				
+				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_DVX_1, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
+				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_DVX_2, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
+				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_ENCODER, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
+				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_MONITOR_LOCAL, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
+				moderoSetButtonBitmap (dvTpMain, BTN_DESTINATION_MONITOR_RECEIVER, MODERO_BUTTON_STATE_OFF, draggableItemBitmapNames[DGX_INPUT_SIGNAGE])
+			}
+		}
+	}
+}
+
+
+
+data_event [dvDxlfMftxUsb]
+{
+	online:
+	{
+		ipAddressDxlfTx = data.sourceip
+		dxlinkEnableTxUsbHidService (dvDxlfMftxUsb)
+		
+		if (device_id(dvDxlfRxUsb))
+			dxlinkSetRxUsbHidRoute (dvDxlfRxUsb,ipAddressDxlfTx)
+	}
+}
+
+
 
 define_event
 
 data_event [dvDxlfMftxUsb]
 {
 	online:
+	{
+		if (device_id(dvDxlfMftxUsb))
+			dxlinkSetRxUsbHidRoute (dvDxlfRxUsb,ipAddressDxlfTx)
+	}
+	command:
+	{
+	}
+}
+
+data_event [dvDgxSwitcher]
+data_event [dvDgxSwitcherDiagnotsics]
+{
+	online:
+	{
+	}
+	command:
 	{
 		ipAddressDxlfTx = data.sourceip
 		dxlinkEnableTxUsbHidService (dvDxlfMftxUsb)
@@ -169,9 +308,6 @@ data_event [dvDxlfRxUsb]
 	{
 		if (device_id(dvDxlfMftxUsb))
 			dxlinkSetRxUsbHidRoute (dvDxlfRxUsb,ipAddressDxlfTx)
-	}
-	command:
-	{
 	}
 }
 
@@ -418,4 +554,3 @@ data_event [touchTracker]
 #include 'amx-dgx-listener'
 #include 'amx-dxlink-listener'
 #include 'amx-modero-listener'
-

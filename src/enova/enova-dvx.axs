@@ -46,19 +46,20 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 	// we need to switch to the valid input 9. In the else if we test for the opposite.
 	// This logic will do nothing if inputs are both valid or if both inputs are not valid
 	
-	if ((dvx.videoInputs[dvDvxSwitcherVideoInput9.port].status = DVX_SIGNAL_STATUS_VALID_SIGNAL) and
-	   (dvx.videoInputs[dvDvxSwitcherVideoInput10.port].status =  DVX_SIGNAL_STATUS_NO_SIGNAL) (*and
-	   (dvx.switchStatusVideoOutputs[dvDvxSwitcherVideoOutput1.port] == dvDvxSwitcherVideoInput9.port)*))
+
+	if ((dvx.videoInputs[dvDvxSwitcherVideoInput9.port].status == DVX_SIGNAL_STATUS_VALID_SIGNAL) and
+	   (dvx.videoInputs[dvDvxSwitcherVideoInput10.port].status != DVX_SIGNAL_STATUS_VALID_SIGNAL) and
+	   (dvx.switchStatusVideoOutputs[dvDvxSwitcherVideoOutput1.port] == dvDvxSwitcherVideoInput10.port))
 	{
-		sendString (0,'lost input 10 switching to input 9')
+		sendString (0,'lost input 9 switching to input 10')
 		dvxSwitchVideoOnly (dvDvxSwitcherMain, dvDvxSwitcherVideoInput9.Port , dvDvxSwitcherVideoOutput1.Port)	
 	}
 	
-	else if ((dvx.videoInputs[dvDvxSwitcherVideoInput10.port].status = DVX_SIGNAL_STATUS_VALID_SIGNAL) and
-			(dvx.videoInputs[dvDvxSwitcherVideoInput9.port].status = DVX_SIGNAL_STATUS_NO_SIGNAL) (*and
-			(dvx.switchStatusVideoOutputs[dvDvxSwitcherVideoOutput1.port] == dvDvxSwitcherVideoInput10.port)*))
+	else if ((dvx.videoInputs[dvDvxSwitcherVideoInput10.port].status == DVX_SIGNAL_STATUS_VALID_SIGNAL) and
+			(dvx.videoInputs[dvDvxSwitcherVideoInput9.port].status != DVX_SIGNAL_STATUS_VALID_SIGNAL) and
+			(dvx.switchStatusVideoOutputs[dvDvxSwitcherVideoOutput1.port] == dvDvxSwitcherVideoInput9.port))
 	{
-		sendString (0,'lost input 9 switching to input 10')
+		sendString (0,'lost input 10 switching to input 9')
 		dvxSwitchVideoOnly (dvDvxSwitcherMain, dvDvxSwitcherVideoInput10.Port , dvDvxSwitcherVideoOutput1.Port)	
 	}
 	
