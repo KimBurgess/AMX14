@@ -96,36 +96,27 @@ define_function refreshSourceLauncherVisibility()
 	}
 }
 
-define_function setFileItemVisible(integer id, char isVisible)
+define_function refreshFileList()
 {
 	if (deviceIsOnline(dvTp))
 	{
-		stack_var char subpageName[16];
+		stack_var integer i;
 
-		subpageName = "SUBPAGE_FILE_PREFIX,itoa(id)";
+		moderoHideAllSubpages(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW);
 
-		if (isVisible)
+		moderoShowSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW,
+				"SUBPAGE_FILE_PREFIX,'spacer'", 1, 0);
+
+		for (i = getEnzoContentItemCount(); i; i--)
 		{
-			moderoShowSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW, subpageName, 1, 1);
+			stack_var char subpageName[16];
+
+			subpageName = "SUBPAGE_FILE_PREFIX,itoa(i)";
+			moderoShowSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW, subpageName, 2, 0);
+
+			moderoSetButtonText(dvTp, BTN_FILE_LIST_ITEM[i],
+					MODERO_BUTTON_STATE_ALL, getEnzoContentItemName(i));
 		}
-		else
-		{
-			moderoHideSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW, subpageName, 1);
-		}
-	}
-}
-
-define_function refreshFileList()
-{
-	stack_var integer i;
-
-	moderoHideAllSubpages(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW);
-
-	for (i = getEnzoContentItemCount(); i; i--)
-	{
-		setFileItemVisible(i, true);
-		moderoSetButtonText(dvTp, BTN_FILE_LIST_ITEM[i],
-				MODERO_BUTTON_STATE_ALL, getEnzoContentItemName(i));
 	}
 }
 
@@ -178,21 +169,18 @@ button_event[dvTp, BTN_END_SESSION]
 	}
 }
 
-button_event[dvTp, BTN_FILE_LIST_UP]
-{
-	release:
-	{
-		enzoSetContentPath(dvEnzo, ENZO_CONTENT_PATH_UP);
-	}
-}
-
 button_event[dvTp, BTN_FILE_LIST_ITEM]
 {
 	release:
 	{
 		stack_var integer index;
+		stack_var char contentType[64]
+
 		index = get_last(BTN_FILE_LIST_ITEM)
-		if (getEnzoContentItemType(index) == ENZO_CONTENT_TYPE_DIRECTORY)
+		contentType = getEnzoContentItemType(index);
+
+		if (contentType == ENZO_CONTENT_TYPE_DIRECTORY ||
+			contentType == ENZO_CONTENT_TYPE_PARENT)
 		{
 			enzoSetContentPath(dvEnzo, getEnzoContentItemPath(index));
 		}
