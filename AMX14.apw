@@ -82,7 +82,7 @@
                IRDB*)>
 
 <!ATTLIST File 
-       Type (Source | MasterSrc | Include | Module | AXB | IR | TPD | TP4 | KPD | TKO | AMX_IR_DB | IRN_DB | Other | DUET | TOK | TKN | KPB ) "Other"
+       Type (Source | MasterSrc | Include | Module | AXB | IR | TPD | TP4 | TP5 | XDD | KPD | TKO | AMX_IR_DB | IRN_DB | Other | DUET | TOK | TKN | KPB ) "Other"
        CompileType (Axcess | Netlinx | None) "None"> 
 
 <!ELEMENT FilePathName	(#PCDATA)>
@@ -661,7 +661,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DGX32</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DGX32</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM30,115200,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -691,8 +691,12 @@
 <FilePathName>lib\dgx\amx-dgx-control.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="None" Type="Include"><Identifier>amx-dgx-listener</Identifier>
-<FilePathName>lib\dgx\amx-dgx-listener.axi</FilePathName>
+<File CompileType="None" Type="Include"><Identifier>amx-dvx-api</Identifier>
+<FilePathName>lib\dvx\amx-dvx-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-dvx-control</Identifier>
+<FilePathName>lib\dvx\amx-dvx-control.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>amx-dxlink-api</Identifier>
@@ -703,20 +707,12 @@
 <FilePathName>lib\dxlink\amx-dxlink-control.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="None" Type="Include"><Identifier>amx-dxlink-listener</Identifier>
-<FilePathName>lib\dxlink\amx-dxlink-listener.axi</FilePathName>
-<Comments></Comments>
-</File>
 <File CompileType="None" Type="Include"><Identifier>amx-modero-api</Identifier>
 <FilePathName>lib\modero\amx-modero-api.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>amx-modero-control</Identifier>
 <FilePathName>lib\modero\amx-modero-control.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="Include"><Identifier>amx-modero-listener</Identifier>
-<FilePathName>lib\modero\amx-modero-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>drag-and-drop</Identifier>
@@ -775,10 +771,10 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-3</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-3</Identifier>
 <SysID>54</SysID>
 <TransSerial>COM8,38400,8,None,1,None</TransSerial>
-<TransModem>COM1,38400,8,None,1,None</TransModem>
+<TransModem></TransModem>
 <TransTCPIP>AMX14-ENOVA-DVX-3156-03:1319:1: ::</TransTCPIP>
 <VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
 <VNMRestoreIPSettings>0.0.0.0:1319:1</VNMRestoreIPSettings>
