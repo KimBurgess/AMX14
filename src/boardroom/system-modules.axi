@@ -15,6 +15,7 @@ program_name='system-modules'
 define_module
 
 'drag-and-drop' dragAndDropMod (vdvDragAndDrop10, dvTpDragAndDrop10)
+
 'drag-and-drop' dragAndDropMod (vdvDragAndDrop19, dvTpDragAndDrop19)
 
 
@@ -32,8 +33,9 @@ define_module
 								    popupNameVideoPreview,
 								    imageFileNameNoVideo)
 
+'Samsung_MD55C_Comm_dr1_0_0' commMonitorLeft(vdvMonitorLeft, dvMonitorLeft)
 
-
+'Samsung_MD55C_Comm_dr1_0_0' commMonitorLeft(vdvMonitorRight, dvMonitorRight)
 
 
 
