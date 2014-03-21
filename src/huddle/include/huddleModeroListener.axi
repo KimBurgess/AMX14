@@ -28,3 +28,5 @@ define_start
 
 dvPanelsNfc[1] = dvTp;
 set_length_array(dvPanelsNfc, 1);
+
+rebuild_event();

@@ -832,6 +832,10 @@
 <FilePathName>src\huddle\include\huddleEnzoListener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>huddleModeroListener</Identifier>
+<FilePathName>src\huddle\include\huddleModeroListener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>huddleOSDManager</Identifier>
 <FilePathName>src\huddle\include\huddleOSDManager.axi</FilePathName>
 <Comments></Comments>

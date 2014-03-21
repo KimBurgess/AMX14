@@ -12,7 +12,6 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 // Device control libraries
 #include 'amx-device-control';
 #include 'amx-enzo-control';
-#include 'amx-modero-control';
 
 // Rms guff
 #include 'RmsApi';
@@ -28,6 +27,7 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 #include 'huddleEnzoListener';
 #include 'huddleModeroListener';
 #include 'huddleRmsListener';
+#include 'huddleUIManager';
 
 
 define_module
@@ -39,17 +39,6 @@ define_module
 
 
 define_variable
-
-constant char PAGE_MAIN[] = 'main';
-constant char PAGE_STANDBY[] = 'standby';
-
-constant char SOURCE_SUBPAGE_PREFEX[] = '[source]';
-
-constant integer BTN_SOURCE_SELECT[] = {1, 2, 3};
-
-constant integer BTN_SOURCES_SUBPAGE_VIEW = 10;
-
-constant integer BTN_END_SESSION = 13;
 
 volatile char sessionActive;
 
@@ -76,14 +65,6 @@ define_function char[8] getInstanceId()
 }
 
 /**
- * Check if this huddle instance is running in extended mode (with UI).
- */
-define_function char extendedModeActive()
-{
-	return deviceIsOnline(dvTp);
-}
-
-/**
  * Starts up the huddle space.
  */
 define_function startSession()
@@ -91,6 +72,11 @@ define_function startSession()
 	log(AMX_INFO, 'Starting huddle session');
 
 	sessionActive = true;
+
+	hideAuthScreen();
+
+	// Re-anchor the enzo button so that it always appears front and center
+	setSourceLauncherVisbible(getSourceKey(SOURCE_ENZO), true);
 
 	setDisplayPower(true);
 	setActiveSource(SOURCE_ENZO);
@@ -106,6 +92,8 @@ define_function endSession()
 	log(AMX_INFO, 'Ending huddle session');
 
 	sessionActive = false;
+
+	showAuthScreen();
 
 	setActiveSource(SOURCE_ENZO);
 	enzoSessionEnd(dvEnzo);
@@ -151,10 +139,7 @@ define_function handleEnzoLoginEvent()
  {
 	log(AMX_DEBUG, 'Enzo logout detected');
 
-	if (extendedModeActive())
-	{
-
-	}
+	// TODO start timer for session end and room release
  }
 
 /**
@@ -188,28 +173,6 @@ define_function handlePushbuttonEvent(char isPushed)
 	else
 	{
 		cycleActiveSource();
-	}
-}
-
-/**
- * Sets the visibility state of a source launcher on our touch panel.
- */
-define_function setSourceLauncherVisbible(char key[], char isVisible)
-{
-	stack_var char subpageName[16];
-
-	log(AMX_DEBUG, "'setting source launcher for ', key, ' visibility ',
-			bool_to_string(isVisible)");
-
-	subpageName = "SOURCE_SUBPAGE_PREFEX,key";
-
-	if (isVisible)
-	{
-		moderoShowSubpage(dvTp, BTN_SOURCES_SUBPAGE_VIEW, subpageName, 1, 10);
-	}
-	else
-	{
-		moderoHideSubpage(dvTp, BTN_SOURCES_SUBPAGE_VIEW, subpageName, 10);
 	}
 }
 
@@ -248,12 +211,7 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 
 	updateButtonFeedbackState();
 
-	// If our touch panel is present we'll dynamically update selectable sources
-	// based on what's available.
-	if (extendedModeActive())
-	{
-		setSourceLauncherVisbible(getSourceKey(sourceId), hasSignal);
-	}
+	setSourceLauncherVisbible(getSourceKey(sourceId), hasSignal);
 }
 
 /**
@@ -265,55 +223,8 @@ define_function handleEnzoContentSourceStatusEvent(integer sourceId, char isAvai
 			getEnzoContentSourceName(sourceId), ' [',
 			bool_to_string(isAvailable), ']'");
 
-	// Dynamically update our enzo based content sources based on what's
-	// available.
-	if (extendedModeActive())
-	{
-		setSourceLauncherVisbible(getEnzoContentSourceKey(sourceId), isAvailable);
-	}
-}
 
-
-define_event
-
-data_event[dvTp]
-{
-	online:
-	{
-		stack_var char i;
-
-		for (i = NUM_SOURCES; i; i--)
-		{
-			setSourceLauncherVisbible(getSourceKey(i), isSourceAvailable(i));
-		}
-
-		for (i = MAX_ENZO_CONTENT_SOURCES; i; i--)
-		{
-			setSourceLauncherVisbible(getEnzoContentSourceKey(i), isEnzoContentSourceAvailable(i));
-		}
-	}
-}
-
-button_event[dvTp, BTN_SOURCE_SELECT]
-{
-	push:
-	{
-		stack_var char sourceId;
-		sourceId = get_last(BTN_SOURCE_SELECT)
-		setActiveSource(sourceId);
-		if (sourceId == SOURCE_ENZO && !getEnzoSessionActive())
-		{
-			enzoSessionStart(dvEnzo);
-		}
-	}
-}
-
-button_event[dvTp, BTN_END_SESSION]
-{
-	push:
-	{
-		endSession();
-	}
+	setSourceLauncherVisbible(getEnzoContentSourceKey(sourceId), isAvailable);
 }
 
 
