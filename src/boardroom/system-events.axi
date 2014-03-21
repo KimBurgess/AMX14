@@ -1089,6 +1089,8 @@ button_event[dvTpTableMain, 0]
 				//startMultiPreviewSnapshots ()
 				
 				// page flips done on the panel
+				
+				systemMode = SYSTEM_MODE_PRESENTATION
 			}
 		}
 	}
@@ -1239,17 +1241,25 @@ button_event[dvTpTableMain,0]
 		{
 			case BTN_MAIN_PRESENTATION:
 			{
+				// menu button feedback
 				channelOn (button.input.device, button.input.channel)
 				
-				dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
-				dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
+				// if coming out of VC mode
+				if (systemMode = SYSTEM_MODE_VIDEO_CONFERENCE)
+				{
+					dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorLeft, DVX_TEST_PATTERN_LOGO_2)
+					dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorRight, DVX_TEST_PATTERN_LOGO_2)
+					
+					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
+					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
+				}
 				
-				dvxSetVideoOutputBlankImage (dvDvxVidOutMonitorLeft, DVX_BLANK_IMAGE_LOGO_2)
-				dvxSetVideoOutputBlankImage (dvDvxVidOutMonitorRight, DVX_BLANK_IMAGE_LOGO_2)
+				systemMode = SYSTEM_MODE_PRESENTATION
 			}
 			
 			case BTN_MAIN_VIDEO_CONFERENCE:
 			{
+				// menu button feedback
 				channelOn (button.input.device, button.input.channel)
 				
 				channelOff (dvTpTableDebug, 1)
@@ -1257,6 +1267,11 @@ button_event[dvTpTableMain,0]
 				
 				dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInVcMain.port, dvDvxVidOutMonitorLeft.port)
 				dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInVcCamera.port, dvDvxVidOutMonitorRight.port)
+				
+				dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorLeft, DVX_TEST_PATTERN_OFF)
+				dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorRight, DVX_TEST_PATTERN_OFF)
+				
+				systemMode = SYSTEM_MODE_VIDEO_CONFERENCE
 			}
 		}
 	}

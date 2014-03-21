@@ -683,6 +683,10 @@ CAM1_RESET_6          = 164
 
 char MAC_ADDRESS_PC[]   = {$EC,$A8,$6B,$F8,$73,$53}
 
+integer SYSTEM_MODE_AV_OFF = 0
+integer SYSTEM_MODE_PRESENTATION = 1
+integer SYSTEM_MODE_VIDEO_CONFERENCE = 2
+
 /*
  * --------------------
  * Other useful constants

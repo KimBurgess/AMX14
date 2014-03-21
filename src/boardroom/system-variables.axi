@@ -327,6 +327,7 @@ _area dropAreaRightOrientationMonitorRight
 // drag item areas
 _area dragAreas10[DVX_MAX_VIDEO_INPUTS]
 
+integer systemMode
 
 /*
  * --------------------

@@ -167,6 +167,7 @@ define_function shutdownAvSystem ()
 	selectedVideoInputMonitorRight = FALSE
 	selectedAudioInput = FALSE
 	audioFollowingVideoOutput = FALSE
+	systemMode = SYSTEM_MODE_AV_OFF
 }
 
 
@@ -267,81 +268,89 @@ define_function tableInputDetected (dev dvTxVidIn)
 		
 		// set the flag to show that the AV system is now in use
 		isSystemAvInUse = TRUE
+		systemMode = SYSTEM_MODE_PRESENTATION
 	}
-	// system is in use - is there a monitor not being used?
-	else if (selectedVideoInputMonitorLeft == DVX_PORT_VID_IN_NONE)
+	// system is in use
+	else
 	{
-		stack_var integer input
-		
-		select
+		if (systemMode = SYSTEM_MODE_PRESENTATION)
 		{
-			active (dvTxVidIn == dvTxTable1VidInDigital):    input = dvDvxVidInTx1.port
-			active (dvTxVidIn == dvTxTable1VidInAnalog):     input = dvDvxVidInTx1.port
-			
-			active (dvTxVidIn == dvTxTable2VidInDigital):    input = dvDvxVidInTx2.port
-			active (dvTxVidIn == dvTxTable2VidInAnalog):     input = dvDvxVidInTx2.port
-			
-			active (dvTxVidIn == dvTxTable3VidInDigital):    input = dvDvxVidInTx3.port
-			active (dvTxVidIn == dvTxTable3VidInAnalog):     input = dvDvxVidInTx3.port
-			
-			active (dvTxVidIn == dvTxTable4VidInDigital):    input = dvDvxVidInTx4.port
-			active (dvTxVidIn == dvTxTable4VidInAnalog):     input = dvDvxVidInTx4.port
+			// is there a monitor not being used?
+			if (selectedVideoInputMonitorLeft == DVX_PORT_VID_IN_NONE)
+			{
+				stack_var integer input
+				
+				select
+				{
+					active (dvTxVidIn == dvTxTable1VidInDigital):    input = dvDvxVidInTx1.port
+					active (dvTxVidIn == dvTxTable1VidInAnalog):     input = dvDvxVidInTx1.port
+					
+					active (dvTxVidIn == dvTxTable2VidInDigital):    input = dvDvxVidInTx2.port
+					active (dvTxVidIn == dvTxTable2VidInAnalog):     input = dvDvxVidInTx2.port
+					
+					active (dvTxVidIn == dvTxTable3VidInDigital):    input = dvDvxVidInTx3.port
+					active (dvTxVidIn == dvTxTable3VidInAnalog):     input = dvDvxVidInTx3.port
+					
+					active (dvTxVidIn == dvTxTable4VidInDigital):    input = dvDvxVidInTx4.port
+					active (dvTxVidIn == dvTxTable4VidInAnalog):     input = dvDvxVidInTx4.port
+				}
+				
+				// route the DVX input for this TX to the DVX output for the left monitor
+				dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorLeft.port)
+				
+				// audio
+				if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
+					  ((audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port) and (signalStatusDvxInputMonitorRight != DVX_SIGNAL_STATUS_VALID_SIGNAL))  )
+				{
+					audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
+				}
+				
+				if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
+				{
+					dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
+				}
+				
+				// turn on the left monitor
+				necMonitorSetPowerOn (vdvMonitorLeft)
+			}
+			else if (selectedVideoInputMonitorRight == DVX_PORT_VID_IN_NONE)
+			{
+				stack_var integer input
+				
+				select
+				{
+					active (dvTxVidIn == dvTxTable1VidInDigital):    input = dvDvxVidInTx1.port
+					active (dvTxVidIn == dvTxTable1VidInAnalog):     input = dvDvxVidInTx1.port
+					
+					active (dvTxVidIn == dvTxTable2VidInDigital):    input = dvDvxVidInTx2.port
+					active (dvTxVidIn == dvTxTable2VidInAnalog):     input = dvDvxVidInTx2.port
+					
+					active (dvTxVidIn == dvTxTable3VidInDigital):    input = dvDvxVidInTx3.port
+					active (dvTxVidIn == dvTxTable3VidInAnalog):     input = dvDvxVidInTx3.port
+					
+					active (dvTxVidIn == dvTxTable4VidInDigital):    input = dvDvxVidInTx4.port
+					active (dvTxVidIn == dvTxTable4VidInAnalog):     input = dvDvxVidInTx4.port
+				}
+				
+				// route the DVX input for this TX to the DVX output for the right monitor
+				dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorRight.port)
+				
+				// audio
+				if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
+					  ((audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port) and (signalStatusDvxInputMonitorLeft != DVX_SIGNAL_STATUS_VALID_SIGNAL))    )
+				{
+					audioFollowingVideoOutput = dvDvxVidOutMonitorRight.port
+				}
+				
+				if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
+				{
+					dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
+				}
+				
+				// turn on the right monitor
+				necMonitorSetPowerOn (vdvMonitorRight)
+			}
 		}
-		
-		// route the DVX input for this TX to the DVX output for the left monitor
-		dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorLeft.port)
-		
-		// audio
-		if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
-		      ((audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port) and (signalStatusDvxInputMonitorRight != DVX_SIGNAL_STATUS_VALID_SIGNAL))  )
-		{
-			audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
-		}
-		
-		if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
-		{
-			dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
-		}
-		
-		// turn on the left monitor
-		necMonitorSetPowerOn (vdvMonitorLeft)
-	}
-	else if (selectedVideoInputMonitorRight == DVX_PORT_VID_IN_NONE)
-	{
-		stack_var integer input
-		
-		select
-		{
-			active (dvTxVidIn == dvTxTable1VidInDigital):    input = dvDvxVidInTx1.port
-			active (dvTxVidIn == dvTxTable1VidInAnalog):     input = dvDvxVidInTx1.port
-			
-			active (dvTxVidIn == dvTxTable2VidInDigital):    input = dvDvxVidInTx2.port
-			active (dvTxVidIn == dvTxTable2VidInAnalog):     input = dvDvxVidInTx2.port
-			
-			active (dvTxVidIn == dvTxTable3VidInDigital):    input = dvDvxVidInTx3.port
-			active (dvTxVidIn == dvTxTable3VidInAnalog):     input = dvDvxVidInTx3.port
-			
-			active (dvTxVidIn == dvTxTable4VidInDigital):    input = dvDvxVidInTx4.port
-			active (dvTxVidIn == dvTxTable4VidInAnalog):     input = dvDvxVidInTx4.port
-		}
-		
-		// route the DVX input for this TX to the DVX output for the right monitor
-		dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorRight.port)
-		
-		// audio
-		if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
-		      ((audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port) and (signalStatusDvxInputMonitorLeft != DVX_SIGNAL_STATUS_VALID_SIGNAL))    )
-		{
-			audioFollowingVideoOutput = dvDvxVidOutMonitorRight.port
-		}
-		
-		if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
-		{
-			dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
-		}
-		
-		// turn on the right monitor
-		necMonitorSetPowerOn (vdvMonitorRight)
 	}
 }
 
