@@ -18,63 +18,100 @@ program_name='system-functions'
  */
 
 
-define_function hideAllPanelDraggablePopups (dev panel)
+define_function resetDraggablePopup (dev dragAndDropVirtual, integer id)
+{
+	hideDraggablePopup (dragAndDropVirtual, id)
+	showDraggablePopup (dragAndDropVirtual, id)
+}
+
+define_function hideDraggablePopup (dev dragAndDropVirtual, integer id)
 {
 	select
 	{
-		active (panel == dvTpDragAndDrop19):
+		active (dragAndDropVirtual == vdvDragAndDrop19):
 		{
-			moderoDisablePopup (dvTpDragAndDrop19, 'draggable-source-1')
-			moderoDisablePopup (dvTpDragAndDrop19, 'draggable-source-5')
-			moderoDisablePopup (dvTpDragAndDrop19, 'draggable-source-6')
-			moderoDisablePopup (dvTpDragAndDrop19, 'draggable-source-7')
-			moderoDisablePopup (dvTpDragAndDrop19, 'draggable-source-8')
+			moderoDisablePopup (dvTpDragAndDrop19, draggablePopups19[id])
 		}
 		
-		active (panel == dvTpDragAndDrop10):
+		active (dragAndDropVirtual == vdvDragAndDrop10):
 		{
-			moderoDisablePopup (dvTpDragAndDrop10, 'draggable-source-displayport')
-			moderoDisablePopup (dvTpDragAndDrop10, 'draggable-source-hdmi1')
-			moderoDisablePopup (dvTpDragAndDrop10, 'draggable-source-hdmi2')
-			moderoDisablePopup (dvTpDragAndDrop10, 'draggable-source-vga')
+			moderoDisablePopup (dvTpDragAndDrop10, draggablePopups10[id])
 		}
 	}
 }
 
-
-define_function showPanelDraggablePopupsAll (dev panel)
+define_function hideAllDraggablePopups (dev dragAndDropVirtual)
 {
 	select
 	{
-		active (panel == dvTpDragAndDrop19):
+		active (dragAndDropVirtual == vdvDragAndDrop19):
 		{
-			moderoEnablePopup (dvTpDragAndDrop19, 'draggable-source-1')
-			moderoEnablePopup (dvTpDragAndDrop19, 'draggable-source-5')
-			moderoEnablePopup (dvTpDragAndDrop19, 'draggable-source-6')
-			moderoEnablePopup (dvTpDragAndDrop19, 'draggable-source-7')
-			moderoEnablePopup (dvTpDragAndDrop19, 'draggable-source-8')
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn1.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn5.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn6.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn7.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn8.port)
 		}
 		
-		active (panel == dvTpDragAndDrop10):
+		active (dragAndDropVirtual == vdvDragAndDrop10):
 		{
-			moderoEnablePopup (dvTpDragAndDrop10, 'draggable-source-displayport')
-			moderoEnablePopup (dvTpDragAndDrop10, 'draggable-source-hdmi1')
-			moderoEnablePopup (dvTpDragAndDrop10, 'draggable-source-hdmi2')
-			moderoEnablePopup (dvTpDragAndDrop10, 'draggable-source-vga')
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableVga.port)
 		}
 	}
 }
 
-define_function enablePanelDragItem (dev panel, integer id)
+define_function showDraggablePopup (dev dragAndDropVirtual, integer id)
 {
 	select
 	{
-		active (panel == dvTpDragAndDrop19):
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			moderoEnablePopup (dvTpDragAndDrop19, draggablePopups19[id])
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			moderoEnablePopup (dvTpDragAndDrop10, draggablePopups10[id])
+		}
+	}
+}
+
+define_function showDraggablePopupsAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn1.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn5.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn6.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn7.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn8.port)
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableVga.port)
+		}
+	}
+}
+
+define_function enableDragItem (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
 		{
 			sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas19[id])")
 		}
 		
-		active (panel == dvTpDragAndDrop10):
+		active (dragAndDropVirtual == vdvDragAndDrop10):
 		{
 			sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas10[id])")
 		}
@@ -82,137 +119,141 @@ define_function enablePanelDragItem (dev panel, integer id)
 }
 
 
-define_function enablePanelDragItemsAll (dev panel)
+define_function enableDragItemsAll (dev dragAndDropVirtual)
 {
 	select
 	{
-		active (panel == dvTpDragAndDrop19):
+		active (dragAndDropVirtual == vdvDragAndDrop19):
 		{
-			enablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn1.port)
-			enablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn5.port)
-			enablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn6.port)
-			enablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn7.port)
-			enablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn8.port)
+			enableDragItem (vdvDragAndDrop19, dvDvxVidIn1.port)
+			enableDragItem (vdvDragAndDrop19, dvDvxVidIn5.port)
+			enableDragItem (vdvDragAndDrop19, dvDvxVidIn6.port)
+			enableDragItem (vdvDragAndDrop19, dvDvxVidIn7.port)
+			enableDragItem (vdvDragAndDrop19, dvDvxVidIn8.port)
 		}
 		
-		active (panel == dvTpDragAndDrop10):
+		active (dragAndDropVirtual == vdvDragAndDrop10):
 		{
-			enablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
-			enablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
-			enablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
-			enablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			enableDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			enableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			enableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			enableDragItem (vdvDragAndDrop10, dvDvxVidInTableVga.port)
 		}
 	}
 }
 
 
-define_function disablePanelDragItem (dev panel, integer id)
+define_function disableDragItem (dev dragAndDropVirtual, integer id)
 {
 	select
 	{
-		active (panel == dvTpDragAndDrop19):
+		active (dragAndDropVirtual == vdvDragAndDrop19):
 		{
-			sendCommand (vdvDragAndDrop19, "'DELETE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas19[id])")
+			sendCommand (vdvDragAndDrop19, "'DELETE_DRAG_ITEM-',itoa(id)")
 		}
 		
-		active (panel == dvTpDragAndDrop10):
+		active (dragAndDropVirtual == vdvDragAndDrop10):
 		{
-			sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas10[id])")
+			sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(id)")
 		}
 	}
 }
 
 
-define_function disablePanelDragItemsAll (dev panel)
+define_function disableDragItemsAll (dev dragAndDropVirtual)
 {
 	select
 	{
-		active (panel == dvTpDragAndDrop19):
+		active (dragAndDropVirtual == vdvDragAndDrop19):
 		{
-			disablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn1.port)
-			disablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn5.port)
-			disablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn6.port)
-			disablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn7.port)
-			disablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn8.port)
+			disableDragItem (vdvDragAndDrop19, dvDvxVidIn1.port)
+			disableDragItem (vdvDragAndDrop19, dvDvxVidIn5.port)
+			disableDragItem (vdvDragAndDrop19, dvDvxVidIn6.port)
+			disableDragItem (vdvDragAndDrop19, dvDvxVidIn7.port)
+			disableDragItem (vdvDragAndDrop19, dvDvxVidIn8.port)
 		}
 		
-		active (panel == dvTpDragAndDrop10):
+		active (dragAndDropVirtual == vdvDragAndDrop10):
 		{
-			disablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
-			disablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
-			disablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
-			disablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			disableDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			disableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			disableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			disableDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
 		}
 	}
 }
 
-define_function disablePanelDropArea (dev panel, integer id)
+define_function disableDropArea (dev dragAndDropVirtual, integer id)
 {
 	select
 	{
-		active (panel == dvTpDragAndDrop19):
+		active (dragAndDropVirtual == vdvDragAndDrop19):
 		{
 			sendCommand (vdvDragAndDrop19, "'DELETE_DROP_AREA-',itoa(id)")
 		}
 		
-		active (panel == dvTpDragAndDrop10):
+		active (dragAndDropVirtual == vdvDragAndDrop10):
 		{
 			sendCommand (vdvDragAndDrop10, "'DELETE_DROP_AREA-',itoa(id)")
 		}
 	}
 }
 
-define_function disablePanelDropItemsAll (dev panel)
+define_function disableDropAreasAll (dev dragAndDropVirtual)
 {
 	select
 	{
-		active (panel == dvTpDragAndDrop19):
+		active (dragAndDropVirtual == vdvDragAndDrop19):
 		{
-			disablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorLeft.port)
-			disablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorRight.port)
-			disablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMultiPreview.port)
+			disableDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorLeft.port)
+			disableDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorRight.port)
+			disableDropArea (vdvDragAndDrop19, dvDvxVidOutMultiPreview.port)
 		}
 		
-		active (panel == dvTpDragAndDrop10):
+		active (dragAndDropVirtual == vdvDragAndDrop10):
 		{
-			disablePanelDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorLeft.port)
-			disablePanelDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorRight.port)
+			disableDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorLeft.port)
+			disableDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorRight.port)
 		}
 	}
 }
 
-define_function enablePanelDropArea (dev panel, integer id)
+define_function enableDropArea (dev dragAndDropVirtual, integer id)
 {
 	select
 	{
-		active (panel == dvTpDragAndDrop19):
+		active (dragAndDropVirtual == vdvDragAndDrop19):
 		{
-			sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',itoa(id)")
+			sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(id, dropAreas19[id])")
 		}
 		
-		active (panel == dvTpDragAndDrop10):
+		// do not handle 10" panel in this function.
+		// the 10" is a special case as the index number of the drodAreas array does not necessary correlate to the output number of the dvx.
+		/*active (dragAndDropVirtual == vdvDragAndDrop10):
 		{
-			sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',itoa(id)")
-		}
+			sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(id, dropAreas10[id])")
+		}*/
 	}
 }
 
-define_function enablePanelDropItemsAll (dev panel)
+define_function enableDropItemsAll (dev dragAndDropVirtual)
 {
 	select
 	{
-		active (panel == dvTpDragAndDrop19):
+		active (dragAndDropVirtual == vdvDragAndDrop19):
 		{
-			enablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorLeft.port)
-			enablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorRight.port)
-			enablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMultiPreview.port)
+			enableDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorLeft.port)
+			enableDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorRight.port)
+			enableDropArea (vdvDragAndDrop19, dvDvxVidOutMultiPreview.port)
 		}
 		
-		active (panel == dvTpDragAndDrop10):
+		// do not handle 10" panel in this function.
+		// the 10" is a special case as the index number of the drodAreas array does not necessary correlate to the output number of the dvx.
+		/*active (dragAndDropVirtual == vdvDragAndDrop10):
 		{
-			enablePanelDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorLeft.port)
-			enablePanelDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorRight.port)
-		}
+			enableDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorLeft.port)
+			enableDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorRight.port)
+		}*/
 	}
 }
 
@@ -297,10 +338,10 @@ define_function selectVcMode ()
 	// set audio for both outputs to follow VC main
 	
 	// hide draggable popups on 19" panel
-	hideAllPanelDraggablePopups (dvTpTableVideo)
+	hideAllDraggablePopups (vdvDragAndDrop19)
 	
 	// disable all drag items on 19" panel
-	disablePanelDragItemsAll (dvTpTableVideo)
+	disableDragItemsAll (vdvDragAndDrop19)
 	
 	// turn off the drag and drop expanded drop area animation channel on the 19" panel
 	channelOff (dvTpTableDebug, 1)
@@ -335,9 +376,6 @@ define_function selectPresentationMode ()
 		//	- flip to user page
 		#warn '@TODO'
 		
-		//	- show all draggable popups on 19" panel
-		showPanelDraggablePopupsAll (dvTpTableVideo)
-		
 		// if coming out of VC mode
 		if (systemMode = SYSTEM_MODE_VIDEO_CONFERENCE)
 		{
@@ -346,8 +384,11 @@ define_function selectPresentationMode ()
 		}
 	}
 	
+	//	- show all draggable popups on 19" panel
+	showDraggablePopupsAll (vdvDragAndDrop19)
+	
 	// enable all drag items on 19" panel
-	enablePanelDragItemsAll (dvTpTableVideo)
+	enableDragItemsAll (vdvDragAndDrop19)
 	
 	// turn off the drag and drop expanded drop area animation channel on the 19" panel
 	channelOff (dvTpTableDebug, 1)
@@ -700,41 +741,6 @@ define_function tableInputDetected (dev dvTxVidIn)
 	}
 }
 
-/*
-define_function loadVideoPreviewWindow (dev dvDvxVidInPort)
-{
-	// kill the multi-preview snapshot timeline
-	//stopMultiPreviewSnapshots ()
-	
-	// turn on the video being previed flag
-	ON [isVideoBeingPreviewed]
-	
-	// delete video snapshot on the video preview button
-	moderoDeleteButtonVideoSnapshot (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL)
-	
-	moderoDisableButtonFeedback (dvTpTableVideo, BTN_VIDEO_PREVIEW_LOADING_BAR)    // reset the loading progress bar
-	
-	moderoSetButtonOpacity (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_INVISIBLE)
-	//moderoSetButtonHide (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW)
-	moderoSetButtonShow (dvTpTableVideo, BTN_ADR_VIDEO_LOADING_PREVIEW)
-	moderoSetButtonShow (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_LOADING_BAR)
-	
-	moderoEnablePopup (dvTpTableVideo, POPUP_NAME_VIDEO_PREVIEW)
-	
-	moderoEnableButtonFeedback (dvTpTableVideo, BTN_VIDEO_PREVIEW_LOADING_BAR) //start the loading progress bar
-	
-	dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInPort.port, dvDvxVidOutMultiPreview.port)
-	
-	CANCEL_WAIT 'WAIT_HIDE_VIDEO_LOADING_BUTTON'
-	WAIT waitTimeVideoLoading 'WAIT_HIDE_VIDEO_LOADING_BUTTON'
-	{
-		moderoSetButtonHide (dvTpTableVideo, BTN_ADR_VIDEO_LOADING_PREVIEW)
-		moderoSetButtonHide (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_LOADING_BAR)
-		//moderoSetButtonShow (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW)
-		moderoSetButtonOpacity (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_OPAQUE)
-	}
-}
-*/
 
 
 /*
@@ -875,7 +881,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 		}
 	}
 	
-	
+	/*
 	switch (signalStatus)
 	{
 		case DVX_SIGNAL_STATUS_NO_SIGNAL:
@@ -893,7 +899,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 			// Otherwise it could result in the snapshots image of the currently routed video to the MPL being shown on all snapshot buttons.
 			
 		}
-	}
+	}*/
 	
 	if (dvxVideoInput.port == selectedVideoInputMonitorLeft)
 	{
@@ -1033,143 +1039,6 @@ define_function dvxNotifyAudioOutMaximumVolume (dev dvxAudioOutput, integer maxV
  */
 
 
-#define INCLUDE_DXLINK_NOTIFY_RX_VIDEO_OUTPUT_RESOLUTION_CALLBACK
-define_function dxlinkNotifyRxVideoOutputResolution (dev dxlinkRxVideoOutput, char resolution[])
-{
-	// dxlinkRxVideoOutput is the D:P:S of the video output port on the DXLink receiver
-	// cResolution is the video output resolution and refresh (HORxVER,REF)
-	
-	select
-	{
-		active(dxlinkRxVideoOutput == dvRxMonitorLeftVidOut):
-		{
-			moderoSetButtonText(dvTpTableDxlink,
-					BTN_ADR_DXLINK_RX_OUTPUT_RESOLUTION_MONITOR_LEFT,
-					MODERO_BUTTON_STATE_ALL,
-					resolution)
-		}
-		
-		active(dxlinkRxVideoOutput == dvRxMonitorRightVidOut):
-			moderoSetButtonText (dvTpTableDxlink, BTN_ADR_DXLINK_RX_OUTPUT_RESOLUTION_MONITOR_RIGHT, MODERO_BUTTON_STATE_ALL, resolution)
-	}
-}
-
-
-#define INCLUDE_DXLINK_NOTIFY_RX_VIDEO_OUTPUT_SCALE_MODE_CALLBACK
-define_function dxlinkNotifyRxVideoOutputScaleMode (dev dxlinkRxVideoOutput, char scaleMode[])
-{
-	// dxlinkRxVideoOutput is the D:P:S of the video output port on the DXLink receiver
-	// scaleMode contains the scaler mode (DXLINK_SCALE_MODE_AUTO | DXLINK_SCALE_MODE_BYPASS | DXLINK_SCALE_MODE_MANUAL)
-	
-	select
-	{
-		active(dxlinkRxVideoOutput == dvRxMonitorLeftVidOut):
-		{
-			switch (scaleMode)
-			{
-				case DXLINK_SCALE_MODE_AUTO:    moderoEnableButtonFeedback(dvTpTableDxlink, BTN_DXLINK_RX_SCALER_AUTO_MONITOR_LEFT)
-				case DXLINK_SCALE_MODE_BYPASS:  moderoEnableButtonFeedback( dvTpTableDxlink, BTN_DXLINK_RX_SCALER_BYPASS_MONITOR_LEFT)
-				case DXLINK_SCALE_MODE_MANUAL:  moderoEnableButtonFeedback( dvTpTableDxlink, BTN_DXLINK_RX_SCALER_MANUAL_MONITOR_LEFT)
-			}
-		}
-		
-		active(dxlinkRxVideoOutput == dvRxMonitorRightVidOut):
-		{
-			switch (scaleMode)
-			{
-				case DXLINK_SCALE_MODE_AUTO:    moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_SCALER_AUTO_MONITOR_RIGHT)
-				case DXLINK_SCALE_MODE_BYPASS:  moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_SCALER_BYPASS_MONITOR_RIGHT)
-				case DXLINK_SCALE_MODE_MANUAL:  moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_SCALER_MANUAL_MONITOR_RIGHT)
-			}
-		}
-	}
-}
-
-
-#define INCLUDE_DXLINK_NOTIFY_RX_VIDEO_OUTPUT_ASPECT_RATIO_CALLBACK
-define_function dxlinkNotifyRxVideoOutputAspectRatio (dev dxlinkRxVideoOutput, char aspectRatio[])
-{
-	// dxlinkRxVideoOutput is the D:P:S of the video output port on the DXLink receiver
-	// cAspectRatio is the aspect ratio (DXLINK_ASPECT_RATIO_ANAMORPHIC | DXLINK_ASPECT_RATIO_MAINTAIN | DXLINK_ASPECT_RATIO_STRETCH | DXLINK_ASPECT_RATIO_ZOOM)
-	
-	select
-	{
-		active(dxlinkRxVideoOutput == dvRxMonitorLeftVidOut):
-		{
-			switch (aspectRatio)
-			{
-				case DXLINK_ASPECT_RATIO_ANAMORPHIC:    moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_ANAMORPHIC_MONITOR_LEFT)
-				case DXLINK_ASPECT_RATIO_MAINTAIN:      moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_MAINTAIN_MONITOR_LEFT)
-				case DXLINK_ASPECT_RATIO_STRETCH:       moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_STRETCH_MONITOR_LEFT)
-				case DXLINK_ASPECT_RATIO_ZOOM:          moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_ZOOM_MONITOR_LEFT)
-			}
-		}
-		
-		active(dxlinkRxVideoOutput == dvRxMonitorRightVidOut):
-		{
-			switch (aspectRatio)
-			{
-				case DXLINK_ASPECT_RATIO_ANAMORPHIC:    moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_ANAMORPHIC_MONITOR_RIGHT)
-				case DXLINK_ASPECT_RATIO_MAINTAIN:      moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_MAINTAIN_MONITOR_RIGHT)
-				case DXLINK_ASPECT_RATIO_STRETCH:       moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_STRETCH_MONITOR_RIGHT)
-				case DXLINK_ASPECT_RATIO_ZOOM:          moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_ZOOM_MONITOR_RIGHT)
-			}
-		}
-	}
-}
-
-
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_AUTO_SELECT_CALLBACK
-define_function dxlinkNotifyTxVideoInputAutoSelect (dev dxlinkTxPort1, char status[])
-{
-	// dvDxlinkTxPort1 is the port #1 on the DXLink Tx
-	// cStatus contains the auto video input select status (STATUS_ENABLE | STATUS_DISABLE)
-	
-	switch (status)
-	{
-		case STATUS_ENABLE:
-		{
-			select
-			{
-				active (dxlinkTxPort1 == dvTxTable1Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_1)
-				active (dxlinkTxPort1 == dvTxTable2Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_2)
-				active (dxlinkTxPort1 == dvTxTable3Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_3)
-				active (dxlinkTxPort1 == dvTxTable4Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_4)
-			}
-		}
-		case STATUS_DISABLE:
-		{
-			select
-			{
-				active (dxlinkTxPort1 == dvTxTable1Main):   moderoDisableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_1)
-				active (dxlinkTxPort1 == dvTxTable2Main):   moderoDisableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_2)
-				active (dxlinkTxPort1 == dvTxTable3Main):   moderoDisableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_3)
-				active (dxlinkTxPort1 == dvTxTable4Main):   moderoDisableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_4)
-			}
-		}
-	}
-}
-
-
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_STATUS_ANALOG_CALLBACK
-define_function dxlinkNotifyTxVideoInputStatusAnalog (dev dxlinkTxAnalogVideoInput, char signalStatus[])
-{
-	// dxlinkTxAnalogVideoInput is the analog video input port on the DXLink Tx
-	// signalStatus is the input signal status (DXLINK_SIGNAL_STATUS_NO_SIGNAL | DXLINK_SIGNAL_STATUS_UNKNOWN | DXLINK_SIGNAL_STATUS_VALID_SIGNAL)
-	
-	switch (signalStatus)
-	{
-		case DXLINK_SIGNAL_STATUS_UNKNOWN:    {}
-		
-		case DXLINK_SIGNAL_STATUS_NO_SIGNAL:  {}
-		
-		case DXLINK_SIGNAL_STATUS_VALID_SIGNAL:
-		{
-			tableInputDetected (dxlinkTxAnalogVideoInput)
-		}
-	}
-}
-
 
 #define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_STATUS_DIGITAL_CALLBACK
 define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoInput, char signalStatus[])
@@ -1190,71 +1059,7 @@ define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoI
 	}
 }
 
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_FORMAT_ANALOG_CALLBACK
-define_function dxlinkNotifyTxVideoInputFormatAnalog (dev dxlinkTxAnalogVideoInput, char videoFormat[])
-{
-	// dxlinkTxAnalogVideoInput is the analog video input port on the DXLink Tx
-	// videoFormat is the video format (VIDEO_SIGNAL_FORMAT_VGA | VIDEO_SIGNAL_FORMAT_COMPOSITE | VIDEO_SIGNAL_FORMAT_COMPONENT | VIDEO_SIGNAL_FORMAT_SVIDEO)
-}
-*/
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_FORMAT_DIGITAL_CALLBACK
-define_function dxlinkNotifyTxVideoInputFormatDigital (dev dxlinkTxDigitalVideoInput, char videoFormat[])
-{
-	// dxlinkTxDigitalVideoInput is the digital video input port on the DXLink Tx
-	// videoFormat is the video format (VIDEO_SIGNAL_FORMAT_DVI | VIDEO_SIGNAL_FORMAT_HDMI)
-}
-*/
 
-#define INCLUDE_DXLINK_NOTIFY_TX_SWITCH_CALLBACK
-define_function dxlinkNotifyTxSwitch (dev dxlinkTxPort1, integer input, integer output)
-{
-	// dxlinkTxPort1 is port 1 on the DXLink Tx.
-	// input contains the input port on the DXLink TX that has been selected (DXLINK_PORT_VIDEO_INPUT_ANALOG | DXLINK_PORT_VIDEO_INPUT_DIGITAL)
-	// output contains the output of the DXLink TX. This is always DXLINK_PORT_VIDEO_OUTPUT.
-	
-	switch (input)
-	{
-		case DXLINK_PORT_VIDEO_INPUT_ANALOG:
-		{
-			select
-			{
-				active (dxlinkTxPort1 == dvTxTable1Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_VGA_1)
-				active (dxlinkTxPort1 == dvTxTable2Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_VGA_2)
-				active (dxlinkTxPort1 == dvTxTable3Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_VGA_3)
-				active (dxlinkTxPort1 == dvTxTable4Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_VGA_4)
-			}
-		}
-		case DXLINK_PORT_VIDEO_INPUT_DIGITAL:
-		{
-			select
-			{
-				active (dxlinkTxPort1 == dvTxTable1Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_HDMI_1)
-				active (dxlinkTxPort1 == dvTxTable2Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_HDMI_2)
-				active (dxlinkTxPort1 == dvTxTable3Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_HDMI_3)
-				active (dxlinkTxPort1 == dvTxTable4Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_HDMI_4)
-			}
-		}
-	}
-}
-
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_RESOLUTION_ANALOG_CALLBACK
-define_function dxlinkNotifyTxVideoInputResolutionAnalog (dev dxlinkTxAnalogVideoInput, char resolution[])
-{
-	// dxlinkTxAnalogVideoInput is the analog video input port on the DXLink Tx
-	// resolution is the input resolution.
-}
-*/
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_RESOLUTION_DIGITAL_CALLBACK
-define_function dxlinkNotifyTxVideoInputResolutionDigital (dev dxlinkTxDigitalVideoInput, char resolution[])
-{
-	// dxlinkTxDigitalVideoInput is the digital video input port on the DXLink Tx
-	// resolution is the input resolution.
-}
-*/
 
 /*
  * --------------------

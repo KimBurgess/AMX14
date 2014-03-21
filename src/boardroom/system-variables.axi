@@ -327,6 +327,12 @@ _area dropAreaRightOrientationMonitorRight
 // drag item areas
 _area dragAreas10[DVX_MAX_VIDEO_INPUTS]
 
+// draggable popups for 19" panel
+char draggablePopups19[DVX_MAX_VIDEO_INPUTS][40]
+char draggablePopups10[DVX_MAX_VIDEO_INPUTS][40]
+
+
+
 integer systemMode
 
 /*

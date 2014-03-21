@@ -76,16 +76,8 @@ data_event [vdvDragAndDrop19]
 {
 	online:
 	{
-		// Define drop areas
-		//send_command vdvDragAndDrop, 'DEFINE_DROP_AREA-<id>,<left>,<top>,<width>,<height>'
-		
-		// Define drop items
-		//send_command vdvDragAndDrop, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidIn1.port, dragAreas19[dvDvxVidIn1.port])")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidIn5.port, dragAreas19[dvDvxVidIn5.port])")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidIn6.port, dragAreas19[dvDvxVidIn6.port])")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidIn7.port, dragAreas19[dvDvxVidIn7.port])")
-		sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidIn8.port, dragAreas19[dvDvxVidIn8.port])")
+		// Define drag items
+		enableDragItemsAll (vdvDragAndDrop19)
 	}
 	
 	string:
@@ -98,9 +90,7 @@ data_event [vdvDragAndDrop19]
 		{
 			case 'DRAG_ITEM_SELECTED-':
 			{
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorLeft.port, dropAreas19[dvDvxVidOutMonitorLeft.port])")
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorRight.port, dropAreas19[dvDvxVidOutMonitorRight.port])")
-				sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMultiPreview.port, dropAreas19[dvDvxVidOutMultiPreview.port])")
+				enableDropItemsAll (vdvDragAndDrop19)
 				
 				channelOn (dvTpTableDebug, 1)
 				
@@ -114,12 +104,9 @@ data_event [vdvDragAndDrop19]
 				idDragItem = atoi(data.text)
 				
 				// reset the draggable popup position by hiding it and then showing it again
-				moderoDisablePopup (dvTpDragAndDrop19, "'draggable-source-',itoa(idDragItem)")
-				moderoEnablePopup (dvTpDragAndDrop19, "'draggable-source-',itoa(idDragItem)")
+				resetDraggablePopup (vdvDragAndDrop19, idDragItem)
 				
-				sendCommand (vdvDragAndDrop19, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMonitorLeft.port)")
-				sendCommand (vdvDragAndDrop19, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMonitorRight.port)")
-				sendCommand (vdvDragAndDrop19, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMultiPreview.port)")
+				disableDropAreasAll (vdvDragAndDrop19)
 				
 				//channelOff (dvTpTableDebug, 1)	// maybe don't do this here
 			}
@@ -137,13 +124,9 @@ data_event [vdvDragAndDrop19]
 				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
 				idDropArea = atoi(data.text)
 				
-				sendCommand (vdvDragAndDrop19, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMonitorLeft.port)")
-				sendCommand (vdvDragAndDrop19, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMonitorRight.port)")
-				sendCommand (vdvDragAndDrop19, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMultiPreview.port)")
+				disableDropAreasAll (vdvDragAndDrop19)
 				
-				
-				moderoDisablePopup (dvTpDragAndDrop19, "'draggable-source-',itoa(idDragItem)")
-				moderoEnablePopup (dvTpDragAndDrop19, "'draggable-source-',itoa(idDragItem)")
+				resetDraggablePopup (vdvDragAndDrop19, idDragItem)
 				
 				select
 				{
@@ -151,34 +134,27 @@ data_event [vdvDragAndDrop19]
 					{
 						channelOff (dvTpTableDebug, 1)
 						
-						dvxSwitchVideoOnly (dvDvxMain, idDragItem, dvDvxVidOutMonitorLeft.port)
+						showSourceOnDisplay (idDragItem, idDropArea)
 						
 						sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
-						
-						// set flag to indicate that system is in use
-						isSystemAvInUse = TRUE
 					}
 					
 					active (idDropArea == dvDvxVidOutMonitorRight.port):
 					{
 						channelOff (dvTpTableDebug, 1)
 						
-						dvxSwitchVideoOnly (dvDvxMain, idDragItem, dvDvxVidOutMonitorRight.port)
+						showSourceOnDisplay (idDragItem, idDropArea)
 						
 						sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
-						
-						// set flag to indicate that system is in use
-						isSystemAvInUse = TRUE
 					}
 					
 					active (idDropArea == dvDvxVidOutMultiPreview.port):
 					{
+						showSourceOnDisplay (idDragItem, idDropArea)
+						
 						sendCommand (vdvMultiPreview, "'START_VIDEO_PREVIEW-',itoa(idDragItem)")
 					}
 				}
-				
-				
-				
 			}
 			
 			case 'DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME-': {}
@@ -191,11 +167,7 @@ data_event [vdvDragAndDrop10]
 	online:
 	{
 		// Define drag items
-		//send_command vdvDragAndDrop, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
-		sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableHdmi1.port, dragAreas10[dvDvxVidInTableHdmi1.port])")
-		sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableHdmi2.port, dragAreas10[dvDvxVidInTableHdmi2.port])")
-		sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableVga.port, dragAreas10[dvDvxVidInTableVga.port])")
-		sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableDisplayPort.port, dragAreas10[dvDvxVidInTableDisplayPort.port])")
+		enableDragItemsAll (vdvDragAndDrop10)
 	}
 	
 	string:
@@ -218,27 +190,30 @@ data_event [vdvDragAndDrop10]
 				{
 					active (idDragItem == dvDvxVidInTableHdmi1.port):
 					{
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableHdmi2.port)")
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableVga.port)")
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableDisplayPort.port)")
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableVga.port)
 					}
+					
 					active (idDragItem == dvDvxVidInTableHdmi2.port):
 					{
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableHdmi1.port)")
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableVga.port)")
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableDisplayPort.port)")
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableVga.port)
 					}
+					
 					active (idDragItem == dvDvxVidInTableVga.port):
 					{
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableHdmi1.port)")
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableHdmi2.port)")
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableDisplayPort.port)")
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
 					}
+					
 					active (idDragItem == dvDvxVidInTableDisplayPort.port):
 					{
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableHdmi1.port)")
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableHdmi2.port)")
-						sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',itoa(dvDvxVidInTableVga.port)")
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+						disableDragItem (vdvDragAndDrop10, dvDvxVidInTableVga.port)
 					}
 				}
 				
@@ -248,16 +223,29 @@ data_event [vdvDragAndDrop10]
 					active (idDragItem == dvDvxVidInTableHdmi1.port OR idDragItem == dvDvxVidInTableVga.port):
 					{
 						isClockwiseOrientation = true
+						
+						// NOTE: Don't call enablePanelDropArea from here!
+						// 10" is a special case where the  an assignment of the drop areas to the displays is dynamic
+						// based on which sources (drag items) are selected by the user so as to orient buttons and graphics to
+						// the side of the panel that the user is located.
 						sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorLeft.port, dropAreaLeftOrientationMonitorLeft)")
 						sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorRight.port, dropAreaLeftOrientationMonitorRight)")
+						
 						moderoSetButtonText (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A, MODERO_BUTTON_STATE_ALL, 'Left')
 						moderoSetButtonText (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B, MODERO_BUTTON_STATE_ALL, 'Right')
 					}
+					
 					active (idDragItem == dvDvxVidInTableHdmi2.port OR idDragItem == dvDvxVidInTableDisplayPort.port):
 					{
 						isClockwiseOrientation = false
+						
+						// NOTE: Don't call enablePanelDropArea from here!
+						// 10" is a special case where the  an assignment of the drop areas to the displays is dynamic
+						// based on which sources (drag items) are selected by the user so as to orient buttons and graphics to
+						// the side of the panel that the user is located.
 						sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorLeft.port, dropAreaRightOrientationMonitorLeft)")
 						sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorRight.port, dropAreaRightOrientationMonitorRight)")
+						
 						moderoSetButtonText (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A, MODERO_BUTTON_STATE_ALL, 'Right')
 						moderoSetButtonText (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B, MODERO_BUTTON_STATE_ALL, 'Left')
 					}
@@ -277,47 +265,20 @@ data_event [vdvDragAndDrop10]
 				idDragItem = atoi(data.text)
 				
 				// Define drag items again
-				//send_command vdvDragAndDrop, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
-				sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableHdmi1.port, dragAreas10[dvDvxVidInTableHdmi1.port])")
-				sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableHdmi2.port, dragAreas10[dvDvxVidInTableHdmi2.port])")
-				sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableVga.port, dragAreas10[dvDvxVidInTableVga.port])")
-				sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableDisplayPort.port, dragAreas10[dvDvxVidInTableDisplayPort.port])")
+				enableDragItemsAll (vdvDragAndDrop10)
 				
 				// delete the drop areas for the monitors
-				sendCommand (vdvDragAndDrop10, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMonitorLeft.port)")
-				sendCommand (vdvDragAndDrop10, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMonitorRight.port)")
+				disableDropAreasAll (vdvDragAndDrop10)
 				
+				// reset the draggable popup position by hiding it and then showing it again
+				resetDraggablePopup (vdvDragAndDrop10, idDragItem)
 				
-				// hide the buttons for the monitors
+				// hide the buttons for the monitors after a short time
+				// allows user unfamiliar with the drag and drop interface to read innstructions
 				wait 20 'FIRST_TIME_USER'
 				{
 					moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A, 30, 1, 3)
 					moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B, 30, 1, 3)
-				}
-				
-				// reset the draggable popup position by hiding it and then showing it again
-				select
-				{
-					active (idDragItem == dvDvxVidInTableHdmi1.port):
-					{
-						moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1)
-						moderoEnablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1)
-					}
-					active (idDragItem == dvDvxVidInTableHdmi2.port):
-					{
-						moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_2)
-						moderoEnablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_2)
-					}
-					active (idDragItem == dvDvxVidInTableVga.port):
-					{
-						moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_VGA)
-						moderoEnablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_VGA)
-					}
-					active (idDragItem == dvDvxVidInTableDisplayPort.port):
-					{
-						moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_DISPLAYPORT)
-						moderoEnablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_DISPLAYPORT)
-					}
 				}
 			}
 			
@@ -395,21 +356,16 @@ data_event [vdvDragAndDrop10]
 				idDropArea = atoi(data.text)
 				
 				// Define drag items again
-				//send_command vdvDragAndDrop, 'DEFINE_DRAG_ITEM-<id>,<left>,<top>,<width>,<height>'
-				sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableHdmi1.port, dragAreas10[dvDvxVidInTableHdmi1.port])")
-				sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableHdmi2.port, dragAreas10[dvDvxVidInTableHdmi2.port])")
-				sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableVga.port, dragAreas10[dvDvxVidInTableVga.port])")
-				sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(dvDvxVidInTableDisplayPort.port, dragAreas10[dvDvxVidInTableDisplayPort.port])")
+				enableDragItemsAll (vdvDragAndDrop10)
 				
 				// delete the drop areas for the monitors
-				sendCommand (vdvDragAndDrop10, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMonitorLeft.port)")
-				sendCommand (vdvDragAndDrop10, "'DELETE_DROP_AREA-',itoa(dvDvxVidOutMonitorRight.port)")
+				disableDropAreasAll (vdvDragAndDrop10)
 				
 				// hide the buttons for the monitors
 				#warn '@TODO'
 				
 				// switch the selected input to the selected output
-				dvxSwitchVideoOnly (dvDvxMain, idDragItem, idDropArea)
+				showSourceOnDisplay (idDragItem, idDropArea)
 				
 				moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A, 0, 1, 0)
 				moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B, 0, 1, 0)
@@ -417,29 +373,7 @@ data_event [vdvDragAndDrop10]
 				//channelOff (dvTpDragAndDrop10, btnDropArea)
 				
 				// reset the draggable popup position by hiding it and then showing it again
-				select
-				{
-					active (idDragItem == dvDvxVidInTableHdmi1.port):
-					{
-						moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1)
-						moderoEnablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1)
-					}
-					active (idDragItem == dvDvxVidInTableHdmi2.port):
-					{
-						moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_2)
-						moderoEnablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_2)
-					}
-					active (idDragItem == dvDvxVidInTableVga.port):
-					{
-						moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_VGA)
-						moderoEnablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_VGA)
-					}
-					active (idDragItem == dvDvxVidInTableDisplayPort.port):
-					{
-						moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_DISPLAYPORT)
-						moderoEnablePopup (dvTpDragAndDrop10, POPUP_NAME_DRAGGABLE_SOURCE_TABLE_DISPLAYPORT)
-					}
-				}
+				resetDraggablePopup (vdvDragAndDrop10, idDragItem)
 			}
 		}
 	}
@@ -508,17 +442,17 @@ data_event[dvTpTableMain]
 		dvxRequestAudioOutputMaximumVolume (dvDvxAudOutSpeakers)
 		
 		// DXLink Rx - Left monitor
-		dxlinkRequestRxVideoOutputResolution (dvRxMonitorLeftVidOut)
+		/*dxlinkRequestRxVideoOutputResolution (dvRxMonitorLeftVidOut)
 		dxlinkRequestRxVideoOutputAspectRatio (dvRxMonitorLeftVidOut)
-		dxlinkRequestRxVideoOutputScaleMode (dvRxMonitorLeftVidOut)
+		dxlinkRequestRxVideoOutputScaleMode (dvRxMonitorLeftVidOut)*/
 		
 		// DXLink Rx - Right monitor
-		dxlinkRequestRxVideoOutputResolution (dvRxMonitorRightVidOut)
+		/*dxlinkRequestRxVideoOutputResolution (dvRxMonitorRightVidOut)
 		dxlinkRequestRxVideoOutputAspectRatio (dvRxMonitorRightVidOut)
-		dxlinkRequestRxVideoOutputScaleMode (dvRxMonitorRightVidOut)
+		dxlinkRequestRxVideoOutputScaleMode (dvRxMonitorRightVidOut)*/
 		
 		// DXLink Tx's
-		dxlinkRequestTxVideoInputAutoSelect (dvTxTable1Main)
+		/*dxlinkRequestTxVideoInputAutoSelect (dvTxTable1Main)
 		dxlinkRequestTxVideoInputAutoSelect (dvTxTable2Main)
 		dxlinkRequestTxVideoInputAutoSelect (dvTxTable3Main)
 		dxlinkRequestTxVideoInputAutoSelect (dvTxTable4Main)
@@ -533,7 +467,7 @@ data_event[dvTpTableMain]
 		dxlinkRequestTxVideoInputSignalStatusDigital (dvTxTable1VidInDigital)
 		dxlinkRequestTxVideoInputSignalStatusDigital (dvTxTable2VidInDigital)
 		dxlinkRequestTxVideoInputSignalStatusDigital (dvTxTable3VidInDigital)
-		dxlinkRequestTxVideoInputSignalStatusDigital (dvTxTable4VidInDigital)
+		dxlinkRequestTxVideoInputSignalStatusDigital (dvTxTable4VidInDigital)*/
 		
 		// PDU
 		pduRequestVersion (dvPduMain1)
@@ -559,7 +493,7 @@ data_event[dvTpTableMain]
 		}
 	}
 }
-
+/*
 data_event[dvTxTable1Main]
 data_event[dvTxTable2Main]
 data_event[dvTxTable3Main]
@@ -606,7 +540,7 @@ data_event[dvRxMonitorRightVidOut]
 		dxlinkRequestRxVideoOutputScaleMode (data.device)
 	}
 }
-
+*/
 
 /*
  * --------------------
@@ -914,6 +848,7 @@ button_event[dvTpTableCamera,0]
 	}
 }
 
+/*
 button_event[dvTpTableDxlink,0]
 {
 	push:
@@ -1053,6 +988,7 @@ button_event[dvTpTableDxlink,0]
 		}                                                                        
 	}
 }
+*/
 
 button_event[dvTpTableDebug,0]
 {
@@ -1116,7 +1052,7 @@ level_event[dvTpTableAudio, BTN_LVL_VOLUME_CONTROL]
  * Timeline events
  * --------------------
  */
-
+/*
 timeline_event[TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS]
 {
 	stack_var integer input
@@ -1144,7 +1080,7 @@ timeline_event[TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS]
 		}
 	}
 }
-
+*/
 
 
 /*
