@@ -7,6 +7,7 @@ program_name='huddleEnzoListener'
 #define INCLUDE_ENZO_NOTIFY_CONTENT_ITEMS_RECORD_COUNT
 #define INCLUDE_ENZO_NOTIFY_CONTENT_ITEMS_RECORD
 #define INCLUDE_ENZO_NOTIFY_CONTENT_PATH_CHANGED
+#define INCLUDE_ENZO_NOTIFY_CONTENT_OPEN_ERROR
 
 
 define_variable
@@ -116,7 +117,16 @@ define_function enzoNotifyContentPathChanged(dev enzo, char sourceId[], char pat
 {
 	if (enzo = dvEnzo)
 	{
-		enzoRequestContentItems(dvEnzo, 1, MAX_ENZO_CONTENT_ITEMS, false);
+		enzoRequestContentItems(dvEnzo, 1, MAX_ENZO_CONTENT_ITEMS, true);
+	}
+}
+
+define_function enzoNotifyContentContentOpenError(dev enzo, char message[256],
+		char path[256])
+{
+	if (enzo == dvEnzo)
+	{
+		showFileBrowserError();
 	}
 }
 

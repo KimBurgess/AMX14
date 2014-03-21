@@ -1,12 +1,15 @@
 program_name='huddleUIManager'
 
 
+#include 'string'
 #include 'amx-modero-control';
 
 
 define_variable
 
 constant char POPUP_AUTH[] = 'auth';
+constant char POPUP_FILE_BROWSER[] = 'fileBrowser';
+constant char POPUP_FILE_BROWSER_ERROR[] = 'fileBrowserError';
 
 constant char SUBPAGE_SOURCE_PREFEX[] = '[source]';
 constant char SUBPAGE_FILE_PREFIX[] = '[file]';
@@ -20,7 +23,8 @@ constant integer BTN_END_SESSION = 13;
 
 constant integer BTN_FILE_LIST_SUBPAGE_VIEW = 19;
 constant integer BTN_FILE_LIST_UP = 20;
-constant integer BTN_FILE_LIST_ITEM[] = {21, 22, 23, 24, 25, 26, 26, 27, 28, 29, 30};
+constant integer BTN_FILE_LIST_ITEM[] = {21, 22, 23, 24, 25, 26, 27, 28, 29,
+		30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40};
 
 
 define_function initUI()
@@ -96,6 +100,40 @@ define_function refreshSourceLauncherVisibility()
 	}
 }
 
+define_function char[32] getIconName(char fileType[])
+{
+	stack_var char mediaType[32];
+	stack_var char subType[32];
+	stack_var char iconName[32];
+
+	mediaType = string_get_key(fileType, '/');
+	subType = string_get_value(fileType, '/');
+
+	switch (mediaType)
+	{
+		case 'audio': iconName = 'audio'
+		case 'image': iconName = 'image';
+		case 'video': iconName = 'video';
+		case 'directory': iconName = 'folder';
+		case 'parent': iconName = 'back';
+		case 'application':
+		{
+			switch (subType)
+			{
+				case 'pdf': iconName = 'pdf';
+			}
+		}
+		default: iconName = 'other';
+	}
+
+	iconName = "'icon-', iconName, '.png'";
+
+	return iconName;
+}
+
+/**
+ * Refresh the displayed content within the file browser area.
+ */
 define_function refreshFileList()
 {
 	if (deviceIsOnline(dvTp))
@@ -104,19 +142,35 @@ define_function refreshFileList()
 
 		moderoHideAllSubpages(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW);
 
-		moderoShowSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW,
-				"SUBPAGE_FILE_PREFIX,'spacer'", 1, 0);
-
 		for (i = getEnzoContentItemCount(); i; i--)
 		{
 			stack_var char subpageName[16];
-
 			subpageName = "SUBPAGE_FILE_PREFIX,itoa(i)";
-			moderoShowSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW, subpageName, 2, 0);
 
 			moderoSetButtonText(dvTp, BTN_FILE_LIST_ITEM[i],
 					MODERO_BUTTON_STATE_ALL, getEnzoContentItemName(i));
+
+			moderoSetButtonBitmap(dvTp, BTN_FILE_LIST_ITEM[i],
+					MODERO_BUTTON_STATE_ALL, getIconName(getEnzoContentItemType(i)));
+
+			moderoShowSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW, subpageName, 0, 0);
 		}
+	}
+}
+
+define_function hideFileBrowser()
+{
+	if (deviceIsOnline(dvTp))
+	{
+		moderoDisablePopup(dvTp, POPUP_FILE_BROWSER);
+	}
+}
+
+define_function showFileBrowserError()
+{
+	if (deviceIsOnline(dvTp))
+	{
+		moderoEnablePopup(dvTp, POPUP_FILE_BROWSER_ERROR);
 	}
 }
 
@@ -138,9 +192,16 @@ button_event[dvTp, BTN_SOURCE_SELECT]
 		stack_var char sourceId;
 		sourceId = get_last(BTN_SOURCE_SELECT)
 		setActiveSource(sourceId);
-		if (sourceId == SOURCE_ENZO && !getEnzoSessionActive())
+		if (sourceId == SOURCE_ENZO)
 		{
-			enzoSessionStart(dvEnzo);
+			if (!getEnzoSessionActive())
+			{
+				enzoSessionStart(dvEnzo);
+			}
+			else
+			{
+				enzoHome(dvEnzo);
+			}
 		}
 	}
 }
@@ -186,6 +247,7 @@ button_event[dvTp, BTN_FILE_LIST_ITEM]
 		}
 		else
 		{
+			setActiveSource(SOURCE_ENZO);
 			enzoContentOpen(dvEnzo, getEnzoContentItemPath(index));
 		}
 	}

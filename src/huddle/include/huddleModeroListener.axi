@@ -18,7 +18,7 @@ define_function moderoNotifyNfcTagRead(dev panel, char nfcUid[])
 	if (panel == dvTp && !isSessionActive())
 	{
 		// TODO auth user
-		// TODO request booking via RMS
+		// TODO request booking via RMS if it is online, if offline just start up the room
 		startSession();
 	}
 }

@@ -29,7 +29,7 @@ constant char ENZO_CONTENT_SOURCE_DOWNLOADS = 2;
 constant char ENZO_CONTENT_SOURCE_USB = 3;
 
 constant char MAX_ENZO_CONTENT_SOURCES = 3;
-constant char MAX_ENZO_CONTENT_ITEMS = 10;
+constant char MAX_ENZO_CONTENT_ITEMS = 20;
 
 volatile enzoContentSource enzoSource[MAX_ENZO_CONTENT_SOURCES];
 volatile enzoContentItem enzoContent[MAX_ENZO_CONTENT_ITEMS];

@@ -112,7 +112,10 @@ define_function char isSessionActive()
 define_function handleBookingStart(RmsEventBookingResponse booking)
 {
 	log(AMX_DEBUG, 'Booking starting for huddle location');
-	startSession();
+	if (!isSessionActive())
+	{
+		startSession();
+	}
 }
 
 /**
@@ -121,7 +124,10 @@ define_function handleBookingStart(RmsEventBookingResponse booking)
 define_function handleBookingEnd(RmsEventBookingResponse booking)
 {
 	log(AMX_DEBUG, 'Booking ending for huddle location');
-	endSession();
+	if (isSessionActive())
+	{
+		endSession();
+	}
 }
 
 /**
@@ -192,15 +198,14 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 	{
 		log(AMX_INFO, 'Signal lost from active source');
 
-		// TODO change messaged based on if we have a UI available or not
-		/*if (extendedModeActive())
+		if (deviceIsOnline(dvTp))
 		{
 			showOSD('disconnect-extended');
 		}
 		else
-		{*/
+		{
 			showOSD('disconnected');
-		//}
+		}
 
 		wait_until (isSourceAvailable(sourceId)) 'signal returned'
 		{
@@ -225,6 +230,8 @@ define_function handleEnzoContentSourceStatusEvent(integer sourceId, char isAvai
 
 
 	setSourceLauncherVisbible(getEnzoContentSourceKey(sourceId), isAvailable);
+
+	hideFileBrowser();
 }
 
 
