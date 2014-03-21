@@ -1241,37 +1241,12 @@ button_event[dvTpTableMain,0]
 		{
 			case BTN_MAIN_PRESENTATION:
 			{
-				// menu button feedback
-				channelOn (button.input.device, button.input.channel)
-				
-				// if coming out of VC mode
-				if (systemMode = SYSTEM_MODE_VIDEO_CONFERENCE)
-				{
-					dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorLeft, DVX_TEST_PATTERN_LOGO_2)
-					dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorRight, DVX_TEST_PATTERN_LOGO_2)
-					
-					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
-					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
-				}
-				
-				systemMode = SYSTEM_MODE_PRESENTATION
+				selectPresentationMode ()
 			}
 			
 			case BTN_MAIN_VIDEO_CONFERENCE:
 			{
-				// menu button feedback
-				channelOn (button.input.device, button.input.channel)
-				
-				channelOff (dvTpTableDebug, 1)
-				sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
-				
-				dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInVcMain.port, dvDvxVidOutMonitorLeft.port)
-				dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInVcCamera.port, dvDvxVidOutMonitorRight.port)
-				
-				dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorLeft, DVX_TEST_PATTERN_OFF)
-				dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorRight, DVX_TEST_PATTERN_OFF)
-				
-				systemMode = SYSTEM_MODE_VIDEO_CONFERENCE
+				selectVcMode ()
 			}
 		}
 	}

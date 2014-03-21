@@ -17,6 +17,351 @@ program_name='system-functions'
  * --------------------
  */
 
+
+define_function hideAllPanelDraggablePopups (dev panel)
+{
+	select
+	{
+		active (panel == dvTpDragAndDrop19):
+		{
+			moderoDisablePopup (dvTpDragAndDrop19, 'draggable-source-1')
+			moderoDisablePopup (dvTpDragAndDrop19, 'draggable-source-5')
+			moderoDisablePopup (dvTpDragAndDrop19, 'draggable-source-6')
+			moderoDisablePopup (dvTpDragAndDrop19, 'draggable-source-7')
+			moderoDisablePopup (dvTpDragAndDrop19, 'draggable-source-8')
+		}
+		
+		active (panel == dvTpDragAndDrop10):
+		{
+			moderoDisablePopup (dvTpDragAndDrop10, 'draggable-source-displayport')
+			moderoDisablePopup (dvTpDragAndDrop10, 'draggable-source-hdmi1')
+			moderoDisablePopup (dvTpDragAndDrop10, 'draggable-source-hdmi2')
+			moderoDisablePopup (dvTpDragAndDrop10, 'draggable-source-vga')
+		}
+	}
+}
+
+
+define_function showPanelDraggablePopupsAll (dev panel)
+{
+	select
+	{
+		active (panel == dvTpDragAndDrop19):
+		{
+			moderoEnablePopup (dvTpDragAndDrop19, 'draggable-source-1')
+			moderoEnablePopup (dvTpDragAndDrop19, 'draggable-source-5')
+			moderoEnablePopup (dvTpDragAndDrop19, 'draggable-source-6')
+			moderoEnablePopup (dvTpDragAndDrop19, 'draggable-source-7')
+			moderoEnablePopup (dvTpDragAndDrop19, 'draggable-source-8')
+		}
+		
+		active (panel == dvTpDragAndDrop10):
+		{
+			moderoEnablePopup (dvTpDragAndDrop10, 'draggable-source-displayport')
+			moderoEnablePopup (dvTpDragAndDrop10, 'draggable-source-hdmi1')
+			moderoEnablePopup (dvTpDragAndDrop10, 'draggable-source-hdmi2')
+			moderoEnablePopup (dvTpDragAndDrop10, 'draggable-source-vga')
+		}
+	}
+}
+
+define_function enablePanelDragItem (dev panel, integer id)
+{
+	select
+	{
+		active (panel == dvTpDragAndDrop19):
+		{
+			sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas19[id])")
+		}
+		
+		active (panel == dvTpDragAndDrop10):
+		{
+			sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas10[id])")
+		}
+	}
+}
+
+
+define_function enablePanelDragItemsAll (dev panel)
+{
+	select
+	{
+		active (panel == dvTpDragAndDrop19):
+		{
+			enablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn1.port)
+			enablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn5.port)
+			enablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn6.port)
+			enablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn7.port)
+			enablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn8.port)
+		}
+		
+		active (panel == dvTpDragAndDrop10):
+		{
+			enablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			enablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			enablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			enablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+		}
+	}
+}
+
+
+define_function disablePanelDragItem (dev panel, integer id)
+{
+	select
+	{
+		active (panel == dvTpDragAndDrop19):
+		{
+			sendCommand (vdvDragAndDrop19, "'DELETE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas19[id])")
+		}
+		
+		active (panel == dvTpDragAndDrop10):
+		{
+			sendCommand (vdvDragAndDrop10, "'DELETE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas10[id])")
+		}
+	}
+}
+
+
+define_function disablePanelDragItemsAll (dev panel)
+{
+	select
+	{
+		active (panel == dvTpDragAndDrop19):
+		{
+			disablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn1.port)
+			disablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn5.port)
+			disablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn6.port)
+			disablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn7.port)
+			disablePanelDragItem (vdvDragAndDrop19, dvDvxVidIn8.port)
+		}
+		
+		active (panel == dvTpDragAndDrop10):
+		{
+			disablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			disablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			disablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			disablePanelDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+		}
+	}
+}
+
+define_function disablePanelDropArea (dev panel, integer id)
+{
+	select
+	{
+		active (panel == dvTpDragAndDrop19):
+		{
+			sendCommand (vdvDragAndDrop19, "'DELETE_DROP_AREA-',itoa(id)")
+		}
+		
+		active (panel == dvTpDragAndDrop10):
+		{
+			sendCommand (vdvDragAndDrop10, "'DELETE_DROP_AREA-',itoa(id)")
+		}
+	}
+}
+
+define_function disablePanelDropItemsAll (dev panel)
+{
+	select
+	{
+		active (panel == dvTpDragAndDrop19):
+		{
+			disablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorLeft.port)
+			disablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorRight.port)
+			disablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMultiPreview.port)
+		}
+		
+		active (panel == dvTpDragAndDrop10):
+		{
+			disablePanelDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorLeft.port)
+			disablePanelDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorRight.port)
+		}
+	}
+}
+
+define_function enablePanelDropArea (dev panel, integer id)
+{
+	select
+	{
+		active (panel == dvTpDragAndDrop19):
+		{
+			sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',itoa(id)")
+		}
+		
+		active (panel == dvTpDragAndDrop10):
+		{
+			sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',itoa(id)")
+		}
+	}
+}
+
+define_function enablePanelDropItemsAll (dev panel)
+{
+	select
+	{
+		active (panel == dvTpDragAndDrop19):
+		{
+			enablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorLeft.port)
+			enablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorRight.port)
+			enablePanelDropArea (vdvDragAndDrop19, dvDvxVidOutMultiPreview.port)
+		}
+		
+		active (panel == dvTpDragAndDrop10):
+		{
+			enablePanelDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorLeft.port)
+			enablePanelDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorRight.port)
+		}
+	}
+}
+
+define_function turnOnDisplay (dev virtual)
+{
+	snapiDisplayEnablePower (virtual)
+}
+
+define_function turnOffDisplay (dev virtual)
+{
+	snapiDisplayDisablePower (virtual)
+}
+
+define_function turnOnDisplaysAll ()
+{
+	turnOnDisplay (vdvMonitorLeft)
+	turnOnDisplay (vdvMonitorRight)
+}
+
+define_function turnOffDisplaysAll ()
+{
+	turnOffDisplay (vdvMonitorLeft)
+	turnOffDisplay (vdvMonitorRight)
+}
+
+define_function enableVideoPreview (integer input)
+{
+	sendCommand (vdvMultiPreview, "'START_VIDEO_PREVIEW-',itoa(input)")
+}
+
+define_function disableVideoPreview ()
+{
+	sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
+}
+
+define_function showSourceOnDisplay (integer input, integer output)
+{
+	// switch the video
+	dvxSwitchVideoOnly (dvDvxMain, input, output)
+	
+	// disable any test patterns on the output of the dvx
+	// turn on the monitor
+	select
+	{
+		active (output == dvDvxVidOutMonitorLeft.port):
+		{
+			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorLeft, DVX_TEST_PATTERN_OFF)
+			turnOnDisplay (vdvMonitorLeft)
+		}
+		
+		active (output == dvDvxVidOutMonitorRight.port):
+		{
+			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorRight, DVX_TEST_PATTERN_OFF)
+			turnOnDisplay (vdvMonitorRight)
+		}
+	}
+	
+	// set flag to indicate that system is in use
+	setFlagAvSystemInUse (TRUE)
+}
+
+define_function setFlagAvSystemInUse (integer boolean)
+{
+	isSystemAvInUse = boolean
+}
+
+define_function setFlagSystemMode (integer mode)
+{
+	systemMode = mode
+}
+
+
+define_function selectVcMode ()
+{
+	// show VC main on left display and VC 2nd (camera) on right display
+	showSourceOnDisplay (dvDvxVidInVcMain.port, dvDvxVidOutMonitorLeft.port)
+	showSourceOnDisplay (dvDvxVidInVcCamera.port, dvDvxVidOutMonitorRight.port)
+		
+	// set lighting to vc preset
+	#warn '@TODO'
+	
+	// set audio for both outputs to follow VC main
+	
+	// hide draggable popups on 19" panel
+	hideAllPanelDraggablePopups (dvTpTableVideo)
+	
+	// disable all drag items on 19" panel
+	disablePanelDragItemsAll (dvTpTableVideo)
+	
+	// turn off the drag and drop expanded drop area animation channel on the 19" panel
+	channelOff (dvTpTableDebug, 1)
+	
+	// stop live video streaming from the MPL
+	disableVideoPreview ()
+	
+	// apply feedback to vc mode select button
+	channelOn (dvTpTableMain, BTN_MAIN_VIDEO_CONFERENCE)
+	
+	// set flag to indicate that system is in use
+	setFlagAvSystemInUse (TRUE)
+
+	// lastly, update the system mode variable
+	setFlagSystemMode (SYSTEM_MODE_VIDEO_CONFERENCE)
+}
+
+define_function selectPresentationMode ()
+{
+	// turn off the test pattern on left and right screen
+	#warn '@TODO'
+	
+	// set lighting to presentation preset
+	#warn '@TODO'
+	
+	// if not already in presentation mode:
+	if (systemMode != SYSTEM_MODE_PRESENTATION)
+	{
+		//	- hide all popups
+		#warn '@TODO'
+		
+		//	- flip to user page
+		#warn '@TODO'
+		
+		//	- show all draggable popups on 19" panel
+		showPanelDraggablePopupsAll (dvTpTableVideo)
+		
+		// if coming out of VC mode
+		if (systemMode = SYSTEM_MODE_VIDEO_CONFERENCE)
+		{
+			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorLeft, DVX_TEST_PATTERN_LOGO_2)
+			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorRight, DVX_TEST_PATTERN_LOGO_2)
+		}
+	}
+	
+	// enable all drag items on 19" panel
+	enablePanelDragItemsAll (dvTpTableVideo)
+	
+	// turn off the drag and drop expanded drop area animation channel on the 19" panel
+	channelOff (dvTpTableDebug, 1)
+	
+	// stop live video streaming from the MPL
+	disableVideoPreview ()
+	
+	// apply feedback to presentation mode select button
+	channelOn (dvTpTableMain, BTN_MAIN_PRESENTATION)
+
+	// lastly, update the system mode variable
+	setFlagSystemMode (SYSTEM_MODE_PRESENTATION)
+}
+
 define_function showDragAndDropPopups (dev panel)
 {
 	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','showDragAndDropPopups (dev panel)'"
@@ -141,8 +486,9 @@ define_function shutdownAvSystem ()
 	sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
 	
 	// Video - Turn the monitors off and switch input "none" to the monitor and multi-preview outputs on the DVX
-	necMonitorSetPowerOff (vdvMonitorLeft)
-	necMonitorSetPowerOff (vdvMonitorRight)
+	snapiDisplayDisablePower (vdvMonitorLeft)
+	snapiDisplayDisablePower (vdvMonitorRight)
+	
 	dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
 	dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
 	dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMultiPreview.port)
@@ -254,7 +600,7 @@ define_function tableInputDetected (dev dvTxVidIn)
 		lightsEnablePresetAllOn ()
 		
 		// turn on the left monitor
-		necMonitorSetPowerOn (vdvMonitorLeft)
+		snapiDisplayEnablePower (vdvMonitorLeft)
 		
 		// wake up the touch panel
 		moderoWake (dvTpTableMain)
@@ -311,7 +657,7 @@ define_function tableInputDetected (dev dvTxVidIn)
 				}
 				
 				// turn on the left monitor
-				necMonitorSetPowerOn (vdvMonitorLeft)
+				snapiDisplayEnablePower (vdvMonitorLeft)
 			}
 			else if (selectedVideoInputMonitorRight == DVX_PORT_VID_IN_NONE)
 			{
@@ -348,7 +694,7 @@ define_function tableInputDetected (dev dvTxVidIn)
 				}
 				
 				// turn on the right monitor
-				necMonitorSetPowerOn (vdvMonitorRight)
+				snapiDisplayEnablePower (vdvMonitorRight)
 			}
 		}
 	}
@@ -580,7 +926,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 			{
 				wait waitTimeValidSignal 'WAIT_FOR_SIGNAL_OF_INPUT_ROUTED_TO_LEFT_MONITOR_TO_RETURN'
 				{
-					necMonitorSetPowerOff (vdvMonitorLeft)
+					snapiDisplayDisablePower (vdvMonitorLeft)
 					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
 					off [selectedVideoInputMonitorLeft]
 					
@@ -606,7 +952,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 			{
 				wait waitTimeValidSignal 'WAIT_FOR_SIGNAL_OF_INPUT_ROUTED_TO_RIGHT_MONITOR_TO_RETURN'
 				{
-					necMonitorSetPowerOff (vdvMonitorRight)
+					snapiDisplayDisablePower (vdvMonitorRight)
 					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
 					off [selectedVideoInputMonitorRight]
 					
