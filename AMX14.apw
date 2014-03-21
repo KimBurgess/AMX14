@@ -535,6 +535,10 @@
 <FilePathName>src\boardroom\rms-main.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>snapi-display-control</Identifier>
+<FilePathName>src\boardroom\snapi-display-control.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>sony-evihd7v</Identifier>
 <FilePathName>src\boardroom\sony-evihd7v.axi</FilePathName>
 <Comments></Comments>
