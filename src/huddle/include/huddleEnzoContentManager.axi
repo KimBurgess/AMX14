@@ -10,6 +10,16 @@ structure enzoContentSource
 	char isAvailable;
 }
 
+structure enzoContentItem
+{
+	char sourceKey[64];
+	char path[256];
+	char name[128];
+	char type[128];
+	long size;
+	char lastModified[32];
+	char readOnly;
+}
 
 
 define_variable
@@ -19,10 +29,15 @@ constant char ENZO_CONTENT_SOURCE_DOWNLOADS = 2;
 constant char ENZO_CONTENT_SOURCE_USB = 3;
 
 constant char MAX_ENZO_CONTENT_SOURCES = 3;
+constant char MAX_ENZO_CONTENT_ITEMS = 10;
 
 volatile enzoContentSource enzoSource[MAX_ENZO_CONTENT_SOURCES];
+volatile enzoContentItem enzoContent[MAX_ENZO_CONTENT_ITEMS];
 
 
+/**
+ * Sets the current number of active enzo content sources.
+ */
 define_function setEznoContentSourceCount(integer count)
 {
 	set_length_array(enzoSource, count);
@@ -82,4 +97,59 @@ define_function setEnzoContentSourceAvailable(integer sourceId, char isAvailable
 	{
 		handleEnzoContentSourceStatusEvent(sourceId, isAvailable);
 	}
+}
+
+/**
+ * Sets the current number of content items available.
+ */
+define_function setEznoContentItemCount(integer count)
+{
+	set_length_array(enzoContent, count);
+}
+
+/**
+ * Gets the current number of content items cached.
+ */
+define_function integer getEnzoContentItemCount()
+{
+	return length_array(enzoContent);
+}
+
+/**
+ * Update the details for a tracked content item.
+ */
+define_function updateEnzoContentItem(integer id, char sourceKey[], char path[],
+	char name[], char type[], long size, char lastModified[], char readOnly)
+{
+	enzoContent[id].sourceKey = sourceKey;
+	enzoContent[id].path = path;
+	enzoContent[id].name = name;
+	enzoContent[id].type = type;
+	enzoContent[id].size = size;
+	enzoContent[id].lastModified = lastModified;
+	enzoContent[id].readOnly = readOnly;
+}
+
+/**
+ * Gets the path for a cached content item.
+ */
+define_function char[256] getEnzoContentItemPath(integer id)
+{
+	return enzoContent[id].path;
+}
+
+/**
+ * Gets the name for a cached content item.
+ */
+define_function char[128] getEnzoContentItemName(integer id)
+{
+	return enzoContent[id].name;
+}
+
+/**
+ * Gets the name for a cached content item.
+ */
+define_function char[128] getEnzoContentItemType(integer id)
+{
+	return enzoContent[id].type;
 }

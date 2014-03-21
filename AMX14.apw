@@ -848,6 +848,10 @@
 <FilePathName>src\huddle\include\huddleSourceManager.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>huddleUIManager</Identifier>
+<FilePathName>src\huddle\include\huddleUIManager.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>logger</Identifier>
 <FilePathName>src\huddle\include\logger.axi</FilePathName>
 <Comments></Comments>

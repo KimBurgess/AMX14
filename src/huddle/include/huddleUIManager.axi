@@ -8,13 +8,19 @@ define_variable
 
 constant char POPUP_AUTH[] = 'auth';
 
-constant char SOURCE_SUBPAGE_PREFEX[] = '[source]';
+constant char SUBPAGE_SOURCE_PREFEX[] = '[source]';
+constant char SUBPAGE_FILE_PREFIX[] = '[file]';
 
 constant integer BTN_SOURCE_SELECT[] = {1, 2, 3};
-
+constant integer BTN_LAUNCHER_USB = 4;
+constant integer BTN_LAUNCHER_DROPBOX = 5;
 constant integer BTN_SOURCES_SUBPAGE_VIEW = 10;
 
 constant integer BTN_END_SESSION = 13;
+
+constant integer BTN_FILE_LIST_SUBPAGE_VIEW = 19;
+constant integer BTN_FILE_LIST_UP = 20;
+constant integer BTN_FILE_LIST_ITEM[] = {21, 22, 23, 24, 25, 26, 26, 27, 28, 29, 30};
 
 
 define_function initUI()
@@ -59,7 +65,7 @@ define_function setSourceLauncherVisbible(char key[], char isVisible)
 		log(AMX_DEBUG, "'setting source launcher for ', key, ' visibility ',
 				bool_to_string(isVisible)");
 
-		subpageName = "SOURCE_SUBPAGE_PREFEX,key";
+		subpageName = "SUBPAGE_SOURCE_PREFEX,key";
 
 		if (isVisible)
 		{
@@ -90,6 +96,39 @@ define_function refreshSourceLauncherVisibility()
 	}
 }
 
+define_function setFileItemVisible(integer id, char isVisible)
+{
+	if (deviceIsOnline(dvTp))
+	{
+		stack_var char subpageName[16];
+
+		subpageName = "SUBPAGE_FILE_PREFIX,itoa(id)";
+
+		if (isVisible)
+		{
+			moderoShowSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW, subpageName, 1, 1);
+		}
+		else
+		{
+			moderoHideSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW, subpageName, 1);
+		}
+	}
+}
+
+define_function refreshFileList()
+{
+	stack_var integer i;
+
+	moderoHideAllSubpages(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW);
+
+	for (i = getEnzoContentItemCount(); i; i--)
+	{
+		setFileItemVisible(i, true);
+		moderoSetButtonText(dvTp, BTN_FILE_LIST_ITEM[i],
+				MODERO_BUTTON_STATE_ALL, getEnzoContentItemName(i));
+	}
+}
+
 
 define_event
 
@@ -103,7 +142,7 @@ data_event[dvTp]
 
 button_event[dvTp, BTN_SOURCE_SELECT]
 {
-	push:
+	release:
 	{
 		stack_var char sourceId;
 		sourceId = get_last(BTN_SOURCE_SELECT)
@@ -115,10 +154,51 @@ button_event[dvTp, BTN_SOURCE_SELECT]
 	}
 }
 
+button_event[dvTp, BTN_LAUNCHER_USB]
+{
+	release:
+	{
+		enzoSetContentSource(dvEnzo, getEnzoContentSourceKey(ENZO_CONTENT_SOURCE_USB));
+	}
+}
+
+button_event[dvTp, BTN_LAUNCHER_DROPBOX]
+{
+	release:
+	{
+		enzoSetContentSource(dvEnzo, getEnzoContentSourceKey(ENZO_CONTENT_SOURCE_DROPBOX));
+	}
+}
+
 button_event[dvTp, BTN_END_SESSION]
 {
 	push:
 	{
 		endSession();
+	}
+}
+
+button_event[dvTp, BTN_FILE_LIST_UP]
+{
+	release:
+	{
+		enzoSetContentPath(dvEnzo, ENZO_CONTENT_PATH_UP);
+	}
+}
+
+button_event[dvTp, BTN_FILE_LIST_ITEM]
+{
+	release:
+	{
+		stack_var integer index;
+		index = get_last(BTN_FILE_LIST_ITEM)
+		if (getEnzoContentItemType(index) == ENZO_CONTENT_TYPE_DIRECTORY)
+		{
+			enzoSetContentPath(dvEnzo, getEnzoContentItemPath(index));
+		}
+		else
+		{
+			enzoContentOpen(dvEnzo, getEnzoContentItemPath(index));
+		}
 	}
 }

@@ -4,6 +4,10 @@ program_name='huddleEnzoListener'
 #define INCLUDE_ENZO_NOTIFY_CONTENT_SOURCES
 #define INCLUDE_ENZO_NOTIFY_CONTENT_ERROR
 #define INCLUDE_ENZO_NOTIFY_CONTENT_SOURCE_COUNT
+#define INCLUDE_ENZO_NOTIFY_CONTENT_ITEMS_RECORD_COUNT
+#define INCLUDE_ENZO_NOTIFY_CONTENT_ITEMS_RECORD
+#define INCLUDE_ENZO_NOTIFY_CONTENT_PATH_CHANGED
+
 
 define_variable
 
@@ -80,6 +84,39 @@ define_function enzoNotifyContentError(dev enzo, char errorMessage[])
 				handleEnzoLogoutEvent();
 			}
 		}
+	}
+}
+
+define_function enzoNotifyContentItemsRecordCount(dev enzo,
+		integer relativeCount, integer absoluteCount)
+{
+	if (enzo == dvEnzo)
+	{
+		setEznoContentItemCount(relativeCount);
+	}
+}
+
+define_function enzoNotifyContentItemsRecord(dev enzo, integer relativeIndex,
+		integer absoluteIndex, char sourceId[], char path[], char name[],
+		char type[], long size, char lastModified[], char readOnly)
+{
+	if (enzo == dvEnzo)
+	{
+		updateEnzoContentItem(relativeIndex, sourceId, path, name, type, size,
+				lastModified, readOnly);
+
+		if (relativeIndex == getEnzoContentItemCount())
+		{
+			refreshFileList();
+		}
+	}
+}
+
+define_function enzoNotifyContentPathChanged(dev enzo, char sourceId[], char path[])
+{
+	if (enzo = dvEnzo)
+	{
+		enzoRequestContentItems(dvEnzo, 1, MAX_ENZO_CONTENT_ITEMS, false);
 	}
 }
 
