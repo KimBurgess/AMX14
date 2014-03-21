@@ -6,6 +6,8 @@ include 'amx-device-control'
 
 define_device
 
+dvSystem = 0:1:0
+
 // DVX Switcher Input/Outputs - Generic Identifiers
 dvDvxSwitcherMain         = 5002:DVX_PORT_MAIN:0
 // Video inputs
@@ -22,7 +24,19 @@ dvDvxSwitcherVideoOutput1 = 5002:DVX_PORT_VID_OUT_1:0
 // Audio outputs
 dvDvxSwitcherAudioOutput1 = 5002:DVX_PORT_AUD_OUT_1:0
 
+vdvRMS = 41001:1:0 // RMS Client (Duet Module)
 
+
+// RMS Client - NetLinx Adapter Module
+// This module includes the RMS client module 
+// and enables communication via SEND_COMMAND, 
+// SEND_STRINGS, CHANNELS, and LEVELS with the 
+// RMS Client.
+DEFINE_MODULE 'RmsNetLinxAdapter_dr4_0_0' mdlRMSNetLinx(vdvRMS)
+			  'RmsControlSystemMonitor' mdlRMSControlSys(vdvRMS, dvSystem)
+			  'RmsDvxSwitcherMonitor' mdlRMSDvxSwitch(vdvRMS)
+			  //'RmsTouchPanelMonitor' mdlRMSTouchPanel(vdvRMS, 
+			
 
 define_variable
 
@@ -51,7 +65,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 	   (dvx.videoInputs[dvDvxSwitcherVideoInput10.port].status != DVX_SIGNAL_STATUS_VALID_SIGNAL) and
 	   (dvx.switchStatusVideoOutputs[dvDvxSwitcherVideoOutput1.port] == dvDvxSwitcherVideoInput10.port))
 	{
-		sendString (0,'lost input 9 switching to input 10')
+		sendString (0,'lost input 10 switching to input 9')
 		dvxSwitchVideoOnly (dvDvxSwitcherMain, dvDvxSwitcherVideoInput9.Port , dvDvxSwitcherVideoOutput1.Port)	
 	}
 	
@@ -59,12 +73,12 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 			(dvx.videoInputs[dvDvxSwitcherVideoInput9.port].status != DVX_SIGNAL_STATUS_VALID_SIGNAL) and
 			(dvx.switchStatusVideoOutputs[dvDvxSwitcherVideoOutput1.port] == dvDvxSwitcherVideoInput9.port))
 	{
-		sendString (0,'lost input 10 switching to input 9')
+		sendString (0,'lost input 9 switching to input 10')
 		dvxSwitchVideoOnly (dvDvxSwitcherMain, dvDvxSwitcherVideoInput10.Port , dvDvxSwitcherVideoOutput1.Port)	
 	}
 	
 	//to see what is going on uncomment the feedback below
-	//sendString (0, "'[',itoa(dvxVideoInput.Number),':',itoa(dvxVideoInput.Port),':',itoa(dvxVideoInput.System),'] ',signalStatus")
+	sendString (0, "'[',itoa(dvxVideoInput.Number),':',itoa(dvxVideoInput.Port),':',itoa(dvxVideoInput.System),'] ',signalStatus")
 }
 
 
