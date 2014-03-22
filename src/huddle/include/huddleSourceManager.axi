@@ -135,6 +135,9 @@ define_function setActiveSource(char sourceId)
 	activeSource = sourceId;
 
 	updateButtonFeedbackState();
+
+	// Anchor the active source in the center of our subpage view
+	setSourceLauncherVisbible(getSourceKey(sourceId), true);
 }
 
 /**
