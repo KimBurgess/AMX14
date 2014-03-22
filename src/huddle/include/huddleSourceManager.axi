@@ -135,6 +135,8 @@ define_function setActiveSource(char sourceId)
 	activeSource = sourceId;
 
 	updateButtonFeedbackState();
+
+	anchorSourceLauncher(getSourceKey(activeSource));
 }
 
 /**

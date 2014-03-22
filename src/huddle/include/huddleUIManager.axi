@@ -74,13 +74,13 @@ define_function anchorSourceLauncher(char key[])
 /**
  * Sets the visibility state of a source launcher on our touch panel.
  */
-define_function setSourceLauncherVisbible(char key[], char isVisible)
+define_function setContentLauncherVisbible(char key[], char isVisible)
 {
 	if (deviceIsOnline(dvTp))
 	{
-		stack_var char subpageName[16];
+		stack_var char subpageName[32];
 
-		log(AMX_DEBUG, "'setting source launcher for ', key, ' visibility ',
+		log(AMX_DEBUG, "'setting content launcher for ', key, ' visibility ',
 				bool_to_string(isVisible)");
 
 		subpageName = "SUBPAGE_SOURCE_PREFEX,key";
@@ -103,19 +103,24 @@ define_function refreshSourceLauncherVisibility()
 {
 	stack_var char i;
 
+	log(AMX_DEBUG, 'refreshing source launcher visibility states');
+
 	for (i = NUM_SOURCES; i; i--)
 	{
-		setSourceLauncherVisbible(getSourceKey(i), isSourceAvailable(i));
+		setContentLauncherVisbible(getSourceKey(i), isSourceAvailable(i));
 	}
 
 	for (i = MAX_ENZO_CONTENT_SOURCES; i; i--)
 	{
-		setSourceLauncherVisbible(getEnzoContentSourceKey(i), isEnzoContentSourceAvailable(i));
+		setContentLauncherVisbible(getEnzoContentSourceKey(i), isEnzoContentSourceAvailable(i));
 	}
 
 	anchorSourceLauncher(getSourceKey(getActiveSource()));
 }
 
+/**
+ * Gets the icon reference for a passed file type.
+ */
 define_function char[32] getIconName(char fileType[])
 {
 	stack_var char mediaType[32];
@@ -160,7 +165,9 @@ define_function refreshFileList()
 	{
 		stack_var integer i;
 
-		moderoEnablePopup(dvTp, POPUP_FILE_BROWSER_LOADING);
+		// FIME this causes the popup to display briefly on device connect
+		// moderoEnablePopup(dvTp, POPUP_FILE_BROWSER_LOADING);
+		moderoSetButtonHide(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW);
 
 		moderoHideAllSubpages(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW);
 
@@ -178,7 +185,8 @@ define_function refreshFileList()
 			moderoShowSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW, subpageName, 0, 0);
 		}
 
-		moderoDisablePopup(dvTp, POPUP_FILE_BROWSER_LOADING);
+		//moderoDisablePopup(dvTp, POPUP_FILE_BROWSER_LOADING);
+		moderoSetButtonShow(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW);
 	}
 }
 

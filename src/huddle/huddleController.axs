@@ -75,8 +75,7 @@ define_function startSession()
 
 	hideAuthScreen();
 
-	// Re-anchor the enzo button so that it always appears front and center
-	setSourceLauncherVisbible(getSourceKey(SOURCE_ENZO), true);
+	refreshSourceLauncherVisibility()
 
 	setDisplayPower(true);
 	setActiveSource(SOURCE_ENZO);
@@ -179,7 +178,6 @@ define_function handlePushbuttonEvent(char isPushed)
 	else
 	{
 		cycleActiveSource();
-		anchorSourceLauncher(getSourceKey(getActiveSource()));
 	}
 }
 
@@ -227,7 +225,7 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 
 	updateButtonFeedbackState();
 
-	setSourceLauncherVisbible(getSourceKey(sourceId), hasSignal);
+	setContentLauncherVisbible(getSourceKey(sourceId), hasSignal);
 }
 
 /**
@@ -239,8 +237,7 @@ define_function handleEnzoContentSourceStatusEvent(integer sourceId, char isAvai
 			getEnzoContentSourceName(sourceId), ' [',
 			bool_to_string(isAvailable), ']'");
 
-
-	setSourceLauncherVisbible(getEnzoContentSourceKey(sourceId), isAvailable);
+	setContentLauncherVisbible(getEnzoContentSourceKey(sourceId), isAvailable);
 
 	hideFileBrowser();
 }

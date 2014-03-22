@@ -84,6 +84,25 @@ define_function char isEnzoContentSourceAvailable(integer sourceId)
 }
 
 /**
+ * Gets the number of content sources currently available.
+ */
+define_function integer getEnzoContentSourceAvailableCount()
+{
+	stack_var integer i;
+	stack_var integer activeSourceCount;
+
+	for (i = length_array(enzoSource); i; i--)
+	{
+		if (isEnzoContentSourceAvailable(i))
+		{
+			activeSourceCount++
+		}
+	}
+
+	return activeSourceCount;
+}
+
+/**
  * Sets the source available for consideration during switching requests.
  */
 define_function setEnzoContentSourceAvailable(integer sourceId, char isAvailable)
