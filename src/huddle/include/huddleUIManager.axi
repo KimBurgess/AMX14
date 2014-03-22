@@ -59,6 +59,19 @@ define_function hideAuthScreen()
 }
 
 /**
+ * Sets a source launcher icon to the achor position of our source list.
+ */
+define_function anchorSourceLauncher(char key[])
+{
+	if (deviceIsOnline(dvTp))
+	{
+		stack_var char subpageName[16];
+		subpageName = "SUBPAGE_SOURCE_PREFEX,key";
+		moderoShowSubpage(dvTp, BTN_SOURCES_SUBPAGE_VIEW, subpageName, 1, 10);
+	}
+}
+
+/**
  * Sets the visibility state of a source launcher on our touch panel.
  */
 define_function setSourceLauncherVisbible(char key[], char isVisible)
@@ -99,6 +112,8 @@ define_function refreshSourceLauncherVisibility()
 	{
 		setSourceLauncherVisbible(getEnzoContentSourceKey(i), isEnzoContentSourceAvailable(i));
 	}
+
+	anchorSourceLauncher(getSourceKey(getActiveSource()));
 }
 
 define_function char[32] getIconName(char fileType[])

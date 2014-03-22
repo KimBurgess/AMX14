@@ -179,6 +179,7 @@ define_function handlePushbuttonEvent(char isPushed)
 	else
 	{
 		cycleActiveSource();
+		anchorSourceLauncher(getSourceKey(getActiveSource()));
 	}
 }
 
