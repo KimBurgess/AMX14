@@ -10,6 +10,7 @@ define_variable
 constant char POPUP_AUTH[] = 'auth';
 constant char POPUP_FILE_BROWSER[] = 'fileBrowser';
 constant char POPUP_FILE_BROWSER_ERROR[] = 'fileBrowserError';
+constant char POPUP_FILE_BROWSER_LOADING[] = 'fileBrowserLoading';
 
 constant char SUBPAGE_SOURCE_PREFEX[] = '[source]';
 constant char SUBPAGE_FILE_PREFIX[] = '[file]';
@@ -123,7 +124,11 @@ define_function char[32] getIconName(char fileType[])
 				case 'pdf': iconName = 'pdf';
 			}
 		}
-		default: iconName = 'other';
+	}
+
+	if (!iconName)
+	{
+		iconName = 'other';
 	}
 
 	iconName = "'icon-', iconName, '.png'";
@@ -140,6 +145,8 @@ define_function refreshFileList()
 	{
 		stack_var integer i;
 
+		moderoEnablePopup(dvTp, POPUP_FILE_BROWSER_LOADING);
+
 		moderoHideAllSubpages(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW);
 
 		for (i = getEnzoContentItemCount(); i; i--)
@@ -155,6 +162,8 @@ define_function refreshFileList()
 
 			moderoShowSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW, subpageName, 0, 0);
 		}
+
+		moderoDisablePopup(dvTp, POPUP_FILE_BROWSER_LOADING);
 	}
 }
 
