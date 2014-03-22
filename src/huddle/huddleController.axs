@@ -214,6 +214,16 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 		}
 	}
 
+	// Autoswitch to a hot plugged source if the user is sitting on the enzo
+	// standby screen.
+	if (getActiveSource() == SOURCE_ENZO &&
+			getEnzoSessionActive() == false &&
+			isSessionActive() == true &&
+			hasSignal == true)
+	{
+		setActiveSource(sourceId);
+	}
+
 	updateButtonFeedbackState();
 
 	setSourceLauncherVisbible(getSourceKey(sourceId), hasSignal);
