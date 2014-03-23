@@ -52,6 +52,28 @@ integer BTN_DRAG_ITEM_SOURCE_DISPLAYPORT = 4
 // Drop Items
 integer BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A  = 11
 integer BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B  = 12
+integer BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A_DROP_ICON = 13
+integer BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B_DROP_ICON = 14
+
+integer BTN_DROP_AREA_19_PANEL_HIGHLIGHT_MONITOR_LEFT  = 61
+integer BTN_DROP_AREA_19_PANEL_HIGHLIGHT_MONITOR_RIGHT = 62
+
+integer BTN_DRAG_AND_DROP_INSTRUCTIONS_10 = 70
+
+/*
+ * --------------------
+ * Menu Selection Feedback button channel/address/level codes
+ * --------------------
+ */
+
+integer BTN_ADR_MENU_SELECT_MODE_PRESENTATION     = 2
+integer BTN_ADR_MENU_SELECT_MODE_VIDEO_CONFERENCE = 3
+integer BTN_ADR_MENU_SELECT_VC_DIAL_ADDRESS       = 31
+integer BTN_ADR_MENU_SELECT_VC_ADDRESS_BOOK       = 32
+integer BTN_ADR_MENU_SELECT_VC_CAMERA_CONTROL     = 33
+integer BTN_ADR_MENU_SELECT_VC_SHARE_CONTENT      = 34
+
+
 
 /*
  * --------------------
@@ -539,6 +561,18 @@ char DYNALITE_PROTOCOL_RECALL_PRESET_VC_MODE_2[]    = {$1C,$01,$64,$0B,$00,$00,$
 char DYNALITE_PROTOCOL_RECALL_PRESET_VC_MODE_3[]    = {$1C,$01,$64,$0C,$00,$00,$FF}
 char DYNALITE_PROTOCOL_RECALL_PRESET_VC_MODE_4[]    = {$1C,$01,$64,$0D,$00,$00,$FF}
 
+/*
+ * --------------------
+ * Lighting Preset Values
+ * --------------------
+ */
+
+integer LIGHTING_PRESET_VALUE_ALL_OFF           = 0
+integer LIGHTING_PRESET_VALUE_DIM               = 20
+integer LIGHTING_PRESET_VALUE_VC_MODE           = 60
+integer LIGHTING_PRESET_VALUE_PRESENTATION_MODE = 80
+integer LIGHTING_PRESET_VALUE_ALL_ON            = 100
+
 
 /*
  * --------------------
@@ -565,13 +599,24 @@ char LABELS_PDU_OUTLETS[][20]   =
  * --------------------
  */
 
-char PAGE_NAME_SPLASH_SCREEN[]                  = 'page-spash-screen'
-char PAGE_NAME_MAIN_USER[]                      = 'page-main-user'
-char POPUP_NAME_VIDEO_PREVIEW[]                 = 'popup-video-preview'
-char POPUP_NAME_VIDEO_LOADING[]                 = 'popup-video-loading'
-char POPUP_NAME_MESSAGE_QUERY_USER_LYNC_CALL[]  = 'popup-message-query-user-lync-call'
-char POPUP_NAME_SOURCE_SELECTION[]              = 'popup-source-selection-vAMX14'
+// 19" panel
+char PAGE_NAME_SPLASH_SCREEN[]                    = 'page-spash-screen'
+char PAGE_NAME_MAIN_USER[]                        = 'page-main-user'
+char POPUP_NAME_VIDEO_PREVIEW[]                   = 'popup-video-preview'
+char POPUP_NAME_VIDEO_LOADING[]                   = 'popup-video-loading'
+char POPUP_NAME_MESSAGE_QUERY_USER_LYNC_CALL[]    = 'popup-message-query-user-lync-call'
+char POPUP_NAME_SOURCE_SELECTION[]                = 'popup-source-selection-vAMX14'
+char POPUP_NAME_VIDEO_CONFERENCE_MAIN[]           = 'popup-video-conference'
+char POPUP_NAME_VIDEO_CONFERENCE_DIAL_ADDRESS[]   = 'vc-dial-address'
+char POPUP_NAME_VIDEO_CONFERENCE_ADDRESS_BOOK[]   = 'vc-camera-control'
+char POPUP_NAME_VIDEO_CONFERENCE_CAMERA_CONTROL[] = 'vc-dial-address'
+char POPUP_NAME_VIDEO_CONFERENCE_SHARE_CONTENT[]  = 'vc-share-content'
 
+// 10" panel
+char POPUP_NAME_CONTROLS_AUDIO[]    = 'audio-control'
+char POPUP_NAME_CONTROLS_LIGHTING[] = 'lighting-control'
+char PAGE_NAME_SPLASH[]             = 'splash'
+char PAGE_NAME_MAIN[]               = 'main'
 
 char POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1[]      = 'draggable-source-hdmi1'
 char POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_2[]      = 'draggable-source-hdmi2'
@@ -584,7 +629,14 @@ char POPUP_NAME_DRAGGABLE_SOURCE_TABLE_DISPLAYPORT[] = 'draggable-source-display
  * --------------------
  */
 
-char IMAGE_FILE_NAME_NO_IMAGE_ICON[]    = 'icon-novideo.png'
+char IMAGE_FILE_NAME_NO_IMAGE_ICON[]                                 = 'icon-novideo.png'
+char IMAGE_FILE_NAME_DROP_ICON_ROTATE_90_DEGREES_CLOCKWISE[]         = 'icon-drop-medium-rotate-90-degrees-clockwise-black.png'
+char IMAGE_FILE_NAME_DROP_ICON_ROTATE_90_DEGREES_COUNTER_CLOCKWISE[] = 'icon-drop-medium-rotate-90-degrees-counter-clockwise-black.png'
+
+char IMAGE_FILE_NAME_DRAG_AND_DROP_INSTRUCTIONS_DISPLAYPORT[] = 'dragAndDropInstructions-1.png'
+char IMAGE_FILE_NAME_DRAG_AND_DROP_INSTRUCTIONS_HDMI_1[]      = 'dragAndDropInstructions-4.png'
+char IMAGE_FILE_NAME_DRAG_AND_DROP_INSTRUCTIONS_HDMI_2[]      = 'dragAndDropInstructions-2.png'
+char IMAGE_FILE_NAME_DRAG_AND_DROP_INSTRUCTIONS_VGA[]         = 'dragAndDropInstructions-3.png'
 
 /*
  * --------------------

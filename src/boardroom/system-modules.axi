@@ -25,11 +25,12 @@ define_module
                                      btnsVideoSnapshotPreviews,          // address codes
                                      btnAdrsVideoSnapshotPreviews,       // address codes
                                      btnAdrsVideoInputLabels,            // address codes
-                                     btnAdrVideoPreviewLoadingMessage,     // address code
-                                     btnLoadingBarMultiState,              // channel code
-                                     btnAdrLoadingBar,                     // address code
-                                     btnAdrVideoPreviewWindow,             // address code
-                                     btnExitVideoPreview,                  // channel code
+                                     btnAdrsVideoOutputSnapshotPreviews, // address codes
+                                     btnAdrVideoPreviewLoadingMessage,   // address code
+                                     btnLoadingBarMultiState,            // channel code
+                                     btnAdrLoadingBar,                   // address code
+                                     btnAdrVideoPreviewWindow,           // address code
+                                     btnExitVideoPreview,                // channel code
                                      popupNameVideoPreview,
                                      imageFileNameNoVideo)
 
