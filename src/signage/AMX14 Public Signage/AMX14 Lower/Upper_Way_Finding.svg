@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generator: AMX InspiredSignage XPress -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" dur="indefinite" height="100%" viewBox="0 0 900 900" viewport-fill="none" width="100%" xml:id="svg">
+ <spx:properties xmlns:spx="http://www.spinetix.com/namespace/1.0/spx">
+  <spx:text name="Title" xlink:href="#title"/>
+  <spx:text name="Description" xlink:href="#desc"/>
+  <spx:choice choice-1="indefinite" choice-2="media" name="Duration" targetAttribute="dur" xlink:href="#svg"/>
+  <spx:color name="Background Color" targetAttribute="viewport-fill" xlink:href="#svg"/>
+  <spx:table defaultPage="yes" itemElement="g" name="Layers" tableElement="g" xlink:href="#layers">
+   <spx:media xmlns:svg="http://www.w3.org/2000/svg" element="g" layer="locked" name="Layers" positionable="yes" svg:display-align="center" svg:font-family="Arial" svg:font-size="64" svg:height="360" svg:preserveAspectRatio="xMidYMid" svg:repeatDur="indefinite" svg:text-align="center" svg:transform="translate(320,180)" svg:width="640" xml:id="media_1"/>
+  </spx:table>
+  <spx:group name="Document">
+   <spx:text name="Canvas Size" targetAttribute="viewBox" xlink:href="#svg"/>
+  </spx:group>
+  <spx:group name="New Layer">
+   <spx:text name="Default Width" targetAttribute="width" targetNamespace="http://www.w3.org/2000/svg" xlink:href="#media_1"/>
+   <spx:text name="Default Height" targetAttribute="height" targetNamespace="http://www.w3.org/2000/svg" xlink:href="#media_1"/>
+   <spx:text name="Default Position" targetAttribute="transform" targetNamespace="http://www.w3.org/2000/svg" xlink:href="#media_1"/>
+   <spx:choice choice-01="none" choice-02="xMidYMid" name="Default Aspect Ratio" targetAttribute="svg:preserveAspectRatio" xlink:href="#media_1"/>
+  </spx:group>
+ </spx:properties>
+ <title xml:id="title">New document
+</title>
+ <desc xml:id="desc">Multilayer Template
+</desc>
+ <g xml:id="layers">
+  <g>
+   <g xml:id="id60542">
+    <animation xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" begin="0s" display-align="center" dur="" fill="remove" font-family="Arial" font-size="64" height="240.0000" initialVisibility="whenStarted" preserveAspectRatio="xMidYMid" repeatCount="indefinite" repeatDur="indefinite" text-align="center" transform="matrix(-1.0000, 0.0000, 0.0000, 1.0000, 416.0000, 128.0000)" width="400.0000" xlink:href="Arrows/Arrow_1.svg" xml:id="id54969"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id5126">
+    <animation xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" begin="0s" display-align="center" dur="" fill="remove" font-family="Arial" font-size="64" height="240.0000" initialVisibility="whenStarted" preserveAspectRatio="xMidYMid" repeatCount="indefinite" repeatDur="indefinite" text-align="center" transform="matrix(-1.0000, 0.0000, 0.0000, 1.0000, 864.0000, 128.0000)" width="400.0000" xlink:href="Arrows/Arrow_2.svg" xml:id="id53713"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id16430">
+    <animation xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" begin="0s" display-align="center" dur="" fill="remove" font-family="Arial" font-size="64" height="248.0001" initialVisibility="whenStarted" preserveAspectRatio="xMidYMid" repeatCount="indefinite" repeatDur="indefinite" text-align="center" transform="matrix(-1.0000, 0.0000, 0.0000, 1.0000, 416.0000, 623.9999)" width="400.0000" xlink:href="Arrows/Arrow_3.svg" xml:id="id51977"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id32054">
+    <animation xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" begin="0s" display-align="center" dur="" fill="remove" font-family="Arial" font-size="64" height="248.0001" initialVisibility="whenStarted" preserveAspectRatio="xMidYMid" repeatCount="indefinite" repeatDur="indefinite" text-align="center" transform="matrix(-1.0000, 0.0000, 0.0000, 1.0000, 863.9999, 623.9999)" width="400.0000" xlink:href="Arrows/Arrow_4.svg" xml:id="id11361"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id60725">
+    <animation xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" begin="0s" display-align="center" dur="" fill="remove" font-family="Arial" font-size="64" height="239.9998" initialVisibility="whenStarted" preserveAspectRatio="xMidYMid" repeatCount="indefinite" repeatDur="indefinite" text-align="center" transform="matrix(0.0000, 1.0000, -1.0000, 0.0000, 559.9998, 304.0000)" width="400.0001" xlink:href="Arrows/Arrow_5.svg" xml:id="id53322"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id67315">
+    <textArea display-align="center" fill="#ffffff" font-family="Proxima Nova" font-size="77.000000" font-style="normal" font-variant="normal" font-weight="normal" height="96.0000" preserveAspectRatio="xMidYMid" text-align="center" transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, 0.0000, 0.0000)" width="895.9999" xml:id="id94012" xml:space="preserve">Session Location</textArea>
+</g>
+  </g>
+ </g>
+</svg>
