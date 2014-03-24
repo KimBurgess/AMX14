@@ -166,8 +166,7 @@ define_function refreshFileList()
 		stack_var integer i;
 
 		// FIME this causes the popup to display briefly on device connect
-		// moderoEnablePopup(dvTp, POPUP_FILE_BROWSER_LOADING);
-		moderoSetButtonHide(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW);
+		moderoEnablePopup(dvTp, POPUP_FILE_BROWSER_LOADING);
 
 		moderoHideAllSubpages(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW);
 
@@ -185,8 +184,7 @@ define_function refreshFileList()
 			moderoShowSubpage(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW, subpageName, 0, 0);
 		}
 
-		//moderoDisablePopup(dvTp, POPUP_FILE_BROWSER_LOADING);
-		moderoSetButtonShow(dvTp, BTN_FILE_LIST_SUBPAGE_VIEW);
+		moderoDisablePopup(dvTp, POPUP_FILE_BROWSER_LOADING)
 	}
 }
 
