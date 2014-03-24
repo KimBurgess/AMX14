@@ -3,6 +3,8 @@ program_name='system-variables'
 #if_not_defined __SYSTEM_VARIABLES__
 #define __SYSTEM_VARIABLES__
 
+#include 'system-devices'
+#include 'system-structures'
 #include 'system-constants'
 
 /*
@@ -240,7 +242,8 @@ persistent integer waitTimeCameraAdjustingToPreset1Pan      = 24
 persistent integer waitTimeCameraAdjustingToPreset1Tilt     = 18
 persistent integer waitTimeCameraAdjustingToPreset1Zoom     = 10
 persistent integer waitTimeCameraAdjustingToPreset1Focus    = 0
-
+persistent integer waitTimeLightingUpdateFromBargraph       = 2
+persistent integer waitTimeRoomVacancy                      = 100
 
 
 
@@ -296,6 +299,14 @@ integer btnAdrsVideoInputLabels[DVX_MAX_VIDEO_INPUTS] =
 	50
 }
 
+integer btnAdrsVideoOutputSnapshotPreviews[DVX_MAX_VIDEO_OUTPUTS] = 
+{
+	201,
+	0,
+	202,
+	0
+}
+
 integer btnAdrVideoPreviewLoadingMessage = 30
 
 integer btnLoadingBarMultiState = 32
@@ -327,6 +338,15 @@ _area dropAreaRightOrientationMonitorRight
 // drag item areas
 _area dragAreas10[DVX_MAX_VIDEO_INPUTS]
 
+// draggable popups for 19" panel
+char draggablePopups19[DVX_MAX_VIDEO_INPUTS][40]
+char draggablePopups10[DVX_MAX_VIDEO_INPUTS][40]
+
+char blockDraggablePopups10[DVX_MAX_VIDEO_INPUTS][40]
+
+integer lightingDelaySecondsFromBargraphAdjust = 2
+
+integer systemMode
 
 /*
  * --------------------

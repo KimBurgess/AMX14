@@ -17,24 +17,522 @@ program_name='system-functions'
  * --------------------
  */
 
-define_function showDragAndDropPopups (dev panel)
+
+define_function resetDraggablePopup (dev dragAndDropVirtual, integer id)
 {
-	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','showDragAndDropPopups (dev panel)'"
+	hideDraggablePopup (dragAndDropVirtual, id)
+	showDraggablePopup (dragAndDropVirtual, id)
+}
+
+define_function hideDraggablePopup (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			moderoDisablePopup (dvTpDragAndDrop19, draggablePopups19[id])
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			moderoDisablePopup (dvTpDragAndDrop10, draggablePopups10[id])
+		}
+	}
+}
+
+define_function hideAllDraggablePopups (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn1.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn5.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn6.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn7.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn8.port)
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableVga.port)
+		}
+	}
+}
+
+define_function showDraggablePopup (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			moderoEnablePopup (dvTpDragAndDrop19, draggablePopups19[id])
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			moderoEnablePopup (dvTpDragAndDrop10, draggablePopups10[id])
+		}
+	}
+}
+
+define_function showDraggablePopupsAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn1.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn5.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn6.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn7.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn8.port)
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableVga.port)
+		}
+	}
+}
+
+
+
+/*define_function showDragAndDropPopups (dev panel)
+{
 	if (panel == dvTpTableMain)
 	{
 		stack_var integer i
 		
-		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::'"
 		for (i=1; i<=DVX_MAX_VIDEO_INPUTS; i++)
 		{
-			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::i = ',itoa(i)"
 			if (dragAreas19[i].height and dragAreas19[i].width and dragAreas19[i].left and dragAreas19[i].top)
 			{
-				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (true); i = ',itoa(i)"
 				moderoEnablePopup (panel, "'draggable-source-',itoa(i)")
 			}
 		}
 	}
+}*/
+
+define_function blockDragItem (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			moderoEnablePopup (dvTpDragAndDrop10, blockDraggablePopups10[id])
+		}
+	}
+}
+
+define_function unblockDragItem (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			moderoDisablePopup (dvTpDragAndDrop10, blockDraggablePopups10[id])
+		}
+	}
+}
+
+define_function unblockDragItemsAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			unblockDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			unblockDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			unblockDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			unblockDragItem (vdvDragAndDrop10, dvDvxVidInTableVga.port)
+		}
+	}
+}
+
+define_function addDragItem (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			sendCommand (vdvDragAndDrop19, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas19[id])")
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			sendCommand (vdvDragAndDrop10, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas10[id])")
+		}
+	}
+}
+
+define_function addDragItemsAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			addDragItem (vdvDragAndDrop19, dvDvxVidIn1.port)
+			addDragItem (vdvDragAndDrop19, dvDvxVidIn5.port)
+			addDragItem (vdvDragAndDrop19, dvDvxVidIn6.port)
+			addDragItem (vdvDragAndDrop19, dvDvxVidIn7.port)
+			addDragItem (vdvDragAndDrop19, dvDvxVidIn8.port)
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			addDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			addDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			addDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			addDragItem (vdvDragAndDrop10, dvDvxVidInTableVga.port)
+		}
+	}
+}
+
+define_function enableDragItem (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			sendCommand (vdvDragAndDrop19, "'ACTIVATE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas19[id])")
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			sendCommand (vdvDragAndDrop10, "'ACTIVATE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreas10[id])")
+		}
+	}
+}
+
+define_function enableDragItemsAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			enableDragItem (vdvDragAndDrop19, dvDvxVidIn1.port)
+			enableDragItem (vdvDragAndDrop19, dvDvxVidIn5.port)
+			enableDragItem (vdvDragAndDrop19, dvDvxVidIn6.port)
+			enableDragItem (vdvDragAndDrop19, dvDvxVidIn7.port)
+			enableDragItem (vdvDragAndDrop19, dvDvxVidIn8.port)
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			enableDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			enableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			enableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			enableDragItem (vdvDragAndDrop10, dvDvxVidInTableVga.port)
+		}
+	}
+}
+
+
+define_function disableDragItem (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			sendCommand (vdvDragAndDrop19, "'DEACTIVATE_DRAG_ITEM-',itoa(id)")
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			sendCommand (vdvDragAndDrop10, "'DEACTIVATE_DRAG_ITEM-',itoa(id)")
+		}
+	}
+}
+
+
+define_function disableDragItemsAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			disableDragItem (vdvDragAndDrop19, dvDvxVidIn1.port)
+			disableDragItem (vdvDragAndDrop19, dvDvxVidIn5.port)
+			disableDragItem (vdvDragAndDrop19, dvDvxVidIn6.port)
+			disableDragItem (vdvDragAndDrop19, dvDvxVidIn7.port)
+			disableDragItem (vdvDragAndDrop19, dvDvxVidIn8.port)
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			disableDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			disableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			disableDragItem (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			disableDragItem (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+		}
+	}
+}
+
+define_function disableDropArea (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			sendCommand (vdvDragAndDrop19, "'DEACTIVATE_DROP_AREA-',itoa(id)")
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			sendCommand (vdvDragAndDrop10, "'DEACTIVATE_DROP_AREA-',itoa(id)")
+		}
+	}
+}
+
+define_function disableDropAreasAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			disableDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorLeft.port)
+			disableDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorRight.port)
+			disableDropArea (vdvDragAndDrop19, dvDvxVidOutMultiPreview.port)
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			disableDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorLeft.port)
+			disableDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorRight.port)
+		}
+	}
+}
+
+define_function addDropArea (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			sendCommand (vdvDragAndDrop19, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(id, dropAreas19[id])")
+		}
+		
+		/*active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(id, dropAreas10[id])")
+		}*/
+	}
+}
+
+
+define_function addDropAreasAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			addDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorLeft.port)
+			addDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorRight.port)
+			addDropArea (vdvDragAndDrop19, dvDvxVidOutMultiPreview.port)
+		}
+		
+		/*active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			addDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorLeft.port)
+			addDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorRight.port)
+		}*/
+	}
+}
+
+define_function enableDropArea (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			sendCommand (vdvDragAndDrop19, "'ACTIVATE_DROP_AREA-',itoa(id)")
+		}
+		
+		// do not handle 10" panel in this function.
+		// the 10" is a special case as the index number of the drodAreas array does not necessary correlate to the output number of the dvx.
+		/*active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(id, dropAreas10[id])")
+		}*/
+	}
+}
+
+define_function enableDropItemsAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{
+			enableDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorLeft.port)
+			enableDropArea (vdvDragAndDrop19, dvDvxVidOutMonitorRight.port)
+			enableDropArea (vdvDragAndDrop19, dvDvxVidOutMultiPreview.port)
+		}
+		
+		// do not handle 10" panel in this function.
+		// the 10" is a special case as the index number of the drodAreas array does not necessary correlate to the output number of the dvx.
+		/*active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			enableDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorLeft.port)
+			enableDropArea (vdvDragAndDrop10, dvDvxVidOutMonitorRight.port)
+		}*/
+	}
+}
+
+define_function turnOnDisplay (dev virtual)
+{
+	snapiDisplayEnablePower (virtual)
+}
+
+define_function turnOffDisplay (dev virtual)
+{
+	snapiDisplayDisablePower (virtual)
+}
+
+define_function turnOnDisplaysAll ()
+{
+	turnOnDisplay (vdvMonitorLeft)
+	turnOnDisplay (vdvMonitorRight)
+}
+
+define_function turnOffDisplaysAll ()
+{
+	turnOffDisplay (vdvMonitorLeft)
+	turnOffDisplay (vdvMonitorRight)
+}
+
+define_function enableVideoPreview (integer input)
+{
+	sendCommand (vdvMultiPreview, "'START_VIDEO_PREVIEW-',itoa(input)")
+}
+
+define_function disableVideoPreview ()
+{
+	sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
+}
+
+define_function showSourceOnDisplay (integer input, integer output)
+{
+	// switch the video
+	dvxSwitchVideoOnly (dvDvxMain, input, output)
+	
+	// disable any test patterns on the output of the dvx
+	// turn on the monitor
+	select
+	{
+		active (output == dvDvxVidOutMonitorLeft.port):
+		{
+			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorLeft, DVX_TEST_PATTERN_OFF)
+			turnOnDisplay (vdvMonitorLeft)
+		}
+		
+		active (output == dvDvxVidOutMonitorRight.port):
+		{
+			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorRight, DVX_TEST_PATTERN_OFF)
+			turnOnDisplay (vdvMonitorRight)
+		}
+	}
+	
+	// set flag to indicate that system is in use
+	setFlagAvSystemInUse (TRUE)
+}
+
+define_function setFlagAvSystemInUse (integer boolean)
+{
+	isSystemAvInUse = boolean
+}
+
+define_function setSystemMode (integer mode)
+{
+	systemMode = mode
+}
+
+define_function integer getSystemMode ()
+{
+	return systemMode
+}
+
+
+define_function selectVcMode ()
+{
+	// show VC main on left display and VC 2nd (camera) on right display
+	showSourceOnDisplay (dvDvxVidInVcMain.port, dvDvxVidOutMonitorLeft.port)
+	showSourceOnDisplay (dvDvxVidInVcCamera.port, dvDvxVidOutMonitorRight.port)
+		
+	// set lighting to vc preset
+	lightsEnablePresetVideoConference()
+	
+	// set audio for both outputs to follow VC main
+	
+	// hide draggable popups on 19" panel
+	hideAllDraggablePopups (vdvDragAndDrop19)
+	
+	// disable all drag items on 19" panel
+	disableDragItemsAll (vdvDragAndDrop19)
+	
+	// turn off the drag and drop expanded drop area animation channel on the 19" panel
+	channelOff (dvTpTableDebug, 1)
+	
+	// stop live video streaming from the MPL
+	disableVideoPreview ()
+	
+	// apply feedback to vc mode select button
+	channelOn (dvTpTableMain, BTN_MAIN_VIDEO_CONFERENCE)
+	
+	// set flag to indicate that system is in use
+	setFlagAvSystemInUse (TRUE)
+
+	// lastly, update the system mode variable
+	setSystemMode (SYSTEM_MODE_VIDEO_CONFERENCE)
+}
+
+define_function selectPresentationMode ()
+{
+	// set lighting to presentation preset
+	lightsEnablePresetPresentation()
+	
+	// if not already in presentation mode:
+	if (getSystemMode() != SYSTEM_MODE_PRESENTATION)
+	{
+		//	- hide all popups
+		#warn '@TODO'
+		
+		//	- flip to user page
+		#warn '@TODO'
+		
+		// if coming out of VC mode
+		if (getSystemMode() == SYSTEM_MODE_VIDEO_CONFERENCE)
+		{
+			dvxSwitch (dvDvxMain, SIGNAL_TYPE_VIDEO, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
+			dvxSwitch (dvDvxMain, SIGNAL_TYPE_VIDEO, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
+			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorLeft, DVX_TEST_PATTERN_LOGO_2)
+			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorRight, DVX_TEST_PATTERN_LOGO_2)
+		}
+	}
+	
+	//	- show all draggable popups on 19" panel
+	showDraggablePopupsAll (vdvDragAndDrop19)
+	
+	// enable all drag items on 19" panel
+	enableDragItemsAll (vdvDragAndDrop19)
+	
+	// turn off the drag and drop expanded drop area animation channel on the 19" panel
+	channelOff (dvTpTableDebug, 1)
+	
+	// stop live video streaming from the MPL
+	disableVideoPreview ()
+	
+	// apply feedback to presentation mode select button
+	channelOn (dvTpTableMain, BTN_MAIN_PRESENTATION)
+
+	// lastly, update the system mode variable
+	setSystemMode (SYSTEM_MODE_PRESENTATION)
 }
 
 define_function initArea (_area area, integer left, integer top, integer width, integer height)
@@ -61,69 +559,7 @@ define_function recallCameraPreset (integer cameraPreset)
 	}
 }
 */
-/*
-define_function startMultiPreviewSnapshots ()
-{
-	if (!isVideoBeingPreviewed)
-	{
-		stack_var integer i
-		stack_var integer isAtLeastOneValidSignal
-		
-		isAtLeastOneValidSignal = FALSE
-		
-		// reset all timeline times back to zero
-		for (i = 1; i<= max_length_array(timelineTimesMultiPreviewSnapshots); i++)
-		{
-			if (dvx.videoInputs[i].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)
-			{
-				timelineTimesMultiPreviewSnapshots[i] = timelineTimeMplBetweenSwitches
-				isAtLeastOneValidSignal = TRUE
-			}
-			else
-			{
-				timelineTimesMultiPreviewSnapshots[i] = 0
-			}
-		}
-		
-		if (isAtLeastOneValidSignal)
-		{
-			if (!timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))
-			{
-				set_length_array (timelineTimesMultiPreviewSnapshots, max_length_array(timelineTimesMultiPreviewSnapshots))
-				
-				timeline_create (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS,
-						timelineTimesMultiPreviewSnapshots,
-						length_array (timelineTimesMultiPreviewSnapshots),
-						timeline_relative,
-						timeline_repeat)
-			}
-			else
-			{
-				CANCEL_WAIT 'WAIT_MULTI_PREVIEW_SNAPSHOT'
-				timeline_reload (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS, timelineTimesMultiPreviewSnapshots, length_array(timelineTimesMultiPreviewSnapshots))
-			}
-		}
-		else
-		{
-			if (timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))
-			{
-				timeline_kill (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)
-				CANCEL_WAIT 'WAIT_MULTI_PREVIEW_SNAPSHOT'
-			}
-		}
-	}
-}
 
-
-define_function stopMultiPreviewSnapshots ()
-{
-	if (timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))
-	{
-		timeline_kill (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)
-		CANCEL_WAIT 'WAIT_MULTI_PREVIEW_SNAPSHOT'
-	}
-}
-*/
 
 define_function shutdownAvSystem ()
 {
@@ -141,8 +577,9 @@ define_function shutdownAvSystem ()
 	sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
 	
 	// Video - Turn the monitors off and switch input "none" to the monitor and multi-preview outputs on the DVX
-	necMonitorSetPowerOff (vdvMonitorLeft)
-	necMonitorSetPowerOff (vdvMonitorRight)
+	snapiDisplayDisablePower (vdvMonitorLeft)
+	snapiDisplayDisablePower (vdvMonitorRight)
+	
 	dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
 	dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
 	dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMultiPreview.port)
@@ -152,12 +589,8 @@ define_function shutdownAvSystem ()
 	dvxSetAudioOutputVolume (dvDvxAudOutSpeakers, volumeDefault)
 	dvxDisableAudioOutputMute (dvDvxAudOutSpeakers)
 	
-	// stop taking snapshots (no point constantly switching on the DVX anymore)
-	//stopMultiPreviewSnapshots ()
-	
 	// reset Camera position
 	irPulse (dvPtzCam, CAM1_HOME)
-	
 	
 	// set flag to indicate that system is not in use
 	isSystemAvInUse = FALSE
@@ -167,6 +600,7 @@ define_function shutdownAvSystem ()
 	selectedVideoInputMonitorRight = FALSE
 	selectedAudioInput = FALSE
 	audioFollowingVideoOutput = FALSE
+	setSystemMode (SYSTEM_MODE_AV_OFF)
 }
 
 
@@ -186,30 +620,6 @@ define_function shutdownAvSystem ()
  */
 define_function tableInputDetected (dev dvTxVidIn)
 {
-	#warn '@BUG: amx-au-gc-boardroom-main'
-	
-	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','tableInputDetected (dev dvTxVidIn)'"
-	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::','dvTxVidIn = ',itoa(dvTxVidIn.number),':',itoa(dvTxVidIn.port),':',itoa(dvTxVidIn.system)"
-	/*
-	 * --------------------
-	 * This code running as expected but the MFTX is reporting a valid signal twice when a new input is plugged in.
-	 * 
-	 * The result is that this function is getting called twice.
-	 * 
-	 * If a new laptop input is plugged in when the system is off this function gets called the first time the MFTX reports
-	 * a valid signal and routes the newly found laptop video to the left monitor.
-	 * 
-	 * But then the MFTX reports a valid signal again so this function gets called again. This time teh system is already on
-	 * and nothing is routed to the right monitor so this function sends the laptop to the right monitor.
-	 * 
-	 * In effect, what the user sees is that when the plug in their laptop it comes on on both screens.
-	 * 
-	 * Not really an issue as far as the user is concerned (they may think the system is designed to do just that) but it's
-	 * not what I want to happen!
-	 * --------------------
-	 */
-	
-	
 	cancel_wait 'WAITING_TO_MAKE_SURE_ROOM_IS_EMPTY'
 	
 	if (!isSystemAvInUse)
@@ -218,21 +628,6 @@ define_function tableInputDetected (dev dvTxVidIn)
 		
 		input = dvTxVidIn.port
 		
-		/*select
-		{
-			active (dvTxVidIn == dvTxTable1VidInDigital):    input = dvDvxVidInTx1.port
-			active (dvTxVidIn == dvTxTable1VidInAnalog):     input = dvDvxVidInTx1.port
-			
-			active (dvTxVidIn == dvTxTable2VidInDigital):    input = dvDvxVidInTx2.port
-			active (dvTxVidIn == dvTxTable2VidInAnalog):     input = dvDvxVidInTx2.port
-			
-			active (dvTxVidIn == dvTxTable3VidInDigital):    input = dvDvxVidInTx3.port
-			active (dvTxVidIn == dvTxTable3VidInAnalog):     input = dvDvxVidInTx3.port
-			
-			active (dvTxVidIn == dvTxTable4VidInDigital):    input = dvDvxVidInTx4.port
-			active (dvTxVidIn == dvTxTable4VidInAnalog):     input = dvDvxVidInTx4.port
-		}*/
-		
 		// route the DVX input for this TX to the DVX output for the left monitor
 		dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorLeft.port)
 		// route the audio from the DVX input for this TX to the DVX output for the speakers
@@ -240,20 +635,11 @@ define_function tableInputDetected (dev dvTxVidIn)
 		// set the flag to show that the audio is following the left screen
 		audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
 		
-		// lower the shades, raise the blockouts
-		amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_CORNER_WINDOW_UP)
-		amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_WALL_WINDOW_UP)
-		amxRelayPulse (dvRelaysRelBox, REL_SHADES_CORNER_WINDOW_DN)
-		amxRelayPulse (dvRelaysRelBox, REL_SHADES_WALL_WINDOW_DN)
-		
 		// set up a nice lighting atmosphere for viewing the video
-		lightsSetLevelWithFade (LIGHTING_ADDRESS_BOARDROOM, LIGHTING_LEVEL_40_PERCENT,5)
-		
-		// Set lights to "all on" mode as people have entered the room
-		lightsEnablePresetAllOn ()
+		lightsEnablePresetPresentation ()
 		
 		// turn on the left monitor
-		necMonitorSetPowerOn (vdvMonitorLeft)
+		snapiDisplayEnablePower (vdvMonitorLeft)
 		
 		// wake up the touch panel
 		moderoWake (dvTpTableMain)
@@ -262,124 +648,87 @@ define_function tableInputDetected (dev dvTxVidIn)
 		moderoSetPage (dvTpTableMain, PAGE_NAME_MAIN_USER)
 		// show the source selection / volume control page
 		moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_SELECTION)
-		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::'"
-		showDragAndDropPopups (dvTpTableMain)
+		// show the drag and drop draggable popups on the 19" panel
+		showDraggablePopupsAll (vdvDragAndDrop19)
 		
 		// set the flag to show that the AV system is now in use
 		isSystemAvInUse = TRUE
+		setSystemMode (SYSTEM_MODE_PRESENTATION)
 	}
-	// system is in use - is there a monitor not being used?
-	else if (selectedVideoInputMonitorLeft == DVX_PORT_VID_IN_NONE)
+	// system is in use
+	else
 	{
-		stack_var integer input
-		
-		select
+		if (getSystemMode() == SYSTEM_MODE_PRESENTATION)
 		{
-			active (dvTxVidIn == dvTxTable1VidInDigital):    input = dvDvxVidInTx1.port
-			active (dvTxVidIn == dvTxTable1VidInAnalog):     input = dvDvxVidInTx1.port
-			
-			active (dvTxVidIn == dvTxTable2VidInDigital):    input = dvDvxVidInTx2.port
-			active (dvTxVidIn == dvTxTable2VidInAnalog):     input = dvDvxVidInTx2.port
-			
-			active (dvTxVidIn == dvTxTable3VidInDigital):    input = dvDvxVidInTx3.port
-			active (dvTxVidIn == dvTxTable3VidInAnalog):     input = dvDvxVidInTx3.port
-			
-			active (dvTxVidIn == dvTxTable4VidInDigital):    input = dvDvxVidInTx4.port
-			active (dvTxVidIn == dvTxTable4VidInAnalog):     input = dvDvxVidInTx4.port
+			// is there a monitor not being used?
+			if (selectedVideoInputMonitorLeft == DVX_PORT_VID_IN_NONE)
+			{
+				stack_var integer input
+				
+				input = dvTxVidIn.port
+				
+				// route the DVX input for this TX to the DVX output for the left monitor
+				dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorLeft.port)
+				
+				/*moderoButtonCopyAttribute (dvTpTableVideo, 
+				                           PORT_TP_VIDEO, 
+				                           btnAdrsVideoSnapshotPreviews[input], 
+				                           MODERO_BUTTON_STATE_OFF,
+				                           BTN_ADR_VIDEO_MONITOR_LEFT_PREVIEW_SNAPSHOT, 
+				                           MODERO_BUTTON_STATE_ALL,
+				                           MODERO_BUTTON_ATTRIBUTE_BITMAP)*/
+				
+				// audio
+				if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
+					  ((audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port) and (signalStatusDvxInputMonitorRight != DVX_SIGNAL_STATUS_VALID_SIGNAL))  )
+				{
+					audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
+				}
+				
+				if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
+				{
+					dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
+				}
+				
+				// turn on the left monitor
+				snapiDisplayEnablePower (vdvMonitorLeft)
+			}
+			else if (selectedVideoInputMonitorRight == DVX_PORT_VID_IN_NONE)
+			{
+				stack_var integer input
+				
+				input = dvTxVidIn.port
+				
+				// route the DVX input for this TX to the DVX output for the right monitor
+				dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorRight.port)
+				
+				/*moderoButtonCopyAttribute (dvTpTableVideo, 
+				                           PORT_TP_VIDEO, 
+				                           btnAdrsVideoSnapshotPreviews[input], 
+				                           MODERO_BUTTON_STATE_OFF,
+				                           BTN_ADR_VIDEO_MONITOR_RIGHT_PREVIEW_SNAPSHOT, 
+				                           MODERO_BUTTON_STATE_ALL,
+				                           MODERO_BUTTON_ATTRIBUTE_BITMAP)*/
+				
+				// audio
+				if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
+					  ((audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port) and (signalStatusDvxInputMonitorLeft != DVX_SIGNAL_STATUS_VALID_SIGNAL))    )
+				{
+					audioFollowingVideoOutput = dvDvxVidOutMonitorRight.port
+				}
+				
+				if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
+				{
+					dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
+				}
+				
+				// turn on the right monitor
+				snapiDisplayEnablePower (vdvMonitorRight)
+			}
 		}
-		
-		// route the DVX input for this TX to the DVX output for the left monitor
-		dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorLeft.port)
-		
-		// audio
-		if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
-		      ((audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port) and (signalStatusDvxInputMonitorRight != DVX_SIGNAL_STATUS_VALID_SIGNAL))  )
-		{
-			audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
-		}
-		
-		if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
-		{
-			dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
-		}
-		
-		// turn on the left monitor
-		necMonitorSetPowerOn (vdvMonitorLeft)
-	}
-	else if (selectedVideoInputMonitorRight == DVX_PORT_VID_IN_NONE)
-	{
-		stack_var integer input
-		
-		select
-		{
-			active (dvTxVidIn == dvTxTable1VidInDigital):    input = dvDvxVidInTx1.port
-			active (dvTxVidIn == dvTxTable1VidInAnalog):     input = dvDvxVidInTx1.port
-			
-			active (dvTxVidIn == dvTxTable2VidInDigital):    input = dvDvxVidInTx2.port
-			active (dvTxVidIn == dvTxTable2VidInAnalog):     input = dvDvxVidInTx2.port
-			
-			active (dvTxVidIn == dvTxTable3VidInDigital):    input = dvDvxVidInTx3.port
-			active (dvTxVidIn == dvTxTable3VidInAnalog):     input = dvDvxVidInTx3.port
-			
-			active (dvTxVidIn == dvTxTable4VidInDigital):    input = dvDvxVidInTx4.port
-			active (dvTxVidIn == dvTxTable4VidInAnalog):     input = dvDvxVidInTx4.port
-		}
-		
-		// route the DVX input for this TX to the DVX output for the right monitor
-		dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorRight.port)
-		
-		// audio
-		if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
-		      ((audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port) and (signalStatusDvxInputMonitorLeft != DVX_SIGNAL_STATUS_VALID_SIGNAL))    )
-		{
-			audioFollowingVideoOutput = dvDvxVidOutMonitorRight.port
-		}
-		
-		if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
-		{
-			dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
-		}
-		
-		// turn on the right monitor
-		necMonitorSetPowerOn (vdvMonitorRight)
 	}
 }
 
-/*
-define_function loadVideoPreviewWindow (dev dvDvxVidInPort)
-{
-	// kill the multi-preview snapshot timeline
-	//stopMultiPreviewSnapshots ()
-	
-	// turn on the video being previed flag
-	ON [isVideoBeingPreviewed]
-	
-	// delete video snapshot on the video preview button
-	moderoDeleteButtonVideoSnapshot (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL)
-	
-	moderoDisableButtonFeedback (dvTpTableVideo, BTN_VIDEO_PREVIEW_LOADING_BAR)    // reset the loading progress bar
-	
-	moderoSetButtonOpacity (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_INVISIBLE)
-	//moderoSetButtonHide (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW)
-	moderoSetButtonShow (dvTpTableVideo, BTN_ADR_VIDEO_LOADING_PREVIEW)
-	moderoSetButtonShow (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_LOADING_BAR)
-	
-	moderoEnablePopup (dvTpTableVideo, POPUP_NAME_VIDEO_PREVIEW)
-	
-	moderoEnableButtonFeedback (dvTpTableVideo, BTN_VIDEO_PREVIEW_LOADING_BAR) //start the loading progress bar
-	
-	dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInPort.port, dvDvxVidOutMultiPreview.port)
-	
-	CANCEL_WAIT 'WAIT_HIDE_VIDEO_LOADING_BUTTON'
-	WAIT waitTimeVideoLoading 'WAIT_HIDE_VIDEO_LOADING_BUTTON'
-	{
-		moderoSetButtonHide (dvTpTableVideo, BTN_ADR_VIDEO_LOADING_PREVIEW)
-		moderoSetButtonHide (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_LOADING_BAR)
-		//moderoSetButtonShow (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW)
-		moderoSetButtonOpacity (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_OPAQUE)
-	}
-}
-*/
 
 
 /*
@@ -388,32 +737,45 @@ define_function loadVideoPreviewWindow (dev dvDvxVidInPort)
  * --------------------
  */
 
+define_function lightsEnablePreset (integer lightingLevel, integer fadeTimeInSeconds)
+{
+	lightsSetLevelWithFade (LIGHTING_ADDRESS_BOARDROOM, lightingLevel, fadeTimeInSeconds)
+	sendLevel (dvTpTableLighting, BTN_LVL_LIGHTING_DISPLAY , lightingLevel)
+	
+	if (lightingLevel)
+	{
+		channelOff (dvTpTableLighting, BTN_LIGHTING_PRESET_ALL_OFF)
+	}
+	else
+	{
+		channelOn (dvTpTableLighting, BTN_LIGHTING_PRESET_ALL_OFF)
+	}
+}
+
 define_function lightsEnablePresetAllOn()
 {
-	lightsSetLevelWithFade (LIGHTING_ADDRESS_BOARDROOM, 100, 1)
+	lightsEnablePreset (LIGHTING_PRESET_VALUE_ALL_ON, 1)
 }
 
 define_function lightsEnablePresetAllOff()
 {
-	lightsSetLevelWithFade (LIGHTING_ADDRESS_BOARDROOM, 0, 10)
+	lightsEnablePreset (LIGHTING_PRESET_VALUE_ALL_OFF, 10)
 }
 
 define_function lightsEnablePresetAllDim()
 {
-	lightsSetLevelWithFade (LIGHTING_ADDRESS_BOARDROOM, 20, 2)
+	lightsEnablePreset (LIGHTING_PRESET_VALUE_DIM, 2)
 }
 
 define_function lightsEnablePresetPresentation()
 {
-	lightsSetLevelWithFade (LIGHTING_ADDRESS_BOARDROOM, 80, 2)
+	lightsEnablePreset (LIGHTING_PRESET_VALUE_PRESENTATION_MODE, 2)
 }
 
-define_function lightsEnablePresetVc()
+define_function lightsEnablePresetVideoConference()
 {
-	lightsSetLevelWithFade (LIGHTING_ADDRESS_BOARDROOM, 60, 2)
+	lightsEnablePreset (LIGHTING_PRESET_VALUE_VC_MODE, 2)
 }
-
-
 
 /*
  * --------------------
@@ -506,7 +868,6 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 	if (signalStatus != oldSignalStatus)
 	{
 		dvx.videoInputs[dvxVideoInput.port].status = signalStatus
-		//startMultiPreviewSnapshots ()
 		
 		if (signalStatus == DVX_SIGNAL_STATUS_VALID_SIGNAL)
 		{
@@ -517,26 +878,6 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 			{
 				tableInputDetected (dvxVideoInput)
 			}
-		}
-	}
-	
-	
-	switch (signalStatus)
-	{
-		case DVX_SIGNAL_STATUS_NO_SIGNAL:
-		case DVX_SIGNAL_STATUS_UNKNOWN:
-		{
-			moderoSetButtonBitmap (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_LEFT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL,IMAGE_FILE_NAME_NO_IMAGE_ICON)
-			moderoSetButtonBitmap (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL,IMAGE_FILE_NAME_NO_IMAGE_ICON)
-		}
-		case DVX_SIGNAL_STATUS_VALID_SIGNAL:
-		{
-			moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_LEFT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL)
-			moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL)
-			
-			// NOTE: Don't set the dynamic resource here. That should be done by the timeline event for taking snapshots.
-			// Otherwise it could result in the snapshots image of the currently routed video to the MPL being shown on all snapshot buttons.
-			
 		}
 	}
 	
@@ -567,53 +908,56 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 		}
 		case DVX_SIGNAL_STATUS_NO_SIGNAL:
 		{
-			if (dvxVideoInput.port == selectedVideoInputMonitorLeft)
+			if (getSystemMode() == SYSTEM_MODE_PRESENTATION)
 			{
-				wait waitTimeValidSignal 'WAIT_FOR_SIGNAL_OF_INPUT_ROUTED_TO_LEFT_MONITOR_TO_RETURN'
+				if (dvxVideoInput.port == selectedVideoInputMonitorLeft)
 				{
-					necMonitorSetPowerOff (vdvMonitorLeft)
-					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
-					off [selectedVideoInputMonitorLeft]
-					
-					if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
+					wait waitTimeValidSignal 'WAIT_FOR_SIGNAL_OF_INPUT_ROUTED_TO_LEFT_MONITOR_TO_RETURN'
 					{
-						if (signalStatusDvxInputMonitorRight == DVX_SIGNAL_STATUS_VALID_SIGNAL)
+						snapiDisplayDisablePower (vdvMonitorLeft)
+						dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
+						off [selectedVideoInputMonitorLeft]
+						
+						if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
 						{
-							dvxSwitchAudioOnly (dvDvxMain, selectedVideoInputMonitorRight, dvDvxAudOutSpeakers.port)
-							audioFollowingVideoOutput = dvDvxVidOutMonitorRight.port
-						}
-						else
-						{
-							dvxSwitchAudioOnly (dvDvxMain, DVX_PORT_AUD_IN_NONE, dvDvxAudOutSpeakers.port)
-							dvxSetAudioOutputVolume (dvDvxAudOutSpeakers, volumeDefault)
-							off [selectedAudioInput]
-							off [audioFollowingVideoOutput]
+							if (signalStatusDvxInputMonitorRight == DVX_SIGNAL_STATUS_VALID_SIGNAL)
+							{
+								dvxSwitchAudioOnly (dvDvxMain, selectedVideoInputMonitorRight, dvDvxAudOutSpeakers.port)
+								audioFollowingVideoOutput = dvDvxVidOutMonitorRight.port
+							}
+							else
+							{
+								dvxSwitchAudioOnly (dvDvxMain, DVX_PORT_AUD_IN_NONE, dvDvxAudOutSpeakers.port)
+								dvxSetAudioOutputVolume (dvDvxAudOutSpeakers, volumeDefault)
+								off [selectedAudioInput]
+								off [audioFollowingVideoOutput]
+							}
 						}
 					}
 				}
-			}
-			
-			if (dvxVideoInput.port == selectedVideoInputMonitorRight)
-			{
-				wait waitTimeValidSignal 'WAIT_FOR_SIGNAL_OF_INPUT_ROUTED_TO_RIGHT_MONITOR_TO_RETURN'
+				
+				if (dvxVideoInput.port == selectedVideoInputMonitorRight)
 				{
-					necMonitorSetPowerOff (vdvMonitorRight)
-					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
-					off [selectedVideoInputMonitorRight]
-					
-					if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
+					wait waitTimeValidSignal 'WAIT_FOR_SIGNAL_OF_INPUT_ROUTED_TO_RIGHT_MONITOR_TO_RETURN'
 					{
-						if (signalStatusDvxInputMonitorLeft == DVX_SIGNAL_STATUS_VALID_SIGNAL)
+						snapiDisplayDisablePower (vdvMonitorRight)
+						dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
+						off [selectedVideoInputMonitorRight]
+						
+						if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
 						{
-							dvxSwitchAudioOnly (dvDvxMain, selectedVideoInputMonitorLeft, dvDvxAudOutSpeakers.port)
-							audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
-						}
-						else
-						{
-							dvxSwitchAudioOnly (dvDvxMain, DVX_PORT_AUD_IN_NONE, dvDvxAudOutSpeakers.port)
-							dvxSetAudioOutputVolume (dvDvxAudOutSpeakers, volumeDefault)
-							off [selectedAudioInput]
-							off [audioFollowingVideoOutput]
+							if (signalStatusDvxInputMonitorLeft == DVX_SIGNAL_STATUS_VALID_SIGNAL)
+							{
+								dvxSwitchAudioOnly (dvDvxMain, selectedVideoInputMonitorLeft, dvDvxAudOutSpeakers.port)
+								audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
+							}
+							else
+							{
+								dvxSwitchAudioOnly (dvDvxMain, DVX_PORT_AUD_IN_NONE, dvDvxAudOutSpeakers.port)
+								dvxSetAudioOutputVolume (dvDvxAudOutSpeakers, volumeDefault)
+								off [selectedAudioInput]
+								off [audioFollowingVideoOutput]
+							}
 						}
 					}
 				}
@@ -678,143 +1022,6 @@ define_function dvxNotifyAudioOutMaximumVolume (dev dvxAudioOutput, integer maxV
  */
 
 
-#define INCLUDE_DXLINK_NOTIFY_RX_VIDEO_OUTPUT_RESOLUTION_CALLBACK
-define_function dxlinkNotifyRxVideoOutputResolution (dev dxlinkRxVideoOutput, char resolution[])
-{
-	// dxlinkRxVideoOutput is the D:P:S of the video output port on the DXLink receiver
-	// cResolution is the video output resolution and refresh (HORxVER,REF)
-	
-	select
-	{
-		active(dxlinkRxVideoOutput == dvRxMonitorLeftVidOut):
-		{
-			moderoSetButtonText(dvTpTableDxlink,
-					BTN_ADR_DXLINK_RX_OUTPUT_RESOLUTION_MONITOR_LEFT,
-					MODERO_BUTTON_STATE_ALL,
-					resolution)
-		}
-		
-		active(dxlinkRxVideoOutput == dvRxMonitorRightVidOut):
-			moderoSetButtonText (dvTpTableDxlink, BTN_ADR_DXLINK_RX_OUTPUT_RESOLUTION_MONITOR_RIGHT, MODERO_BUTTON_STATE_ALL, resolution)
-	}
-}
-
-
-#define INCLUDE_DXLINK_NOTIFY_RX_VIDEO_OUTPUT_SCALE_MODE_CALLBACK
-define_function dxlinkNotifyRxVideoOutputScaleMode (dev dxlinkRxVideoOutput, char scaleMode[])
-{
-	// dxlinkRxVideoOutput is the D:P:S of the video output port on the DXLink receiver
-	// scaleMode contains the scaler mode (DXLINK_SCALE_MODE_AUTO | DXLINK_SCALE_MODE_BYPASS | DXLINK_SCALE_MODE_MANUAL)
-	
-	select
-	{
-		active(dxlinkRxVideoOutput == dvRxMonitorLeftVidOut):
-		{
-			switch (scaleMode)
-			{
-				case DXLINK_SCALE_MODE_AUTO:    moderoEnableButtonFeedback(dvTpTableDxlink, BTN_DXLINK_RX_SCALER_AUTO_MONITOR_LEFT)
-				case DXLINK_SCALE_MODE_BYPASS:  moderoEnableButtonFeedback( dvTpTableDxlink, BTN_DXLINK_RX_SCALER_BYPASS_MONITOR_LEFT)
-				case DXLINK_SCALE_MODE_MANUAL:  moderoEnableButtonFeedback( dvTpTableDxlink, BTN_DXLINK_RX_SCALER_MANUAL_MONITOR_LEFT)
-			}
-		}
-		
-		active(dxlinkRxVideoOutput == dvRxMonitorRightVidOut):
-		{
-			switch (scaleMode)
-			{
-				case DXLINK_SCALE_MODE_AUTO:    moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_SCALER_AUTO_MONITOR_RIGHT)
-				case DXLINK_SCALE_MODE_BYPASS:  moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_SCALER_BYPASS_MONITOR_RIGHT)
-				case DXLINK_SCALE_MODE_MANUAL:  moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_SCALER_MANUAL_MONITOR_RIGHT)
-			}
-		}
-	}
-}
-
-
-#define INCLUDE_DXLINK_NOTIFY_RX_VIDEO_OUTPUT_ASPECT_RATIO_CALLBACK
-define_function dxlinkNotifyRxVideoOutputAspectRatio (dev dxlinkRxVideoOutput, char aspectRatio[])
-{
-	// dxlinkRxVideoOutput is the D:P:S of the video output port on the DXLink receiver
-	// cAspectRatio is the aspect ratio (DXLINK_ASPECT_RATIO_ANAMORPHIC | DXLINK_ASPECT_RATIO_MAINTAIN | DXLINK_ASPECT_RATIO_STRETCH | DXLINK_ASPECT_RATIO_ZOOM)
-	
-	select
-	{
-		active(dxlinkRxVideoOutput == dvRxMonitorLeftVidOut):
-		{
-			switch (aspectRatio)
-			{
-				case DXLINK_ASPECT_RATIO_ANAMORPHIC:    moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_ANAMORPHIC_MONITOR_LEFT)
-				case DXLINK_ASPECT_RATIO_MAINTAIN:      moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_MAINTAIN_MONITOR_LEFT)
-				case DXLINK_ASPECT_RATIO_STRETCH:       moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_STRETCH_MONITOR_LEFT)
-				case DXLINK_ASPECT_RATIO_ZOOM:          moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_ZOOM_MONITOR_LEFT)
-			}
-		}
-		
-		active(dxlinkRxVideoOutput == dvRxMonitorRightVidOut):
-		{
-			switch (aspectRatio)
-			{
-				case DXLINK_ASPECT_RATIO_ANAMORPHIC:    moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_ANAMORPHIC_MONITOR_RIGHT)
-				case DXLINK_ASPECT_RATIO_MAINTAIN:      moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_MAINTAIN_MONITOR_RIGHT)
-				case DXLINK_ASPECT_RATIO_STRETCH:       moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_STRETCH_MONITOR_RIGHT)
-				case DXLINK_ASPECT_RATIO_ZOOM:          moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_ZOOM_MONITOR_RIGHT)
-			}
-		}
-	}
-}
-
-
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_AUTO_SELECT_CALLBACK
-define_function dxlinkNotifyTxVideoInputAutoSelect (dev dxlinkTxPort1, char status[])
-{
-	// dvDxlinkTxPort1 is the port #1 on the DXLink Tx
-	// cStatus contains the auto video input select status (STATUS_ENABLE | STATUS_DISABLE)
-	
-	switch (status)
-	{
-		case STATUS_ENABLE:
-		{
-			select
-			{
-				active (dxlinkTxPort1 == dvTxTable1Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_1)
-				active (dxlinkTxPort1 == dvTxTable2Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_2)
-				active (dxlinkTxPort1 == dvTxTable3Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_3)
-				active (dxlinkTxPort1 == dvTxTable4Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_4)
-			}
-		}
-		case STATUS_DISABLE:
-		{
-			select
-			{
-				active (dxlinkTxPort1 == dvTxTable1Main):   moderoDisableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_1)
-				active (dxlinkTxPort1 == dvTxTable2Main):   moderoDisableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_2)
-				active (dxlinkTxPort1 == dvTxTable3Main):   moderoDisableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_3)
-				active (dxlinkTxPort1 == dvTxTable4Main):   moderoDisableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_4)
-			}
-		}
-	}
-}
-
-
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_STATUS_ANALOG_CALLBACK
-define_function dxlinkNotifyTxVideoInputStatusAnalog (dev dxlinkTxAnalogVideoInput, char signalStatus[])
-{
-	// dxlinkTxAnalogVideoInput is the analog video input port on the DXLink Tx
-	// signalStatus is the input signal status (DXLINK_SIGNAL_STATUS_NO_SIGNAL | DXLINK_SIGNAL_STATUS_UNKNOWN | DXLINK_SIGNAL_STATUS_VALID_SIGNAL)
-	
-	switch (signalStatus)
-	{
-		case DXLINK_SIGNAL_STATUS_UNKNOWN:    {}
-		
-		case DXLINK_SIGNAL_STATUS_NO_SIGNAL:  {}
-		
-		case DXLINK_SIGNAL_STATUS_VALID_SIGNAL:
-		{
-			tableInputDetected (dxlinkTxAnalogVideoInput)
-		}
-	}
-}
-
 
 #define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_STATUS_DIGITAL_CALLBACK
 define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoInput, char signalStatus[])
@@ -830,76 +1037,12 @@ define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoI
 		
 		case DXLINK_SIGNAL_STATUS_VALID_SIGNAL:
 		{
-			tableInputDetected (dxlinkTxDigitalVideoInput)
+			//tableInputDetected (dxlinkTxDigitalVideoInput)
 		}
 	}
 }
 
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_FORMAT_ANALOG_CALLBACK
-define_function dxlinkNotifyTxVideoInputFormatAnalog (dev dxlinkTxAnalogVideoInput, char videoFormat[])
-{
-	// dxlinkTxAnalogVideoInput is the analog video input port on the DXLink Tx
-	// videoFormat is the video format (VIDEO_SIGNAL_FORMAT_VGA | VIDEO_SIGNAL_FORMAT_COMPOSITE | VIDEO_SIGNAL_FORMAT_COMPONENT | VIDEO_SIGNAL_FORMAT_SVIDEO)
-}
-*/
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_FORMAT_DIGITAL_CALLBACK
-define_function dxlinkNotifyTxVideoInputFormatDigital (dev dxlinkTxDigitalVideoInput, char videoFormat[])
-{
-	// dxlinkTxDigitalVideoInput is the digital video input port on the DXLink Tx
-	// videoFormat is the video format (VIDEO_SIGNAL_FORMAT_DVI | VIDEO_SIGNAL_FORMAT_HDMI)
-}
-*/
 
-#define INCLUDE_DXLINK_NOTIFY_TX_SWITCH_CALLBACK
-define_function dxlinkNotifyTxSwitch (dev dxlinkTxPort1, integer input, integer output)
-{
-	// dxlinkTxPort1 is port 1 on the DXLink Tx.
-	// input contains the input port on the DXLink TX that has been selected (DXLINK_PORT_VIDEO_INPUT_ANALOG | DXLINK_PORT_VIDEO_INPUT_DIGITAL)
-	// output contains the output of the DXLink TX. This is always DXLINK_PORT_VIDEO_OUTPUT.
-	
-	switch (input)
-	{
-		case DXLINK_PORT_VIDEO_INPUT_ANALOG:
-		{
-			select
-			{
-				active (dxlinkTxPort1 == dvTxTable1Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_VGA_1)
-				active (dxlinkTxPort1 == dvTxTable2Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_VGA_2)
-				active (dxlinkTxPort1 == dvTxTable3Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_VGA_3)
-				active (dxlinkTxPort1 == dvTxTable4Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_VGA_4)
-			}
-		}
-		case DXLINK_PORT_VIDEO_INPUT_DIGITAL:
-		{
-			select
-			{
-				active (dxlinkTxPort1 == dvTxTable1Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_HDMI_1)
-				active (dxlinkTxPort1 == dvTxTable2Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_HDMI_2)
-				active (dxlinkTxPort1 == dvTxTable3Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_HDMI_3)
-				active (dxlinkTxPort1 == dvTxTable4Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_HDMI_4)
-			}
-		}
-	}
-}
-
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_RESOLUTION_ANALOG_CALLBACK
-define_function dxlinkNotifyTxVideoInputResolutionAnalog (dev dxlinkTxAnalogVideoInput, char resolution[])
-{
-	// dxlinkTxAnalogVideoInput is the analog video input port on the DXLink Tx
-	// resolution is the input resolution.
-}
-*/
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_RESOLUTION_DIGITAL_CALLBACK
-define_function dxlinkNotifyTxVideoInputResolutionDigital (dev dxlinkTxDigitalVideoInput, char resolution[])
-{
-	// dxlinkTxDigitalVideoInput is the digital video input port on the DXLink Tx
-	// resolution is the input resolution.
-}
-*/
 
 /*
  * --------------------
@@ -1215,9 +1358,9 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 		{
 			case IO_OCCUPANCY_SENSOR:
 			{
-				wait 100 'WAITING_TO_MAKE_SURE_ROOM_IS_EMPTY'
+				wait waitTimeRoomVacancy 'WAITING_TO_MAKE_SURE_ROOM_IS_EMPTY'
 				{
-				
+					
 					// room is now unoccupied (note: Will take 8 minutes minimum to trigger after person leaves room)
 					isRoomOccupied = FALSE
 					
@@ -1230,9 +1373,6 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 					// Send the panel to sleep
 					moderoSleep (dvTpTableMain)
 					
-					// Stop taking snapshots
-					//stopMultiPreviewSnapshots ()
-					
 					// shutdown the system if it was being used (i.e., someone just walked away without pressing the shutdown button on the panel)
 					if (isSystemAvInUse)
 					{
@@ -1244,17 +1384,5 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 #end_if

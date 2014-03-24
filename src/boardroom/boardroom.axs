@@ -22,8 +22,6 @@ program_name='boardroom2'
 
 // Need to declare the lighting include file after declaring the lighting devices
 #include 'lighting'
-// Need to declare the nec monitor include file after declaring the monitor devices
-#include 'nec-monitor'
 // Need to declare the wake-on-lan include file after declaring the wake-on-lan IP socket
 #include 'wake-on-lan'
 // Need to declare the rms-main include file after declaring the RMS virtual device

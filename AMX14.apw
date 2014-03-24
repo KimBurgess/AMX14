@@ -365,11 +365,11 @@
 </DeviceMap>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Boardroom</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Boardroom</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
-<TransTCPIP>AMX14-ENOVA-DVX-3156-02:1319:1: ::</TransTCPIP>
+<TransTCPIP>AMX14-BOARD-DVX-3155:1319:1: ::</TransTCPIP>
 <VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
 <VNMRestoreIPSettings>192.168.3.201:1319:1:Melbourne Office::</VNMRestoreIPSettings>
 <VNMSystemID>1</VNMSystemID>
@@ -491,6 +491,10 @@
 <FilePathName>module\Samsung_MD55C_Comm_dr1_0_0.jar</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Other"><Identifier>SamsungMD55C Interface</Identifier>
+<FilePathName>module\SamsungMD55C Interface.doc</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>touch-tracker</Identifier>
 <FilePathName>module\touch-tracker.axi</FilePathName>
 <Comments></Comments>
@@ -529,6 +533,10 @@
 </File>
 <File CompileType="None" Type="Include"><Identifier>rms-main</Identifier>
 <FilePathName>src\boardroom\rms-main.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>snapi-display-control</Identifier>
+<FilePathName>src\boardroom\snapi-display-control.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>sony-evihd7v</Identifier>
@@ -799,7 +807,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-3</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-3</Identifier>
 <SysID>54</SysID>
 <TransSerial>COM8,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>

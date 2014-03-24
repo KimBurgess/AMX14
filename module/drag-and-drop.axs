@@ -36,6 +36,28 @@ char CMD_HEADER_DELETE_DROP_AREA[] = 'DELETE_DROP_AREA-'
 // Example:
 //    'DELETE_DROP_AREA-1'
 
+char CMD_HEADER_ACTIVATE_DRAG_ITEM[] = 'ACTIVATE_DRAG_ITEM-'
+// CMD Syntax:
+//    'ACTIVATE_DRAG_ITEM-<id>'
+// Example:
+//    'ACTIVATE_DRAG_ITEM-1'
+char CMD_HEADER_ACTIVATE_DROP_AREA[] = 'ACTIVATE_DROP_AREA-'
+// CMD Syntax:
+//    'ACTIVATE_DROP_AREA-<id>'
+// Example:
+//    'ACTIVATE_DROP_AREA-1'
+
+char CMD_HEADER_DEACTIVATE_DRAG_ITEM[] = 'DEACTIVATE_DRAG_ITEM-'
+// CMD Syntax:
+//    'DEACTIVATE_DRAG_ITEM-<id>'
+// Example:
+//    'DEACTIVATE_DRAG_ITEM-1'
+char CMD_HEADER_DEACTIVATE_DROP_AREA[] = 'DEACTIVATE_DROP_AREA-'
+// CMD Syntax:
+//    'DEACTIVATE_DROP_AREA-<id>'
+// Example:
+//    'DEACTIVATE_DROP_AREA-1'
+
 char CMD_HEADER_STOP_TRACKING_TOUCH[] = 'STOP_TRACKING_TOUCH'
 // CMD Syntax:
 //    'STOP_TRACKING_TOUCH'
@@ -88,8 +110,8 @@ char STR_RESP_HEADER_DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME[] = 'DRAG_ITEM_NOT
  * Maxiumum values
  */
 
-integer MAX_DROP_AREAS = 50
-integer MAX_DRAG_AREAS = 50
+integer MAX_DROP_AREAS = 10
+integer MAX_DRAG_AREAS = 10
 integer MAX_AREA_NAME_LENGTH = 50
 
 long TIMELINE_ID_1 = 1
@@ -110,6 +132,7 @@ structure _bounds
 structure _area
 {
 	integer id
+	integer activeStatus
 	_bounds bounds
 }
 
@@ -142,16 +165,51 @@ rebuild_event()
 
 define_function copyRectangle (_bounds boundsCopyTo, _bounds boundsCopyFrom)
 {
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function copyRectangle (_bounds boundsCopyTo, _bounds boundsCopyFrom)'"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyTo.left = ',itoa(boundsCopyTo.left)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyTo.top = ',itoa(boundsCopyTo.top)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyTo.width = ',itoa(boundsCopyTo.width)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyTo.height = ',itoa(boundsCopyTo.height)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyFrom.left = ',itoa(boundsCopyFrom.left)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyFrom.top = ',itoa(boundsCopyFrom.top)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyFrom.width = ',itoa(boundsCopyFrom.width)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyFrom.height = ',itoa(boundsCopyFrom.height)"*/
+	
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to copy bounds'"*/
 	boundsCopyTo.height = boundsCopyFrom.height
 	boundsCopyTo.left = boundsCopyFrom.left
 	boundsCopyTo.top = boundsCopyFrom.top
 	boundsCopyTo.width = boundsCopyFrom.width
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::copying bounds is complete'"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyTo.left = ',itoa(boundsCopyTo.left)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyTo.top = ',itoa(boundsCopyTo.top)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyTo.width = ',itoa(boundsCopyTo.width)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::boundsCopyTo.height = ',itoa(boundsCopyTo.height)"*/
 }
 
 define_function updateArea (_area area, integer id, _bounds bounds)
 {
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function updateArea (_area area, integer id, _bounds bounds)'"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::area.bounds.left = ',itoa(area.bounds.left)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::area.bounds.top = ',itoa(area.bounds.top)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::area.bounds.width = ',itoa(area.bounds.width)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::area.bounds.height = ',itoa(area.bounds.height)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::id = ',itoa(id)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::bounds.left = ',itoa(bounds.left)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::bounds.top = ',itoa(bounds.top)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::bounds.width = ',itoa(bounds.width)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::bounds.height = ',itoa(bounds.height)"*/
+	
 	area.id = id
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::area.id = ',itoa(area.id)"*/
+	
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to copy rectangle'"*/
 	copyRectangle (area.bounds, bounds)
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::copy rectangle complete'"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::area.bounds.left = ',itoa(area.bounds.left)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::area.bounds.top = ',itoa(area.bounds.top)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::area.bounds.width = ',itoa(area.bounds.width)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::area.bounds.height = ',itoa(area.bounds.height)"*/
 }
 
 
@@ -167,6 +225,7 @@ define_function addDragArea (integer id, _bounds bounds)
 	{
 		set_length_array (dragAreas, 1)
 		updateArea (dragAreas[1], id, bounds)
+		activateArea (dragAreas[1])
 		return
 	}
 	
@@ -175,16 +234,98 @@ define_function addDragArea (integer id, _bounds bounds)
 		if (dragAreas[i].id == id)
 		{
 			updateArea (dragAreas[i], id, bounds)
+			activateArea (dragAreas[i])
 			return
 		}
 	}
 	
 	// check that the array is not full
-	if (length_array(dragAreas) < max_length_array(dragAreas))
+	if (i < max_length_array(dragAreas))
 	{
-		set_length_array (dragAreas, (length_array(dragAreas)+1))
-		updateArea (dragAreas[length_array(dragAreas)], id, bounds)
+		set_length_array (dragAreas, i)
+		updateArea (dragAreas[i], id, bounds)
+		activateArea (dragAreas[i])
 		return
+	}
+}
+
+define_function activateArea (_area area)
+{
+	area.activeStatus = true
+}
+
+define_function deactivateArea (_area area)
+{
+	
+	//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function deactivateArea (_area area)'"
+	//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set area.activeState (currently <',itoa(,area.activeStatus),'>) to false'"
+	area.activeStatus = false
+	//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::finished setting area.activeState to false. area.activeState = ',itoa(,area.activeStatus)"
+}
+
+define_function integer getAreaActiveStatus (_area area)
+{
+	return area.activeStatus
+}
+
+define_function activateDragArea (integer id)
+{
+	stack_var integer i
+	
+	for (i = 1; i <= max_length_array(dragAreas); i++)
+	{
+		if (dragAreas[i].id == id)
+		{
+			activateArea(dragAreas[i])
+		}
+	}
+}
+
+define_function activateDropArea (integer id)
+{
+	stack_var integer i
+	
+	for (i = 1; i <= max_length_array(dropAreas); i++)
+	{
+		if (dropAreas[i].id == id)
+		{
+			activateArea(dropAreas[i])
+		}
+	}
+}
+
+define_function deactivateDragArea (integer id)
+{
+	stack_var integer i
+	stack_var integer isMatchFound
+	
+	//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function deactivateDragArea (integer id)'"
+	//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::id = ',itoa(id)"
+	
+	for (i = 1; i <= length_array(dragAreas); i++)
+	{
+		//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::i = ',itoa(i)"
+		if (dragAreas[i].id == id)
+		{
+			//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (dragAreas[i].id == id)'"
+			//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to activate dragAreas[',itoa(i),']'"
+			deactivateArea(dragAreas[i])
+			//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::activation of dragAreas[',itoa(i),'] complete'"
+		}
+	}
+}
+
+define_function deactivateDropArea (integer id)
+{
+	stack_var integer i
+	stack_var integer isMatchFound
+	
+	for (i = 1; i <= max_length_array(dropAreas); i++)
+	{
+		if (dropAreas[i].id == id)
+		{
+			deactivateArea(dropAreas[i])
+		}
 	}
 }
 
@@ -193,25 +334,64 @@ define_function removeDragArea (integer id)
 	stack_var integer i
 	stack_var integer isMatchFound
 	
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function removeDragArea (integer id)'"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::id = ',itoa(id)"*/
+	
 	isMatchFound = FALSE
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::isMatchFound = ',itoa(isMatchFound)"*/
 	
 	for (i = 1; i <= length_array(dragAreas); i++)
 	{
+		/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::i = ',itoa(i)"
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'].id = ',itoa(dragAreas[i].id)"*/
 		if (dragAreas[i].id == id)
 		{
+			/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (dragAreas[i].id == id)'"*/
 			isMatchFound = TRUE
+			/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::isMatchFound = ',itoa(isMatchFound)"*/
 		}
 		
 		if (isMatchFound)
 		{
+			/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (isMatchFound)'"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.left = ',itoa(dragAreas[i].bounds.left)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.top = ',itoa(dragAreas[i].bounds.top)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.width = ',itoa(dragAreas[i].bounds.width)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.height = ',itoa(dragAreas[i].bounds.height)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::....about to reset dragAreas[',itoa(i),']'"*/
 			resetArea (dragAreas[i])
+			/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::....reset dragAreas[',itoa(i),'] complete'"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.left = ',itoa(dragAreas[i].bounds.left)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.top = ',itoa(dragAreas[i].bounds.top)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.width = ',itoa(dragAreas[i].bounds.width)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.height = ',itoa(dragAreas[i].bounds.height)"*/
 			if (i <= length_array(dragAreas))
+			{
+				/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (i <= length_array(dragAreas))'"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.left = ',itoa(dragAreas[i].bounds.left)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.top = ',itoa(dragAreas[i].bounds.top)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.width = ',itoa(dragAreas[i].bounds.width)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.height = ',itoa(dragAreas[i].bounds.height)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::....about to update dragAreas[',itoa(i),']'"*/
 				updateArea (dragAreas[i],dragAreas[i+1].id,dragAreas[i+1].bounds)
+				/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::....update of dragAreas[',itoa(i),'] is complete'"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.left = ',itoa(dragAreas[i].bounds.left)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.top = ',itoa(dragAreas[i].bounds.top)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.width = ',itoa(dragAreas[i].bounds.width)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dragAreas[',itoa(i),'.bounds.height = ',itoa(dragAreas[i].bounds.height)"*/
+			}
 		}
 	}
 	
+	
 	if (isMatchFound)
+	{
+		/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (isMatchFound)'"
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::length_array(dragAreas) = ',itoa(length_array(dragAreas))"
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to decrease length of dragAreas array by 1'"*/
 		set_length_array (dragAreas, (length_array(dragAreas)-1))
+		/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::length_array(dragAreas) = ',itoa(length_array(dragAreas))"*/
+	}
 }
 
 
@@ -220,29 +400,67 @@ define_function removeDropArea (integer id)
 	stack_var integer i
 	stack_var integer isMatchFound
 	
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function removeDropArea (integer id)'"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::id = ',itoa(id)"*/
+	
 	isMatchFound = FALSE
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::isMatchFound = ',itoa(isMatchFound)"*/
 	
 	for (i = 1; i <= length_array(dropAreas); i++)
 	{
+		/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::i = ',itoa(i)"*/
 		if (dropAreas[i].id == id)
 		{
+			/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (dropAreas[i].id == id)'"*/
 			isMatchFound = TRUE
+			/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::isMatchFound = ',itoa(isMatchFound)"*/
 		}
 		
 		if (isMatchFound)
 		{
+			/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (isMatchFound)'"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.left = ',itoa(dropAreas[i].bounds.left)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.top = ',itoa(dropAreas[i].bounds.top)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.width = ',itoa(dropAreas[i].bounds.width)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.height = ',itoa(dropAreas[i].bounds.height)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::....about to reset dropAreas[',itoa(i),']'"*/
 			resetArea (dropAreas[i])
+			/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::....reset dropAreas[',itoa(i),'] complete'"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.left = ',itoa(dropAreas[i].bounds.left)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.top = ',itoa(dropAreas[i].bounds.top)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.width = ',itoa(dropAreas[i].bounds.width)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.height = ',itoa(dropAreas[i].bounds.height)"*/
 			if (i <= length_array(dropAreas))
+			{
+				/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (i <= length_array(dropAreas))'"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.left = ',itoa(dropAreas[i].bounds.left)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.top = ',itoa(dropAreas[i].bounds.top)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.width = ',itoa(dropAreas[i].bounds.width)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.height = ',itoa(dropAreas[i].bounds.height)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::....about to update dropAreas[',itoa(i),']'"*/
 				updateArea (dropAreas[i],dropAreas[i+1].id,dropAreas[i+1].bounds)
+				/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::....update of dropAreas[',itoa(i),'] is complete'"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.left = ',itoa(dropAreas[i].bounds.left)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.top = ',itoa(dropAreas[i].bounds.top)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.width = ',itoa(dropAreas[i].bounds.width)"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dropAreas[',itoa(i),'.bounds.height = ',itoa(dropAreas[i].bounds.height)"*/
+			}
 		}
 	}
 	
 	if (isMatchFound)
+	{
+		/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (isMatchFound)'"
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::length_array(dropAreas) = ',itoa(length_array(dropAreas))"
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to decrease length of dropAreas array by 1'"*/
 		set_length_array (dropAreas, (length_array(dropAreas)-1))
+		/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::length_array(dropAreas) = ',itoa(length_array(dropAreas))"*/
+	}
 }
 
 define_function resetArea (_area area)
 {
+	/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function resetArea (_area area)'"*/
 	area.id = 0
 	area.bounds.height = 0
 	area.bounds.left = 0
@@ -263,6 +481,7 @@ define_function addDropArea (integer id, _bounds bounds)
 	{
 		set_length_array (dropAreas, 1)
 		updateArea (dropAreas[1], id, bounds)
+		activateArea (dropAreas[1])
 		return
 	}
 	
@@ -271,6 +490,7 @@ define_function addDropArea (integer id, _bounds bounds)
 		if (dropAreas[i].id == id)
 		{
 			updateArea (dropAreas[i], id, bounds)
+			activateArea (dropAreas[i])
 			return
 		}
 	}
@@ -280,6 +500,7 @@ define_function addDropArea (integer id, _bounds bounds)
 	{
 		set_length_array (dropAreas, i)
 		updateArea (dropAreas[i], id, bounds)
+		activateArea (dropAreas[i])
 		return
 	}
 }
@@ -321,14 +542,17 @@ define_function moderoNotifyTouchCoordinatesPress (dev panel, integer nX, intege
 		
 		for (i = 1; i <= length_array(dragAreas); i++)
 		{
-			if (isCoordWithinBounds(nX, nY, dragAreas[i]))
+			if (getAreaActiveStatus(dragAreas[i]))	// look no further unless the drag area is active
 			{
-				selectedDragArea[idTouchPoint] = i
-				sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_SELECTED,itoa(dragAreas[i].id)")
-				
-				if (!timeline_active(idTouchPoint))
-					timeline_create (idTouchPoint, timelineTimes, 1, TIMELINE_ABSOLUTE, TIMELINE_ONCE)
-				
+				if (isCoordWithinBounds(nX, nY, dragAreas[i]))
+				{
+					selectedDragArea[idTouchPoint] = i
+					sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_SELECTED,itoa(dragAreas[i].id)")
+					
+					if (!timeline_active(idTouchPoint))
+						timeline_create (idTouchPoint, timelineTimes, 1, TIMELINE_ABSOLUTE, TIMELINE_ONCE)
+					
+				}
 			}
 		}
 	}
@@ -372,20 +596,25 @@ define_function moderoNotifyTouchCoordinatesMove (dev panel, integer nX, integer
 				
 				for (i=1; i<=max_length_array(dropAreas); i++)
 				{
-					if (isCoordWithinBounds(nX,nY,dropAreas[i]) )
+					if (getAreaActiveStatus(dropAreas[i]))	// look no further unless the drop area is active
 					{
-						if (!intersectStatus[selectedDragArea[idTouchPoint]][i])
+						if (isCoordWithinBounds(nX,nY,dropAreas[i]) )
 						{
-							intersectStatus[selectedDragArea[idTouchPoint]][i] = true
-							sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_ENTER_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)")
+							if (!intersectStatus[selectedDragArea[idTouchPoint]][i])
+							{
+								intersectStatus[selectedDragArea[idTouchPoint]][i] = true
+								
+								sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_ENTER_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)")
+							}
 						}
-					}
-					else
-					{
-						if (intersectStatus[selectedDragArea[idTouchPoint]][i])
+						else
 						{
-							intersectStatus[selectedDragArea[idTouchPoint]][i] = false
-							sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_EXIT_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)")
+							if (intersectStatus[selectedDragArea[idTouchPoint]][i])
+							{
+								intersectStatus[selectedDragArea[idTouchPoint]][i] = false
+								
+								sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_EXIT_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)")
+							}
 						}
 					}
 				}
@@ -425,10 +654,13 @@ define_function moderoNotifyTouchCoordinatesRelease (dev panel, integer nX, inte
 			
 			for (i=1; i<= length_array(dropAreas); i++)
 			{
-				if (isCoordWithinBounds(nX, nY, dropAreas[i]))
+				if (getAreaActiveStatus(dropAreas[i]))	// look no further unless the drop area is active
 				{
-					isDroppedOntoDragArea = true
-					sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_DROPPED_ON_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)")
+					if (isCoordWithinBounds(nX, nY, dropAreas[i]))
+					{
+						isDroppedOntoDragArea = true
+						sendString (virtual, "STR_RESP_HEADER_DRAG_ITEM_DROPPED_ON_DROP_AREA,itoa(dragAreas[selectedDragArea[idTouchPoint]].id),DELIM_PARAM,itoa(dropAreas[i].id)")
+					}
 				}
 			}
 			
@@ -470,10 +702,15 @@ data_event[virtual]
 	{
 		stack_var char header[50]
 		
+		//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::data_event[virtual]'"
+		//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::data.text = ',data.text"
+		
 		header = remove_string(data.text,DELIM_HEADER,1)
+		//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::header = ',header"
 		
 		if (!length_array(header))
 		{
+			/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (!length_array(header))'"*/
 			switch (data.text)
 			{
 				case CMD_HEADER_STOP_TRACKING_TOUCH:
@@ -495,6 +732,7 @@ data_event[virtual]
 		}
 		else
 		{
+			//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (!length_array(header))...else'"
 			switch (header)
 			{
 				case CMD_HEADER_DEFINE_DRAG_ITEM:
@@ -532,9 +770,12 @@ data_event[virtual]
 					// <id>
 					integer id
 					
-					id = atoi(remove_string (data.text,DELIM_PARAM,1))
+					/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....case CMD_HEADER_DELETE_DRAG_ITEM'"*/
+					id = atoi(data.text)
 					
+					/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....about to remove drag area <',itoa(id),'>'"*/
 					removeDragArea (id)
+					/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....removal of drag area <',itoa(id),'> complete'"*/
 				}
 				
 				case CMD_HEADER_DELETE_DROP_AREA:
@@ -542,9 +783,58 @@ data_event[virtual]
 					// <id>
 					integer id
 					
-					id = atoi(remove_string (data.text,DELIM_PARAM,1))
+					/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....case CMD_HEADER_DELETE_DROP_AREA'"*/
+					id = atoi(data.text)
 					
+					/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....about to remove drop area <',itoa(id),'>'"*/
 					removeDropArea (id)
+					/*send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....removal of drop area <',itoa(id),'> complete'"*/
+				}
+				
+				case CMD_HEADER_ACTIVATE_DRAG_ITEM:
+				{
+					// <id>
+					integer id
+					
+					id = atoi(data.text)
+					
+					activateDragArea (id)
+				}
+				
+				case CMD_HEADER_ACTIVATE_DROP_AREA:
+				{
+					// <id>
+					integer id
+					
+					id = atoi(data.text)
+					
+					activateDropArea (id)
+				}
+				
+				case CMD_HEADER_DEACTIVATE_DRAG_ITEM:
+				{
+					// <id>
+					integer id
+					//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....case CMD_HEADER_DEACTIVATE_DRAG_ITEM'"
+					
+					id = atoi(data.text)
+					
+					//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....about to deactivate drag area <',itoa(id),'>'"
+					deactivateDragArea (id)
+					//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....deactivation of drag area <',itoa(id),'> complete'"
+				}
+				
+				case CMD_HEADER_DEACTIVATE_DROP_AREA:
+				{
+					// <id>
+					integer id
+					//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....case CMD_HEADER_DEACTIVATE_DROP_AREA'"
+					
+					id = atoi(data.text)
+					
+					//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....about to deactivate drop area <',itoa(id),'>'"
+					deactivateDropArea (id)
+					//send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (header)....about to deactivate drop area <',itoa(id),'>'"
 				}
 			}
 		}
