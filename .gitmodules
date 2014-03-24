@@ -37,3 +37,6 @@
 [submodule "lib/xpress"]
 	path = lib/xpress
 	url = https://github.com/DavidVine/amx-is-xpress.git
+[submodule "lib/scheduling-ui"]
+	path = lib/scheduling-ui
+	url = https://github.com/AMXAUNZ/amx-au-office-scheduling.git
