@@ -22,6 +22,8 @@ dvTP2		= 10002:1:0	// TP outside door
 
 vdvRMS		= 41001:1:0
 
+ipSocketXpressPlayer = 0:2:0
+
 (***********************************************************)
 (*               CONSTANT DEFINITIONS GO BELOW             *)
 (***********************************************************)
@@ -64,6 +66,8 @@ btnSource4toDisplay3		= 34
 btnSource4toDisplay4		= 44
 btnSource4toALL			= 104
 
+btnSignageSlideTitle = 200
+btnSignageSlideStory = 201
 
 
 (***********************************************************)
@@ -75,6 +79,11 @@ DEFINE_TYPE
 (*               VARIABLE DEFINITIONS GO BELOW             *)
 (***********************************************************)
 DEFINE_VARIABLE
+
+char ipAddressXpressPlayer[50]             = '192.168.4.70'
+char xpressPlayerVariableNameToUpdate[100] = 'menu'
+char xpressPlayerVariableValueTitle[100]   = 'P1'
+char xpressPlayerVariableValueStory[100]   = 'P2'
 
 // Flags
 VOLATILE INTEGER nDisplay1SourceSelected
@@ -99,6 +108,8 @@ DEFINE_MODULE 'RmsDvxSwitcherMonitor' dvxSwitcher(vdvRMS);  //monitor DVX intern
 
 
 #INCLUDE 'amx-dvx-control.axi'
+#INCLUDE 'amx-is-xpress-api'
+#INCLUDE 'amx-is-xpress-control'
 
 
 #define INCLUDE_DVX_NOTIFY_VIDEO_INPUT_STATUS_CALLBACK
@@ -280,13 +291,15 @@ BUTTON_EVENT[dvTP,0]
 		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display3)
 		dvxSwitchVideoOnly(dvSWITCHER, Source4, Display4)
 	    }
-	    CASE 200:
+	    CASE btnSignageSlideTitle:
 	    {
-		// code to switch IS-SPX-1300 to Intro slide
+			// code to switch IS-SPX-1300 to Title slide
+			xpressUpdateVariable (ipSocketXpressPlayer, ipAddressXpressPlayer, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, xpressPlayerVariableNameToUpdate, xpressPlayerVariableValueTitle)
 	    }
-	    CASE 201:
+	    CASE btnSignageSlideStory:
 	    {
 		// code to switch IS-SPX-1300 to Story slide
+			xpressUpdateVariable (ipSocketXpressPlayer, ipAddressXpressPlayer, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, xpressPlayerVariableNameToUpdate, xpressPlayerVariableValueStory)
 	    }
 	}    
     }

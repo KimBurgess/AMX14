@@ -162,6 +162,10 @@
 <FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>amx-is-xpress-api</Identifier>
 <FilePathName>lib\xpress\amx-is-xpress-api.axi</FilePathName>
 <Comments></Comments>
@@ -221,6 +225,10 @@
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>amx-is-xpress-api</Identifier>
@@ -288,6 +296,10 @@
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>amx-is-xpress-api</Identifier>
