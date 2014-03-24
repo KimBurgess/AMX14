@@ -9,17 +9,14 @@ dvIO = 5001:4:0;
 vdvRms = 41001:1:0;
 
 // Central wayfinding panel
-dvWayfindingTp = 10002:2:0;
+dvWayfindingTp = 10002:1:0;
 
 // Basic huddle
 vdvHuddle1Display = 41501:1:0;
 dvHuddle1Tx = 7001:1:0;
 dvHuddle1Rx = 8001:1:0;
 dvHuddle1Enzo = 20001:1:0;
-
-// Extended huddle add ons
 dvHuddle1Tp = 10001:1:0;
-dvHuddle1SchedulingTp = 10002:2:0;
 
 
 define_variable
@@ -40,8 +37,7 @@ define_module
 // can expand to accomodate multiple huddles running from a single NI-700.
 // Simply instatiate a huddleController for each.
 'huddleController' mdlHuddle1(vdvRMS, vdvHuddle1Display, dvHuddle1Enzo,
-		dvHuddle1Rx, dvHuddle1Tx, dcHuddle1Btn, dcHuddle1BtnFb, dvHuddle1Tp,
-		dvHuddle1SchedulingTp);
+		dvHuddle1Rx, dvHuddle1Tx, dcHuddle1Btn, dcHuddle1BtnFb, dvHuddle1Tp);
 
 // Display module instantiation is intentially done here rather than within the
 // huddleController module so that we can use the same huddle interaction logic
