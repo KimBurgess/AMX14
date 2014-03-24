@@ -77,7 +77,7 @@ DEFINE_TYPE
 (***********************************************************)
 DEFINE_VARIABLE
 
-char ipAddressXpressPlayer[50]             = '192.168.4.X'
+char ipAddressXpressPlayer[50]             = '192.168.4.93'
 char xpressPlayerVariableNameToUpdate[100] = 'menu'
 char xpressPlayerVariableValueTitle[100]   = 'P1'
 char xpressPlayerVariableValueStory[100]   = 'P2'
