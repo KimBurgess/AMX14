@@ -162,6 +162,14 @@
 <FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-api</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-control</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-control.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="TP4"><Identifier>AMX14 Generic Swtching MXT1000</Identifier>
 <FilePathName>src\demo-presentations\ui\AMX14 Generic Swtching MXT1000.TP4</FilePathName>
 <Comments></Comments>
@@ -213,6 +221,14 @@
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-api</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-control</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-control.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="TP4"><Identifier>AMX14 Generic Swtching MXT1000</Identifier>
@@ -272,6 +288,14 @@
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-api</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-control</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-control.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="TP4"><Identifier>AMX14 Generic Swtching MXT1000</Identifier>
