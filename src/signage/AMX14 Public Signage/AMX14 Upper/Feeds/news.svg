@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generator: AMX InspiredSignage XPress -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" xmlns:xlink="http://www.w3.org/1999/xlink" dur="indefinite" height="100%" snapshotTime="40.048398s" spx:start-at-random-time="on" width="100%" xml:id="svg">
+ <spx:editmode xlink:href="#rss_mode"/>
+ <spx:properties>
+  <spx:version date="$Date: 2011-04-20 11:52:16 +0200 (Wed, 20 Apr 2011) $" revision="$Revision: 13259 $"/>
+  <spx:text name="Title" xlink:href="#title"/>
+  <spx:text name="Description" xlink:href="#desc"/>
+  <spx:table itemElement="g" name="Layers" tableElement="g" xlink:href="#layers">
+   <spx:media xmlns:svg="http://www.w3.org/2000/svg" element="g" name="Layers" positionable="yes" svg:display-align="center" svg:dur="indefinite" svg:font-family="Arial" svg:font-size="58.000000" svg:height="368" svg:preserveAspectRatio="xMidYMid" svg:text-align="center" svg:transform="translate(16,16)" svg:width="640" xml:id="media_1"/>
+  </spx:table>
+  <spx:table itemElement="item" name="Inline RSS" tableElement="rss" tableElementNameSpace="" xlink:href="#inline">
+   <spx:text element="title" name="Title"/>
+   <spx:text element="description" name="Description"/>
+   <spx:text element="enclosure" name="Enclosure"/>
+  </spx:table>
+  <spx:group name="New Layer">
+   <spx:text name="Default Width" targetAttribute="width" targetNamespace="http://www.w3.org/2000/svg" xlink:href="#media_1"/>
+   <spx:text name="Default Height" targetAttribute="height" targetNamespace="http://www.w3.org/2000/svg" xlink:href="#media_1"/>
+   <spx:text name="Default Position" targetAttribute="transform" targetNamespace="http://www.w3.org/2000/svg" xlink:href="#media_1"/>
+   <spx:choice choice-01="none" choice-02="xMidYMid" name="Default Aspect Ratio" targetAttribute="svg:preserveAspectRatio" xlink:href="#media_1"/>
+  </spx:group>
+  <spx:choice choice-1="inline" choice-2="http://rss.news.yahoo.com/rss/world" choice-3="http://www.20minutes.fr/rss/flux/une.xml" choice-4="http://rss.cnn.com/rss/edition.rss" name="RSS Feed Source" xlink:href="#rss_uri"/>
+  <spx:choice choice-1="RSS" choice-2="XML" choice-3="CSV" choice-4="TXT" choice-5="ICAL" name="Feed Type" xlink:href="#rss_parser"/>
+  <spx:choice choice-1="document load" choice-2="at end" choice-3="next item" name="Feed Update Policy" xlink:href="#rss_policy"/>
+  <spx:text name="Item Duration" xlink:href="#rss_item_dur"/>
+  <spx:choice choice-1="on" choice-2="off" name="Looping" xlink:href="#rss_looping"/>
+  <spx:group name="iCal">
+   <spx:choice choice-01="now" choice-02="today" choice-03="sunday" choice-04="monday" choice-05="tuesday" choice-06="wednesday" choice-07="thursday" choice-08="friday" choice-09="saturday" choice-10="this month" choice-11="this year" choice-12="-1 day" choice-13="-2 days" choice-14="-1 week" choice-15="-2 weeks" choice-16="-1 month" choice-17="-2 months" choice-18="Day Month Year" name="Start date" targetAttribute="startDate" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#rss_parser"/>
+   <spx:choice choice-01="indefinite" choice-02="today" choice-03="sunday" choice-04="monday" choice-05="tuesday" choice-06="wednesday" choice-07="thursday" choice-08="friday" choice-09="saturday" choice-10="this month" choice-11="this year" choice-12="+1 day" choice-13="+2 days" choice-14="+1 week" choice-15="+2 weeks" choice-16="+1 month" choice-17="+2 months" choice-18="Day Month Year" name="End date" targetAttribute="endDate" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#rss_parser"/>
+  </spx:group>
+  <spx:group name="Multiple items per page">
+   <spx:text name="Number of rows" targetAttribute="rss_num_row" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#rss_multi"/>
+   <spx:text name="Number of columns" targetAttribute="rss_num_col" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#rss_multi"/>
+   <spx:text name="X Offset" targetAttribute="rss_x_offset" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#rss_multi"/>
+   <spx:text name="Y Offset" targetAttribute="rss_y_offset" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#rss_multi"/>
+   <spx:text name="Time Offset (s)" targetAttribute="rss_t_offset" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#rss_multi"/>
+  </spx:group>
+ </spx:properties>
+ <title xml:id="title">News
+</title>
+ <desc xml:id="desc">Click on the &quot;edit mode&quot; button to move / add / remove layers.
+</desc>
+ <script><![CDATA[
+    dedup_suffix = 1;
+
+    function dedup( root ) {
+      var suffix = '__' + (dedup_suffix++);
+      var x=root;
+      var funcxmlri = [ "clip-path", "fill", "stroke" ];
+      var tplist = [ "begin", "end" ];
+      var re=/^\s*([A-Za-z_\u0080-\uFFFF][0-9A-Za-z_\u0080-\uFFFF]*)$/;
+
+      while ( x!=null ) {
+        var a=x.getAttributeNS( "http://www.w3.org/1999/xlink", "href" );
+        if ( a.length>1 && a.charAt(0)=='#' )
+          x.setAttributeNS( "http://www.w3.org/1999/xlink", "href", a+suffix );
+        a=x.getAttributeNS( "http://www.w3.org/2000/svg", "href" );
+        if ( a.length>1 && a.charAt(0)=='#' )
+          x.setAttributeNS( "http://www.w3.org/2000/svg", "href", a+suffix );
+        a=x.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "effect-target-id" );
+        if ( a.length>0 )
+          x.setAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "effect-target-id", a+suffix );
+        for each ( var p in funcxmlri ) {
+          a=x.getAttributeNS( "http://www.w3.org/2000/svg", p );
+          if ( a.length>6 && a.substring( 0, 5 )=="url(#" && a.charAt( a.length-1 )==')' )
+            x.setAttributeNS( "http://www.w3.org/2000/svg", p, a.substring( 0, a.length-1 )+suffix+')' );
+        }
+        for each ( var vl in tplist ) {
+          var a=x.getAttributeNS( "http://www.w3.org/2000/svg", vl );
+          if ( a.length>0 ) {
+            var b='';
+            for each ( var tp in a.split( ';' ) ) {
+              var c=tp.indexOf( '.' );
+              if ( c!=-1 ) {
+                var idv=tp.substring( 0, c );
+                var r=idv.match( re );
+                if ( r && r[1]!="document" )
+                  tp = tp.substring( 0, c ) + suffix + tp.substring( c );
+              }
+              if ( b.length>0 )
+                b += ';';
+              b += tp;
+            }
+            if ( a!=b )
+              x.setAttributeNS( "http://www.w3.org/2000/svg", vl, b );
+          }
+        }
+        if ( 'id' in x ) {
+          var id=x.id;
+          if ( id!=null && id.length>0 )
+            x.id=id+suffix;
+        }
+        if ( x.firstElementChild!=null )
+          x=x.firstElementChild;
+        else do
+          if ( x==root )
+            x=null;
+          else if ( x.nextElementSibling!=null ) {
+            x=x.nextElementSibling;
+            break;
+          } else
+            x=x.parentNode;
+        while ( x!=null );
+      }
+    }
+
+    function push_timing_element( timing_elements, timingElement, set_end ) {
+      var tp=timingElement.getAttribute("begin"), begin=null, end=null;
+      if ( set_end && !tp )
+        tp="0";
+      if ( tp.substring(0,14)=="document.begin" )
+        begin = tp.length > 14 ? parseFloat( tp.substring(14) ) : 0;
+      else if ( tp.substring(0,12)=="document.end" )
+        end = tp.length > 12 ? parseFloat( tp.substring(12) ) : 0;
+      else
+        begin=parseFloat(tp);
+      if ( begin!=null && !isFinite( begin ) )
+        begin=null;
+      if ( end!=null && !isFinite( end ) )
+        end=null;
+      if ( begin!=null || end!=null ) {
+        timing_elements.push( [ timingElement, begin, end, set_end ] );
+        var insert_before=timingElement.nextElementSibling;
+        var parent=timingElement.parentNode;
+        parent.removeChild( timingElement );
+        timingElement.setAttribute( "begin", "indefinite" );
+        parent.insertBefore( timingElement, insert_before );
+      }
+    }
+
+    function getRealMediaElement( x, timing_elements ) {
+      while ( x.localName=="g" ) {
+        var targetId=x.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "effect-target-id" );
+        if ( targetId!=null ) {
+          if ( timing_elements!=null ) for ( var child=x.firstElementChild; child!=null; child=child.nextElementSibling ) {
+            if ( child.localName=="set" ) {
+              var tp=child.getAttribute( "begin" );
+              var c=tp.charCodeAt(0);
+              if ( tp.substring(0,14)=="document.begin" || tp.substring(0,12)=="document.end" || c=='+' || c=='-' || ( c>=48 && c<=57 ) )
+                push_timing_element( timing_elements, child, false );
+              break;
+            }
+          }
+          var target=document.getElementById( targetId );
+          if ( target!=null )
+            x=target;
+          else
+            break;
+        } else
+          break;
+      }
+      return x;
+    }
+
+    function fixString( x, map ) {
+      var r="";
+      for ( var i=0; i<x.length; ) {
+        var n=x.indexOf( "[SPX]", i );
+        if ( n==-1 ) {
+          r += x.substring( i );
+          break;
+        }
+        if ( n > i )
+          r += x.substring( i, n );
+        if ( n+6<x.length && x.charAt(n+5)=='[' ) {
+          var nn=x.indexOf( ']', n+6 );
+          if ( nn!=-1 ) {
+            var key=x.substring( n+6, nn );
+            if ( key in map )
+              r += map[key];
+            i=nn+1;
+            continue;
+          }
+        }
+        r += x.substr( i, n+5 );
+        i = n+5;
+      }
+      return r;
+    }
+
+    function fixTextContent( x, map ) {
+      for ( var child=x.firstChild; child; child=child.nextSibling )
+        if ( child.nodeType==Node.ELEMENT_NODE && ( child.localName=="tspan" || child.localName=="a" || child.localName=="switch" ) )
+          fixTextContent( child, map );
+        else if ( child.nodeType==Node.TEXT_NODE )
+          child.textContent=fixString( child.textContent, map );
+    }
+    
+    function mapURI( paramstr ) {
+      var comp=[];
+      for each ( var c in paramstr.split( '&' ) ) {
+        var eq=c.indexOf( '=' ), name, value;
+        if ( eq==-1 ) {
+          name=decodeURIComponent(c);
+          value="";
+        } else {
+          name=decodeURIComponent( c.slice( 0, eq ) );
+          value=decodeURIComponent( c.slice( eq+1 ) );
+        }
+        comp[name]=value;
+      }
+      return comp;
+    }
+
+    function fixMediaElement( x, map, timing_elements ) {
+      var timingElement=null;
+      if ( map!=null ) {
+        if ( x.localName=="text" || x.localName=="textArea" ) {
+          fixTextContent( x, map );
+        } else if ( x.localName=="video" || x.localName=="audio" || x.localName=="animation" || x.localName=="image" ) {
+          var uristr=fixString( x.getAttributeNS( "http://www.w3.org/1999/xlink", "href" ), map ), uri;
+          if ( uristr.substr( 0, 5 )=="data:" ) {
+            uri=uristr;
+          } else {
+            var q=uristr.indexOf( '?' ), uri, comp;
+            if ( q==-1 ) {
+              uri=uristr;
+              comp=[];
+            } else {
+              uri=uristr.slice( 0, q );
+              comp=mapURI( uristr.slice( q+1 ) );
+            }
+            var extp=uri.lastIndexOf( '.' ), ext="";
+            if ( extp!=-1 )
+              ext=uri.substring(extp+1).toLowerCase();
+            if ( uri && ext!="jpg" && ext!="jpeg" && ext!="png" && ext!="gif" ) {
+              for ( var name in map )
+                if ( !(name in comp) )
+                  comp[name]=map[name];
+              var first=true;
+              for ( var name in comp ) if ( name ) {
+                uri += first ? "?" : "&";
+                first=false;
+                uri += encodeURIComponent(name) + "=" + encodeURIComponent(comp[name]);
+              }
+            }
+          }
+          x.setAttributeNS( "http://www.w3.org/1999/xlink", "xlink:href", uri );
+          if ( x.localName!="image" )
+            timingElement=x;
+        } else if ( x.localName=="g" ) {
+          var t=x.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "layer-type" );
+          if ( t=="textArea" ) {
+            for ( var child=x.firstElementChild; child; child=child.nextElementSibling ) {
+              if ( child.localName=="rect" ) {
+                child.setAttribute( "fill", fixString( child.getAttribute( "fill" ), map ) );
+                child.setAttribute( "stroke", fixString( child.getAttribute( "stroke" ), map ) );
+              } else if ( child.localName=="textArea" ) {
+                fixTextContent( child, map );
+                break;
+              }
+            }
+          }
+        }
+      }
+      if ( timing_elements!=null ) {
+        if ( timingElement==null )
+          for ( var child=x.firstElementChild; child; child=child.nextElementSibling )
+            if ( child.localName=="set" || child.localName=="animate" ) {
+              timingElement=child;
+              break;
+            }
+        if ( timingElement!=null )
+          push_timing_element( timing_elements, timingElement, true );
+      }
+    }
+
+    function kick_start( timing_elements, t_offset ) {
+      for each ( var timingElement in timing_elements ) {
+        if ( timingElement[1]!=null )
+          timingElement[0].beginElementAt( timingElement[1]+t_offset );
+        if ( timingElement[2]!=null )
+          timingElement[0].beginElementAt( timingElement[2]+item_dur );
+        if ( timingElement[3] )
+          timingElement[0].endElementAt( item_dur );
+      }
+    }
+
+    function fixLayers( g, map, timing_elements ) {
+      g.setAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "spx:liveEdit", "off" );
+      for ( var layer=g.firstElementChild; layer; layer=layer.nextElementSibling ) if ( layer.localName=="g" ) {
+        var media=layer.firstElementChild;
+        if ( media )
+          media=media.firstElementChild;
+        if ( media ) {
+          media.setAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "spx:liveEdit", "off" );
+          fixMediaElement( getRealMediaElement( media, timing_elements ), map, timing_elements );
+        }
+      }
+    }
+
+    function readItemsIntoMap( x, array ) {
+      for ( var row=x.firstElementChild; row!=null; row=row.nextElementSibling ) {
+        var map = [];
+        for ( var col=row.firstElementChild; col!=null; col=col.nextElementSibling )
+          map[col.localName]=col.textContent;
+        array.push( map );
+      }
+    }
+    function display_item( map ) {
+      if ( map==null ) return true;
+      
+      var now = new Date();
+      var skipThis=false;
+      
+      var validityStart = map["validity-start"];
+      if ( validityStart!=undefined && validityStart!="" ){
+        var start = new Date(validityStart);
+        if ( start > now ) skipThis=true;
+      }
+      var validityEnd = map["validity-end"];
+      if ( validityEnd!=undefined && validityEnd!="" ){
+        var end = new Date(validityEnd);
+        if ( end < now ) skipThis=true;
+      }
+      var timeStart = map["time-start"];
+      if ( timeStart!=undefined && timeStart!="" ){
+        var start = new Date(now.getFullYear()+" "+(now.getMonth()+1)+" "+now.getDate()+" "+timeStart);
+        if ( start > now ) skipThis=true;
+      }
+      var timeEnd = map["time-end"];
+      if ( timeEnd!=undefined && timeEnd!="" ){
+        var end = new Date(now.getFullYear()+" "+(now.getMonth()+1)+" "+now.getDate()+" "+timeEnd);
+        if ( end < now ) skipThis=true;
+      }
+      var days = map["valid-days"];
+    
+      if ( days!=undefined && days!="" ){
+        // list of days ( number between 0 and 6. Sunday is 0, Monday is 1 and so on )
+        // e.g. "12345" means valid on week-days, "06" means valid on week-ends
+        if ( days.search( now.getDay() )==-1 ) skipThis=true;
+      }
+    
+      return !skipThis;
+    }
+    
+    var inRecursion = false;
+    
+    function next_item_callback( event ) {
+      if ( item!=null ) {
+        item+=1;
+        if ( item >= rss.length )
+          item=null;
+      }
+      if ( rss_pending!=null && policy=="next item" ) {
+        item=null;
+        rss=rss_pending;
+        rss_pending=null;
+      } else if ( rss_pending!=null && item==null) {
+        rss=rss_pending;
+        rss_pending=null;
+      }
+      if ( item==null && rss!=null && rss.length>0 && ( show_first || looping ) ) {
+        show_first=false;
+        item=0;
+      }
+      if ( cloned_layers!=null )
+        svg.removeChild( cloned_layers );
+      cloned_layers=document.createElementNS( "http://www.w3.org/2000/svg", "g" );
+      svg.appendChild( cloned_layers );
+      var ty=0, tt=0;
+      var oneOk=false;
+      outer: for ( var row=0; row<num_row; row++ ) {
+        var tx=0;
+        for ( var col=0; col<num_col; col++ ) {
+          if ( item!=null && ( col!=0 || row!=0 ) && ++item >= rss.length ) {
+            item=null;
+            break outer;
+          }
+          var map = item==null ? null : rss[item];
+          // check if this item can be displayed
+          while ( !display_item( map ) ) {
+            item++;
+            if ( item >= rss.length ){
+                item=null;
+                if ( !oneOk && !inRecursion ) {
+                   inRecursion = true;
+                   next_item_callback( event );
+                   return;
+                }
+                break outer;
+            }
+            map = rss[item];
+          }
+          oneOk = true;
+          inRecursion = false;
+          
+          var clone=layers.cloneNode( true );
+          if ( num_row > 1 || num_col > 1 )
+            dedup( clone );
+          clone.setAttribute( "transform", "translate("+tx+","+ty+")" );
+          var set=null;
+          if ( tt!=0 ) {
+            set=document.createElementNS( "http://www.w3.org/2000/svg", "set" );
+            set.setAttribute( "attributeName", "display" );
+            set.setAttribute( "to", "none" );
+            set.setAttribute( "begin", "indefinite" );
+            set.setAttribute( "dur", tt );
+            clone.appendChild( set );
+          }
+          cloned_layers.appendChild( clone );
+          if ( item!=null )
+            clone.setAttribute( "display", "inline" );
+          var timing_elements=[];
+          fixLayers( clone.firstElementChild, map, timing_elements );
+          kick_start( timing_elements, tt );
+          if ( set!=null )
+            set.beginElement();
+          tt += t_offset;
+          tx += x_offset;
+        }
+        ty += y_offset;
+      }
+    }
+
+    function parseTXT( txt ) {
+      var records = [];
+      for each ( var i in txt.split( /[\r\n]+/ ) ) {
+        var x = [];
+        x.title = i;
+        records.push( x );
+      }
+      return records;
+    }
+
+    function parse_date( udate, end ) {
+      var t=new Date(), date=udate.toLowerCase();
+      if ( date=="now" ) {
+      } else if ( date=="indefinite" ) {
+        t.setTime( 2145913200000 );
+      } else if ( date=="today" ) {
+        t=new Date( t.getFullYear(), t.getMonth(), t.getDate()+end );
+      } else if ( date=="this month" ) {
+        t=new Date( t.getFullYear(), t.getMonth()+end, 1 );
+      } else if ( date=="this year" ) {
+        t=new Date( t.getFullYear()+end, 0, 1 );
+      } else {
+        var day_of_the_week=[ "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday" ];
+        var w=day_of_the_week.indexOf(date);
+        if ( w!=-1 ) {
+          var d=t.getDay()-w;
+          if ( d < 0 ) d+=7;
+          t=new Date( t.getFullYear(), t.getMonth(), t.getDate()+end*8-d );
+        } else {
+          var m=date.match( /^([+-]?[1-9][0-9]*) (week|day|month|year)s?$/ );
+          if ( m ) {
+            var n=parseInt( m[1] );
+            var x = m[2]=="week" ? 7 : m[2]=="month" ? 30 : m[2]=="year" ? 365 : 1;
+            t=new Date( t.getFullYear(), t.getMonth(), t.getDate()+n*x+end );
+          } else {
+            t=new Date( udate );
+          }
+        }
+      }
+      return t;
+    }
+
+    function parse( response ) {
+      var newrss=null;
+      if ( parser=="RSS" ) {
+        var rssDocument=parseRSS( response );
+        if ( rssDocument!=null ) {
+          newrss = [];
+          readItemsIntoMap( rssDocument.documentElement, newrss );
+        }
+      } else if ( parser=="XML" || parser=="XML-UI" ) {
+        var rssDocument=parseXML( response );
+        if ( rssDocument!=null ) {
+          newrss = [];
+          readItemsIntoMap( rssDocument.documentElement, newrss );
+        }
+      } else if ( parser=="TXT" ) {
+        newrss=parseTXT( response );
+      } else if ( parser=="CSV" ) {
+        var rssDocument=parseCSV( response );
+        if ( rssDocument!=null ) {
+          newrss = [];
+          readItemsIntoMap( rssDocument.documentElement, newrss );
+        }
+      } else if ( parser=="ICAL" ) {
+        var ical=parseICAL( response );
+        if ( ical!=null ) {
+          var icalDocument=ical.getScheduleAsRSS( parse_date(parser_startDate,0).getTime(), parse_date(parser_endDate,1).getTime() );
+          if ( icalDocument!=null ) {
+            newrss = [];
+            readItemsIntoMap( icalDocument.documentElement, newrss );
+          }
+        }
+      } else if ( parser=="JS" ) {
+        newrss = [];
+        custom_parser( response, newrss );
+      }
+      return newrss;
+    }
+
+    function sv_callback( sv ) {
+      if ( next_item_timer!=null ) {
+        next_item_timer.stop();
+        next_item_timer=null;
+      }
+      rss=parse( sv.value );
+      item=null;
+      if ( rss!=null && rss.length>0 ) {
+        var offset=0, t0=svg.getCurrentTime();
+        if ( t0 < doc_start_time ) {
+          var skip=Math.floor((doc_start_time-t0)/item_dur);
+          if ( skip > 0 ) {
+            offset = skip*item_dur;
+            item = skip-1;
+            if ( looping )
+              item %= rss.length;
+          } else {
+            show_first=true;
+          }
+        } else {
+          show_first=true;
+        }
+        if ( item==null || item<rss.length ) {
+          next_item_timer=createTimer( offset*1000, item_dur*1000 );
+          next_item_timer.addEventListener( "SVGTimer", next_item_callback, false );
+          next_item_timer.start();
+        } else {
+          item=null;
+        }
+      }
+    }
+
+    function rss_callback( status ) {
+      if ( status.success && !editing_mode ) {
+        var newrss=parse( status.content );
+        if ( newrss!=null ) {
+          if ( load_first )
+            rss=newrss;
+          else
+            rss_pending=newrss;
+        }
+        if ( load_first && !looping )
+            svg.setAttribute( "dur", rss==null ? 0 : Math.ceil(rss.length/num_row/num_col)*item_dur );
+        if ( load_first && cloned_layers!=null && item==null && rss!=null && rss.length > 0 ) {
+          item = Math.floor( svg.getCurrentTime()/item_dur ) * num_row * num_col;
+          if ( looping )
+            item %= rss.length;
+          if ( item < rss.length ) {
+            var clone=cloned_layers.firstElementChild;
+            outer: for ( var row=0; row<num_row; row++ ) {
+              for ( var col=0; col<num_col; col++ ) {
+                if ( col!=0 || row!=0 ) {
+                  if ( ++item >= rss.length ) {
+                    item=null;
+                    break outer;
+                  }
+                  clone=clone.nextElementSibling;
+                  if ( clone==null )
+                    break outer;
+                }
+                clone.setTrait( "display", "inline" );
+                fixLayers( clone.firstElementChild, rss[item], null );
+              }
+            }
+          }
+        }
+        load_first=false;
+      }
+    }
+
+    function mode_callback() {
+      if ( next_item_timer!=null ) {
+        next_item_timer.stop();
+        next_item_timer=null;
+      }
+      editing_mode = mode.textContent=="on";
+      item_dur = parseFloat( rss_item_dur.textContent );
+      uri = rss_uri.textContent;
+      policy = rss_policy.textContent;
+      looping = rss_looping.textContent=="on";
+      var rss_parser=document.getElementById( "rss_parser" );
+      parser=rss_parser.textContent;
+      if ( parser.length > 3 && parser.substring( parser.length-3 )==".js" ) {
+        var script_node=document.getElementById( "js" );
+        if ( script_node!=null )
+          svg.removeChild( script_node );
+        script_node=document.createElementNS( "http://www.w3.org/2000/svg", "script" );
+        script_node.setAttributeNS( "http://www.w3.org/1999/xlink", "href", parser );
+        script_node.id="js";
+        svg.appendChild( script_node );
+        parser="JS";
+      }
+      parser_startDate=rss_parser.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "startDate" );
+      parser_endDate=rss_parser.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "endDate" );
+      if ( !("old_editing_mode" in document.global) || old_editing_mode!=editing_mode || rss==null ) {
+        if ( ("cloned_layers" in document.global) && cloned_layers!=null )
+            svg.removeChild( cloned_layers );
+        cloned_layers=null;
+        if ( editing_mode ) {
+          if ( layers.parentNode==null ) {
+            layers.setAttribute( "display", "inline" );
+            svg.appendChild( layers );
+          }
+          var grid=document.getElementById( "grid" );
+          if ( grid!=null )
+            svg.removeChild( grid );
+          if ( num_row > 1 || num_col > 1 ) {
+            grid=document.createElementNS( "http://www.w3.org/2000/svg", "path" );
+            grid.id="grid";
+            grid.setAttribute( "stroke-width", "2" );
+            grid.setAttribute( "stroke", "black" );
+            grid.setAttribute( "stroke-dasharray", "2,2" );
+            var path="";
+            var viewBox=svg.getRectTrait( "viewBox" );
+            for ( var i=0; i<=num_row; i++ )
+              path += " M "+(viewBox.x+i*x_offset)+" 0 V "+viewBox.height;
+            for ( var i=0; i<=num_col; i++ )
+              path += " M 0 "+(viewBox.y+i*y_offset)+" H "+viewBox.width;
+            grid.setAttribute( "d", path );
+            svg.appendChild( grid );
+          }
+        } else {
+          if ( layers.parentNode!=null ) {
+            svg.removeChild( layers );
+            layers.setAttribute( "display", "none" );
+          }
+          rss=null;
+          item=null;
+          load_first=true;
+          rss_pending=null;
+          var colon=uri.indexOf( ':' ), at=uri.indexOf( '@' );
+          if ( at>0 && ( colon==-1 || colon>at ) ) {
+            if ( "sv" in document.global )
+              sv.removeUpdateListener( sv_callback );
+            sv=createSharedVariable( uri );
+            sv.addUpdateListener( sv_callback );
+          } else {
+            if ( uri=="inline" ) {
+              rss = [];
+              readItemsIntoMap( document.getElementById( "inline" ), rss );
+              if ( !looping )
+                svg.setAttribute( "dur", Math.ceil(rss.length/num_row/num_col)*item_dur );
+            } else {
+              getURL( uri, rss_callback, policy=="document load" ? GETURL_CACHE_CONTENT : (GETURL_CACHE_CONTENT|GETURL_TRACK_CHANGES) );
+            }
+            next_item_timer=createTimer( 0, item_dur*1000 );
+            next_item_timer.addEventListener( "SVGTimer", next_item_callback, false );
+            next_item_timer.start();
+          }
+        }
+        old_editing_mode=editing_mode;
+      } else if ( !editing_mode ) {  // Going back in time
+        item=null;
+        next_item_timer=createTimer( 0, item_dur*1000 );
+        next_item_timer.addEventListener( "SVGTimer", next_item_callback, false );
+        next_item_timer.start();
+      }
+    }
+
+    next_item_timer=null;
+    show_first=true;
+    if ( !("layers" in this) )
+      layers=document.getElementById( "enclosing" );
+    mode=document.getElementById( "rss_mode" );
+    mode.addEventListener( "load", mode_callback, false );
+    rss_item_dur=document.getElementById( "rss_item_dur" );
+    rss_uri=document.getElementById( "rss_uri" );
+    rss_policy=document.getElementById( "rss_policy" );
+    rss_looping=document.getElementById( "rss_looping" );
+    var rss_multi=document.getElementById( "rss_multi" );
+    num_row=parseInt( rss_multi.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "rss_num_row" ) );
+    if ( !isFinite(num_row) || num_row<=0 )
+      num_row=1;
+    num_col=parseInt( rss_multi.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "rss_num_col" ) );
+    if ( !isFinite(num_col) || num_col<=0 )
+      num_col=1;
+    x_offset=parseFloat( rss_multi.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "rss_x_offset" ) );
+    y_offset=parseFloat( rss_multi.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "rss_y_offset" ) );
+    t_offset=parseFloat( rss_multi.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "rss_t_offset" ) );
+    svg=document.documentElement;
+    doc_start_time=svg.getCurrentTime();
+   ]]></script>
+ <defs>
+  <title xml:id="rss_mode">off
+</title>
+  <title spx:liveEdit="off" xml:id="rss_item_dur">10
+</title>
+  <title spx:liveEdit="off" xml:id="rss_uri">http://rss.news.yahoo.com/rss/world
+</title>
+  <title spx:liveEdit="off" xml:id="rss_policy">at end
+</title>
+  <title spx:liveEdit="off" xml:id="rss_looping">on
+</title>
+  <title spx:endDate="indefinite" spx:liveEdit="off" spx:startDate="now" xml:id="rss_parser">RSS
+</title>
+  <title spx:liveEdit="off" spx:rss_num_col="1" spx:rss_num_row="1" spx:rss_t_offset="0" spx:rss_x_offset="400" spx:rss_y_offset="200" xml:id="rss_multi"/>
+  <rss xmlns="" xml:id="inline">
+   <item>
+    <title>Setting the RSS Feed
+</title>
+    <description>Choose a new source URI in &quot;RSS Feed Source&quot; in the properties panel.
+</description>
+    <enclosure>data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0
+      cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjUwIiB3aWR0aD0iMjUwIj4KIDxy
+      ZWN0IGZpbGw9IiMxNDY4YjMiIGhlaWdodD0iMjUwIiB3aWR0aD0iMjUwIi8+CiA8dGV4dCBm
+      aWxsPSIjODA4MDgwIiBmb250LXNpemU9IjY0IiB4PSIzMCIgeT0iMTQwIj48YW5pbWF0ZSBh
+      dHRyaWJ1dGVOYW1lPSJmaWxsIiBkdXI9IjUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiB2
+      YWx1ZXM9IndoaXRlO2JsYWNrO3doaXRlIi8+UGljdHVyZTwvdGV4dD4KPC9zdmc+Cg==
+</enclosure>
+   </item>
+   <item>
+    <title>Setting the item duration
+</title>
+    <description>Enter a new value in &quot;Item Duration&quot; in the properties panel.
+</description>
+    <enclosure>data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0
+      cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjUwIiB3aWR0aD0iMjUwIj4KIDxy
+      ZWN0IGZpbGw9IiMxNDY4YjMiIGhlaWdodD0iMjUwIiB3aWR0aD0iMjUwIi8+CiA8dGV4dCBm
+      aWxsPSIjODA4MDgwIiBmb250LXNpemU9IjY0IiB4PSIzMCIgeT0iMTQwIj48YW5pbWF0ZSBh
+      dHRyaWJ1dGVOYW1lPSJmaWxsIiBkdXI9IjUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiB2
+      YWx1ZXM9IndoaXRlO2JsYWNrO3doaXRlIi8+UGljdHVyZTwvdGV4dD4KPC9zdmc+Cg==
+</enclosure>
+   </item>
+   <item>
+    <title>Editing the layout
+</title>
+    <description>Turn on editing mode and move rectanges around.
+</description>
+    <enclosure>data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0
+      cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjUwIiB3aWR0aD0iMjUwIj4KIDxy
+      ZWN0IGZpbGw9IiMxNDY4YjMiIGhlaWdodD0iMjUwIiB3aWR0aD0iMjUwIi8+CiA8dGV4dCBm
+      aWxsPSIjODA4MDgwIiBmb250LXNpemU9IjY0IiB4PSIzMCIgeT0iMTQwIj48YW5pbWF0ZSBh
+      dHRyaWJ1dGVOYW1lPSJmaWxsIiBkdXI9IjUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiB2
+      YWx1ZXM9IndoaXRlO2JsYWNrO3doaXRlIi8+UGljdHVyZTwvdGV4dD4KPC9zdmc+Cg==
+</enclosure>
+   </item>
+  </rss>
+ </defs>
+ <g xml:id="enclosing">
+  <g xml:id="layers">
+   <g>
+    <g xml:id="id84734">
+     <textArea display-align="center" fill="#f7f7f7" font-family="Proxima Nova" font-size="27.000000" font-style="normal" font-variant="normal" font-weight="normal" height="32.0000" preserveAspectRatio="xMidYMid" text-align="start" transform="translate(176.0000, 0.0000)" width="1072.0000" xml:id="id37241" xml:space="preserve">[SPX][title]</textArea>
+</g>
+   </g>
+   <g>
+    <g xml:id="id64678">
+     <g spx:effect-target-id="_id26426_SPX_media" transform="translate(176.0000, 48.0000)" xml:id="id17745">
+      <clipPath xml:id="id19269">
+       <rect height="720.0000" width="720.0000" x="0.0000" y="0.0000"/>
+      </clipPath>
+      <set attributeName="display" begin="id35505.begin" dur="1s" to="inherit" xml:id="id26426"/>
+      <g xmlns:svg="http://www.w3.org/2000/svg" clip-path="url(#id19269)" height="720" snapshotTime="0.3s" transform="matrix( 1.4890, 0.0000, 0.0000, 0.1334, 0.0000, 0.0000 )" version="1.2" viewBox="0 0 720 720" width="720">
+       <title>Fly in Right
+</title>
+       <g transform="translate(-720,0)">
+        <animateTransform additive="sum" attributeName="transform" begin="id26426.begin+0" dur="1" fill="freeze" from="0,0" to="720,0" type="translate"/>
+        <textArea display="none" display-align="center" font-family="Arial" font-size="58.000000" font-style="normal" font-variant="normal" font-weight="normal" height="96.0258" preserveAspectRatio="xMidYMid" spx:effect-viewport-height="720.0000" spx:effect-viewport-transform="" spx:effect-viewport-width="720.0000" spx:effect-viewport-x="0.0000" spx:effect-viewport-y="0.0000" text-align="start" transform="matrix( 0.6716, 0, 0, 7.4980, 0.0000, 0.0000 )" width="1072.0748" xml:id="_id26426_SPX_media" xml:space="preserve"><set attributeName="display" begin="0.25s" dur="indefinite" to="inherit" xml:id="id35505"/><svg:tspan fill="#fdfdfd" font-family="Proxima Nova" font-size="22.000000">[SPX][description]</svg:tspan></textArea>
+</g>
+      </g>
+     </g>
+    </g>
+   </g>
+   <g>
+    <g xml:id="id67768">
+     <animation begin="0s" display-align="center" dur="indefinite" fill="remove" font-family="Arial" font-size="58.000000" height="112.0000" initialVisibility="whenStarted" opacity="1.0000" preserveAspectRatio="xMidYMid" text-align="center" transform="translate(0.0000, 15.9999)" width="160.0000" xlink:href="[SPX][enclosure]" xml:id="id89935"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>

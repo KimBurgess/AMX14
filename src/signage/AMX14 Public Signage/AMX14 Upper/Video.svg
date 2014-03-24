@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generator: AMX InspiredSignage XPress -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" dur="indefinite" height="100%" spx:start-at-random-time="on" width="100%" xml:id="svg">
+ <spx:properties>
+  <spx:table defaultPage="yes" itemElement="g" itemElementNamespace="http://www.w3.org/2000/svg" name="Playlist" tableElement="defs" xlink:href="#playlistSrc">
+   <spx:media element="g" name="Media" svg:display-align="center" svg:font-family="Arial" svg:font-size="46.000000" svg:preserveAspectRatio="xMidYMid" svg:text-align="center"/>
+  </spx:table>
+  <spx:color name="Background Fill" targetAttribute="fill" xlink:href="#bg"/>
+  <spx:text name="Max Slide Duration" targetAttribute="maxItemDur" xlink:href="#query_1"/>
+  <spx:text name="Default Slide Duration" targetAttribute="defaultItemDur" xlink:href="#query_1"/>
+  <spx:choice choice-01="on" choice-02="off" name="Enable Looping" targetAttribute="loop" xlink:href="#query_1"/>
+  <spx:text name="Inter Slide Duration" targetAttribute="interDur" xlink:href="#query_1"/>
+  <spx:group expand="yes" name="Transition">
+   <spx:choice choice-01="none" choice-02="fade" choice-04="fly" choice-05="wipe" choice-10="random" name="Type" targetAttribute="animPrefix" xlink:href="#query_1"/>
+   <spx:choice choice-01="up" choice-03="down" choice-04="left" choice-05="right" name="Direction" targetAttribute="animDir" xlink:href="#query_1"/>
+   <spx:text name="Duration" targetAttribute="animDur" xlink:href="#query_1"/>
+  </spx:group>
+  <spx:query animDir="left" animDur="1" animPrefix="fade" configUri="inline" defaultItemDur="5s" interDur="1" liveEdit="off" loop="on" maxItemDur="3600s" xml:id="query_1"/>
+ </spx:properties>
+ <title xml:id="title">New playlist
+</title>
+ <desc xml:id="desc">Playlist Template
+</desc>
+ <defs spx:liveEdit="off" xml:id="playlistSrc">
+  <g>
+   <g xml:id="id58398">
+    <video xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" xmlns:xlink="http://www.w3.org/1999/xlink" display-align="center" dur="211.8s" font-family="Arial" font-size="46.000000" preserveAspectRatio="xMidYMid" spx:preview-href=".preview.Redbull%20iphone%20version.mp4.png" text-align="center" xlink:href="Videos/Redbull%20iphone%20version.mp4" xml:id="id74265"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id31462">
+    <video xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" xmlns:xlink="http://www.w3.org/1999/xlink" display-align="center" dur="254.76s" font-family="Arial" font-size="46.000000" preserveAspectRatio="xMidYMid" spx:preview-href=".preview.amx_qut_final_small.mp4.png" text-align="center" xlink:href="Videos/amx_qut_final_small.mp4" xml:id="id16689"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id49646">
+    <video xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" xmlns:xlink="http://www.w3.org/1999/xlink" display-align="center" dur="248.64s" font-family="Arial" font-size="46.000000" preserveAspectRatio="xMidYMid" spx:preview-href=".preview.AMX%20Mobile%20Version.mp4.png" text-align="center" xlink:href="Videos/AMX%20Mobile%20Version.mp4" xml:id="id53033"/>
+   </g>
+  </g>
+ </defs>
+ <defs spx:liveEdit="off" xml:id="playlistDefault">
+  <g>
+   <g xml:id="id1">
+    <animation begin="indefinite" dur="3s" preserveAspectRatio="xMidYMid" type="image/svg+xml" xlink:href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgeG1sbnM9Imh0dHA6 Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTI4MCA3MjAiPg0KICA8cmVjdCBm aWxsPSJ3aGl0ZSIgeD0iMjkwIiB5PSIxMDAiIHdpZHRoPSI3MDAiIGhlaWdodD0iNTIwIiBzdHJv a2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1kYXNoYXJyYXk9IjUsNSIvPg0KICA8 dGV4dEFyZWEgeD0iMzAwIiB5PSIxMTAiIHdpZHRoPSI2ODAiIGhlaWdodD0iNTAwIiBmb250LXNp emU9IjMyIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgdGV4dC1hbGlnbj0iY2VudGVyIiBkaXNw bGF5LWFsaWduPSJjZW50ZXIiPg0KICAgIFBsYXlsaXN0IHRlbXBsYXRlPHRicmVhay8+PHRicmVh ay8+DQogIDwvdGV4dEFyZWE+DQo8L3N2Zz4=" xml:id="anim_1"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id2">
+    <animation begin="indefinite" dur="5s" preserveAspectRatio="xMidYMid" type="image/svg+xml" xlink:href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgeG1sbnM9Imh0dHA6 Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTI4MCA3MjAiPg0KICA8cmVjdCBm aWxsPSJ3aGl0ZSIgeD0iMjkwIiB5PSIxMDAiIHdpZHRoPSI3MDAiIGhlaWdodD0iNTIwIiBzdHJv a2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1kYXNoYXJyYXk9IjUsNSIvPg0KICA8 dGV4dEFyZWEgeD0iMzAwIiB5PSIxMTAiIHdpZHRoPSI2ODAiIGhlaWdodD0iNTAwIiBmb250LXNp emU9IjMyIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgdGV4dC1hbGlnbj0iY2VudGVyIiBkaXNw bGF5LWFsaWduPSJjZW50ZXIiPg0KICAgIFVzZSB0aGUgIlBsYXlsaXN0IiBwYW5lIG9uIHRoZSBy aWdodCB0byBtb2RpZnkgdGhlIGNvbnRlbnQgYW5kIHRoZSBvcmRlciBvZiB5b3VyIHBsYXlsaXN0 PHRicmVhay8+DQogICAgRHJhZyBhbmQgZHJvcCBtZWRpYSBvbiB0aGUgInBsYXlsaXN0IiBwYW5l IHRvIGFkZCBlbGVtZW50cyB0byB5b3VyIHBsYXlsaXN0PHRicmVhay8+DQogICAgVXNlIHRoZSAi UHJvcGVydGllcyIgcGFnZSBvbiB0aGUgcmlnaHQgdG8gY3VzdG9taXplIHRoZSBwcmV2aWV3IG9m IHlvdXIgcGxheWxpc3Q8dGJyZWFrLz4NCiAgPC90ZXh0QXJlYT4NCjwvc3ZnPg==" xml:id="anim_2"/>
+   </g>
+  </g>
+ </defs>
+ <rect fill="none" xml:id="bg"/>
+ <g xml:id="playlistDest"/>
+ <script><![CDATA[
+    
+    svgNS = "http://www.w3.org/2000/svg";
+    spxNS = "http://www.spinetix.com/namespace/1.0/spx";
+    xlinkNS = "http://www.w3.org/1999/xlink";
+
+    function getRandomAnimation() {
+	    var animList = [ "fade","fly", "wipe" ];
+      return animList[ Math.floor( Math.random()*animList.length ) ];
+    }
+    
+    function getRandomDir() {
+      var dirList = [ "left", "right", "up", "down" ];
+      return dirList[ Math.floor( Math.random()*dirList.length ) ];
+    }
+    
+    function setAttributes( node ) {
+      for ( var i=1; i+1<arguments.length; i+=2 )
+        node.setAttribute( arguments[i], arguments[i+1] );
+    }
+
+    function appendNewChild( node, name ) {
+      var child=document.createElementNS( svgNS, name );
+      for ( var i=2; i+1<arguments.length; i+=2 )
+        child.setAttribute( arguments[i], arguments[i+1] );
+      node.appendChild( child );
+      return child;
+    }
+
+    function addAnimationIn( node, name, dir, dur ){
+  	  var anim1 = null;
+
+      if ( !dur )
+        name="none";
+
+      if ( name=="random" ) {
+        name=getRandomAnimation();
+        dir=getRandomDir();
+  	  }
+  	
+	    switch ( name ) {
+		    case "none":
+          break;
+		    case "fade":
+          anim1=appendNewChild( node, "animate", "attributeName", "opacity", "from", "0", "to", "1" );
+		      break;
+        case "fly":
+          anim1=appendNewChild( node, "animateTransform", "attributeName", "transform", "type", "translate", "to", "0,0" );
+          switch( dir ) {
+		        case "right":
+			        anim1.setAttribute( "from", "" + (-width) + ",0" );
+		          break;
+		        case "left":
+			        anim1.setAttribute( "from", "" + width + ",0" );
+      		    break;
+		        case "down":
+			        anim1.setAttribute( "from", "0," + (-height) );
+		          break;
+		        case "up":
+			        anim1.setAttribute( "from", "0," + height );
+		          break;
+    		  }
+          break;
+        case "wipe":
+          var defs=appendNewChild( node, "defs" );
+          var clip=appendNewChild( defs, "clipPath" );
+          clip.id="clip_"+node.id;
+		      node.setAttribute( "clip-path", "url(#"+clip.id+")" );
+          var rect=appendNewChild( clip, "rect", "width", width, "height", height );
+          anim1=appendNewChild( rect, "animate" );
+          switch ( dir ) {
+		        case "right":
+              setAttributes( anim1, "attributeName", "width", "from", 0, "to", width );
+		          break;
+		        case "left":
+              setAttributes( anim1, "attributeName", "x", "from", width, "to", 0 );
+		          break;
+		        case "down":
+              setAttributes( anim1, "attributeName", "height", "from", 0, "to", height );
+		          break;
+		        case "up":
+              setAttributes( anim1, "attributeName", "y", "from", height, "to", 0 );
+		          break;
+    		  }
+          break;
+	    }
+
+      if ( anim1!=null )
+        setAttributes( anim1, "begin", "indefinite", "fill", "freeze", "dur", dur );
+
+      return anim1;
+    }
+
+    function addAnimationOut( node, name, dir, dur ) {
+	
+      if ( !dur )
+        name="none";
+  	
+      if ( name=="random" ) {
+        name=getRandomAnimation();
+        dir=getRandomDir();
+  	  }
+  	
+	    var additive1=true;
+  	  var anim1 = null;
+  	
+	    switch(name){
+		    case "none":
+          break;
+		    case "fade":
+			    anim1=appendNewChild( node, "animate", "attributeName", "opacity", "from", "1", "to", "0" );	
+			    additive1=false;
+		      break;
+        case "fly":
+		      anim1=appendNewChild( node, "animateTransform", "attributeName", "transform", "type", "translate", "from", "0,0" );
+          switch ( dir ) {
+		        case "right":
+			        anim1.setAttribute( "to", "" + width + ",0" );
+		          break;
+		        case "left":
+			        anim1.setAttribute( "to", "" + (-width) + ",0" );
+		          break;
+		        case "down":
+			        anim1.setAttribute( "to", "0," + height );
+		          break;
+		        case "up":
+			        anim1.setAttribute( "to", "0," + (-height) );
+		          break;
+	        }
+          break;
+        case "wipe":
+          anim1=appendNewChild( node, "set", "attributeName", "display", "to", "inherit" );
+          additive1=false;
+          break;
+      }
+	    if ( anim1!=null ) {
+		    setAttributes( anim1, "fill", "freeze", "dur", dur );
+		    if ( additive1 )
+          anim1.setAttribute( "additive", "sum" );
+	    }
+      return anim1;
+    }
+    
+    function on_resize( evt ) {
+      width = docViewBox.width;
+      height = docViewBox.height;
+      for each ( i in fix_size )
+        setAttributes( i, "width", width, "height", height );
+    }
+
+    function drop_fix_size( x ) {
+      var i=fix_size.indexOf( x );
+      if ( i>=0 )
+        fix_size.splice( i, 1 );
+    }
+    
+    function remove( media ) {
+      playlistDest.removeChild( media );
+      if ( media.localName=="g" ) {
+        for ( var c=media.firstElementChild; c!=null; c=c.nextElementSibling )
+          if ( c.localName=="textArea" || c.localName=="rect" )
+            drop_fix_size( c );
+      } else {
+        drop_fix_size( media );
+      }
+    }
+    
+    function remove_1( media ) {
+      media.setAttributeNS( spxNS, "spx:animOut", "off" );
+      var found=false;
+      for ( var c=media.firstElementChild; c; c=c.nextElementSibling )
+        if ( c.localName=="set" && c.getAttribute( "attributeName" )=="vector-effect" )
+          found=true;
+      if ( !found )
+        remove( media );
+    }
+    
+    function remove_2( media ) {
+      for ( var c=media.firstElementChild; c; c=c.nextElementSibling )
+        if ( c.localName=="set" && c.getAttribute( "attributeName" )=="vector-effect" ) {
+          media.removeChild( c );
+          break;
+        }
+      if ( media.getAttributeNS( spxNS, "animOut" ) != "on" )
+        remove( media );
+    }
+    
+    function getSMIL( media ) {
+      var smil=null;
+      if ( media.localName=="audio" || media.localName=="video" || media.localName=="animation" )
+        smil=media;
+      else for ( var c=media.firstElementChild; c!=null; c=c.nextElementSibling )
+        if ( ( c.localName=="set" || c.localName=="animate" ) && c.getAttribute( "attributeName" )=="display" ) {
+          smil=c;
+          break;
+        }
+      return smil;
+    }
+    
+    uid=0;
+
+    function next_media() {
+      var first = current==null, t0=0;
+      if ( !first )
+        current=current.nextElementSibling;
+      if ( current==null ) {
+        if ( first ) {
+          if ( total_dur > 0 ) {
+            t0=svg.getCurrentTime()%total_dur;
+            var extra = 0;
+            if ( anim!="none" )
+              extra = animDur/2;
+            if ( extra < 1 ) extra = 1; // we display the media at least for 1 sec
+            for ( current=playlist.firstElementChild; current; current=current.nextElementSibling ) {
+              var media=current.firstElementChild.firstElementChild;
+              var smil=getSMIL( media ), dur=defDur;
+              if ( smil!=null ) {
+                var d=smil.getTrait("dur");
+                if ( d!="indefinite" && d!="infinite" && ( d!="media" || smil===media ) )
+                  dur=parseFloat(d);
+              }
+              if ( dur > maxDur )
+                dur=maxDur;
+              var extra2 = extra;
+              if ( extra2 > 0.1*dur ) extra2 = 0.1*dur;
+              if ( t0 < dur-extra2 || t0<=0)
+                break;
+              t0 -= dur+interDur;
+            }
+          } else {
+            current=playlist.firstElementChild;
+          }
+        } else if ( loop ) {
+          current=playlist.firstElementChild;
+        } else if ( total_dur==0 ) {
+          svg.setAttribute( "dur", svg.getCurrentTime() );
+        }
+        if ( current==null )
+          return;
+      }
+      
+      // check if we can display the current item 
+      var validItem = current.firstElementChild.firstElementChild; // validity is on the media
+      var skipThis = false;
+      var now = new Date();
+      
+      var validityStart = validItem.getAttributeNS( spxNS, "validity-start" );
+      if ( validityStart!="" ){
+        var start = new Date(validityStart);
+        if ( start > now ) skipThis=true;
+      }
+      var validityEnd = validItem.getAttributeNS( spxNS, "validity-end" );
+      if ( validityEnd!="" ){
+        var end = new Date(validityEnd);
+        if ( end < now ) skipThis=true;
+      }
+      var timeStart = validItem.getAttributeNS( spxNS, "time-start" );
+      if ( timeStart!="" ){
+        var start = new Date(now.getFullYear()+" "+(now.getMonth()+1)+" "+now. getDate()+" "+timeStart);
+        if ( start > now ) skipThis=true;
+      }
+      var timeEnd = validItem.getAttributeNS( spxNS, "time-end" );
+      if ( timeEnd!="" ){
+        var end = new Date(now.getFullYear()+" "+(now.getMonth()+1)+" "+now. getDate()+" "+timeEnd);
+        if ( end < now ) skipThis=true;
+      }
+      var days = validItem.getAttributeNS( spxNS, "valid-days" );
+      if ( days!="" ){
+        // list of days ( number between 0 and 6. Sunday is 0, Monday is 1 and so on )
+        // e.g. "12345" means valid on week-days, "06" means valid on week-ends
+        if ( days.search( now.getDay() )==-1 ) skipThis=true;
+      }
+      
+      if ( skipThis ) {
+        logAtLevel( LOG_LEVEL_DEBUG, "Media "+ validItem.id +" not valid. Skipping");
+        if ( firstSkippedItem==validItem ) { // we have skipped all the items 
+            logAtLevel( LOG_LEVEL_WARN, "No valid media found in the playlist, trying again in 60s");
+            firstSkippedItem=null;
+            
+            var timer=createTimer( 60*1000, 0 );
+            timer.addEventListener( "SVGTimer", next_media, false );
+            timer.start();
+            return; 
+        }
+        if ( firstSkippedItem==null ) firstSkippedItem=validItem;
+        next_media();
+        return;
+      }
+      
+      firstSkippedItem=null; // we found one valid item
+      
+      var media=current.firstElementChild.firstElementChild.cloneNode(true);
+      media.id=media.id+'_'+uid;
+      uid++;
+      var smil=getSMIL( media );
+      if ( smil==null )
+        smil=appendNewChild( media, "set", "attributeName", "display", "to", "inherit", "dur", defDur, "id", "autosmil" );
+      smil.id=smil.id+'_'+uid;
+      uid++;
+      if ( smil===media ) {
+        setAttributes( smil, "begin", "indefinite", "initialVisibility", "always", "fill", "freeze", "max", maxDur );
+      } else {
+        media.setAttribute( "display", "inherit" );
+        setAttributes( smil, "begin", "indefinite", "max", maxDur, "fill", "freeze" );
+        if ( smil.localName=="animate" )
+          smil.setAttribute( "values", "inherit;inherit" );
+      }
+      var dur=smil.getTrait( "dur" );
+      if ( dur=="indefinite" || dur=="infinite" || ( dur=="media" && smil!==media ) )
+        smil.setAttribute( "dur", defDur );
+      if ( media.localName=="g" && media.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "layer-type" )=="textArea" ) {
+        for ( var c=media.firstElementChild; c!=null; c=c.nextElementSibling )
+          if ( c.localName=="textArea" || c.localName=="rect" ) {
+            fix_size.push( c );
+            setAttributes( c, "x", 0, "y", 0, "width", width, "height", height );
+          }
+      } else {
+        fix_size.push( media );
+        setAttributes( media, "x", 0, "y", 0, "width", width, "height", height, "audio-level", 0 );
+        appendNewChild( media, "set", "attributeName", "audio-level", "to", "1", "begin", media.id +".begin" ,"end", media.id +".end"  );
+      }
+      var animIn=addAnimationIn( media, anim, animDir, animDur );
+      var animOut=addAnimationOut( media, anim, animDir, animDur );
+      var offset = 0;
+      if ( anim!="none" ) {
+        offset = -animDur/2;
+        if ( animOut ) {
+          media.setAttributeNS( spxNS, "spx:animOut", "on" );
+          animOut.setAttribute( "begin", smil.id+".end-"+(loop || current.nextElementSibling!=null ? animDur/2 : animDur) );
+        }
+      }
+      if ( loop || current.nextElementSibling!=null )
+        offset += interDur;
+      else
+        offset=0;
+      if ( offset >= 0 )
+        offset = "+" + offset;
+      var dummy=appendNewChild( media, "set", "attributeName", "vector-effect", "to", "inherit", "dur", "1", "begin", smil.id+".end"+offset );
+      dummy.addEventListener( "beginEvent", function( evt ) {
+        evt.currentTarget.removeEventListener( "beginEvent", this, false );
+        remove_2(media);
+        next_media();
+      }, false );
+      playlistDest.appendChild( media );
+      if ( animOut )
+        animOut.addEventListener( "endEvent", function( evt ) {
+          evt.currentTarget.removeEventListener( "endEvent", this, false );
+          remove_1(media);
+        }, false );
+      if ( animIn )
+        animIn.beginElementAt(-t0);
+      if ( anim=="none" || first )
+        smil.beginElementAt(-t0);
+      else
+        smil.beginElementAt( -t0+animDur/2 );
+    }
+
+    function mapURI( paramstr, decodeUri ) {
+        if ( decodeUri===undefined ) decodeUri=true;
+        var comp=[];
+        for each ( var c in paramstr.split( '&' ) ) {
+            var eq=c.indexOf( '=' ), name, value;
+            if ( eq==-1 ) {
+                if (decodeUri)            
+                    name=decodeURIComponent(c);
+                else
+                    name=c;
+              value="";
+            } else {
+                if ( decodeUri ) {
+                    name=decodeURIComponent( c.slice( 0, eq ) );
+                    value=decodeURIComponent( c.slice( eq+1 ) );
+                } else {
+                    name=c.slice( 0, eq );
+                    value=c.slice( eq+1 );
+                }
+            }
+            
+            comp[name]=value;
+        }
+        return comp;
+    }
+    
+    function config_callback( status ) {
+      if ( status.success ) {
+        var medias;
+      
+        if ( configType == "CSV" ) {
+            // media are descibed in a CSV config file
+            medias = parseCSV( status.content, null, "uri", "dur" );
+        } else {
+            // XML config
+            medias = parseXML( status.content );
+        }
+        playlist.textContent="";// clear all the element of the playlist
+        for ( var row=medias.documentElement.firstElementChild; row!=null; row=row.nextElementSibling ) {
+            if ( row.localName=="item" ) {
+                var map = [];
+                for ( var col=row.firstElementChild; col!=null; col=col.nextElementSibling )
+                    map[col.localName]=col.textContent;
+                
+                // create the media. We use animation for all media, because it works for the player (even if this is not SVG valid)
+                g1 = appendNewChild( playlist, "g" );
+                g2 = appendNewChild( g1, "g" );
+                media = appendNewChild( g2, "animation",  "dur", map['dur'], "begin", "indefinite")
+                media.setAttributeNS(xlinkNS, "xlink:href", map['uri'] );
+                // read validity features
+                if ( map['validity-start']!=undefined ) media.setAttributeNS(spxNS, "spx:validity-start", map['validity-start'] );
+                if ( map['validity-end']!=undefined ) media.setAttributeNS(spxNS, "spx:validity-end", map['validity-end'] );
+                if ( map['time-start']!=undefined ) media.setAttributeNS(spxNS, "spx:time-start", map['time-start'] );
+                if ( map['time-end']!=undefined ) media.setAttributeNS(spxNS, "spx:time-end", map['time-end'] );
+                if ( map['valid-days']!=undefined ) media.setAttributeNS(spxNS, "spx:valid-days", map['valid-days'] );
+                
+                logAtLevel( LOG_LEVEL_DEBUG, "Adding: " + map['uri'] + " (duration: " + map['dur'] +")" + "(validity: " + map['validity-start'] + "/" + map['validity-end'] + " days: " + map['time-start'] + "-" + map['time-end'] + " " +  map['valid-days'] + ")");
+            } else if ( row.localName=="config" ) {
+                for ( var col=row.firstElementChild; col!=null; col=col.nextElementSibling )
+                    if ( params[col.localName]==undefined ) params[col.localName]=col.textContent;
+            }
+        }        
+
+        init_playlist();
+            
+      } else {
+        logAtLevel( LOG_LEVEL_ERROR, "Cannot read configuration file" );
+      }
+    }
+    
+    fix_size=[];
+    options = document.getElementById("query_1");
+    defDur = parseFloat( options.getAttribute("defaultItemDur") );
+    maxDur = parseFloat( options.getAttribute("maxItemDur") );
+    interDur = parseFloat( options.getAttribute("interDur") );
+    animDur = parseFloat( options.getAttribute("animDur") );
+    loop = options.getAttribute("loop")=="on";
+    anim = options.getAttribute("animPrefix");
+    animDir = options.getAttribute("animDir");
+    configUri = options.getAttribute("configUri");
+    
+    docViewBox=document.documentElement.viewport;  // Replace with custom viewbox if needed
+    width = docViewBox.width;
+    height = docViewBox.height;
+    var bg=document.getElementById( "bg" );
+    setAttributes( bg, "width", width, "height", height );
+    fix_size.push( bg );
+
+    svg=document.documentElement;
+    playlist=document.getElementById("playlistSrc");
+    playlistDest=document.getElementById("playlistDest");
+    var current=null;
+    var firstSkippedItem = null;
+    var total_dur=0;
+    
+    // This playlist accept an input file 
+    var uri=document.documentURI;
+    var q=uri.indexOf( '?' );
+    var configType = "XML";
+    var params = [];
+    if ( q!=-1 ) {
+        params = mapURI( uri.slice( q+1 ) );
+        // overide attribute using the command 
+        if ( params['configUri']!=undefined ) configUri=params['configUri'];
+    }
+    
+    
+    function init_playlist() {  
+
+        if ( params['defaultItemDur']!=undefined ) defDur=parseFloat( params['defaultItemDur'] );
+        if ( params['maxItemDur']!=undefined ) maxDur=parseFloat( params['maxItemDur'] );
+        if ( params['interDur']!=undefined ) interDur=parseFloat( params['interDur'] );
+        if ( params['animDur']!=undefined ) animDur=parseFloat( params['animDur'] );
+        if ( params['loop']!=undefined ) loop=params['loop'];
+        if ( params['animPrefix']!=undefined ) anim=params['animPrefix'] ;
+        if ( params['animDir']!=undefined ) animDir=params['animDir'];
+        
+        if ( playlist.childElementCount==0  )
+            playlist=document.getElementById("playlistDefault");
+        
+        for ( var item=playlist.firstElementChild; item; item=item.nextElementSibling ) {
+            var media=item.firstElementChild.firstElementChild;
+            var smil=getSMIL( media ), dur=defDur;
+            if ( smil!=null ) {
+                var d=smil.getTrait("dur");
+                if ( d!="indefinite" && d!="infinite" && ( d!="media" || smil===media ) )
+                    dur=parseFloat(d);
+            }
+            if ( dur <= 0 || isNaN(dur) ) {
+                total_dur=0;
+                break;
+            }
+            if ( dur > maxDur )
+                dur=maxDur;
+            total_dur+=dur;
+        }
+    if ( total_dur > 0 )
+      total_dur +=interDur*(playlist.childElementCount-1);
+        if ( total_dur > 0 && !loop )
+       svg.setAttribute( "dur", total_dur );
+        svg.addEventListener( "resize", on_resize, false );
+        
+        // clean up of mybe previously palying media
+        playlistDest.textContent="";
+        current=null;
+        
+        next_media();
+        
+    }
+    // get the configuration file 
+    
+    // this version is compatible with old firmwares
+    function start() {
+        if ( configUri!="inline" ) {
+            logAtLevel( LOG_LEVEL_INFO, "Starting playtlist using configuration file: " + configUri );
+            if ( configUri.substring( configUri.length-4 )==".csv" )
+                configType = "CSV";
+            getURL( configUri, config_callback, GETURL_CACHE_CONTENT|GETURL_TRACK_CHANGES ); // config_callback will start the playlist
+        } else 
+            init_playlist(); //otherwise we will do that once all the media have been loaded
+    }
+    svg.addEventListener( "load", start, false );
+    
+    // this version requires firmware 2.1
+    /* 
+    if ( configUri!="inline" ) {
+        logAtLevel( LOG_LEVEL_INFO, "Starting playtlist using configuration file: " + configUri );
+        if ( configUri.substring( configUri.length-3 )==".csv" )
+            configType = "CSV";
+        getURL( configUri, config_callback, GETURL_CACHE_CONTENT|GETURL_TRACK_CHANGES ); // config_callback will start the playlist
+    } else 
+        init_playlist(); //otherwise we will do that once all the media have been loaded
+    */    
+   
+    ]]></script>
+</svg>
