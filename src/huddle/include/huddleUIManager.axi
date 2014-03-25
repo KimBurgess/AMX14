@@ -30,9 +30,14 @@ constant integer BTN_FILE_LIST_ITEM[] = {21, 22, 23, 24, 25, 26, 27, 28, 29,
 
 define_function initUI()
 {
+	// Bring everything into sync with the current system state. This is a
+	// little odd as the same physical space for AMX14 is being shared by two
+	// discreet demo's.
 	if (isSessionActive())
 	{
 		hideAuthScreen();
+		createAdHocMeetingRoomBooking();
+		enzoSessionStart(dvEnzo);
 	}
 	else
 	{

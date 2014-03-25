@@ -17,9 +17,10 @@ define_function moderoNotifyNfcTagRead(dev panel, char nfcUid[])
 {
 	if (panel == dvTp && !isSessionActive())
 	{
-		// TODO auth user
-		// TODO request booking via RMS if it is online, if offline just start up the room
-		startSession();
+		// For the purposes of this demo any NFC card will be treated as authed.
+		// In real world scenarious you can trigger a user auth process form
+		// here and call back to handleUserAuth() on success.
+		handleUserAuth();
 	}
 }
 

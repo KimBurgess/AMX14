@@ -2,7 +2,8 @@ program_name='huddleRmsListener'
 
 
 #define INCLUDE_SCHEDULING_EVENT_STARTED_CALLBACK;
-#define INCLUDE_SCHEDULING_EVENT_ENDED_CALLBACK
+#define INCLUDE_SCHEDULING_EVENT_ENDED_CALLBACK;
+#define INCLUDE_SCHEDULING_ACTIVE_UPDATED_CALLBACK;
 
 
 #include 'RmsAssetLocationTracker';
@@ -11,10 +12,22 @@ program_name='huddleRmsListener'
 #include 'RmsSchedulingEventListener';
 
 
+define_variable
+
+constant integer LOCATION_HUDDLE = 1;
+constant integer LOCATION_MEETING = 2;
+
+// As we're using the same physical space for two discreet demo environemnts we
+// need to track active bookings for each seperately.
+volatile RmsEventBookingResponse activeBookingHuddle;
+volatile RmsEventBookingResponse activeBookingMeeting;
+
+
 define_function RmsEventSchedulingEventStarted(CHAR bookingId[],
 		RmsEventBookingResponse eventBookingResponse)
 {
-	if (eventBookingResponse.location == locationTracker.location.id)
+	if (eventBookingResponse.location == locationTracker[LOCATION_MEETING].location.id ||
+				eventBookingResponse.location == locationTracker[LOCATION_HUDDLE].location.id)
 	{
 		handleBookingStart(eventBookingResponse);
 	}
@@ -23,34 +36,29 @@ define_function RmsEventSchedulingEventStarted(CHAR bookingId[],
 define_function RmsEventSchedulingEventEnded(CHAR bookingId[],
 		RmsEventBookingResponse eventBookingResponse)
 {
-	if (eventBookingResponse.location == locationTracker.location.id)
+	if (eventBookingResponse.location == locationTracker[LOCATION_MEETING].location.id ||
+			eventBookingResponse.location == locationTracker[LOCATION_HUDDLE].location.id)
 	{
 		handleBookingEnd(eventBookingResponse);
 	}
 }
 
-
-define_event
-
-// To enable this physical space to provide to discreet demo experience for
-// AMX14 the touch panel is placed in it's own location (with a different
-// resource calendar) on the RMS server. This then simply remaps our internals
-// the appropriate location depending on what's plugged in.
-data_event[dvTp]
+define_function RmsEventSchedulingActiveUpdated(CHAR bookingId[],
+		RmsEventBookingResponse eventBookingResponse)
 {
-
-	online:
+	if (eventBookingResponse.location == locationTracker[LOCATION_MEETING].location.id)
 	{
-		setLocationTrackerAsset(RmsDevToString(data.device));
+		activeBookingMeeting = eventBookingResponse;
 	}
-
-	offline:
+	else if (eventBookingResponse.location == locationTracker[LOCATION_HUDDLE].location.id)
 	{
-		setLocationTrackerAsset(RmsDevToString(dvRx));
+		// TODO call meetinging ending function so that warning can be displayed
+		activeBookingHuddle = eventBookingResponse;
 	}
-
 }
+
 
 define_start
 
-setLocationTrackerAsset(RmsDevToString(dvRx));
+setLocationTrackerAsset(LOCATION_HUDDLE, RmsDevToString(dvRx));
+setLocationTrackerAsset(LOCATION_MEETING, RmsDevToString(dvTp));

@@ -72,8 +72,7 @@ define_function startSession()
 	sessionActive = true;
 
 	hideAuthScreen();
-
-	refreshSourceLauncherVisibility()
+	refreshSourceLauncherVisibility();
 
 	setDisplayPower(true);
 	setActiveSource(SOURCE_ENZO);
@@ -95,11 +94,48 @@ define_function endSession()
 	setActiveSource(SOURCE_ENZO);
 	enzoSessionEnd(dvEnzo);
 	setDisplayPower(false);
+
+	RmsBookingEnd(activeBookingMeeting.bookingId, activeBookingMeeting.location);
+	RmsBookingEnd(activeBookingHuddle.bookingId, activeBookingHuddle.location);
 }
 
 define_function char isSessionActive()
 {
 	return sessionActive;
+}
+
+define_function createAdHocMeetingRoomBooking()
+{
+	// TODO associate NFC card user with booking
+	RmsBookingCreate(ldate,
+			time,
+			20,
+			'Ad-hoc booking',
+			'Ad-hoc booking created from the in room UI',
+			locationTracker[LOCATION_MEETING].location.id);
+}
+
+/**
+ * Event handler for post successful user auth.
+ */
+define_function handleUserAuth()
+{
+	log(AMX_DEBUG, "'User successfully authenticated'");
+
+	if (!isSessionActive())
+	{
+		// TODO play sound
+
+		createAdHocMeetingRoomBooking();
+
+		hideAuthScreen();
+		refreshSourceLauncherVisibility();
+		// TODO show reserving now screen
+
+		startSession();
+
+		enzoSessionStart(dvEnzo);
+	}
 }
 
 /**
@@ -109,10 +145,6 @@ define_function char isSessionActive()
 define_function handleBookingStart(RmsEventBookingResponse booking)
 {
 	log(AMX_DEBUG, 'Booking starting for huddle location');
-	if (!isSessionActive())
-	{
-		startSession();
-	}
 }
 
 /**
@@ -121,10 +153,6 @@ define_function handleBookingStart(RmsEventBookingResponse booking)
 define_function handleBookingEnd(RmsEventBookingResponse booking)
 {
 	log(AMX_DEBUG, 'Booking ending for huddle location');
-	if (isSessionActive())
-	{
-		endSession();
-	}
 }
 
 /**
