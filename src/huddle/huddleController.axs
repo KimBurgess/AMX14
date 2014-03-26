@@ -124,13 +124,14 @@ define_function handleUserAuth()
 
 	if (!isSessionActive())
 	{
-		// TODO play sound
+		playAuthSound();
 
 		createAdHocMeetingRoomBooking();
 
 		hideAuthScreen();
 		refreshSourceLauncherVisibility();
-		// TODO show reserving now screen
+
+		showReservingScreen();
 
 		startSession();
 
@@ -161,6 +162,8 @@ define_function handleBookingEnd(RmsEventBookingResponse booking)
 define_function handleEnzoLoginEvent()
 {
 	log(AMX_DEBUG, 'Enzo login detected');
+
+	refreshSourceLauncherVisibility();
 }
 
 /**
@@ -169,6 +172,8 @@ define_function handleEnzoLoginEvent()
  define_function handleEnzoLogoutEvent()
  {
 	log(AMX_DEBUG, 'Enzo logout detected');
+
+	refreshSourceLauncherVisibility();
 
 	// TODO start timer for session end and room release
  }

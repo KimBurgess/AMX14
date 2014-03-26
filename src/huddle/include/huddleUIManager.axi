@@ -11,6 +11,7 @@ constant char POPUP_AUTH[] = 'auth';
 constant char POPUP_FILE_BROWSER[] = 'fileBrowser';
 constant char POPUP_FILE_BROWSER_ERROR[] = 'fileBrowserError';
 constant char POPUP_FILE_BROWSER_LOADING[] = 'fileBrowserLoading';
+constant char POPUP_RESERVING[] = 'reserving';
 
 constant char SUBPAGE_SOURCE_PREFEX[] = '[source]';
 constant char SUBPAGE_FILE_PREFIX[] = '[file]';
@@ -66,6 +67,24 @@ define_function showAuthScreen()
 define_function hideAuthScreen()
 {
 	moderoDisablePopup(dvTp, POPUP_AUTH);
+}
+
+/**
+ * Play the authentication successful sound.
+ */
+define_function playAuthSound()
+{
+	moderoPlaySoundFile(dvTp, 'valid-id.wav');
+}
+
+define_function showReservingScreen()
+{
+	moderoEnablePopup(dvTp, POPUP_RESERVING);
+}
+
+define_function hideReservingScreen()
+{
+	moderoDisablePopup(dvTp, POPUP_RESERVING);
 }
 
 /**
