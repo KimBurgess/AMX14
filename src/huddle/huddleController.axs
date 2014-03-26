@@ -13,10 +13,6 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 #include 'amx-device-control';
 #include 'amx-enzo-control';
 
-// Rms guff
-#include 'RmsApi';
-#include 'RmsSchedulingApi';
-
 // System components
 #include 'huddleDisplayManager';
 #include 'huddleSourceManager';
@@ -28,6 +24,10 @@ module_name='huddleController'(dev vdvRms, dev vdvDisplay,
 #include 'huddleModeroListener';
 #include 'huddleRmsListener';
 #include 'huddleUIManager';
+
+// Rms guff
+#include 'RmsApi';
+#include 'RmsSchedulingApi';
 
 
 define_module
@@ -94,8 +94,16 @@ define_function endSession()
 
 	showAuthScreen();
 
+	// Switch back to Enzo to prevent the display from de-powering itself on
+	// automatically if no source present on next boot.
+	setActiveSource(SOURCE_ENZO);
+
 	enzoSessionEnd(dvEnzo);
-	setDisplayPower(false);
+
+	// Give the enzo shutdown sound time to play
+	wait 15 {
+		setDisplayPower(false);
+	}
 
 	RmsBookingEnd(activeBookingMeeting.bookingId, activeBookingMeeting.location);
 	RmsBookingEnd(activeBookingHuddle.bookingId, activeBookingHuddle.location);
