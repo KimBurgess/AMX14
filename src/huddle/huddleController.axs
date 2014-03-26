@@ -241,19 +241,15 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 		wait_until (isSourceAvailable(sourceId)) 'signal returned'
 		{
 			log(AMX_DEBUG, 'Signal to active source returned. Switching back to display');
+
+			cancel_wait 'auto power off';
+
 			hideOSD();
 		}
-	}
 
-	// Set the system to shut down after 60 seconds of sitting on the signal
-	// disconnect screen. The OSD will also change after 30 seconds to provide
-	// the user with a warning.
-	if (hasSignal)
-	{
-		cancel_wait 'auto power off';
-	}
-	else
-	{
+		// Set the system to shut down after 60 seconds of sitting on the signal
+		// disconnect screen. The OSD will also change after 30 seconds to provide
+		// the user with a warning.
 		if (isSourceAvailable(SOURCE_HDMI) == false &&
 				isSourceAvailable(SOURCE_VGA) == false)
 		{

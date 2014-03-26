@@ -16,4 +16,13 @@ $(function() {
 		$('#message').fadeIn(3000);
 	}, 2000);
 
+  if ($('#message2').length) {
+    setTimeout(function() {
+      $('#message').fadeOut(1000);
+      setTimeout(function() {
+        $('#message2').fadeIn(3000);
+      }, 1000)
+    }, 30000);
+  }
+
 });
