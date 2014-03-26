@@ -4,6 +4,7 @@ program_name='huddleRmsListener'
 #define INCLUDE_SCHEDULING_EVENT_STARTED_CALLBACK;
 #define INCLUDE_SCHEDULING_EVENT_ENDED_CALLBACK;
 #define INCLUDE_SCHEDULING_ACTIVE_UPDATED_CALLBACK;
+#define INCLUDE_SCHEDULING_CREATE_RESPONSE_CALLBACK
 
 
 #include 'RmsAssetLocationTracker';
@@ -54,6 +55,20 @@ define_function RmsEventSchedulingActiveUpdated(CHAR bookingId[],
 	{
 		// TODO call meetinging ending function so that warning can be displayed
 		activeBookingHuddle = eventBookingResponse;
+	}
+}
+
+define_function RmsEventSchedulingCreateResponse(char isDefaultLocation,
+		char responseText[],
+		RmsEventBookingResponse eventBookingResponse)
+{
+	if (eventBookingResponse.location == locationTracker[LOCATION_HUDDLE].location.id &&
+			eventBookingResponse.isSuccessful &&
+			!isSessionActive());
+	{
+		// This will only ever fire if a booking is created from wayfinding TP,
+		// which only creates bookings for now.
+		startSession();
 	}
 }
 

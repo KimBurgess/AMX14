@@ -28,6 +28,8 @@ define_variable
 volatile devchan dcHuddle1Btn = {dvIO, 1};
 volatile devchan dcHUddle1BtnFb = {dvIO, 2};
 
+volatile integer huddleLocationIds[] = {2};
+
 
 define_module
 
@@ -38,6 +40,8 @@ define_module
 // Simply instatiate a huddleController for each.
 'huddleController' mdlHuddle1(vdvRMS, vdvHuddle1Display, dvHuddle1Enzo,
 		dvHuddle1Rx, dvHuddle1Tx, dcHuddle1Btn, dcHuddle1BtnFb, dvHuddle1Tp);
+
+'huddleFinder' mdlHuddleFinder(vdvRms, dvWayfindingTp, huddleLocationIds);
 
 // Display module instantiation is intentially done here rather than within the
 // huddleController module so that we can use the same huddle interaction logic
