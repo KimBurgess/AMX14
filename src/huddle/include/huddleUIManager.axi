@@ -27,6 +27,11 @@ constant integer BTN_FILE_LIST_UP = 20;
 constant integer BTN_FILE_LIST_ITEM[] = {21, 22, 23, 24, 25, 26, 27, 28, 29,
 		30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40};
 
+// Part of the Google doc PoC
+constant integer BTN_GOOGLE_DOC = 50;
+persistent char googleDocLink[] = 'https://docs.google.com/document/d/19ajNKijP2BkXHNd2_p5L5lmCpW4VUsLlmyeSsP8KFlg/edit?usp=sharing';
+
+
 
 define_function initUI()
 {
@@ -119,6 +124,14 @@ define_function refreshSourceLauncherVisibility()
 	{
 		setContentLauncherVisbible(getEnzoContentSourceKey(i), isEnzoContentSourceAvailable(i));
 	}
+
+	// This is simply here to show proof of concept for a button to launch a
+	// link directoy on Enzo. In real world scenarios a nice solution here would
+	// be to parse the contents of any active meeting descriptions provided by
+	// RMS and render each link as a launchable button. This would enable
+	// all shared documents referenced within meeting invite to be quikcly and
+	// easilly displayed on the room display.
+	setContentLauncherVisbible('googleDoc', getEnzoSessionActive());
 
 	anchorSourceLauncher(getSourceKey(getActiveSource()));
 }
@@ -285,5 +298,14 @@ button_event[dvTp, BTN_FILE_LIST_ITEM]
 			setActiveSource(SOURCE_ENZO);
 			enzoContentOpen(dvEnzo, getEnzoContentItemPath(index));
 		}
+	}
+}
+
+button_event[dvTp, BTN_GOOGLE_DOC]
+{
+	release:
+	{
+		setActiveSource(SOURCE_ENZO);
+		enzoShowWebApp(dvEnzo, googleDocLink);
 	}
 }
