@@ -808,6 +808,10 @@
 <FilePathName>src\huddle\huddleController.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Module"><Identifier>huddleFinder</Identifier>
+<FilePathName>src\huddle\huddleFinder.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>huddleControlPortsListener</Identifier>
 <FilePathName>src\huddle\include\huddleControlPortsListener.axi</FilePathName>
 <Comments></Comments>

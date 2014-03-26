@@ -130,6 +130,9 @@ define_function setActiveSource(char sourceId)
 		hideOSD();
 	}
 
+	cancel_wait 'signal returned';
+	cancel_wait 'auto power off';
+
 	setDisplaySource(sourceId);
 
 	activeSource = sourceId;

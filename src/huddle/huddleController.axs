@@ -39,6 +39,9 @@ define_module
 
 define_variable
 
+// Delay before powering off a system when no sources are present (1/10ths second)
+persistent integer powerOffDelay = 600;
+
 volatile char sessionActive;
 
 
@@ -91,7 +94,6 @@ define_function endSession()
 
 	showAuthScreen();
 
-	setActiveSource(SOURCE_ENZO);
 	enzoSessionEnd(dvEnzo);
 	setDisplayPower(false);
 
@@ -175,7 +177,10 @@ define_function handleEnzoLoginEvent()
 
 	refreshSourceLauncherVisibility();
 
-	// TODO start timer for session end and room release
+	if (isSessionActive())
+	{
+		endSession();
+	}
  }
 
 /**
@@ -203,10 +208,6 @@ define_function handlePushbuttonEvent(char isPushed)
 	log(AMX_DEBUG, "'pushbutton event [', bool_to_string(isPushed), ']'");
 
 	if (isPushed)
-	{
-		cancel_wait 'signal returned';
-	}
-	else
 	{
 		cycleActiveSource();
 	}
@@ -244,6 +245,26 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 		}
 	}
 
+	// Set the system to shut down after 60 seconds of sitting on the signal
+	// disconnect screen. The OSD will also change after 30 seconds to provide
+	// the user with a warning.
+	if (hasSignal)
+	{
+		cancel_wait 'auto power off';
+	}
+	else
+	{
+		if (isSourceAvailable(SOURCE_HDMI) == false &&
+				isSourceAvailable(SOURCE_VGA) == false)
+		{
+			wait powerOffDelay 'auto power off'
+			{
+				log(AMX_INFO, 'Shutting down system due to innactivity');
+				endSession();
+			}
+		}
+	}
+
 	// Autoswitch to a hot plugged source if the user is sitting on the enzo
 	// standby screen.
 	if (getActiveSource() == SOURCE_ENZO &&
@@ -252,6 +273,15 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 			hasSignal == true)
 	{
 		setActiveSource(sourceId);
+	}
+
+	// We'll kick open an enzo session when we know that people are actually
+	// present in the room. This enables us to provide a system shutdown based
+	// on Enzo logout so that there is a shutdown path if there is no room UI
+	// present.
+	if (hasSignal == true && !getEnzoSessionActive())
+	{
+		enzoSessionStart(dvEnzo);
 	}
 
 	updateButtonFeedbackState();
