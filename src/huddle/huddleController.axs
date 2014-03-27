@@ -246,7 +246,7 @@ define_function handleSignalStatusEvent(char sourceId, char hasSignal)
 			showOSD('disconnected');
 		}
 
-		wait_until (isSourceAvailable(sourceId)) 'signal returned'
+		wait_until (isSourceAvailable(getActiveSource())) 'signal returned'
 		{
 			log(AMX_DEBUG, 'Signal to active source returned. Switching back to display');
 
