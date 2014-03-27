@@ -185,7 +185,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>UI</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>UI</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -824,10 +824,6 @@
 <FilePathName>src\huddle\include\huddleDXLinkListener.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="None" Type="Include"><Identifier>huddleEnzoListener</Identifier>
-<FilePathName>src\huddle\include\huddleEnzoListener.axi</FilePathName>
-<Comments></Comments>
-</File>
 <File CompileType="None" Type="Include"><Identifier>huddleEnzoContentManager</Identifier>
 <FilePathName>src\huddle\include\huddleEnzoContentManager.axi</FilePathName>
 <Comments></Comments>
@@ -868,8 +864,8 @@
 <FilePathName>src\huddle\ui\huddle.TP5</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="None" Type="TP4"><Identifier>huddleScheduling</Identifier>
-<FilePathName>src\huddle\ui\huddleScheduling.TP4</FilePathName>
+<File CompileType="None" Type="TP4"><Identifier>huddleFinder</Identifier>
+<FilePathName>src\huddle\ui\huddleFinder.TP4</FilePathName>
 <Comments></Comments>
 </File>
 </System>
@@ -948,7 +944,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-2</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-2</Identifier>
 <SysID>53</SysID>
 <TransSerial>COM30,115200,8,None,1,None</TransSerial>
 <TransModem></TransModem>
