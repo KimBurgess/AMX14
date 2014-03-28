@@ -42,13 +42,11 @@ char groupColorYellowid[50] = 'Yellow'
 char groupColorBlueid[50] = 'Blue'
 char groupColorNoneid[50] = 'None'
 
-DEFINE_VARIABLE
+define_variable
 
 
-INCLUDE 'amx-is-xpress-control.axi'
+#include 'amx-is-xpress-control.axi'
 
-
-//define_function xpressUpdateVariable (dev xpressPlayerIpSocketDevice, char xpressPlayerIpAddress[], integer networkApiTcpPort, char varName[], char value[])
 
 define_function upadetArrowColor(char location[], char group[])
 {
@@ -123,41 +121,3 @@ define_function activateWayFinding()
     xpressUpdateVariable (dvLowerPlayer, ipAddressXpressPlayerLower, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, xpressPlayerSideBarVariableNameToUpdate, xpressPlayerVariableValueArrows)
 
 }
-
-DEFINE_START
-
-
-DEFINE_EVENT
-
-DATA_EVENT [vdvTest]
-{
-    COMMAND:
-    {
-	STACK_VAR char cmd[100]
-	STACK_VAR char color[20]
-	STACK_VAR char location[20]
-	cmd = DATA.TEXT
-	IF (FIND_STRING(cmd,'LOCATION=',1))
-	{
-	    REMOVE_STRING(cmd,'LOCATION=',1)
-	    location = REMOVE_STRING(cmd,',',1)
-	    SET_LENGTH_ARRAY(location,(LENGTH_ARRAY(location)-1))
-	    IF (FIND_STRING(cmd,'COLOR=',1))
-	    {
-		color = REMOVE_STRING(cmd,'COLOR=',1)
-		color = cmd
-	    }
-	upadetArrowColor(location,color)
-	}
-	ELSE IF(cmd = 'qr_code')
-	{
-	    activateQRcode()
-	}
-	ELSE IF(cmd = 'way_finding')
-	{
-	    activateWayFinding()
-	}
-    }
-}
-
-DEFINE_PROGRAM
