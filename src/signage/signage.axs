@@ -1,14 +1,14 @@
-PROGRAM_NAME='signage'
+program_name='signage'
 
 
-DEFINE_DEVICE
+define_device
 
-ipSocketXpressPlayerUpper = 0:2:0
-ipSocketXpressPlayerLower = 0:3:0
+dvUpperPlayer = 0:2:0;
+dvLowerPlayer = 0:3:0;
 
-vdvTest = 33100:1:0
+vdvTest = 33100:1:0;
 
-DEFINE_CONSTANT
+define_constant
 
 char ipAddressXpressPlayerUpper[50]        		= '192.168.4.128'
 char ipAddressXpressPlayerLower[50]        		= '192.168.4.129'
@@ -106,21 +106,21 @@ define_function upadetArrowColor(char location[], char group[])
 	}
     }
     SEND_STRING 0, "varLocationToUpdate,' ',varNewColor"
-    xpressUpdateVariable (ipSocketXpressPlayerUpper, ipAddressXpressPlayerUpper, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, varLocationToUpdate, varNewColor)
-    xpressUpdateVariable (ipSocketXpressPlayerLower, ipAddressXpressPlayerLower, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, varLocationToUpdate, varNewColor)
+    xpressUpdateVariable (dvUpperPlayer, ipAddressXpressPlayerUpper, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, varLocationToUpdate, varNewColor)
+    xpressUpdateVariable (dvLowerPlayer, ipAddressXpressPlayerLower, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, varLocationToUpdate, varNewColor)
 }
 
 define_function activateQRcode()
 {
-    xpressUpdateVariable (ipSocketXpressPlayerUpper, ipAddressXpressPlayerUpper, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, xpressPlayerSideBarVariableNameToUpdate, xpressPlayerVariableValueQr)
-    xpressUpdateVariable (ipSocketXpressPlayerLower, ipAddressXpressPlayerLower, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, xpressPlayerSideBarVariableNameToUpdate, xpressPlayerVariableValueQr)
+    xpressUpdateVariable (dvUpperPlayer, ipAddressXpressPlayerUpper, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, xpressPlayerSideBarVariableNameToUpdate, xpressPlayerVariableValueQr)
+    xpressUpdateVariable (dvLowerPlayer, ipAddressXpressPlayerLower, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, xpressPlayerSideBarVariableNameToUpdate, xpressPlayerVariableValueQr)
 
 }
 
 define_function activateWayFinding()
 {
-    xpressUpdateVariable (ipSocketXpressPlayerUpper, ipAddressXpressPlayerUpper, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, xpressPlayerSideBarVariableNameToUpdate, xpressPlayerVariableValueArrows)
-    xpressUpdateVariable (ipSocketXpressPlayerLower, ipAddressXpressPlayerLower, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, xpressPlayerSideBarVariableNameToUpdate, xpressPlayerVariableValueArrows)
+    xpressUpdateVariable (dvUpperPlayer, ipAddressXpressPlayerUpper, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, xpressPlayerSideBarVariableNameToUpdate, xpressPlayerVariableValueArrows)
+    xpressUpdateVariable (dvLowerPlayer, ipAddressXpressPlayerLower, XPRESS_NETWORK_API_TCP_PORT_DEFAULT, xpressPlayerSideBarVariableNameToUpdate, xpressPlayerVariableValueArrows)
 
 }
 
