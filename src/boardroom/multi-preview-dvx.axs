@@ -96,48 +96,95 @@ define_function addDeviceToDevArray (dev deviceArray[], dev device)
 
 define_function startMultiPreviewSnapshots ()
 {
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function startMultiPreviewSnapshots ()'"
+	
 	if (getFlag(isVideoBeingPreviewed) == FALSE)	// only startup snapshots if live video is not being previewed
 	{
 		stack_var integer i
 		stack_var integer isAtLeastOneValidSignal
 		
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (getFlag(isVideoBeingPreviewed) == FALSE)'"
+		
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set variable isAtLeastOneValidSignal to FALSE'"
 		setFlag (isAtLeastOneValidSignal, FALSE)
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::variable isAtLeastOneValidSignal has been set to FALSE'"
 		
 		// reset all timeline times back to zero
 		for (i = 1; i<= DVX_MAX_VIDEO_INPUTS; i++)
 		{
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::for (i = 1; i<= DVX_MAX_VIDEO_INPUTS; i++).....i = <',itoa(i),'>'"
 			if (dvx.videoInputs[i].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)
 			{
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (dvx.videoInputs[i].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)'"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set variable isAtLeastOneValidSignal to TRUE'"
 				setFlag (isAtLeastOneValidSignal, TRUE)
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::variable isAtLeastOneValidSignal has been set to TRUE'"
+				break
 			}
 		}
 		
 		if (getFlag(isAtLeastOneValidSignal) == TRUE)
 		{
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (getFlag(isAtLeastOneValidSignal) == TRUE)'"
 			if (!timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))
 			{
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (!timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))'"
+				
 				set_length_array (tlTimes, max_length_array(tlTimes))
 				
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to create the timeline (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)'"
 				timeline_create (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS,
 						tlTimes,
 						length_array (tlTimes),
 						timeline_absolute,
 						timeline_repeat)
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::timeline created (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)'"
 				
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set variable snapshotsInProgress to TRUE'"
 				setFlag (snapshotsInProgress, TRUE)
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::variable snapshotsInProgress has been set to TRUE'"
 			}
 			else
 			{
-				timeline_reload (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS, tlTimes, length_array(tlTimes))
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (!timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))....else'"
+				
+				// commented out for testing >>>>>>>>>>
+				//timeline_reload (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS, tlTimes, length_array(tlTimes))
+				// commented out for testing <<<<<<<<<<
+				
+				//////// commented in for testing >>>>>>>>>>
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to kill the timeline (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)'"
+				timeline_kill (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::timeline killed (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)'"
+				
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to create the timeline (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)'"
+				timeline_create (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS,
+						tlTimes,
+						length_array (tlTimes),
+						timeline_absolute,
+						timeline_repeat)
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::timeline created (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)'"
+				//////// commented in for testing <<<<<<<<<<
+				
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set variable snapshotsInProgress to TRUE'"
 				setFlag (snapshotsInProgress, TRUE)
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set variable snapshotsInProgress to TRUE'"
 			}
 		}
 		else
 		{
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (getFlag(isAtLeastOneValidSignal) == TRUE).....else'"
 			if (timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))
 			{
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))'"
+				
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to kill the timeline (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)'"
 				timeline_kill (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::timeline killed (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)'"
+				
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set variable snapshotsInProgress to FALSE'"
 				setFlag (snapshotsInProgress, FALSE)
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::variable snapshotsInProgress has been set to FALSE'"
 			}
 		}
 	}
@@ -145,10 +192,19 @@ define_function startMultiPreviewSnapshots ()
 
 define_function stopMultiPreviewSnapshots ()
 {
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function stopMultiPreviewSnapshots ()'"
+	
 	if (timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))
 	{
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))'"
+		
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set variable currentDvxInput to FALSE'"
 		currentDvxInput = FALSE
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::variable currentDvxInput now set to FALSE'"
+		
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to kill the timeline (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)'"
 		timeline_kill (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::timeline has been killed (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)'"
 	}
 }
 
@@ -159,11 +215,18 @@ define_function stopLiveVideoPreview ()
 
 define_function startLiveVideoPreview (integer input)
 {
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function startLiveVideoPreview (integer input)'"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::input = ',itoa(input)"
+	
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to call stopMultiPreviewSnapshots()'"
 	// stop taking snapshots
 	stopMultiPreviewSnapshots ()
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::finished calling stopMultiPreviewSnapshots()'"
 	
 	// delete video snapshot on the video preview button
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to call moderoDeleteButtonVideoSnapshot ()'"
 	moderoDeleteButtonVideoSnapshot (dvTpSnapshotPreview, btnAdrVideoPreviewWindow, MODERO_BUTTON_STATE_ALL)
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::finished call stopMultiPreviewSnapshots()'"
 	
 	moderoDisableButtonFeedback (dvTpSnapshotPreview, btnLoadingBarMultiState)    // reset the loading progress bar
 	
@@ -173,11 +236,15 @@ define_function startLiveVideoPreview (integer input)
 	
 	moderoEnableButtonFeedback (dvTpSnapshotPreview, btnLoadingBarMultiState) //start the loading progress bar
 	
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to switch video on the DVX. input (',itoa(dvDvxVidInPorts[input].port),') output (',itoa(dvDvxVidOutMultiPreview.port),')'"
 	dvxSwitchVideoOnly (dvDvxSwitcher, dvDvxVidInPorts[input].port, dvDvxVidOutMultiPreview.port)
 	
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to cancel a wait (WAIT_HIDE_VIDEO_LOADING_BUTTON)'"
 	CANCEL_WAIT 'WAIT_HIDE_VIDEO_LOADING_BUTTON'
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to throw some code onto the wait stack (WAIT_HIDE_VIDEO_LOADING_BUTTON)'"
 	WAIT waitTimeVideoLoading 'WAIT_HIDE_VIDEO_LOADING_BUTTON'
 	{
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to run the code inside the wait (WAIT_HIDE_VIDEO_LOADING_BUTTON)'"
 		moderoSetButtonHide (dvTpSnapshotPreview, btnAdrVideoPreviewLoadingMessage)
 		moderoSetButtonHide (dvTpSnapshotPreview, btnAdrLoadingBar)
 		moderoSetButtonOpacity (dvTpSnapshotPreview, btnAdrVideoPreviewWindow, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_OPAQUE)
@@ -185,7 +252,9 @@ define_function startLiveVideoPreview (integer input)
 	}
 	
 	// turn on the video being previed flag
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set variable isVideoBeingPreviewed to TRUE'"
 	setFlag (isVideoBeingPreviewed, TRUE)
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::variable isVideoBeingPreviewed now set to TRUE'"
 }
 
 
@@ -198,9 +267,10 @@ define_function dvxNotifySwitch (dev dvxPort1, char signalType[], integer input,
 	// output contains the destination output number that the source was switched to
 	
 	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function dvxNotifySwitch (dev dvxPort1, char signalType[], integer input, integer output)'"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dvxPort1 = ',itoa(dvxPort1.number),':',itoa(dvxPort1.port),':',itoa(dvxPort1.system)"
 	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::signalType = ',signalType"
 	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::input = ',itoa(input)"
-	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::input = ',itoa(output)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::output = ',itoa(output)"
 	
 	switch (signalType)
 	{
@@ -212,18 +282,19 @@ define_function dvxNotifySwitch (dev dvxPort1, char signalType[], integer input,
 			if (input == DVX_PORT_VID_IN_NONE)
 			{
 				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (input == DVX_PORT_VID_IN_NONE)'"
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set bitmap of button (address code ',itoa(btnAdrsVideoOutputSnapshotPreviews[output]),') to no image icon'"
 				moderoSetButtonBitmap (dvTpSnapshotPreview, btnAdrsVideoOutputSnapshotPreviews[output], MODERO_BUTTON_STATE_ALL, imageFileNameNoVideo)
 			}
 			else
 			{
 				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (input == DVX_PORT_VID_IN_NONE)....else'"
-				moderoButtonCopyAttribute (dvTpSnapshotPreview, 
+				/*moderoButtonCopyAttribute (dvTpSnapshotPreview, 
 										   dvTpSnapshotPreview.port, 
 										   btnAdrsVideoInputSnapshotPreviews[input], 
 										   MODERO_BUTTON_STATE_OFF,
 										   btnAdrsVideoOutputSnapshotPreviews[output], 
 										   MODERO_BUTTON_STATE_ALL,
-										   MODERO_BUTTON_ATTRIBUTE_BITMAP)
+										   MODERO_BUTTON_ATTRIBUTE_BITMAP)*/
 			}
 		}
 	}
@@ -238,13 +309,22 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 	
 	stack_var char oldSignalStatus[50]
 	
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[])'"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dvxVideoInput = ',itoa(dvxVideoInput.number),':',itoa(dvxVideoInput.port),':',itoa(dvxVideoInput.system)"
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::signalStatus = ',signalStatus"
+	
 	oldSignalStatus = dvx.videoInputs[dvxVideoInput.port].status
 	
 	// only need to do anything if the signal status for this input has actually changed
 	if (signalStatus != oldSignalStatus)
 	{
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (signalStatus != oldSignalStatus)'"
+		
 		dvx.videoInputs[dvxVideoInput.port].status = signalStatus
+		
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to start multi preview snapshots'"
 		startMultiPreviewSnapshots ()
+		send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::start multi preview snapshots complete'"
 		
 		switch (signalStatus)
 		{
@@ -253,19 +333,22 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 			{
 				stack_var integer output
 				
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::case DVX_SIGNAL_STATUS_NO_SIGNAL | case DVX_SIGNAL_STATUS_UNKNOWN'"
+				
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set bitmap of button (address code ',itoa(btnAdrsVideoOutputSnapshotPreviews[dvxVideoInput.port]),') to no image icon'"
 				moderoSetButtonBitmap (dvTpSnapshotPreview, btnAdrsVideoInputSnapshotPreviews[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL,imageFileNameNoVideo)
 				
 				for (output = 1; output <= DVX_MAX_VIDEO_OUTPUTS; output++)
 				{
 					if (dvx.switchStatusVideoOutputs[output] == dvxVideoInput.port)
 					{
-						moderoButtonCopyAttribute (dvTpSnapshotPreview, 
+						/*moderoButtonCopyAttribute (dvTpSnapshotPreview, 
 												   dvTpSnapshotPreview.port, 
 												   btnAdrsVideoInputSnapshotPreviews[dvxVideoInput.port], 
 												   MODERO_BUTTON_STATE_OFF,
 												   btnAdrsVideoOutputSnapshotPreviews[output], 
 												   MODERO_BUTTON_STATE_ALL,
-												   MODERO_BUTTON_ATTRIBUTE_BITMAP)
+												   MODERO_BUTTON_ATTRIBUTE_BITMAP)*/
 					}
 				}
 			}
@@ -419,61 +502,95 @@ timeline_event[TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS]
 {
 	local_var char dynamicImageName[30]
 	
+	send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::timeline_event[TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS]'"
+	
 	switch (timeline.sequence)
 	{
 		case 1:
 		{
 			stack_var integer i
 			
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (timeline.sequence)....case 1'"
+			
 			// set up dvx input to start from
+			
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::currentDvxInput = ',itoa(currentDvxInput)"
 			if (currentDvxInput == false)
+			{
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (currentDvxInput == false)'"
 				currentDvxInput = 1
+			}
+			
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::currentDvxInput = ',itoa(currentDvxInput)"
 			
 			for (i = currentDvxInput; i < currentDvxInput + DVX_MAX_VIDEO_INPUTS - 1; i++)
 			{
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::for (i = currentDvxInput; i < currentDvxInput + DVX_MAX_VIDEO_INPUTS - 1; i++).....i = ',itoa(i)"
+				
 				if (dvx.videoInputs[((i % DVX_MAX_VIDEO_INPUTS) + 1)].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)
 				{
+					send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (dvx.videoInputs[((i % DVX_MAX_VIDEO_INPUTS) + 1)].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)'"
+					
 					currentDvxInput = ((i % DVX_MAX_VIDEO_INPUTS) + 1)
+					send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::currentDvxInput = ',itoa(currentDvxInput)"
+					
 					break	// exit the for loop
 				}
 			}
 			
 			moderoRequestButtonBitmapName (dvTpSnapshotPreview, btnAdrsVideoInputSnapshotPreviews[currentDvxInput], MODERO_BUTTON_STATE_OFF)
 			
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to switch video on DVX (input ',itoa(currentDvxInput),' to output ',itoa(dvDvxVidOutMultiPreview.port),')'"
 			dvxSwitchVideoOnly (dvDvxSwitcher, currentDvxInput, dvDvxVidOutMultiPreview.port)
 		}
 		case 2:
 		{
 			stack_var integer output
 			
-			dynamicImageName = "'MXA_PREVIEW_',itoa(currentDvxInput)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (timeline.sequence)....case 2'"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::currentDvxInput = ',itoa(currentDvxInput)"
 			
+			dynamicImageName = "'MXA_PREVIEW_',itoa(currentDvxInput)"
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::dynamicImageName = ',dynamicImageName"
+			
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set panel to enable automatic reloading/refreshing of dynamic resource (',dynamicImageName,') on view'"
 			moderoEnableResourceReloadOnView (dvTpSnapshotPreview, dynamicImageName)
+			
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to force a refresh of the dynamic resource (',dynamicImageName,')'"
 			moderoResourceForceRefreshPrefetchFromCache (dvTpSnapshotPreview, dynamicImageName, MODERO_RESOURCE_NOTIFICATION_OFF)
+			
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set panel to disable automatic reloading/refreshing of dynamic resource (',dynamicImageName,') on view'"
 			moderoDisableResourceReloadOnView (dvTpSnapshotPreview, dynamicImageName)
 			
 			// only need to set the button bitmap the first time the resource is loaded
 			if (currentPreviewButtonBitmap[currentDvxInput] != dynamicImageName)
 			{
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (currentPreviewButtonBitmap[currentDvxInput] != dynamicImageName)'"
+				
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::about to set bitmap of button (address code ',itoa(btnAdrsVideoInputSnapshotPreviews[currentDvxInput]),') to dynamic resource (MXA_PREVIEW_',itoa(currentDvxInput),')'"
 				moderoSetButtonBitmapResource (dvTpSnapshotPreview, btnAdrsVideoInputSnapshotPreviews[currentDvxInput],MODERO_BUTTON_STATE_ALL,"'MXA_PREVIEW_',itoa(currentDvxInput)")
 			}
 			
 			for (output = 1; output <= DVX_MAX_VIDEO_OUTPUTS; output++)
 			{
+				send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::for (output = 1; output <= DVX_MAX_VIDEO_OUTPUTS; output++)......output = ',itoa(output)"
+				
 				if (dvx.switchStatusVideoOutputs[output] == currentDvxInput)
 				{
-					moderoButtonCopyAttribute (dvTpSnapshotPreview, 
+					send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::if (dvx.switchStatusVideoOutputs[output] == currentDvxInput)'"
+					/*moderoButtonCopyAttribute (dvTpSnapshotPreview, 
 											   dvTpSnapshotPreview.port, 
 											   btnAdrsVideoInputSnapshotPreviews[currentDvxInput], 
 											   MODERO_BUTTON_STATE_OFF,
 											   btnAdrsVideoOutputSnapshotPreviews[output], 
 											   MODERO_BUTTON_STATE_ALL,
-											   MODERO_BUTTON_ATTRIBUTE_BITMAP)
+											   MODERO_BUTTON_ATTRIBUTE_BITMAP)*/
 				}
 			}
 		}
 		case 3:
 		{
+			send_string 0, "'DEBUG::',__FILE__,'::',itoa(__LINE__),'::switch (timeline.sequence)....case 3'"
 			// do nothing - just waiting until the next switch
 		}
 	}

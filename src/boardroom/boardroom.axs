@@ -1,4 +1,8 @@
-program_name='boardroom2'
+program_name='boardroom'
+
+#include 'system-defines'
+
+
 
 // Library Files
 #include 'common'
@@ -13,6 +17,7 @@ program_name='boardroom2'
 #include 'system-variables'
 #include 'system-mutual-exclusions'
 
+#include 'RmsSchedulingApi'	// RmsSchedulingEventListener is included within
 
 /*
  * --------------------

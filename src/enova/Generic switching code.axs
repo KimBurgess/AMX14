@@ -131,7 +131,6 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 (***********************************************************)
 DEFINE_START
 
-SEND_COMMAND dvTP,'PAGE-Enova Demo'
 
 (***********************************************************)
 (*                THE EVENTS GO BELOW                      *)
@@ -154,6 +153,15 @@ DATA_EVENT[vdvRMS]
     OFFLINE:
     {
     }
+}
+
+
+DATA_EVENT[dvTP]
+{
+	ONLINE:
+	{
+		SEND_COMMAND dvTP,'PAGE-Enova Demo'
+	}
 }
 
 

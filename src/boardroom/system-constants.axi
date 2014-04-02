@@ -60,6 +60,9 @@ integer BTN_DROP_AREA_19_PANEL_HIGHLIGHT_MONITOR_RIGHT = 62
 
 integer BTN_DRAG_AND_DROP_INSTRUCTIONS_10 = 70
 
+
+
+
 /*
  * --------------------
  * Menu Selection Feedback button channel/address/level codes
@@ -600,7 +603,7 @@ char LABELS_PDU_OUTLETS[][20]   =
  */
 
 // 19" panel
-char PAGE_NAME_SPLASH_SCREEN[]                    = 'page-spash-screen'
+char PAGE_NAME_SPLASH_SCREEN[]                    = 'page-splash-screen'
 char PAGE_NAME_MAIN_USER[]                        = 'page-main-user'
 char POPUP_NAME_VIDEO_PREVIEW[]                   = 'popup-video-preview'
 char POPUP_NAME_VIDEO_LOADING[]                   = 'popup-video-loading'
@@ -613,10 +616,11 @@ char POPUP_NAME_VIDEO_CONFERENCE_CAMERA_CONTROL[] = 'vc-dial-address'
 char POPUP_NAME_VIDEO_CONFERENCE_SHARE_CONTENT[]  = 'vc-share-content'
 
 // 10" panel
-char POPUP_NAME_CONTROLS_AUDIO[]    = 'audio-control'
-char POPUP_NAME_CONTROLS_LIGHTING[] = 'lighting-control'
-char PAGE_NAME_SPLASH[]             = 'splash'
-char PAGE_NAME_MAIN[]               = 'main'
+char POPUP_NAME_CONTROLS_AUDIO[]         = 'volume'
+char POPUP_NAME_CONTROLS_LIGHTING[]      = 'lighting'
+char PAGE_NAME_SPLASH[]                  = 'splash'
+char PAGE_NAME_MAIN[]                    = 'main'
+char POPUP_NAME_MENU[]                   = 'menu'
 
 char POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_1[]      = 'draggable-source-hdmi1'
 char POPUP_NAME_DRAGGABLE_SOURCE_TABLE_HDMI_2[]      = 'draggable-source-hdmi2'

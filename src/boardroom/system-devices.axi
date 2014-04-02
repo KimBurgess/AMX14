@@ -23,6 +23,7 @@ define_constant
 integer DEV_ID_MASTER                    = 0
 integer DEV_ID_TOUCH_PANEL_19_INCH_TABLE = 10001
 integer DEV_ID_TOUCH_PANEL_DRAG_AND_DROP = 10002
+integer DEV_ID_TOUCH_PANEL_SCHEDULING    = 10003
 integer DEV_ID_TX_1                      = 7001
 integer DEV_ID_TX_2                      = 7002
 integer DEV_ID_TX_3                      = 7003
@@ -49,6 +50,7 @@ integer DEV_ID_VIRTUAL_DRAG_AND_DROP_10  = 33001
 integer DEV_ID_VIRTUAL_DRAG_AND_DROP_19  = 33002
 integer DEV_ID_VIRTUAL_LIGHTING          = 33003
 integer DEV_ID_VIRTUAL_MULTI_PREVIEW     = 33004
+integer DEV_ID_VIRTUAL_MD5_UTIL          = 41002
 
 /*
  * --------------------
@@ -106,6 +108,8 @@ integer SYS_MASTER  = 0
 
 define_device
 
+vdvMD5Util = DEV_ID_VIRTUAL_MD5_UTIL:PORT_VIRTUAL_MAIN:SYS_MASTER
+
 // Master Controller
 dvMaster    = DEV_ID_MASTER:1:SYS_MASTER
 
@@ -129,6 +133,9 @@ dvTpTableDebug      = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_DEBUG:SYS_MASTER
 // drag and drop elements
 dvTpDragAndDrop10 = DEV_ID_TOUCH_PANEL_DRAG_AND_DROP:PORT_TP_MAIN:SYS_MASTER
 dvTpDragAndDrop19 = DEV_ID_TOUCH_PANEL_19_INCH_TABLE:PORT_TP_VIDEO:SYS_MASTER
+
+// Scheduling panel
+dvTpScheduling = DEV_ID_TOUCH_PANEL_SCHEDULING:PORT_TP_MAIN:SYS_MASTER
 
 // DXLinx Receiver on Left Monitor
 dvRxMonitorLeftMain     = DEV_ID_RX_MONITOR_LEFT:DXLINK_PORT_MAIN:SYS_MASTER
@@ -181,10 +188,10 @@ dvDvxVidIn8     = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_8:SYS_MASTER
 dvDvxVidIn9     = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_9:SYS_MASTER
 dvDvxVidIn10    = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_10:SYS_MASTER
 // Named ports
-dvDvxVidInTx1   = dvDvxVidIn7
-dvDvxVidInTx2   = dvDvxVidIn8
-dvDvxVidInTx3   = dvDvxVidIn9
-dvDvxVidInTx4   = dvDvxVidIn10
+dvDvxVidInTx1   = dvDvxVidIn1
+dvDvxVidInTx2   = dvDvxVidIn6
+dvDvxVidInTx3   = dvDvxVidIn7
+dvDvxVidInTx4   = dvDvxVidIn8
 // Drag and drop names
 dvDvxVidInTableVga         = dvDvxVidIn1
 dvDvxVidInVcMain           = dvDvxVidIn3

@@ -18,10 +18,51 @@ program_name='system-functions'
  */
 
 
+define_function resetMenuOnDragAndDropPanel ()
+{
+	moderoEnableButtonAnimateFromCurrentState (dvTpDragAndDrop10, 1, 1, 4)
+	moderoEnableButtonAnimateFromCurrentState (dvTpDragAndDrop10, 2, 1, 4)
+	moderoEnableButtonAnimateFromCurrentState (dvTpDragAndDrop10, 3, 1, 4)
+	moderoEnableButtonAnimateFromCurrentState (dvTpDragAndDrop10, 4, 1, 4)
+}
+
 define_function resetDraggablePopup (dev dragAndDropVirtual, integer id)
 {
 	hideDraggablePopup (dragAndDropVirtual, id)
 	showDraggablePopup (dragAndDropVirtual, id)
+}
+
+define_function resetAllDraggablePopups (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDrop19):
+		{hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn1.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn5.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn6.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn7.port)
+			hideDraggablePopup (vdvDragAndDrop19, dvDvxVidIn8.port)
+			
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn1.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn5.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn6.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn7.port)
+			showDraggablePopup (vdvDragAndDrop19, dvDvxVidIn8.port)
+		}
+		
+		active (dragAndDropVirtual == vdvDragAndDrop10):
+		{
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			hideDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableVga.port)
+			
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableDisplayPort.port)
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi1.port)
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableHdmi2.port)
+			showDraggablePopup (vdvDragAndDrop10, dvDvxVidInTableVga.port)
+		}
+	}
 }
 
 define_function hideDraggablePopup (dev dragAndDropVirtual, integer id)
@@ -74,7 +115,8 @@ define_function showDraggablePopup (dev dragAndDropVirtual, integer id)
 		
 		active (dragAndDropVirtual == vdvDragAndDrop10):
 		{
-			moderoEnablePopup (dvTpDragAndDrop10, draggablePopups10[id])
+			if (dvx.videoInputs[id].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)
+				moderoEnablePopupOnPage (dvTpDragAndDrop10, draggablePopups10[id], PAGE_NAME_MAIN)
 		}
 	}
 }
@@ -462,9 +504,11 @@ define_function integer getSystemMode ()
 define_function selectVcMode ()
 {
 	// show VC main on left display and VC 2nd (camera) on right display
+	//if (debugA)
 	showSourceOnDisplay (dvDvxVidInVcMain.port, dvDvxVidOutMonitorLeft.port)
+	//if (debugB)
 	showSourceOnDisplay (dvDvxVidInVcCamera.port, dvDvxVidOutMonitorRight.port)
-		
+	
 	// set lighting to vc preset
 	lightsEnablePresetVideoConference()
 	
@@ -509,10 +553,11 @@ define_function selectPresentationMode ()
 		// if coming out of VC mode
 		if (getSystemMode() == SYSTEM_MODE_VIDEO_CONFERENCE)
 		{
-			dvxSwitch (dvDvxMain, SIGNAL_TYPE_VIDEO, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
-			dvxSwitch (dvDvxMain, SIGNAL_TYPE_VIDEO, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
 			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorLeft, DVX_TEST_PATTERN_LOGO_2)
 			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorRight, DVX_TEST_PATTERN_LOGO_2)
+			
+			dvxSwitch (dvDvxMain, SIGNAL_TYPE_VIDEO, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
+			dvxSwitch (dvDvxMain, SIGNAL_TYPE_VIDEO, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
 		}
 	}
 	
@@ -571,6 +616,30 @@ define_function shutdownAvSystem ()
 	
 	// Lights - recall the "all off" preset
 	lightsEnablePresetAllOff ()
+	
+	// Flip the touch panel to the splash screen
+	moderoSetPage (dvTpTableMain, PAGE_NAME_SPLASH_SCREEN)
+	moderoSetPage (dvTpDragAndDrop10, PAGE_NAME_SPLASH)
+	
+	// kill all popups on both panels
+	moderoDisableAllPopups (dvTpTableMain)
+	moderoDisableAllPopups (dvTpDragAndDrop10)
+	
+	// reset the menu on the 10"
+	resetMenuOnDragAndDropPanel ()
+	
+	
+	// turn off the drag and drop expanded drop area animation channel on the 19" panel
+	channelOff (dvTpTableDebug, 1)
+	
+	// stop live video streaming from the MPL
+	disableVideoPreview ()
+	
+	// cancel the current RMS booking (if there is one)
+	if (currentBookingId != '')
+	{
+		RmsBookingEnd(currentBookingId, 0)
+	}
 	
 	
 	channelOff (dvTpTableDebug, 1)
@@ -651,6 +720,9 @@ define_function tableInputDetected (dev dvTxVidIn)
 		// show the drag and drop draggable popups on the 19" panel
 		showDraggablePopupsAll (vdvDragAndDrop19)
 		
+		moderoSetPage (dvTpDragAndDrop10, PAGE_NAME_MAIN)
+		moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_MENU, PAGE_NAME_MAIN)
+		
 		// set the flag to show that the AV system is now in use
 		isSystemAvInUse = TRUE
 		setSystemMode (SYSTEM_MODE_PRESENTATION)
@@ -668,7 +740,9 @@ define_function tableInputDetected (dev dvTxVidIn)
 				input = dvTxVidIn.port
 				
 				// route the DVX input for this TX to the DVX output for the left monitor
-				dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorLeft.port)
+				//dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorLeft.port)
+				
+				showSourceOnDisplay (input, dvDvxVidOutMonitorLeft.port)
 				
 				/*moderoButtonCopyAttribute (dvTpTableVideo, 
 				                           PORT_TP_VIDEO, 
@@ -691,7 +765,7 @@ define_function tableInputDetected (dev dvTxVidIn)
 				}
 				
 				// turn on the left monitor
-				snapiDisplayEnablePower (vdvMonitorLeft)
+				//snapiDisplayEnablePower (vdvMonitorLeft)
 			}
 			else if (selectedVideoInputMonitorRight == DVX_PORT_VID_IN_NONE)
 			{
@@ -700,7 +774,9 @@ define_function tableInputDetected (dev dvTxVidIn)
 				input = dvTxVidIn.port
 				
 				// route the DVX input for this TX to the DVX output for the right monitor
-				dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorRight.port)
+				//dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorRight.port)
+				
+				showSourceOnDisplay (input, dvDvxVidOutMonitorRight.port)
 				
 				/*moderoButtonCopyAttribute (dvTpTableVideo, 
 				                           PORT_TP_VIDEO, 
@@ -723,7 +799,7 @@ define_function tableInputDetected (dev dvTxVidIn)
 				}
 				
 				// turn on the right monitor
-				snapiDisplayEnablePower (vdvMonitorRight)
+				//snapiDisplayEnablePower (vdvMonitorRight)
 			}
 		}
 	}
@@ -741,6 +817,7 @@ define_function lightsEnablePreset (integer lightingLevel, integer fadeTimeInSec
 {
 	lightsSetLevelWithFade (LIGHTING_ADDRESS_BOARDROOM, lightingLevel, fadeTimeInSeconds)
 	sendLevel (dvTpTableLighting, BTN_LVL_LIGHTING_DISPLAY , lightingLevel)
+	sendLevel (dvTpDragAndDrop10, BTN_LVL_LIGHTING_DISPLAY , lightingLevel)
 	
 	if (lightingLevel)
 	{
@@ -776,6 +853,58 @@ define_function lightsEnablePresetVideoConference()
 {
 	lightsEnablePreset (LIGHTING_PRESET_VALUE_VC_MODE, 2)
 }
+
+
+
+/*
+ * --------------------
+ * Override RMS event listener callback functions
+ * --------------------
+ */
+
+	/*STRUCTURE RmsEventBookingResponse
+	{
+		CHAR bookingId[RMS_MAX_PARAM_LEN];
+		LONG location;
+		CHAR isPrivateEvent;
+		CHAR startDate[RMS_MAX_DATE_TIME_LEN];
+		CHAR startTime[RMS_MAX_DATE_TIME_LEN];
+		CHAR endDate[RMS_MAX_DATE_TIME_LEN];
+		CHAR endTime[RMS_MAX_DATE_TIME_LEN];
+		CHAR subject[RMS_MAX_PARAM_LEN];
+		CHAR details[RMS_MAX_PARAM_LEN];
+		CHAR clientGatewayUid[RMS_MAX_PARAM_LEN];
+		CHAR isAllDayEvent;
+		CHAR organizer[RMS_MAX_PARAM_LEN];
+		LONG elapsedMinutes;                          // Only used for active booking events
+		LONG minutesUntilStart;                       // Only used for next active booking events
+		LONG remainingMinutes;                        // Only used for active booking events
+		CHAR onBehalfOf[RMS_MAX_PARAM_LEN];
+		CHAR attendees[RMS_MAX_PARAM_LEN];            // Not used in some contexts such as adhoc creation
+		CHAR isSuccessful;
+		CHAR failureDescription[RMS_MAX_PARAM_LEN];   // Not used if result is from a successful event
+    }*/
+
+
+//#define INCLUDE_SCHEDULING_ACTIVE_UPDATED_CALLBACK
+define_function RmsEventSchedulingActiveUpdated(CHAR bookingId[], RmsEventBookingResponse eventBookingResponse)
+{
+	currentBookingId = bookingId
+}
+
+//#define INCLUDE_SCHEDULING_EVENT_STARTED_CALLBACK
+define_function RmsEventSchedulingEventStarted(CHAR bookingId[], RmsEventBookingResponse eventBookingResponse)
+{
+	currentBookingId = bookingId
+}
+
+//#define INCLUDE_SCHEDULING_EVENT_ENDED_CALLBACK
+define_function RmsEventSchedulingEventEnded(CHAR bookingId[], RmsEventBookingResponse eventBookingResponse)
+{
+	currentBookingId = ''
+}
+
+
 
 /*
  * --------------------
@@ -890,6 +1019,89 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 		signalStatusDvxInputMonitorRight = signalStatus
 	}
 	
+	// 10" Drag and drop
+	// if input is one of the table inputs and the signal has just been lost (changed from valid signal)
+	//  - disable the corresponding drag area on the 10" panel
+	//  - hide the draggable popup for that input on the 10" panel
+	// if input is one of the table inputs and the signal has just been detected (changed to valid signal)
+	//  - enable the corresponding drag area on the 10" panel
+	//  - show the draggable popup for that input on the 10" panel (on the main page)
+	
+	if (signalStatus != oldSignalStatus)
+	{
+		select
+		{
+			active (signalStatus == DVX_SIGNAL_STATUS_VALID_SIGNAL):
+			{
+				enableDragItem (vdvDragAndDrop10, dvxVideoInput.port)
+				unblockDragItem (vdvDragAndDrop10, dvxVideoInput.port)
+				showDraggablePopup (vdvDragAndDrop10, dvxVideoInput.port)
+				//moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_AUDIO, PAGE_NAME_MAIN)
+				
+				select
+				{
+					active (dvxVideoInput.port == dvDvxVidInTableHdmi1.port):
+					{
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DRAG_AND_DROP_INSTRUCTIONS_10, MODERO_BUTTON_STATE_ON, IMAGE_FILE_NAME_DRAG_AND_DROP_INSTRUCTIONS_HDMI_1)
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A_DROP_ICON, MODERO_BUTTON_STATE_ALL, IMAGE_FILE_NAME_DROP_ICON_ROTATE_90_DEGREES_CLOCKWISE)
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B_DROP_ICON, MODERO_BUTTON_STATE_ALL, IMAGE_FILE_NAME_DROP_ICON_ROTATE_90_DEGREES_CLOCKWISE)
+					}
+					
+					active (dvxVideoInput.port == dvDvxVidInTableHdmi2.port):
+					{
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DRAG_AND_DROP_INSTRUCTIONS_10, MODERO_BUTTON_STATE_ON, IMAGE_FILE_NAME_DRAG_AND_DROP_INSTRUCTIONS_HDMI_2)
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A_DROP_ICON, MODERO_BUTTON_STATE_ALL, IMAGE_FILE_NAME_DROP_ICON_ROTATE_90_DEGREES_COUNTER_CLOCKWISE)
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B_DROP_ICON, MODERO_BUTTON_STATE_ALL, IMAGE_FILE_NAME_DROP_ICON_ROTATE_90_DEGREES_COUNTER_CLOCKWISE)
+					}
+					
+					active (dvxVideoInput.port == dvDvxVidInTableVga.port):
+					{
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DRAG_AND_DROP_INSTRUCTIONS_10, MODERO_BUTTON_STATE_ON, IMAGE_FILE_NAME_DRAG_AND_DROP_INSTRUCTIONS_VGA)
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A_DROP_ICON, MODERO_BUTTON_STATE_ALL, IMAGE_FILE_NAME_DROP_ICON_ROTATE_90_DEGREES_CLOCKWISE)
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B_DROP_ICON, MODERO_BUTTON_STATE_ALL, IMAGE_FILE_NAME_DROP_ICON_ROTATE_90_DEGREES_CLOCKWISE)
+					}
+					
+					active (dvxVideoInput.port == dvDvxVidInTableDisplayPort.port):
+					{
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DRAG_AND_DROP_INSTRUCTIONS_10, MODERO_BUTTON_STATE_ON, IMAGE_FILE_NAME_DRAG_AND_DROP_INSTRUCTIONS_DISPLAYPORT)
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A_DROP_ICON, MODERO_BUTTON_STATE_ALL, IMAGE_FILE_NAME_DROP_ICON_ROTATE_90_DEGREES_COUNTER_CLOCKWISE)
+						moderoSetButtonBitmap (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B_DROP_ICON, MODERO_BUTTON_STATE_ALL, IMAGE_FILE_NAME_DROP_ICON_ROTATE_90_DEGREES_COUNTER_CLOCKWISE)
+					}
+				}
+				
+				// hide audio/lighting control popups
+				moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_AUDIO)
+				moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_LIGHTING)
+				
+				moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_MENU)
+				resetMenuOnDragAndDropPanel ()
+				
+				channelOn (dvTpDragAndDrop10, BTN_DRAG_AND_DROP_INSTRUCTIONS_10)
+				moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A, 0, 30, 2)
+				moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B, 0, 30, 2)
+				moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A_DROP_ICON, 0, 30, 2)
+				moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B_DROP_ICON, 0, 30, 2)
+				wait 100 'NEW_SIGNAL'
+				{
+					channelOff (dvTpDragAndDrop10, BTN_DRAG_AND_DROP_INSTRUCTIONS_10)
+					moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A, 30, 1, 3)
+					moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B, 30, 1, 3)
+					moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A_DROP_ICON, 0, 1, 3)
+					moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B_DROP_ICON, 0, 1, 3)
+					//moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_AUDIO, PAGE_NAME_MAIN)
+					//moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_LIGHTING, PAGE_NAME_MAIN)
+					
+					moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_MENU, PAGE_NAME_MAIN)
+				}
+			}
+			
+			active (signalStatus != DVX_SIGNAL_STATUS_VALID_SIGNAL):
+			{
+				hideDraggablePopup (vdvDragAndDrop10, dvxVideoInput.port)
+			}
+		}
+	}
+	
 	// Energy saving - switch off monitors when signal has been disconnected for some time
 	// if signal
 	switch (signalStatus)
@@ -998,6 +1210,7 @@ define_function dvxNotifyAudioOutVolume (dev dvxAudioOutput, integer volume)
 	if (dvxAudioOutput == dvDvxAudOutSpeakers)
 	{
 		send_level dvTpTableAudio, BTN_LVL_VOLUME_DISPLAY, volume
+		send_level dvTpDragAndDrop10, BTN_LVL_VOLUME_DISPLAY, volume
 	}
 }
 
@@ -1322,7 +1535,7 @@ define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
 	
 	cancel_wait 'WAITING_TO_MAKE_SURE_ROOM_IS_EMPTY'
 	
-	if (ioPort == dvDvxIos)
+	/*if (ioPort == dvDvxIos)
 	{
 		switch (ioChanCde)
 		{
@@ -1341,7 +1554,7 @@ define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
 				//startMultiPreviewSnapshots ()
 			}
 		}
-	}
+	}*/
 }
 
 
@@ -1364,7 +1577,7 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 					// room is now unoccupied (note: Will take 8 minutes minimum to trigger after person leaves room)
 					isRoomOccupied = FALSE
 					
-					// Set lights to "all off" mode as there have been no people in the room for at least 8 minutes
+					/*// Set lights to "all off" mode as there have been no people in the room for at least 8 minutes
 					lightsEnablePresetAllOff ()
 					
 					// Flip the touch panel to the splash screen
@@ -1378,11 +1591,12 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 					{
 						countTimesPeopleLeftWithoutShuttingDownSystem++
 						shutdownAvSystem ()
-					}
+					}*/
 				}
 			}
 		}
 	}
 }
+
 
 #end_if

@@ -348,6 +348,8 @@ integer lightingDelaySecondsFromBargraphAdjust = 2
 
 integer systemMode
 
+volatile char currentBookingId[256] = ''
+
 /*
  * --------------------
  * Debugging variables

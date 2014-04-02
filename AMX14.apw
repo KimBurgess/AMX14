@@ -185,7 +185,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>UI</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>UI</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -401,11 +401,11 @@
 </DeviceMap>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Boardroom</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Boardroom</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
-<TransTCPIP>AMX14-BOARD-DVX-3155:1319:1: ::</TransTCPIP>
+<TransTCPIP>192.168.4.11:1319:1:Integrate 2013 - Pod 1A - Network Media::</TransTCPIP>
 <VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
 <VNMRestoreIPSettings>192.168.3.201:1319:1:Melbourne Office::</VNMRestoreIPSettings>
 <VNMSystemID>1</VNMSystemID>
@@ -499,6 +499,14 @@
 <FilePathName>lib\rms-sdk\includes\RmsMonitorCommon.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
 <Comments></Comments>
@@ -518,6 +526,64 @@
 <File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
 <FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
 <Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsAssetLocationTracker</Identifier>
+<FilePathName>lib\rms-tools\RmsAssetLocationTracker.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsExtendedApi</Identifier>
+<FilePathName>lib\rms-tools\RmsExtendedApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>BookingManager</Identifier>
+<FilePathName>lib\scheduling-ui\include\BookingManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>DailyBookingTracker</Identifier>
+<FilePathName>lib\scheduling-ui\include\DailyBookingTracker.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>DeviceUtil</Identifier>
+<FilePathName>lib\scheduling-ui\include\DeviceUtil.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>ProfileImageManager</Identifier>
+<FilePathName>lib\scheduling-ui\include\ProfileImageManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsRapidUpdater</Identifier>
+<FilePathName>lib\scheduling-ui\include\RmsRapidUpdater.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>TimeUtil</Identifier>
+<FilePathName>lib\scheduling-ui\include\TimeUtil.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>string</Identifier>
+<FilePathName>lib\scheduling-ui\lib\ncl\string.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>TpApi</Identifier>
+<FilePathName>lib\scheduling-ui\lib\tp\TpApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>TpEventListener</Identifier>
+<FilePathName>lib\scheduling-ui\lib\tp\TpEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>MD5Calculator_dr1_0_0</Identifier>
+<FilePathName>lib\scheduling-ui\module\MD5Calculator_dr1_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>SchedulingUI</Identifier>
+<FilePathName>lib\scheduling-ui\module\SchedulingUI.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>scheduling</Identifier>
+<FilePathName>lib\scheduling-ui\ui\scheduling.TP4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP3"><DevName>dvTP3</DevName>
+</DeviceMap>
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>drag-and-drop</Identifier>
 <FilePathName>module\drag-and-drop.axs</FilePathName>
@@ -557,6 +623,10 @@
 </File>
 <File CompileType="None" Type="Include"><Identifier>modero-multi-preview-dvx</Identifier>
 <FilePathName>src\boardroom\modero-multi-preview-dvx.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>multi-preview-dvx-v2.0</Identifier>
+<FilePathName>src\boardroom\multi-preview-dvx-v2.0.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>multi-preview-dvx</Identifier>
@@ -651,6 +721,10 @@
 </File>
 <File CompileType="None" Type="Include"><Identifier>wake-on-lan</Identifier>
 <FilePathName>src\boardroom\wake-on-lan.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>system-defines</Identifier>
+<FilePathName>system-defines.axi</FilePathName>
 <Comments></Comments>
 </File>
 </System>
@@ -780,7 +854,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-2</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-2</Identifier>
 <SysID>53</SysID>
 <TransSerial>COM30,115200,8,None,1,None</TransSerial>
 <TransModem></TransModem>

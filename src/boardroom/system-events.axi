@@ -251,6 +251,7 @@ data_event [vdvDragAndDrop10]
 				
 				idDragItem = atoi(data.text)
 				
+				
 				// remove the other drag items (don't want to allow multiple item selection in this instance)
 				select
 				{
@@ -309,8 +310,11 @@ data_event [vdvDragAndDrop10]
 						// 10" is a special case where the  an assignment of the drop areas to the displays is dynamic
 						// based on which sources (drag items) are selected by the user so as to orient buttons and graphics to
 						// the side of the panel that the user is located.
-						sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorLeft.port, dropAreaLeftOrientationMonitorLeft)")
-						sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorRight.port, dropAreaLeftOrientationMonitorRight)")
+						if (dvx.videoInputs[idDragItem].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)
+						{
+							sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorLeft.port, dropAreaLeftOrientationMonitorLeft)")
+							sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorRight.port, dropAreaLeftOrientationMonitorRight)")
+						}
 						
 						/*moderoSetButtonText (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A, MODERO_BUTTON_STATE_ALL, 'Left')
 						moderoSetButtonText (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B, MODERO_BUTTON_STATE_ALL, 'Right')*/
@@ -327,8 +331,11 @@ data_event [vdvDragAndDrop10]
 						// 10" is a special case where the  an assignment of the drop areas to the displays is dynamic
 						// based on which sources (drag items) are selected by the user so as to orient buttons and graphics to
 						// the side of the panel that the user is located.
-						sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorLeft.port, dropAreaRightOrientationMonitorLeft)")
-						sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorRight.port, dropAreaRightOrientationMonitorRight)")
+						if (dvx.videoInputs[idDragItem].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)
+						{
+							sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorLeft.port, dropAreaRightOrientationMonitorLeft)")
+							sendCommand (vdvDragAndDrop10, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(dvDvxVidOutMonitorRight.port, dropAreaRightOrientationMonitorRight)")
+						}
 						
 						/*moderoSetButtonText (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A, MODERO_BUTTON_STATE_ALL, 'Right')
 						moderoSetButtonText (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B, MODERO_BUTTON_STATE_ALL, 'Left')*/
@@ -341,9 +348,12 @@ data_event [vdvDragAndDrop10]
 				// hide audio/lighting control popups
 				moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_AUDIO)
 				moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_LIGHTING)
+				moderoDisablePopup (dvTpDragAndDrop10, POPUP_NAME_MENU)
+				resetMenuOnDragAndDropPanel ()
 				
 				// show buttons for the monitors
 				cancel_wait 'FIRST_TIME_USER'
+				cancel_wait 'NEW_SIGNAL'
 				moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A, 0, 30, 2)
 				moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B, 0, 30, 2)
 				moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A_DROP_ICON, 0, 30, 2)
@@ -381,11 +391,14 @@ data_event [vdvDragAndDrop10]
 					moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B_DROP_ICON, 0, 1, 3)
 					
 					// show audio/lighting control popups
-					moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_AUDIO, PAGE_NAME_MAIN)
-					moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_LIGHTING, PAGE_NAME_MAIN)
+					//moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_AUDIO, PAGE_NAME_MAIN)
+					//moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_LIGHTING, PAGE_NAME_MAIN)
+					
+					moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_MENU, PAGE_NAME_MAIN)
 					
 					channelOff (dvTpDragAndDrop10, BTN_DRAG_AND_DROP_INSTRUCTIONS_10)
 					//moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DRAG_AND_DROP_INSTRUCTIONS_10, 0, 1, 3)
+					
 				}
 			}
 			
@@ -398,25 +411,28 @@ data_event [vdvDragAndDrop10]
 				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
 				idDropArea = atoi(data.text)
 				
-				select
+				if (dvx.videoInputs[idDragItem].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)
 				{
-					active (idDropArea == dvDvxVidOutMonitorLeft.port):
+					select
 					{
-						if (isClockwiseOrientation)
-							btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A
-						else
-							btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B
+						active (idDropArea == dvDvxVidOutMonitorLeft.port):
+						{
+							if (isClockwiseOrientation)
+								btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A
+							else
+								btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B
+						}
+						active (idDropArea == dvDvxVidOutMonitorRight.port):
+						{
+							if (isClockwiseOrientation)
+								btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B
+							else
+								btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A
+						}
 					}
-					active (idDropArea == dvDvxVidOutMonitorRight.port):
-					{
-						if (isClockwiseOrientation)
-							btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B
-						else
-							btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A
-					}
+					
+					moderoEnableButtonAnimate (dvTpDragAndDrop10, btnDropArea, 30, 60, 1)
 				}
-				
-				moderoEnableButtonAnimate (dvTpDragAndDrop10, btnDropArea, 30, 60, 1)
 				
 				//channelOn (dvTpDragAndDrop10, btnDropArea)
 			}
@@ -430,25 +446,28 @@ data_event [vdvDragAndDrop10]
 				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
 				idDropArea = atoi(data.text)
 				
-				select
+				if (dvx.videoInputs[idDragItem].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)
 				{
-					active (idDropArea == dvDvxVidOutMonitorLeft.port):
+					select
 					{
-						if (isClockwiseOrientation)
-							btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A
-						else
-							btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B
+						active (idDropArea == dvDvxVidOutMonitorLeft.port):
+						{
+							if (isClockwiseOrientation)
+								btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A
+							else
+								btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B
+						}
+						active (idDropArea == dvDvxVidOutMonitorRight.port):
+						{
+							if (isClockwiseOrientation)
+								btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B
+							else
+								btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A
+						}
 					}
-					active (idDropArea == dvDvxVidOutMonitorRight.port):
-					{
-						if (isClockwiseOrientation)
-							btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B
-						else
-							btnDropArea = BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_A
-					}
+					
+					moderoEnableButtonAnimate (dvTpDragAndDrop10, btnDropArea, 60, 30, 2)
 				}
-				
-				moderoEnableButtonAnimate (dvTpDragAndDrop10, btnDropArea, 60, 30, 2)
 				
 				//channelOff (dvTpDragAndDrop10, btnDropArea)
 			}
@@ -483,8 +502,10 @@ data_event [vdvDragAndDrop10]
 				moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DROP_AREA_10_INCH_PANEL_DESTINATION_B_DROP_ICON, 0, 1, 0)
 				
 				// show audio/lighting control popups
-				moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_AUDIO, PAGE_NAME_MAIN)
-				moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_LIGHTING, PAGE_NAME_MAIN)
+				//moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_AUDIO, PAGE_NAME_MAIN)
+				//moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_LIGHTING, PAGE_NAME_MAIN)
+				
+				moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_MENU, PAGE_NAME_MAIN)
 				
 				channelOff (dvTpDragAndDrop10, BTN_DRAG_AND_DROP_INSTRUCTIONS_10)
 				//moderoEnableButtonAnimate (dvTpDragAndDrop10, BTN_DRAG_AND_DROP_INSTRUCTIONS_10, 0, 1, 0)
@@ -624,6 +645,59 @@ data_event [dvTpTableMain]
 				moderoEnablePopup (dvTpTableMain, POPUP_NAME_VIDEO_CONFERENCE_MAIN)
 				// show the VC dial popup
 				moderoEnablePopup (dvTpTableMain, POPUP_NAME_VIDEO_CONFERENCE_DIAL_ADDRESS)
+			}
+		}
+	}
+}
+
+data_event [dvTpDragAndDrop10]
+{
+	string:
+	{
+		switch (data.text)
+		{
+			case 'AWAKE':
+			{
+			}
+			
+			case 'ASLEEP':
+			{
+			}
+			
+			case 'STANDBY':
+			{
+			}
+			
+			case 'SHUTDOWN':
+			{
+			}
+			
+			case 'STARTUP':
+			{
+			}
+			
+			default:
+			{
+				if (find_string(data.text, "'PAGE-',PAGE_NAME_MAIN", 1) == 1)
+				{
+					// Define drag items again
+					enableDragItemsAll (vdvDragAndDrop10)
+					
+					// delete the drop areas for the monitors
+					disableDropAreasAll (vdvDragAndDrop10)
+					
+					// reset the draggable popup position by hiding it and then showing it again
+					resetAllDraggablePopups (vdvDragAndDrop10)
+					
+					// unblock all of the drag items
+					unblockDragItemsAll (vdvDragAndDrop10)
+					
+					// show the lighting and audio controls
+					//moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_AUDIO, PAGE_NAME_MAIN)
+					//moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_CONTROLS_LIGHTING, PAGE_NAME_MAIN)
+					
+					moderoEnablePopupOnPage (dvTpDragAndDrop10, POPUP_NAME_MENU, PAGE_NAME_MAIN)
+				}
 			}
 		}
 	}
@@ -1010,6 +1084,20 @@ button_event [dvTpTableDebug,0]
 	}
 }
 
+button_event [dvTpDragAndDrop10, 0]
+{
+	push:
+	{
+		switch (button.input.channel)
+		{
+			case BTN_MAIN_SHUT_DOWN:
+			{
+				shutdownAvSystem ()
+			}
+		}
+	}
+}
+
 button_event [dvTpTableMain, 0]
 {
 	push:
@@ -1048,18 +1136,21 @@ button_event [dvTpTableMain, 0]
  */
 
 level_event [dvTpTableAudio, BTN_LVL_VOLUME_CONTROL]
+level_event [dvTpDragAndDrop10, BTN_LVL_VOLUME_CONTROL]
 {
 	dvxSetAudioOutputVolume (dvDvxAudOutSpeakers, level.value)
 }
 
 level_event [dvTpTableLighting, BTN_LVL_LIGHTING_CONTROL]
+level_event [dvTpDragAndDrop10, BTN_LVL_LIGHTING_CONTROL]
 {
 	local_var integer newLightLevel
 	
 	newLightLevel = level.value
 	
-	// update display bargraph on 19" panel
+	// update display bargraph on panels
 	sendLevel (dvTpTableLighting, BTN_LVL_LIGHTING_DISPLAY , newLightLevel)
+	sendLevel (dvTpDragAndDrop10, BTN_LVL_LIGHTING_DISPLAY , newLightLevel)
 	
 	if (level.value == 0)
 	{
