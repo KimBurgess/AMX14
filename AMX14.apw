@@ -728,7 +728,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Huddle</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Huddle</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -744,6 +744,18 @@
 <Comments></Comments>
 <File CompileType="None" Type="Include"><Identifier>common</Identifier>
 <FilePathName>lib\common\common.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-controlports-api</Identifier>
+<FilePathName>lib\device\amx-controlports-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-controlports-control</Identifier>
+<FilePathName>lib\device\amx-controlports-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-controlports-listener</Identifier>
+<FilePathName>lib\device\amx-controlports-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>amx-device-control</Identifier>
@@ -774,8 +786,160 @@
 <FilePathName>lib\enzo\amx-enzo-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-api</Identifier>
+<FilePathName>lib\modero\amx-modero-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-control</Identifier>
+<FilePathName>lib\modero\amx-modero-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-listener</Identifier>
+<FilePathName>lib\modero\amx-modero-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>string</Identifier>
+<FilePathName>lib\ncl\string.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsDuetMonitorMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors-duet\RmsDuetMonitorMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsGenericNetLinxDeviceMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsGenericNetLinxDeviceMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSourceUsageMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSourceUsageMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemModeMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSystemModeMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemPowerMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSystemPowerMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsVirtualDeviceMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsVirtualDeviceMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsAssetLocationTracker</Identifier>
+<FilePathName>lib\rms-tools\RmsAssetLocationTracker.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsExtendedApi</Identifier>
+<FilePathName>lib\rms-tools\RmsExtendedApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsExtendedEventListener</Identifier>
+<FilePathName>lib\rms-tools\RmsExtendedEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Other"><Identifier>SamsungMD55C Interface</Identifier>
+<FilePathName>module\docs\SamsungMD55C Interface.doc</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>Samsung_MD55C_Comm_dr1_0_0</Identifier>
+<FilePathName>module\Samsung_MD55C_Comm_dr1_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>huddle</Identifier>
 <FilePathName>src\huddle\huddle.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>huddleController</Identifier>
+<FilePathName>src\huddle\huddleController.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>huddleFinder</Identifier>
+<FilePathName>src\huddle\huddleFinder.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleControlPortsListener</Identifier>
+<FilePathName>src\huddle\include\huddleControlPortsListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleDisplayManager</Identifier>
+<FilePathName>src\huddle\include\huddleDisplayManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleDXLinkListener</Identifier>
+<FilePathName>src\huddle\include\huddleDXLinkListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleEnzoContentManager</Identifier>
+<FilePathName>src\huddle\include\huddleEnzoContentManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleEnzoListener</Identifier>
+<FilePathName>src\huddle\include\huddleEnzoListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleModeroListener</Identifier>
+<FilePathName>src\huddle\include\huddleModeroListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleOSDManager</Identifier>
+<FilePathName>src\huddle\include\huddleOSDManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleRmsListener</Identifier>
+<FilePathName>src\huddle\include\huddleRmsListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleSourceManager</Identifier>
+<FilePathName>src\huddle\include\huddleSourceManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleUIManager</Identifier>
+<FilePathName>src\huddle\include\huddleUIManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>logger</Identifier>
+<FilePathName>src\huddle\include\logger.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>util</Identifier>
+<FilePathName>src\huddle\include\util.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP5"><Identifier>huddle</Identifier>
+<FilePathName>src\huddle\ui\huddle.TP5</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>huddleFinder</Identifier>
+<FilePathName>src\huddle\ui\huddleFinder.TP4</FilePathName>
 <Comments></Comments>
 </File>
 </System>

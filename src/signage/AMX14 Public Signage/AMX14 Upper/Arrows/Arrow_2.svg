@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generator: AMX InspiredSignage XPress -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" dur="indefinite" height="364" id="svg2" version="1.0" width="434">
+ <spx:properties xmlns:spx="http://www.spinetix.com/namespace/1.0/spx">
+  <spx:color name="Color" targetAttribute="fill" xlink:href="#g_1"/>
+ </spx:properties>
+ <script><![CDATA[
+var anim=document.getElementById( "anim" );
+var rect=document.getElementById( "rect" );
+var rect2=document.getElementById( "rect4116");
+var v=createSharedVariable( "arrow2" );
+v.addUpdateListener( function ( sv ) {
+rect2.setAttribute( "fill", sv.value);
+rect.setAttribute( "fill", sv.value );
+anim.beginElement();
+} );
+]]></script>
+ <g fill="#BC1616" transform="matrix(-1,0,0,1,434.42519,0)" xml:id="g_1">
+  <rect height="257.741" id="rect4116" transform="matrix(1,0,-0.7061362,0.7080761,0,0)" width="100" x="181.50136" y="-0.70613718"/>
+  <use transform="matrix(1,0,0,-1,0,363.5)" xlink:href="#rect4116"/>
+  <rect height="100" width="367.69553" x="66.729935" xml:id="rect" y="132"/>
+  <animate attributeName="display" begin="indefinite" dur="1s" to="inherit" xml:id="anim"/>
+ </g>
+</svg>
