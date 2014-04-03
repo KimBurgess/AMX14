@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generator: AMX InspiredSignage XPress -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" dur="indefinite" height="100%" viewBox="0 0 1280 720" viewport-fill="black" width="100%" xml:id="svg">
+ <spx:properties xmlns:spx="http://www.spinetix.com/namespace/1.0/spx">
+  <spx:text name="Title" xlink:href="#title"/>
+  <spx:text name="Description" xlink:href="#desc"/>
+  <spx:choice choice-1="indefinite" choice-2="media" name="Duration" targetAttribute="dur" xlink:href="#svg"/>
+  <spx:color name="Background Color" targetAttribute="viewport-fill" xlink:href="#svg"/>
+  <spx:table defaultPage="yes" itemElement="g" name="Layers" tableElement="g" xlink:href="#layers">
+   <spx:media xmlns:svg="http://www.w3.org/2000/svg" element="g" layer="locked" name="Layers" positionable="yes" svg:display-align="center" svg:font-family="Arial" svg:font-size="64" svg:height="360" svg:preserveAspectRatio="xMidYMid" svg:repeatDur="indefinite" svg:text-align="center" svg:transform="translate(320,180)" svg:width="640" xml:id="media_1"/>
+  </spx:table>
+  <spx:group name="Document">
+   <spx:text name="Canvas Size" targetAttribute="viewBox" xlink:href="#svg"/>
+  </spx:group>
+  <spx:group name="New Layer">
+   <spx:text name="Default Width" targetAttribute="width" targetNamespace="http://www.w3.org/2000/svg" xlink:href="#media_1"/>
+   <spx:text name="Default Height" targetAttribute="height" targetNamespace="http://www.w3.org/2000/svg" xlink:href="#media_1"/>
+   <spx:text name="Default Position" targetAttribute="transform" targetNamespace="http://www.w3.org/2000/svg" xlink:href="#media_1"/>
+   <spx:choice choice-01="none" choice-02="xMidYMid" name="Default Aspect Ratio" targetAttribute="svg:preserveAspectRatio" xlink:href="#media_1"/>
+  </spx:group>
+ </spx:properties>
+ <title xml:id="title">New document
+</title>
+ <desc xml:id="desc">Multilayer Template
+</desc>
+ <g xml:id="layers">
+  <g>
+   <g xml:id="id58430">
+    <animation xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" display-align="center" dur="media" font-family="Arial" font-size="64" height="480.0000" preserveAspectRatio="xMidYMid" repeatDur="indefinite" spx:preview-href=".preview.Video.svg.png" text-align="center" transform="translate(0.0000, 0.0000)" width="832.0000" xlink:href="Video.svg" xml:id="id73977"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id34054">
+    <image xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" display-align="center" font-family="Arial" font-size="64" height="104.0000" preserveAspectRatio="xMidYMid" repeatDur="indefinite" spx:preview-href=".preview.AMX14-Logo.png.png" text-align="center" transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, 848.0001, 16.0000)" width="416.0001" xlink:href="Images/AMX14-Logo.png" xml:id="id93361"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id58723">
+    <animation xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" begin="0s" display-align="center" dur="" fill="remove" font-family="Arial" font-size="64" height="168" initialVisibility="whenStarted" preserveAspectRatio="xMidYMid" repeatCount="indefinite" repeatDur="indefinite" spx:preview-href=".preview.news.svg.png" text-align="center" transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, 32.0000, 512.0001)" width="1216" xlink:href="Feeds/news.svg" xml:id="id71340"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id69396">
+    <animation xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" begin="0s" display-align="center" dur="" fill="remove" font-family="Arial" font-size="64" height="45" initialVisibility="whenStarted" preserveAspectRatio="xMidYMid" repeatCount="indefinite" repeatDur="indefinite" spx:preview-href=".preview.Twitter_ticker.svg.png" text-align="center" transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, 0.0000, 672.0001)" width="1280" xlink:href="Feeds/Twitter_ticker.svg" xml:id="id75283"/>
+   </g>
+  </g>
+  <g>
+   <g xml:id="id64374">
+    <animation xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" display-align="center" dur="media" font-family="Arial" font-size="64" height="368.0000" preserveAspectRatio="none" repeatDur="indefinite" spx:preview-href=".preview.Playlist_Side_Bar.svg.png" text-align="center" transform="translate(848.0001, 128.0000)" width="416.0004" xlink:href="Playlist_Side_Bar.svg" xml:id="id20481"/>
+   </g>
+  </g>
+ </g>
+</svg>

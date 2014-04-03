@@ -162,6 +162,18 @@
 <FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-api</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-control</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-control.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="TP4"><Identifier>AMX14 Generic Swtching MXT1000</Identifier>
 <FilePathName>src\demo-presentations\ui\AMX14 Generic Swtching MXT1000.TP4</FilePathName>
 <Comments></Comments>
@@ -213,6 +225,18 @@
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-api</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-control</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-control.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="TP4"><Identifier>AMX14 Generic Swtching MXT1000</Identifier>
@@ -272,6 +296,18 @@
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-api</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-control</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-control.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="TP4"><Identifier>AMX14 Generic Swtching MXT1000</Identifier>
@@ -365,11 +401,11 @@
 </DeviceMap>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Boardroom</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Boardroom</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
-<TransTCPIP>AMX14-ENOVA-DVX-3156-02:1319:1: ::</TransTCPIP>
+<TransTCPIP>192.168.4.11:1319:1:Integrate 2013 - Pod 1A - Network Media::</TransTCPIP>
 <VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
 <VNMRestoreIPSettings>192.168.3.201:1319:1:Melbourne Office::</VNMRestoreIPSettings>
 <VNMSystemID>1</VNMSystemID>
@@ -463,6 +499,14 @@
 <FilePathName>lib\rms-sdk\includes\RmsMonitorCommon.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
 <FilePathName>lib\rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
 <Comments></Comments>
@@ -483,12 +527,74 @@
 <FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>RmsAssetLocationTracker</Identifier>
+<FilePathName>lib\rms-tools\RmsAssetLocationTracker.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsExtendedApi</Identifier>
+<FilePathName>lib\rms-tools\RmsExtendedApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>BookingManager</Identifier>
+<FilePathName>lib\scheduling-ui\include\BookingManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>DailyBookingTracker</Identifier>
+<FilePathName>lib\scheduling-ui\include\DailyBookingTracker.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>DeviceUtil</Identifier>
+<FilePathName>lib\scheduling-ui\include\DeviceUtil.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>ProfileImageManager</Identifier>
+<FilePathName>lib\scheduling-ui\include\ProfileImageManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsRapidUpdater</Identifier>
+<FilePathName>lib\scheduling-ui\include\RmsRapidUpdater.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>TimeUtil</Identifier>
+<FilePathName>lib\scheduling-ui\include\TimeUtil.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>string</Identifier>
+<FilePathName>lib\scheduling-ui\lib\ncl\string.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>TpApi</Identifier>
+<FilePathName>lib\scheduling-ui\lib\tp\TpApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>TpEventListener</Identifier>
+<FilePathName>lib\scheduling-ui\lib\tp\TpEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>MD5Calculator_dr1_0_0</Identifier>
+<FilePathName>lib\scheduling-ui\module\MD5Calculator_dr1_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>SchedulingUI</Identifier>
+<FilePathName>lib\scheduling-ui\module\SchedulingUI.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>scheduling</Identifier>
+<FilePathName>lib\scheduling-ui\ui\scheduling.TP4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP3"><DevName>dvTP3</DevName>
+</DeviceMap>
+</File>
 <File CompileType="Netlinx" Type="Module"><Identifier>drag-and-drop</Identifier>
 <FilePathName>module\drag-and-drop.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="DUET"><Identifier>Samsung_MD55C_Comm_dr1_0_0</Identifier>
 <FilePathName>module\Samsung_MD55C_Comm_dr1_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Other"><Identifier>SamsungMD55C Interface</Identifier>
+<FilePathName>module\SamsungMD55C Interface.doc</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>touch-tracker</Identifier>
@@ -519,6 +625,10 @@
 <FilePathName>src\boardroom\modero-multi-preview-dvx.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Module"><Identifier>multi-preview-dvx-v2.0</Identifier>
+<FilePathName>src\boardroom\multi-preview-dvx-v2.0.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Module"><Identifier>multi-preview-dvx</Identifier>
 <FilePathName>src\boardroom\multi-preview-dvx.axs</FilePathName>
 <Comments></Comments>
@@ -529,6 +639,10 @@
 </File>
 <File CompileType="None" Type="Include"><Identifier>rms-main</Identifier>
 <FilePathName>src\boardroom\rms-main.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>snapi-display-control</Identifier>
+<FilePathName>src\boardroom\snapi-display-control.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>sony-evihd7v</Identifier>
@@ -609,8 +723,12 @@
 <FilePathName>src\boardroom\wake-on-lan.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>system-defines</Identifier>
+<FilePathName>system-defines.axi</FilePathName>
+<Comments></Comments>
+</File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Huddle</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>Huddle</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM3,38400,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -626,6 +744,18 @@
 <Comments></Comments>
 <File CompileType="None" Type="Include"><Identifier>common</Identifier>
 <FilePathName>lib\common\common.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-controlports-api</Identifier>
+<FilePathName>lib\device\amx-controlports-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-controlports-control</Identifier>
+<FilePathName>lib\device\amx-controlports-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-controlports-listener</Identifier>
+<FilePathName>lib\device\amx-controlports-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>amx-device-control</Identifier>
@@ -656,8 +786,160 @@
 <FilePathName>lib\enzo\amx-enzo-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-api</Identifier>
+<FilePathName>lib\modero\amx-modero-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-control</Identifier>
+<FilePathName>lib\modero\amx-modero-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-modero-listener</Identifier>
+<FilePathName>lib\modero\amx-modero-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>string</Identifier>
+<FilePathName>lib\ncl\string.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsDuetMonitorMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors-duet\RmsDuetMonitorMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsGenericNetLinxDeviceMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsGenericNetLinxDeviceMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSourceUsageMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSourceUsageMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemModeMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSystemModeMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemPowerMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSystemPowerMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsVirtualDeviceMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsVirtualDeviceMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsAssetLocationTracker</Identifier>
+<FilePathName>lib\rms-tools\RmsAssetLocationTracker.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsExtendedApi</Identifier>
+<FilePathName>lib\rms-tools\RmsExtendedApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsExtendedEventListener</Identifier>
+<FilePathName>lib\rms-tools\RmsExtendedEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Other"><Identifier>SamsungMD55C Interface</Identifier>
+<FilePathName>module\docs\SamsungMD55C Interface.doc</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>Samsung_MD55C_Comm_dr1_0_0</Identifier>
+<FilePathName>module\Samsung_MD55C_Comm_dr1_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>huddle</Identifier>
 <FilePathName>src\huddle\huddle.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>huddleController</Identifier>
+<FilePathName>src\huddle\huddleController.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>huddleFinder</Identifier>
+<FilePathName>src\huddle\huddleFinder.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleControlPortsListener</Identifier>
+<FilePathName>src\huddle\include\huddleControlPortsListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleDisplayManager</Identifier>
+<FilePathName>src\huddle\include\huddleDisplayManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleDXLinkListener</Identifier>
+<FilePathName>src\huddle\include\huddleDXLinkListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleEnzoContentManager</Identifier>
+<FilePathName>src\huddle\include\huddleEnzoContentManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleEnzoListener</Identifier>
+<FilePathName>src\huddle\include\huddleEnzoListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleModeroListener</Identifier>
+<FilePathName>src\huddle\include\huddleModeroListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleOSDManager</Identifier>
+<FilePathName>src\huddle\include\huddleOSDManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleRmsListener</Identifier>
+<FilePathName>src\huddle\include\huddleRmsListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleSourceManager</Identifier>
+<FilePathName>src\huddle\include\huddleSourceManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>huddleUIManager</Identifier>
+<FilePathName>src\huddle\include\huddleUIManager.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>logger</Identifier>
+<FilePathName>src\huddle\include\logger.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>util</Identifier>
+<FilePathName>src\huddle\include\util.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP5"><Identifier>huddle</Identifier>
+<FilePathName>src\huddle\ui\huddle.TP5</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>huddleFinder</Identifier>
+<FilePathName>src\huddle\ui\huddleFinder.TP4</FilePathName>
 <Comments></Comments>
 </File>
 </System>
@@ -732,7 +1014,7 @@
 <Comments></Comments>
 </File>
 </System>
-<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX</Identifier>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Enova-Demo-DVX-2</Identifier>
 <SysID>53</SysID>
 <TransSerial>COM30,115200,8,None,1,None</TransSerial>
 <TransModem></TransModem>
@@ -764,6 +1046,30 @@
 </File>
 <File CompileType="None" Type="Include"><Identifier>amx-dvx-listener</Identifier>
 <FilePathName>lib\dvx\amx-dvx-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsDvxSwitcherMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsDvxSwitcherMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemPowerMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSystemPowerMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>enova-dvx</Identifier>
@@ -803,6 +1109,34 @@
 </File>
 <File CompileType="None" Type="Include"><Identifier>amx-dvx-listener</Identifier>
 <FilePathName>lib\dvx\amx-dvx-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsDvxSwitcherMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsDvxSwitcherMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemPowerMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsSystemPowerMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
+<FilePathName>lib\rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>enova-dvx</Identifier>

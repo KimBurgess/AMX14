@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generator: AMX InspiredSignage XPress -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:spx="http://www.spinetix.com/namespace/1.0/spx" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" snapshotTime="1.716598s" spx:start-at-random-time="on" width="100%" xml:id="svg">
+ <spx:properties>
+  <spx:version date="$Date: 2011-04-18 11:26:44 +0200 (Mon, 18 Apr 2011) $" revision="$Revision: 13235 $"/>
+  <spx:text name="Title" xlink:href="#title"/>
+  <spx:text name="Description" xlink:href="#desc"/>
+  <spx:table itemElement="item" name="Inline RSS" tableElement="rss" xlink:href="#inline">
+   <spx:text element="title" name="Title"/>
+  </spx:table>
+  <spx:choice choice-1="on" choice-2="off" name="Looping" targetAttribute="tickerLooping" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#options"/>
+  <spx:group expand="yes" name="Data Source">
+   <spx:choice choice-1="inline" choice-2="http://rss.news.yahoo.com/rss/world" choice-3="http://www.20minutes.fr/rss/flux/une.xml" choice-4="http://rss.cnn.com/rss/edition.rss" name="RSS Feed Source" xlink:href="#rss_uri"/>
+   <spx:choice choice-1="RSS" choice-2="XML" choice-3="CSV" choice-4="TXT" choice-5="ICAL" name="Feed Type" xlink:href="#rss_parser"/>
+   <spx:choice choice-1="document load" choice-2="at end" choice-3="next item" name="Feed Update Policy" xlink:href="#rss_policy"/>
+  </spx:group>
+  <spx:group expand="yes" name="Controls">
+   <spx:rich name="Layout" xlink:href="#template"/>
+   <spx:choice choice-1="Right-to-left" choice-2="Left-to-right" choice-3="Bottom-to-top" choice-4="Top-to-bottom" name="Direction" targetAttribute="tickerDirection" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#options"/>
+   <spx:text name="Crawl speed (%)" targetAttribute="tickerSpeed" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#options"/>
+   <spx:choice choice-1="yes" choice-2="no" name="Smooth speeds only" targetAttribute="tickerSmooth" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#options"/>
+   <spx:text name="Spacing (%)" targetAttribute="tickerSpacing" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#options"/>
+  </spx:group>
+  <spx:group expand="yes" name="Background">
+   <spx:color name="Back Color" targetAttribute="fill" xlink:href="#ticker-bg"/>
+   <spx:text name="Back Opacity" targetAttribute="fill-opacity" xlink:href="#ticker-bg"/>
+  </spx:group>
+  <spx:group name="iCal">
+   <spx:choice choice-01="now" choice-02="today" choice-03="sunday" choice-04="monday" choice-05="tuesday" choice-06="wednesday" choice-07="thursday" choice-08="friday" choice-09="saturday" choice-10="this month" choice-11="this year" choice-12="-1 day" choice-13="-2 days" choice-14="-1 week" choice-15="-2 weeks" choice-16="-1 month" choice-17="-2 months" choice-18="Day Month Year" name="Start date" targetAttribute="startDate" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#rss_parser"/>
+   <spx:choice choice-01="indefinite" choice-02="today" choice-03="sunday" choice-04="monday" choice-05="tuesday" choice-06="wednesday" choice-07="thursday" choice-08="friday" choice-09="saturday" choice-10="this month" choice-11="this year" choice-12="+1 day" choice-13="+2 days" choice-14="+1 week" choice-15="+2 weeks" choice-16="+1 month" choice-17="+2 months" choice-18="Day Month Year" name="End date" targetAttribute="endDate" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#rss_parser"/>
+  </spx:group>
+  <spx:group name="Advanced">
+   <spx:text name="Baseline (%)" targetAttribute="tickerBaseline" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#options"/>
+   <spx:text name="Number of lines" targetAttribute="tickerLines" targetNamespace="http://www.spinetix.com/namespace/1.0/spx" xlink:href="#options"/>
+  </spx:group>
+ </spx:properties>
+ <title xml:id="title">Crawling text
+</title>
+ <desc xml:id="desc">Crawling text template
+</desc>
+ <defs spx:liveEdit="off">
+  <textArea fill="#fdfdfd" font-family="Proxima Nova" font-size="12.000000" font-style="normal" font-variant="normal" font-weight="normal" text-align="center" xml:id="template" xml:space="preserve">[SPX][title]  [SPX][content]</textArea>
+  <title xml:id="rss_uri">http://AMX14-DNS-SERVER-BAK/amx_twitter.xml
+</title>
+  <title xml:id="rss_policy">at end
+</title>
+  <title spx:endDate="indefinite" spx:startDate="now" xml:id="rss_parser">XML
+</title>
+  <title spx:tickerBaseline="30" spx:tickerDirection="Right-to-left" spx:tickerLines="1" spx:tickerLooping="on" spx:tickerSmooth="yes" spx:tickerSpacing="20" spx:tickerSpeed="200" xml:id="options"/>
+  <rss xml:id="inline">
+   <item>
+    <title xml:id="id82948">Template for scrolling text.
+</title>
+   </item>
+   <item>
+    <title xml:id="id53315">You can use inline text or remote RSS for controlling the text to be displayed.
+</title>
+   </item>
+   <item>
+    <title xml:id="id22196">The document size will be adapted automatically.
+</title>
+   </item>
+  </rss>
+ </defs>
+ <script><![CDATA[
+    tickerNextItem=0;
+    svg=document.documentElement;
+    tickerViewBox=svg.viewport;  // Replace with custom viewbox if needed
+    options=document.getElementById( "options" );
+    tickerSpeed=parseFloat(options.getAttributeNS( 'http://www.spinetix.com/namespace/1.0/spx', 'tickerSpeed' ));
+    if ( !isFinite(tickerSpeed) || tickerSpeed<=0 ) {
+      alert( 'Invalid speed percentage: '+tickerSpeed );
+      tickerSpeed=100;
+    }
+    if ( options.getAttributeNS( 'http://www.spinetix.com/namespace/1.0/spx', 'tickerSmooth' )=="yes" )
+      tickerSmooth=true;
+    else
+      tickerSmooth=false;
+    tickerSpacing=parseFloat(options.getAttributeNS( 'http://www.spinetix.com/namespace/1.0/spx', 'tickerSpacing' ));
+    if ( !isFinite(tickerSpacing) ) {
+      alert( 'Invalid spacing percentage: '+tickerSpacing );
+      tickerSpacing=20;
+    }
+    tickerLines=parseInt(options.getAttributeNS( 'http://www.spinetix.com/namespace/1.0/spx', 'tickerLines' ));
+    if ( !isFinite(tickerLines) || tickerLines<=0 ) {
+      alert( 'Invalid number of lines: '+tickerLines );
+      tickerLines=1;
+    }
+    tickerBaseline=parseFloat(options.getAttributeNS( 'http://www.spinetix.com/namespace/1.0/spx', 'tickerBaseline' ));
+    tickerDirection=options.getAttributeNS( 'http://www.spinetix.com/namespace/1.0/spx', 'tickerDirection' );
+    bVertical=false;
+    bLeftToRight=false;
+    if ( tickerDirection=="Left-to-right" ) {
+      bLeftToRight=true;
+    } else if ( tickerDirection=="Bottom-to-top" ) {
+      bVertical=true;
+    } else if ( tickerDirection=="Top-to-bottom" ) {
+      bLeftToRight=true;
+      bVertical=true;
+    }
+    var tickerCTM=svg.getDeviceCTM();
+    if ( "getDeviceRefreshRate" in svg )
+      deviceRefreshRate=svg.getDeviceRefreshRate();
+    else
+      deviceRefreshRate=60;
+    devicePixelSize = 1;
+    if ( bVertical ) {
+      if ( tickerCTM.getComponent(2)==0 )
+        devicePixelSize = Math.abs(tickerCTM.getComponent(3));
+      else if ( tickerCTM.getComponent(3)==0 )
+        devicePixelSize = Math.abs(tickerCTM.getComponent(2));
+    } else {
+      if ( tickerCTM.getComponent(1)==0 )
+        devicePixelSize = Math.abs(tickerCTM.getComponent(0));
+      else if ( tickerCTM.getComponent(0)==0 )
+        devicePixelSize = Math.abs(tickerCTM.getComponent(1));
+    }
+
+    tickerLooping = options.getAttributeNS( 'http://www.spinetix.com/namespace/1.0/spx', 'tickerLooping' ) == "on";
+    uri=document.getElementById( "rss_uri" ).textContent;
+    policy=document.getElementById( "rss_policy" ).textContent;
+    var rss_parser=document.getElementById( "rss_parser" );
+    parser=rss_parser.textContent;
+    if ( parser.length > 3 && parser.substring( parser.length-3 )==".js" ) {
+      var script_node=document.getElementById( "js" );
+      if ( script_node!=null )
+        svg.removeChild( script_node );
+      script_node=document.createElementNS( "http://www.w3.org/2000/svg", "script" );
+      script_node.setAttributeNS( "http://www.w3.org/1999/xlink", "href", parser );
+      script_node.id="js";
+      svg.appendChild( script_node );
+      parser="JS";
+    }
+    parser_startDate=rss_parser.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "startDate" );
+    parser_endDate=rss_parser.getAttributeNS( "http://www.spinetix.com/namespace/1.0/spx", "endDate" );
+    template=document.getElementById( "template" );
+    bg=document.getElementById( "ticker-bg" );
+    bg.setAttribute( "width", tickerViewBox.width );
+    bg.setAttribute( "height", tickerViewBox.height );
+
+    function fixString( x, map ) {
+      var r="";
+      for ( var i=0; i<x.length; ) {
+        var n=x.indexOf( "[SPX]", i );
+        if ( n==-1 ) {
+          r += x.substring( i );
+          break;
+        }
+        if ( n > i )
+          r += x.substring( i, n );
+        if ( n+6<x.length && x.charAt(n+5)=='[' ) {
+          var nn=x.indexOf( ']', n+6 );
+          if ( nn!=-1 ) {
+            var key=x.substring( n+6, nn );
+            if ( key in map )
+              r += map[key];
+            i=nn+1;
+            continue;
+          }
+        }
+        r += x.substr( i, n+5 );
+        i = n+5;
+      }
+      return r;
+    }
+
+    function fixTextContentWithSize( x, map, fontSize ) {
+      x.setAttribute( "font-size", fontSize );
+      for ( var child=x.firstChild; child; child=child.nextSibling )
+        if ( child.nodeType==Node.ELEMENT_NODE && ( child.localName=="tspan" || child.localName=="a" || child.localName=="switch" ) )
+          fixTextContentWithSize( child, map, fontSize );
+        else if ( child.nodeType==Node.TEXT_NODE )
+          child.textContent=fixString( child.textContent, map );
+    }
+
+    function readItemsIntoMap( x, array ) {
+      for ( var row=x.firstElementChild; row!=null; row=row.nextElementSibling ) {
+        var map = [];
+        for ( var col=row.firstElementChild; col!=null; col=col.nextElementSibling )
+          map[col.localName]=col.textContent;
+        array.push( map );
+      }
+    }
+    
+    function parseTXT( txt ) {
+      var records = [];
+      for each ( var i in txt.split( /[\r\n]+/ ) ) {
+        var x = [];
+        x.title = i;
+        records.push( x );
+      }
+      return records;
+    }
+
+    function parse_date( udate, end ) {
+      var t=new Date(), date=udate.toLowerCase();
+      if ( date=="now" ) {
+      } else if ( date=="indefinite" ) {
+        t.setTime( 2145913200000 );
+      } else if ( date=="today" ) {
+        t=new Date( t.getFullYear(), t.getMonth(), t.getDate()+end );
+      } else if ( date=="this month" ) {
+        t=new Date( t.getFullYear(), t.getMonth()+end, 1 );
+      } else if ( date=="this year" ) {
+        t=new Date( t.getFullYear()+end, 0, 1 );
+      } else {
+        var day_of_the_week=[ "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday" ];
+        var w=day_of_the_week.indexOf(date);
+        if ( w!=-1 ) {
+          var d=t.getDay()-w;
+          if ( d < 0 ) d+=7;
+          t=new Date( t.getFullYear(), t.getMonth(), t.getDate()+end*8-d );
+        } else {
+          var m=date.match( /^([+-]?[1-9][0-9]*) (week|day|month|year)s?$/ );
+          if ( m ) {
+            var n=parseInt( m[1] );
+            var x = m[2]=="week" ? 7 : m[2]=="month" ? 30 : m[2]=="year" ? 365 : 1;
+            t=new Date( t.getFullYear(), t.getMonth(), t.getDate()+n*x+end );
+          } else {
+            t=new Date( udate );
+          }
+        }
+      }
+      return t;
+    }
+
+    function parse( response ) {
+      var newrss=null;
+      if ( parser=="RSS" ) {
+        var rssDocument=parseRSS( response );
+        if ( rssDocument!=null ) {
+          newrss = [];
+          readItemsIntoMap( rssDocument.documentElement, newrss );
+        }
+      } else if ( parser=="XML" || parser=="XML-UI" ) {
+        var rssDocument=parseXML( response );
+        if ( rssDocument!=null ) {
+          newrss = [];
+          readItemsIntoMap( rssDocument.documentElement, newrss );
+        }
+      } else if ( parser=="TXT" ) {
+        newrss=parseTXT( response );
+      } else if ( parser=="CSV" ) {
+        var rssDocument=parseCSV( response );
+        if ( rssDocument!=null ) {
+          newrss = [];
+          readItemsIntoMap( rssDocument.documentElement, newrss );
+        }
+      } else if ( parser=="ICAL" ) {
+        var ical=parseICAL( response );
+        if ( ical!=null ) {
+          var icalDocument=ical.getScheduleAsRSS( parse_date(parser_startDate,0).getTime(), parse_date(parser_endDate,1).getTime() );
+          if ( icalDocument!=null ) {
+            newrss = [];
+            readItemsIntoMap( icalDocument.documentElement, newrss );
+          }
+        }
+      } else if ( parser=="JS" ) {
+        newrss = [];
+        custom_parser( response, newrss );
+      }
+      return newrss;
+    }
+
+    function sv_callback( sv ) {
+      item=null;
+      rss=parse( sv.value );
+      tickerTimer.stop();
+      for ( var x=bg.nextElementSibling; x!=null; ) {
+        var y=x.nextElementSibling;
+        svg.removeChild( x );
+        x=y;
+      }
+      feed_start_time=svg.getCurrentTime();
+      if ( feed_start_time<doc_start_time ) {
+        tickerTimer.delay=(doc_start_time-feed_start_time)*1000;
+        tickerTimer.start();
+      } else {
+        ticker_timer();
+      }
+    }
+
+    function rss_callback( status ) {
+      if ( status.success ) {
+        var newrss=parse( status.content );
+        if ( newrss!=null ) {
+          if ( item==null ) {
+            rss=newrss;
+            ticker_timer();
+          } else {
+            rss_pending=newrss;
+          }
+        }
+      }
+    }
+
+    function remove_after_end( evt ) {
+      evt.currentTarget.parentNode.removeChild( evt.currentTarget );
+    }
+
+    function on_resize( ev ) {
+      item=null;
+      tickerTimer.stop();
+      bg.setAttribute( "width", tickerViewBox.width );
+      bg.setAttribute( "height", tickerViewBox.height );
+      for ( var x=bg.nextElementSibling; x!=null; ) {
+        var y=x.nextElementSibling;
+        svg.removeChild( x );
+        x=y;
+      }
+      ticker_timer();
+    }
+    
+    function ticker_timer( ev ) {
+      var t0=0, total_dur=0, modulo=false;
+      if ( item!=null ) {
+        if ( rss_pending!=null && policy=="next item" ) {
+          item=null;
+          rss=rss_pending;
+          rss_pending=null;
+        } else {
+          item++;
+          if ( item >= rss.length )
+            item=null;
+          if ( item==null && rss_pending!=null ) {
+            rss=rss_pending;
+            rss_pending=null;
+          }
+        }
+        if ( item==null && rss!=null && tickerLooping && rss.length>0 )
+          item=0;
+      } else if ( rss!=null ) {
+        t0=svg.getCurrentTime()-feed_start_time;
+        item = rss.length>0 ? 0 : null;
+      }
+      var map=null;
+      while ( item!=null ) {
+        map = rss[item]
+        var newText=template.cloneNode( true );
+        newText.id='';
+        if ( bVertical )
+          newText.setAttribute( "width", tickerViewBox.width );
+        fixTextContentWithSize( newText, map, tickerViewBox.height*(1-tickerBaseline/100)/tickerLines );
+        var textBBox=newText.getBBox();
+        var textDistance=0;
+        if ( textBBox!=null )
+          textDistance = bVertical ? textBBox.y+textBBox.height : textBBox.x+textBBox.width;
+        textDistance *= 1.03;
+        var crawlDistance = bVertical ? tickerViewBox.height+textDistance : tickerViewBox.width+textDistance;
+        var pixelsPerRefresh = tickerViewBox.height/tickerLines*(tickerSpeed/100)/deviceRefreshRate*devicePixelSize;
+        if ( tickerSmooth ) {
+          if ( pixelsPerRefresh > 0.5 )
+            pixelsPerRefresh = Math.ceil( pixelsPerRefresh );
+          else
+            pixelsPerRefresh = 1 / Math.floor( 1/pixelsPerRefresh );
+        }
+        var unitsPerSecond = pixelsPerRefresh*deviceRefreshRate/devicePixelSize;
+        var dur=crawlDistance/unitsPerSecond;
+        if ( t0 < dur ) {
+          var animText=document.createElementNS( 'http://www.w3.org/2000/svg', 'animateTransform' );
+          animText.setAttribute( 'attributeName', 'transform' );
+          animText.setAttribute( 'type', 'translate' );
+          animText.setAttribute( 'begin', 'indefinite' );
+          animText.setAttribute( 'additive', 'sum' );
+          if ( bVertical ) {
+            if ( bLeftToRight ) {
+              animText.setAttribute( 'from', '0,-'+textDistance );
+              animText.setAttribute( 'by', '0,'+crawlDistance );
+            } else {
+              animText.setAttribute( 'from', '0,'+tickerViewBox.height );
+              animText.setAttribute( 'by', '0,-'+crawlDistance );
+            }
+          } else {
+            if ( bLeftToRight ) {
+              animText.setAttribute( 'from', '-'+textDistance+',0' );
+              animText.setAttribute( 'by', ''+crawlDistance+',0' );
+            } else {
+              animText.setAttribute( 'from', tickerViewBox.width+',0' );
+              animText.setAttribute( 'by', '-'+crawlDistance+',0' );
+            }
+          }
+          animText.setAttribute( 'dur', dur );
+          newText.appendChild( animText );
+          svg.appendChild( newText );
+          newText.addEventListener( 'endEvent', remove_after_end, false );
+          animText.beginElementAt(-t0);
+          if ( !tickerLooping && item==rss.length-1 ) {
+            if ( !( "sv" in document.global ) )
+              svg.setAttribute( "dur", svg.getCurrentTime()-t0+dur );
+            break;
+          }
+        }
+        var delay=(textDistance+tickerSpacing*tickerViewBox.height/tickerLines/100)/unitsPerSecond;
+        if ( t0 > delay ) {
+          t0 -= delay;
+          if ( !modulo )
+            total_dur += delay;
+          if ( ++item>=rss.length ) {
+            item=null;
+            if ( !modulo && total_dur > 0 ) {
+              var t1=t0;
+              t0 %= total_dur;
+              var crawlDur=(bVertical ? tickerViewBox.height : tickerViewBox.width)/(unitsPerSecond*tickerLines);
+              t0 += (1+Math.floor(crawlDur/total_dur))*total_dur;
+              if ( t0 > t1 )
+                t0=t1;
+            }
+            if ( tickerLooping )
+              item=0;
+            else if ( !( "sv" in document.global ) )
+              svg.setAttribute( "dur", total_dur-delay+dur );
+            modulo=true;
+          }
+          continue;
+        } else {
+          tickerTimer.delay=(delay-t0)*1000;
+          tickerTimer.start();
+          break;
+        }
+      }
+    }
+
+    function on_load( ev ) {
+      svg.removeEventListener( "load", on_load, false );
+      var colon=uri.indexOf( ':' ), at=uri.indexOf( '@' );
+      if ( at>0 && ( colon==-1 || colon>at ) ) {
+        if ( "sv" in document.global )
+          sv.removeUpdateListener( sv_callback );
+        sv=createSharedVariable( uri );
+        sv.addUpdateListener( sv_callback );
+      } else {
+        if ( uri=="inline" ) {
+          rss = [];
+          readItemsIntoMap( document.getElementById( "inline" ), rss );
+          ticker_timer();
+        } else {
+          getURL( uri, rss_callback, policy=="document load" ? GETURL_CACHE_CONTENT : (GETURL_CACHE_CONTENT|GETURL_TRACK_CHANGES) );
+        }
+      }
+    }
+
+    rss=null;
+    item=null;
+    load_first=true;
+    rss_pending=null;
+    feed_start_time=0;
+    doc_start_time=svg.getCurrentTime();
+    tickerTimer=createTimer( 0, -1 );
+    tickerTimer.addEventListener( 'SVGTimer', ticker_timer, false );
+    svg.addEventListener( "resize", on_resize, false );
+    svg.addEventListener( "load", on_load, false );
+
+  ]]></script>
+ <rect fill="#000000" fill-opacity="100" xml:id="ticker-bg"/>
+</svg>

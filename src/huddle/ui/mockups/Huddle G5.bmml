@@ -20,7 +20,7 @@
     </control>
     <control controlID="6" controlTypeID="com.balsamiq.mockups::Image" x="587" y="284" w="150" h="150" measuredW="77" measuredH="79" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>DropBox</text>
+        <text>Web</text>
       </controlProperties>
     </control>
     <control controlID="7" controlTypeID="com.balsamiq.mockups::Image" x="1055" y="284" w="150" h="150" measuredW="77" measuredH="79" zOrder="5" locked="false" isInGroup="-1">
@@ -49,6 +49,11 @@
     <control controlID="22" controlTypeID="com.balsamiq.mockups::StickyNote" x="1166" y="459" w="158" h="73" measuredW="109" measuredH="123" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Dynamic%20source%20list%20on%20subpage%20view.</text>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::StickyNote" x="768" y="166" w="170" h="151" measuredW="109" measuredH="123" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Tapping%20USB%20brings%20up%20a%20popup%20which%20contains%20a%20vertical%20subpage%20view%20for%20browsing%20USB%20device%20contents.%20When%20individual%20content%20item%20is%20selected%20this%20is%20presented%20via%20Enzo.</text>
       </controlProperties>
     </control>
   </controls>

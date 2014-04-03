@@ -34,3 +34,9 @@
 [submodule "lib/drag-and-drop"]
 	path = lib/drag-and-drop
 	url = https://github.com/AMXAUNZ/drag-and-drop.git
+[submodule "lib/xpress"]
+	path = lib/xpress
+	url = https://github.com/DavidVine/amx-is-xpress.git
+[submodule "lib/scheduling-ui"]
+	path = lib/scheduling-ui
+	url = https://github.com/AMXAUNZ/amx-au-office-scheduling.git
