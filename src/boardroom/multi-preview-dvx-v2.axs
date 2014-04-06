@@ -1,4 +1,4 @@
-module_name='multi-preview-dvx-v2.0' (dev virtual,
+module_name='multi-preview-dvx-v2' (dev virtual,
 								 dev dvDvxVidOutMultiPreview, 
                                  dev dvTpSnapshotPreview, 
 								 integer btnsVideoInputSnapshotPreviews[],     // address codes
@@ -482,7 +482,7 @@ data_event[dvTpSnapshotPreview]
 		moderoSetButtonHide (dvTpSnapshotPreview, btnAdrLoadingBar)
 		
 		// Setup video settings for MPL
-		moderoSetMultiPreviewInputFormatAndResolution (data.device, MODERO_MULTI_PREVIEW_INPUT_FORMAT_HDMI, MODERO_MULTI_PREVIEW_INPUT_RESOLUTION_HDMI_720x480i30HZ)
+		moderoSetMultiPreviewInputFormatAndResolution (data.device, MODERO_MULTI_PREVIEW_INPUT_FORMAT_HDMI, MODERO_MULTI_PREVIEW_INPUT_RESOLUTION_HDMI_1280x720p30HZ)
 		
 		// Request Dvx Info
 		dvxRequestVideoInputStatusAll (dvDvxSwitcher)
