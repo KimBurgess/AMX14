@@ -335,6 +335,26 @@
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
+<File CompileType="None" Type="Include"><Identifier>RmsApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingApi</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingApi.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsSchedulingEventListener</Identifier>
+<FilePathName>lib\rms-sdk\includes\RmsSchedulingEventListener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RmsAssetLocationTracker</Identifier>
+<FilePathName>lib\rms-tools\RmsAssetLocationTracker.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-is-xpress-control</Identifier>
+<FilePathName>lib\xpress\amx-is-xpress-control.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>signageControl</Identifier>
 <FilePathName>src\signage\include\signageControl.axi</FilePathName>
 <Comments></Comments>

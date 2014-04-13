@@ -39,11 +39,6 @@ char groupColorYellowid[50] = 'Yellow'
 char groupColorBlueid[50] = 'Blue'
 char groupColorNoneid[50] = 'None'
 
-define_variable
-
-persistent char ipAddressXpressPlayerUpper[] = '192.168.4.128';
-persistent char ipAddressXpressPlayerLower[] = '192.168.4.129';
-
 
 define_function upadetArrowColor(char location[], char group[])
 {
